@@ -18,6 +18,7 @@ export default function Contact() {
   const [captcha, setCaptcha] = useState(null)
   const [botField, setBotField] = useState('') // honeypot
   const [startTs, setStartTs] = useState(0)
+  const [submitted, setSubmitted] = useState(false)
   const toast = useToast()
 
   useEffect(() => {
@@ -26,6 +27,7 @@ export default function Contact() {
 
   const onSubmit = async (e) => {
     e.preventDefault()
+    setSubmitted(true)
     setStatus(null)
     // Basic validation + spam checks
     if (!name || !email || !message || !captcha) {
@@ -102,7 +104,13 @@ export default function Contact() {
                 className="mt-1 w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-white placeholder-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
                 placeholder={t('contact.form.name_placeholder')}
                 required
+                aria-required="true"
+                aria-invalid={submitted && !name ? 'true' : 'false'}
+                aria-describedby={submitted && !name ? 'name-error' : undefined}
               />
+              {submitted && !name && (
+                <p id="name-error" className="mt-1 text-sm text-red-400">{t('contact.form.error')}</p>
+              )}
             </div>
             <div>
               <label htmlFor="email" className="block text-sm text-white/70">{t('contact.form.email')}</label>
@@ -114,7 +122,13 @@ export default function Contact() {
                 className="mt-1 w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-white placeholder-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
                 placeholder={t('contact.form.email_placeholder')}
                 required
+                aria-required="true"
+                aria-invalid={submitted && !email ? 'true' : 'false'}
+                aria-describedby={submitted && !email ? 'email-error' : undefined}
               />
+              {submitted && !email && (
+                <p id="email-error" className="mt-1 text-sm text-red-400">{t('contact.form.error')}</p>
+              )}
             </div>
           </div>
           <div ref={reveal} className="lg:col-span-1">
@@ -127,7 +141,13 @@ export default function Contact() {
               className="mt-1 w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-white placeholder-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
               placeholder={t('contact.form.message_placeholder')}
               required
+              aria-required="true"
+              aria-invalid={submitted && !message ? 'true' : 'false'}
+              aria-describedby={submitted && !message ? 'message-error' : undefined}
             />
+            {submitted && !message && (
+              <p id="message-error" className="mt-1 text-sm text-red-400">{t('contact.form.error')}</p>
+            )}
           </div>
 
           <div ref={reveal} className="lg:col-span-2 flex items-center gap-4">
@@ -142,7 +162,7 @@ export default function Contact() {
               className="absolute opacity-0 pointer-events-none -z-10"
             />
             <HCaptcha className="shrink-0" onVerify={setCaptcha} />
-            <Button type="submit" variant="primary" size="md" disabled={loading}>
+            <Button type="submit" variant="primary" size="md" disabled={loading} aria-busy={loading ? 'true' : 'false'}>
               {loading ? t('contact.form.sending') : t('contact.form.submit')}
             </Button>
             <a
@@ -154,10 +174,10 @@ export default function Contact() {
           </div>
 
           {status === 'success' && (
-            <p ref={reveal} className="lg:col-span-2 text-sm text-emerald-400">{t('contact.form.success')}</p>
+            <p ref={reveal} className="lg:col-span-2 text-sm text-emerald-400" role="status" aria-live="polite">{t('contact.form.success')}</p>
           )}
           {status === 'error' && (
-            <p ref={reveal} className="lg:col-span-2 text-sm text-red-400">{t('contact.form.error')}</p>
+            <p ref={reveal} className="lg:col-span-2 text-sm text-red-400" role="status" aria-live="polite">{t('contact.form.error')}</p>
           )}
         </form>
       </div>

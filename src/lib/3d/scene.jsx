@@ -1,30 +1,51 @@
 import React, { useEffect, useMemo, useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 
 function RotatingIcosa({ color = '#ffffff', wireframe = true }) {
   const ref = useRef()
   // mouse target rotation
   const target = useRef({ x: 0, y: 0 })
+  const animating = useRef(false)
+  const { invalidate, gl } = useThree()
 
   useEffect(() => {
+    const el = gl?.domElement
+    if (!el) return
     const onMove = (e) => {
-      // Normalize to -0.5..0.5
-      const nx = (e.clientX / window.innerWidth) - 0.5
-      const ny = (e.clientY / window.innerHeight) - 0.5
+      const rect = el.getBoundingClientRect()
+      const nx = (e.clientX - rect.left) / rect.width - 0.5
+      const ny = (e.clientY - rect.top) / rect.height - 0.5
       target.current.x = ny * 0.6
       target.current.y = nx * 0.8
+      animating.current = true
+      invalidate()
     }
-    window.addEventListener('pointermove', onMove, { passive: true })
-    return () => window.removeEventListener('pointermove', onMove)
-  }, [])
+    const onLeave = () => {
+      animating.current = false
+    }
+    el.addEventListener('pointermove', onMove, { passive: true })
+    el.addEventListener('pointerleave', onLeave)
+    return () => {
+      el.removeEventListener('pointermove', onMove)
+      el.removeEventListener('pointerleave', onLeave)
+    }
+  }, [gl, invalidate])
 
-  useFrame((_, dt) => {
+  useFrame(() => {
     if (!ref.current) return
-    // subtle auto-rotation
-    ref.current.rotation.y += dt * 0.2
+    if (!animating.current) return
     // ease towards mouse target
-    ref.current.rotation.x += (target.current.x - ref.current.rotation.x) * 0.08
-    ref.current.rotation.y += (target.current.y - ref.current.rotation.y) * 0.06
+    ref.current.rotation.x += (target.current.x - ref.current.rotation.x) * 0.12
+    ref.current.rotation.y += (target.current.y - ref.current.rotation.y) * 0.1
+    // stop when close to target to avoid continuous frames
+    const dx = Math.abs(target.current.x - ref.current.rotation.x)
+    const dy = Math.abs(target.current.y - ref.current.rotation.y)
+    if (dx < 0.001 && dy < 0.001) {
+      animating.current = false
+    } else {
+      // request next frame
+      invalidate()
+    }
   })
 
   const materialProps = useMemo(() => ({
@@ -42,7 +63,7 @@ function RotatingIcosa({ color = '#ffffff', wireframe = true }) {
   )
 }
 
-function ShaderPlane({ enabled = true }) {
+function ShaderPlane({ enabled = false }) {
   const meshRef = useRef()
   const matRef = useRef()
   const frag = `
@@ -81,9 +102,10 @@ function ShaderPlane({ enabled = true }) {
   )
 }
 
-export default function Scene({ enableShader = true }) {
+export default function Scene({ enableShader = false }) {
   return (
     <Canvas
+      frameloop="demand"
       dpr={[1, Math.min(2, window.devicePixelRatio || 1)]}
       gl={{ antialias: true, alpha: true }}
       camera={{ position: [0, 0, 3.2], fov: 50 }}

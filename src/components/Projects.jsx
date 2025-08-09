@@ -52,9 +52,9 @@ export default function Projects() {
             <article
               key={idx}
               ref={reveal}
-              className="rounded-xl border border-white/10 bg-white/5 p-6 flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1 hover:bg-white/7.5"
+              className="relative rounded-2xl p-[1px] bg-gradient-to-b from-white/20 to-white/5 transition-transform duration-300 hover:-translate-y-1"
             >
-              <div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col justify-between shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)] backdrop-blur-sm">
                 <h3 className="text-xl font-semibold">{p.name}</h3>
                 <p className="mt-2 text-white/70">{p.desc}</p>
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -64,13 +64,13 @@ export default function Projects() {
                     </span>
                   ))}
                 </div>
-              </div>
-              <div className="mt-6">
-                {p.url && (
-                  <Button as="a" href={p.url} target="_blank" rel="noreferrer noopener" variant="secondary" size="md">
-                    {t('projects.view')}
-                  </Button>
-                )}
+                <div className="mt-6">
+                  {p.url && (
+                    <Button as="a" href={p.url} target="_blank" rel="noreferrer noopener" variant="secondary" size="md">
+                      {t('projects.view')}
+                    </Button>
+                  )}
+                </div>
               </div>
             </article>
           ))}

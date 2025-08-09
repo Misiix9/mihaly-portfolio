@@ -8,10 +8,12 @@ import ParticlesCanvas from './ui/ParticlesCanvas'
 import LottiePlayer from './ui/LottiePlayer'
 const Scene3D = lazy(() => import('../lib/3d/scene.jsx'))
 import Viewport from './util/Viewport'
+import useReducedMotion from '../lib/anim/useReducedMotion'
 
 export default function Hero() {
   const { t } = useTranslation()
   const reveal = useScrollReveal()
+  const reduced = useReducedMotion(false)
   return (
     <section className="relative py-20 md:py-28">
       {/* Background hook for particles/3D/shaders */}
@@ -25,55 +27,67 @@ export default function Hero() {
         data-mouse="0.06"
       />
       {/* Particles background (mount when visible) */}
-      <Viewport once rootMargin="200px">
-        <ParticlesCanvas />
-      </Viewport>
-      {/* 3D scene background (lazy) */}
-      <div className="pointer-events-none absolute -z-10 inset-0 flex items-center justify-center opacity-60">
+      {!reduced && (
         <Viewport once rootMargin="200px">
-          <Suspense fallback={null}>
-            <div className="h-48 w-48 md:h-64 md:w-64 lg:h-80 lg:w-80">
-              <Scene3D />
-            </div>
-          </Suspense>
+          <ParticlesCanvas />
         </Viewport>
-      </div>
+      )}
+      {/* 3D scene background (lazy) */}
+      {!reduced && (
+        <div className="pointer-events-none absolute -z-10 inset-0 flex items-center justify-center opacity-60">
+          <Viewport once rootMargin="200px">
+            <Suspense fallback={null}>
+              <div className="h-48 w-48 md:h-64 md:w-64 lg:h-80 lg:w-80">
+                <Scene3D />
+              </div>
+            </Suspense>
+          </Viewport>
+        </div>
+      )}
       {/* Lottie decorative accent */}
-      <div className="pointer-events-none absolute -z-10 top-6 right-6 w-28 opacity-60">
-        <LottiePlayer
-          src="https://lottie.host/2f7f22a1-2d2b-4c2f-b1e2-7f3a0f0e25a8/Zq2iP2b2mD.json"
-          speed={1}
-          loop
-          autoplay
-        />
-      </div>
+      {!reduced && (
+        <div className="pointer-events-none absolute -z-10 top-6 right-6 w-28 opacity-60">
+          <LottiePlayer
+            src="https://lottie.host/2f7f22a1-2d2b-4c2f-b1e2-7f3a0f0e25a8/Zq2iP2b2mD.json"
+            speed={1}
+            loop
+            autoplay
+          />
+        </div>
+      )}
 
       {/* Subtle hero accents */}
-      <Parallax
-        className="pointer-events-none absolute -z-10 -top-6 left-8 h-32 w-32 rounded-full bg-white/5 blur-3xl"
-        aria-hidden
-        speedY={0.14}
-        maxShift={90}
-      />
-      <Parallax
-        className="pointer-events-none absolute -z-10 top-24 right-16 h-24 w-24 rounded-full bg-white/6 blur-2xl"
-        aria-hidden
-        speedY={0.12}
-        maxShift={80}
-      />
+      {!reduced && (
+        <>
+          <Parallax
+            className="pointer-events-none absolute -z-10 -top-6 left-8 h-32 w-32 rounded-full bg-white/5 blur-3xl"
+            aria-hidden
+            speedY={0.14}
+            maxShift={90}
+          />
+          <Parallax
+            className="pointer-events-none absolute -z-10 top-24 right-16 h-24 w-24 rounded-full bg-white/6 blur-2xl"
+            aria-hidden
+            speedY={0.12}
+            maxShift={80}
+          />
+        </>
+      )}
 
       <div className="container mx-auto px-4 sm:px-6">
         <div className="relative inline-block">
           <h1 ref={reveal} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">{t('hero.name')}</h1>
-          <Parallax
-            mode="gsap"
-            className="absolute -bottom-2 left-0 h-px w-40 bg-white/30"
-            speedY={0.8}
-            start="top bottom"
-            end="bottom top"
-            maxShift={80}
-            aria-hidden
-          />
+          {!reduced && (
+            <Parallax
+              mode="gsap"
+              className="absolute -bottom-2 left-0 h-px w-40 bg-white/30"
+              speedY={0.8}
+              start="top bottom"
+              end="bottom top"
+              maxShift={80}
+              aria-hidden
+            />
+          )}
         </div>
         <h2 ref={reveal} className="mt-2 text-xl sm:text-2xl text-white/80">{t('hero.role')}</h2>
         <p ref={reveal} className="mt-4 text-white/70 max-w-2xl">{t('hero.subtitle')}</p>

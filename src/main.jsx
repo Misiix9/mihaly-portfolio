@@ -11,6 +11,15 @@ import { initGA } from './lib/analytics/ga4.js'
 import GAListener from './lib/analytics/GAListener.jsx'
 import { setDefaultSiteMeta } from './lib/seo/meta.js'
 import { setPersonSchema } from './lib/seo/schema.js'
+// Reduced motion detection (non-React utility for bootstrap time)
+function detectReducedMotion() {
+  try {
+    if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    }
+  } catch { /* no-op */ }
+  return false
+}
 
 // Initialize i18n (EN/HU, detection, persistence)
 setupI18n()
@@ -31,6 +40,16 @@ try {
 } catch {
   // no-op
 }
+
+// Respect prefers-reduced-motion by lowering global parallax intensity
+try {
+  const reduced = detectReducedMotion()
+  window.__reducedMotion = reduced
+  if (reduced) {
+    // Keep subtle motion but much lower
+    setParallaxGlobalIntensity(0.35)
+  }
+} catch { /* no-op */ }
 
 // Initialize GA4 if measurement ID present
 try {

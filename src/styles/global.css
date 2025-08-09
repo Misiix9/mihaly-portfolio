@@ -23,6 +23,7 @@ body {
   --muted: #bfbfbf;
   --border: #2a2a2a;
   --overlay: rgba(255,255,255,0.06);
+  --accent: #e6e6e6; /* subtle light for monochrome accents */
 
   /* Spacing scale */
   --space-1: 0.25rem; /* 4px */
@@ -60,6 +61,21 @@ body {
 html, body {
   background: var(--bg);
   color: var(--fg);
+}
+
+/* Container max width and padding */
+.container {
+  max-width: 1160px;
+}
+
+/* Section rhythm */
+section {
+  scroll-margin-top: 80px;
+}
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.16), transparent);
 }
 
 ::selection {
@@ -112,7 +128,8 @@ a:hover::after { opacity: 0.8; transform: scaleX(1); }
   border-radius: var(--radius-sm);
 }
 
-/* Utilities */
+/* Subtle card shadow and glass helpers */
+.shadow-soft { box-shadow: 0 10px 30px -15px rgba(0,0,0,0.7); }
 .glass {
   background: var(--overlay);
   backdrop-filter: blur(10px);

@@ -12,6 +12,7 @@ export default defineConfig({
         manualChunks: {
           three: ['three', '@react-three/fiber'],
           lottie: ['lottie-web'],
+          gsap: ['gsap', 'gsap/ScrollTrigger'],
         },
       },
     },

@@ -20,15 +20,19 @@ export default function Layout() {
       <Transitions />
       <header className="sticky top-0 z-50 bg-black/70 backdrop-blur border-b border-white/10">
         <div className="container mx-auto px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between">
-          <span className="font-semibold">Mihaly Gyori</span>
+          <span className="font-semibold tracking-tight">Mihaly Gyori</span>
           <LanguageSwitch />
         </div>
       </header>
       <main id="main">
         <Hero />
+        <div className="section-divider container mx-auto px-4 sm:px-6" />
         <About />
+        <div className="section-divider container mx-auto px-4 sm:px-6" />
         <Skills />
+        <div className="section-divider container mx-auto px-4 sm:px-6" />
         <Projects />
+        <div className="section-divider container mx-auto px-4 sm:px-6" />
         <Contact />
       </main>
       <Footer />

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, createElement } from 'react'
 import { registerParallax, createGsapParallax } from '../../lib/anim/parallax.js'
 
 /**
@@ -60,9 +60,5 @@ export default function Parallax({
     }
   }, [mode, speedY, speedX, effectiveMaxShift, mouse, start, end, ease, scrub])
 
-  return (
-    <Tag ref={ref} className={className} style={style} {...rest}>
-      {children}
-    </Tag>
-  )
+  return createElement(Tag, { ref, className, style, ...rest }, children)
 }

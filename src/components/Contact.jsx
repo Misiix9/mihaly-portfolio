@@ -5,7 +5,7 @@ import Button from './ui/Button'
 import useScrollReveal from '../lib/anim/useScrollReveal'
 import Parallax from './ui/Parallax'
 import HCaptcha from './ui/HCaptcha'
-import { useToast } from './ui/ToastProvider'
+import { useToast } from './ui/toast'
 
 export default function Contact() {
   const { t } = useTranslation()

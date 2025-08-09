@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "lang": { "en": "EN", "hu": "HU" },
+
+  "hero": {
+    "name": "Mihály Győri",
+    "role": "Website & Desktop Developer Student",
+    "title": "Developer Portfolio",
+    "subtitle": "Minimal, animated, and fast.",
+    "cta_primary": "Get in touch",
+    "cta_secondary": "View projects"
+  },
+
+  "about": {
+    "title": "About",
+    "body": "I’m Mihály Győri, a Hungarian web and desktop developer student. I create modern, interactive experiences with React—balancing clean design, rich animation, and solid performance.",
+    "strengths_title": "Strengths",
+    "stack_title": "Stack",
+    "strengths": [
+      "Clean, minimal UIs",
+      "Performance-minded",
+      "Polished animations & micro‑interactions",
+      "Curious problem‑solver"
+    ],
+    "stack": [
+      "React",
+      "JavaScript",
+      "Vite",
+      "Tailwind CSS",
+      "i18next"
+    ]
+  },
+
+  "skills": {
+    "title": "Skills",
+    "categories": [
+      {
+        "title": "Frontend",
+        "items": ["React", "JavaScript", "HTML", "CSS", "Tailwind CSS"]
+      },
+      {
+        "title": "Tools",
+        "items": ["Vite", "Git", "GitHub", "Figma"]
+      },
+      {
+        "title": "Learning",
+        "items": ["Three.js", "GSAP", "Lottie", "i18n best practices"]
+      }
+    ]
+  },
+
+  "projects": {
+    "title": "Projects",
+    "view": "View project",
+    "items": [
+      {
+        "name": "Footify.hu",
+        "desc": "A football site for fixtures, results, and streamlined stats.",
+        "tech": ["React", "Vite", "Tailwind CSS"],
+        "url": "https://footify.hu"
+      }
+    ],
+    "footify": {
+      "title": "Footify.hu",
+      "description": "A modern football platform with live data and smooth interactions."
+    }
+  },
+
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Have a project in mind? Let’s talk.",
+    "form": {
+      "name": "Name",
+      "name_placeholder": "Your name",
+      "email": "Email",
+      "email_placeholder": "you@example.com",
+      "message": "Message",
+      "message_placeholder": "Tell me a bit about your project...",
+      "submit": "Send",
+      "sending": "Sending...",
+      "mailto_fallback": "or use your email client",
+      "success": "Thanks! Your message has been sent.",
+      "error": "Something went wrong. Please try again or email me directly."
+    }
+  },
+
+  "footer": {
+    "rights": "All rights reserved."
+  }
+}

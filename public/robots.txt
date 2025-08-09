@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://Misiix9.github.io/mihaly-portfolio/sitemap.xml

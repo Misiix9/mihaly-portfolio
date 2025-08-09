@@ -57,6 +57,12 @@ VITE_DEFAULT_LANG=en
 
 Do not commit actual secrets. Use repository secrets/CI vars for production.
 
+Quick start: copy the template
+
+```bash
+cp .env.example .env
+```
+
 ## Project Structure (planned)
 ```
 src/

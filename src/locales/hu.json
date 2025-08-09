@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "home": "Kezdőlap",
+    "about": "Rólam",
+    "skills": "Készségek",
+    "projects": "Projektek",
+    "contact": "Kapcsolat"
+  },
+  "lang": { "en": "EN", "hu": "HU" },
+
+  "hero": {
+    "name": "Győri Mihály",
+    "role": "Webes és Asztali Fejlesztő Hallgató",
+    "title": "Fejlesztői Portfólió",
+    "subtitle": "Letisztult, animált és gyors.",
+    "cta_primary": "Lépj kapcsolatba",
+    "cta_secondary": "Projektek megtekintése"
+  },
+
+  "about": {
+    "title": "Rólam",
+    "body": "Győri Mihály vagyok, magyar webes és asztali fejlesztő hallgató. Modern, interaktív élményeket készítek Reacttel—letisztult dizájnnal, igényes animációkkal és jó teljesítménnyel.",
+    "strengths_title": "Erősségek",
+    "stack_title": "Technológiák",
+    "strengths": [
+      "Letisztult, minimal UI-k",
+      "Teljesítmény‑tudatos",
+      "Igényes animációk és mikrointerakciók",
+      "Kíváncsi problémamegoldó"
+    ],
+    "stack": [
+      "React",
+      "JavaScript",
+      "Vite",
+      "Tailwind CSS",
+      "i18next"
+    ]
+  },
+
+  "skills": {
+    "title": "Készségek",
+    "categories": [
+      {
+        "title": "Frontend",
+        "items": ["React", "JavaScript", "HTML", "CSS", "Tailwind CSS"]
+      },
+      {
+        "title": "Eszközök",
+        "items": ["Vite", "Git", "GitHub", "Figma"]
+      },
+      {
+        "title": "Tanulás alatt",
+        "items": ["Three.js", "GSAP", "Lottie", "i18n legjobb gyakorlatok"]
+      }
+    ]
+  },
+
+  "projects": {
+    "title": "Projektek",
+    "view": "Megnyitás",
+    "items": [
+      {
+        "name": "Footify.hu",
+        "desc": "Foci oldal mérkőzésekkel, eredményekkel és letisztult statisztikákkal.",
+        "tech": ["React", "Vite", "Tailwind CSS"],
+        "url": "https://footify.hu"
+      }
+    ],
+    "footify": {
+      "title": "Footify.hu",
+      "description": "Modern futball platform élő adatokkal és finom interakciókkal."
+    }
+  },
+
+  "contact": {
+    "title": "Kapcsolat",
+    "subtitle": "Van egy ötleted? Beszéljünk!",
+    "form": {
+      "name": "Név",
+      "name_placeholder": "A te neved",
+      "email": "Email",
+      "email_placeholder": "te@pelda.hu",
+      "message": "Üzenet",
+      "message_placeholder": "Mesélj kicsit a projektről...",
+      "submit": "Küldés",
+      "sending": "Küldés folyamatban...",
+      "mailto_fallback": "vagy használd az e-mail kliensed",
+      "success": "Köszönöm! Az üzeneted megérkezett.",
+      "error": "Hiba történt. Próbáld újra, vagy írj közvetlenül e-mailt."
+    }
+  },
+
+  "footer": {
+    "rights": "Minden jog fenntartva."
+  }
+}

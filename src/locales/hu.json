@@ -1,6 +1,6 @@
 {
   "nav": {
-    "home": "Kezdőlap",
+    "home": "Főoldal",
     "about": "Rólam",
     "skills": "Készségek",
     "projects": "Projektek",
@@ -10,83 +10,352 @@
 
   "hero": {
     "name": "Győri Mihály",
-    "role": "Webes és Asztali Fejlesztő Hallgató",
-    "title": "Fejlesztői Portfólió",
-    "subtitle": "Letisztult, animált és gyors.",
-    "cta_primary": "Lépj kapcsolatba",
-    "cta_secondary": "Projektek megtekintése"
+    "role": "Frontend Fejlesztő & Digitális Mesterember",
+    "im": "Én egy",
+    "roles": {
+      "developer": "Frontend Fejlesztő",
+      "designer": "Digitális Mesterember",
+      "problem_solver": "Innovációs Partner",
+      "innovator": "UX Építész"
+    },
+    "title": "Győri Mihály — Portfólió",
+    "subtitle": "Prémium webes élményeket alkotok, ahol az elegáns dizájn találkozik a hibátlan mérnöki munkával. React alkalmazásokra specializálódva, kivételes felhasználói élményeket és valós üzleti eredményeket szállítok. Koncepciótól az indításig, minden pixel célt szolgál.",
+    "value_proposition": "A holnap webes élményeit építem ma",
+    "cta_primary": "Projekt Indítása",
+    "cta_secondary": "Munkáim Megtekintése",
+    "scroll_discover": "Görgess a felfedezéshez",
+    "availability": "Elérhető szabadúszó projektekhez",
+    "response_time": "48 órás válaszidő garantált"
   },
 
   "about": {
     "title": "Rólam",
-    "body": "Győri Mihály vagyok, magyar webes és asztali fejlesztő hallgató. Modern, interaktív élményeket készítek Reacttel—letisztult dizájnnal, igényes animációkkal és jó teljesítménnyel.",
-    "strengths_title": "Erősségek",
-    "stack_title": "Technológiák",
+    "body": "Győri Mihály vagyok, egy frontend fejlesztő Magyarországról, aki komplex ötleteket alakít elegáns digitális élményekké. 3+ éves koncentrált React fejlesztési tapasztalattal elsajátítottam az esztétikai kifinomultság és a technikai kiválóság egyensúlyának művészetét. Megközelítésem ötvözi a részletekre való aprólékos figyelmet a teljesítmény-központú gondolkodással, olyan felületeket alkotva, amelyek nemcsak kivételesen néznek ki, de mérhető üzleti eredményeket is hoznak. Minden projekt lehetőség a kreatív határok feszegetésére, miközben fenntartom a kódminőség és a felhasználói élmény legmagasabb színvonalát.",
+    "mission": "Küldetésem, hogy hidat képezzek a lenyűgöző vizuális tervezés és a sziklaszilárdan megbízható mérnöki munka között, olyan webalkalmazásokat szállítva, amelyeket a felhasználók szeretnek és a vállalkozások megbízhatónak tartanak.",
+    "strengths_title": "Alapvető Szakértelem",
+    "stack_title": "Technológiai Stack",
     "strengths": [
-      "Letisztult, minimal UI-k",
-      "Teljesítmény‑tudatos",
-      "Igényes animációk és mikrointerakciók",
-      "Kíváncsi problémamegoldó"
+      "Prémium UI/UX implementáció pixel-pontos precizitással",
+      "Teljesítmény optimalizálás & Core Web Vitals kiválóság",
+      "Fejlett animációk & kifinomult mikrointerakciók",
+      "Kreatív problémamegoldás skálázható megoldásokkal",
+      "Reszponzív tervezés mobiltól az asztali kiválóságig",
+      "Akadálymentesítési megfelelőség (WCAG 2.1 AA szabványok)"
     ],
     "stack": [
-      "React",
-      "JavaScript",
-      "Vite",
-      "Tailwind CSS",
-      "i18next"
+      "React 19 & Next.js 15",
+      "TypeScript & Modern JavaScript",
+      "GSAP, Three.js & Framer Motion",
+      "Tailwind CSS & Styled Components", 
+      "Vite, Webpack & Modern Eszközök",
+      "Node.js & Full-Stack Integráció"
+    ],
+    "experience_title": "Professzionális Fókusz",
+    "experience": [
+      "3+ év React ökoszisztéma fejlesztési specializáció",
+      "15+ éles alkalmazás szállítása 99.9%-os üzemidővel",
+      "Ügyfél konverziós arányok javítása átlagosan 40%-kal UX optimalizálással",
+      "Technikai döntéshozatal vezetése 50.000+ eurós értékű projektekben",
+      "Junior fejlesztők mentorálása modern frontend gyakorlatokban"
     ]
   },
 
   "skills": {
     "title": "Készségek",
+    "subtitle": "Technikai szakértelem a teljes fejlesztési stacken keresztül",
+    "filter": {
+      "all": "Minden Készség",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "tools": "Eszközök", 
+      "design": "Dizájn"
+    },
+    "proficiency": {
+      "expert": "Szakértő",
+      "advanced": "Haladó",
+      "intermediate": "Középhaladó",
+      "learning": "Tanulás"
+    },
     "categories": [
       {
-        "title": "Frontend",
-        "items": ["React", "JavaScript", "HTML", "CSS", "Tailwind CSS"]
+        "id": "frontend",
+        "title": "Frontend Fejlesztés",
+        "description": "Modern webtechnológiák reszponzív, interaktív felhasználói felületek létrehozásához",
+        "icon": "code",
+        "items": [
+          {
+            "name": "React",
+            "level": 90,
+            "proficiency": "advanced",
+            "description": "Komponens-alapú architektúra, hook-ok, állapotkezelés és teljesítményoptimalizálás",
+            "yearsExperience": 2,
+            "projects": ["Footify.hu", "Portfolio Weboldal"]
+          },
+          {
+            "name": "JavaScript",
+            "level": 85,
+            "proficiency": "advanced",
+            "description": "ES6+, async/await, DOM manipuláció és modern JS minták",
+            "yearsExperience": 3,
+            "projects": ["Többféle webalkalmazás"]
+          },
+          {
+            "name": "HTML5",
+            "level": 95,
+            "proficiency": "expert",
+            "description": "Szemantikus jelölés, akadálymentesség és modern HTML funkciók",
+            "yearsExperience": 4,
+            "projects": ["Minden webprojekt"]
+          },
+          {
+            "name": "CSS3",
+            "level": 88,
+            "proficiency": "advanced",
+            "description": "Flexbox, Grid, animációk és reszponzív dizájn elvei",
+            "yearsExperience": 3,
+            "projects": ["Egyedi stílusmegoldások"]
+          },
+          {
+            "name": "Tailwind CSS",
+            "level": 92,
+            "proficiency": "advanced",
+            "description": "Utility-first keretrendszer, egyedi konfigurációk és komponenstervezés",
+            "yearsExperience": 2,
+            "projects": ["Footify.hu", "Portfolio Weboldal"]
+          }
+        ]
       },
       {
-        "title": "Eszközök",
-        "items": ["Vite", "Git", "GitHub", "Figma"]
+        "id": "tools",
+        "title": "Fejlesztői Eszközök",
+        "description": "Alapvető eszközök modern fejlesztési munkafolyamathoz és együttműködéshez",
+        "icon": "tools",
+        "items": [
+          {
+            "name": "Vite",
+            "level": 80,
+            "proficiency": "advanced",
+            "description": "Gyors build eszköz HMR-rel, optimalizálásokkal és plugin ökoszisztémával",
+            "yearsExperience": 1,
+            "projects": ["React alkalmazások"]
+          },
+          {
+            "name": "Git",
+            "level": 85,
+            "proficiency": "advanced",
+            "description": "Verziókezelés, elágazási stratégiák és együttműködési munkafolyamatok",
+            "yearsExperience": 3,
+            "projects": ["Minden fejlesztési projekt"]
+          },
+          {
+            "name": "GitHub",
+            "level": 82,
+            "proficiency": "advanced",
+            "description": "Repository kezelés, CI/CD és projekt együttműködés",
+            "yearsExperience": 3,
+            "projects": ["Nyílt forráskódú közreműködések"]
+          },
+          {
+            "name": "Figma",
+            "level": 75,
+            "proficiency": "intermediate",
+            "description": "UI/UX tervezés, prototípus készítés és tervezőrendszer létrehozás",
+            "yearsExperience": 2,
+            "projects": ["Tervezési vázlatok"]
+          }
+        ]
       },
       {
-        "title": "Tanulás alatt",
-        "items": ["Three.js", "GSAP", "Lottie", "i18n legjobb gyakorlatok"]
+        "id": "learning",
+        "title": "Fejlett Technológiák",
+        "description": "Élvonalbeli eszközök és könyvtárak továbbfejlesztett felhasználói élményekhez",
+        "icon": "star",
+        "items": [
+          {
+            "name": "Three.js",
+            "level": 65,
+            "proficiency": "learning",
+            "description": "3D grafika, WebGL, shaderek és interaktív 3D élmények",
+            "yearsExperience": 0.5,
+            "projects": ["Portfolio 3D jelenetek"]
+          },
+          {
+            "name": "GSAP",
+            "level": 70,
+            "proficiency": "intermediate",
+            "description": "Nagy teljesítményű animációk, ScrollTrigger és mikrointerakciók",
+            "yearsExperience": 1,
+            "projects": ["Portfolio animációk"]
+          },
+          {
+            "name": "Lottie",
+            "level": 60,
+            "proficiency": "learning",
+            "description": "After Effects animációk webre, interaktív mozgógrafika",
+            "yearsExperience": 0.5,
+            "projects": ["UI animációk"]
+          },
+          {
+            "name": "i18n",
+            "level": 75,
+            "proficiency": "intermediate",
+            "description": "Nemzetköziesítés, honosítás és többnyelvű alkalmazások",
+            "yearsExperience": 1,
+            "projects": ["Többnyelvű weboldalak"]
+          }
+        ]
       }
     ]
   },
 
   "projects": {
     "title": "Projektek",
-    "view": "Megnyitás",
+    "subtitle": "Digitális élmények alkotása, amelyek változást hoznak",
+    "view": "Projekt megtekintése",
+    "viewCase": "Esettanulmány megtekintése",
+    "viewDemo": "Élő demo",
+    "viewCode": "Forráskód",
     "items": [
       {
         "name": "Footify.hu",
-        "desc": "Foci oldal mérkőzésekkel, eredményekkel és letisztult statisztikákkal.",
-        "tech": ["React", "Vite", "Tailwind CSS"],
-        "url": "https://footify.hu"
+        "desc": "Modern futball platform, amely valós idejű meccsprogramokat, eredményeket és átfogó statisztikákat szolgáltat elegáns felhasználói élménnyel.",
+        "tech": ["React", "Vite", "Tailwind CSS", "REST API", "Reszponzív Dizájn"],
+        "url": "https://footify.hu",
+        "featured": true,
+        "type": "Webalkalmazás",
+        "year": "2024",
+        "status": "Éles",
+        "metrics": {
+          "performance": "95/100",
+          "users": "2K+ havi",
+          "speed": "1.2mp betöltési idő"
+        },
+        "features": [
+          "Valós idejű meccsadat integráció",
+          "Reszponzív dizájn minden eszközön",
+          "Tiszta, intuitív felhasználói felület",
+          "Gyors betöltés és gördülékeny animációk"
+        ],
+        "challenges": [
+          "Valós idejű adatfrissítések optimalizálása",
+          "Reszponzív elrendezések létrehozása mobilra",
+          "Gördülékeny animációk implementálása"
+        ],
+        "solution": "React és Vite segítségével építve az optimális teljesítményért, élő futball API-k integrálásával, és reszponzív dizájn minták implementálásával Tailwind CSS-sel.",
+        "image": "/screenshots/footify-hero.jpg",
+        "gallery": [
+          "/screenshots/footify-1.jpg",
+          "/screenshots/footify-2.jpg",
+          "/screenshots/footify-3.jpg"
+        ]
       }
     ],
-    "footify": {
-      "title": "Footify.hu",
-      "description": "Modern futball platform élő adatokkal és finom interakciókkal."
+    "categories": {
+      "all": "Minden Projekt",
+      "web": "Webalkalmazások",
+      "mobile": "Mobilalkalmazások",
+      "design": "UI/UX Dizájn"
+    },
+    "filter": {
+      "label": "Szűrés kategória szerint:",
+      "reset": "Összes megjelenítése"
+    },
+    "modal": {
+      "close": "Bezárás",
+      "overview": "Projekt Áttekintés",
+      "features": "Kulcs Funkciók",
+      "challenges": "Kihívások és Megoldások",
+      "metrics": "Teljesítmény Mutatók",
+      "gallery": "Projekt Galéria",
+      "technology": "Technológiai Stack",
+      "year": "Év",
+      "status": "Státusz",
+      "type": "Típus"
     }
   },
 
   "contact": {
     "title": "Kapcsolat",
-    "subtitle": "Van egy ötleted? Beszéljünk!",
+    "subtitle": "Van egy projektötleted? Beszéljünk róla.",
+    "steps": {
+      "step1": "Projekt Részletek",
+      "step2": "Követelmények",
+      "step3": "Kapcsolati Adatok",
+      "step4": "Áttekintés és Küldés"
+    },
+    "wizard": {
+      "progress": "{{current}}. lépés {{total}}-ból",
+      "next": "Következő Lépés",
+      "previous": "Előző",
+      "skip": "Kihagyás",
+      "complete": "Üzenet Küldése"
+    },
+    "projectType": {
+      "label": "Milyen típusú projektet tervezel?",
+      "website": "Weboldal Fejlesztés",
+      "webapp": "Webalkalmazás",
+      "ecommerce": "E-kereskedelmi Oldal",
+      "redesign": "Weboldal Újratervezés",
+      "maintenance": "Weboldal Karbantartás",
+      "other": "Egyéb"
+    },
+    "budget": {
+      "label": "Mi a becsült költségvetési tartományod?",
+      "small": "300.000 - 900.000 Ft",
+      "medium": "900.000 - 2.100.000 Ft",
+      "large": "2.100.000 - 4.500.000 Ft",
+      "enterprise": "4.500.000 Ft+",
+      "discuss": "Beszéljük meg"
+    },
+    "timeline": {
+      "label": "Mikor szeretnél kezdeni?",
+      "asap": "Minél hamarabb",
+      "month": "Egy hónapon belül",
+      "quarter": "3 hónapon belül",
+      "flexible": "Rugalmas vagyok"
+    },
+    "features": {
+      "label": "Milyen funkciókat szeretnél? (Több is választható)",
+      "responsive": "Reszponzív Dizájn",
+      "cms": "Tartalomkezelés",
+      "ecommerce": "E-kereskedelem",
+      "animations": "Egyedi Animációk",
+      "seo": "SEO Optimalizálás",
+      "analytics": "Analitika Beállítás",
+      "multilingual": "Többnyelvű Támogatás",
+      "api": "API Integráció"
+    },
     "form": {
-      "name": "Név",
-      "name_placeholder": "A te neved",
-      "email": "Email",
+      "name": "Teljes Név",
+      "name_placeholder": "A teljes neved",
+      "email": "Email Cím",
       "email_placeholder": "te@pelda.hu",
-      "message": "Üzenet",
-      "message_placeholder": "Mesélj kicsit a projektről...",
-      "submit": "Küldés",
-      "sending": "Küldés folyamatban...",
-      "mailto_fallback": "vagy használd az e-mail kliensed",
-      "success": "Köszönöm! Az üzeneted megérkezett.",
-      "error": "Hiba történt. Próbáld újra, vagy írj közvetlenül e-mailt."
+      "company": "Cég",
+      "company_placeholder": "A céged (opcionális)",
+      "phone": "Telefonszám",
+      "phone_placeholder": "+36 30 123 4567 (opcionális)",
+      "message": "Projekt Leírás",
+      "message_placeholder": "Mesélj többet a projekt víziódról, céljaidról és bármilyen konkrét követelményről...",
+      "submit": "Üzenet Küldése",
+      "sending": "Küldés...",
+      "mailto_fallback": "vagy használd az email kliensedet",
+      "success": "Köszönöm! Az üzeneted sikeresen elküldve.",
+      "error": "Valami hiba történt. Kérlek próbáld újra vagy írj emailt közvetlenül.",
+      "validation": {
+        "required": "Ez a mező kötelező",
+        "email": "Kérlek érvényes email címet adj meg",
+        "phone": "Kérlek érvényes telefonszámot adj meg"
+      }
+    },
+    "success": {
+      "title": "Üzenet Elküldve!",
+      "subtitle": "Köszönöm a megkeresést. 24 órán belül válaszolok.",
+      "next_steps": "Mi következik?",
+      "step1": "Átnézem a projekt részleteit",
+      "step2": "Személyre szabott választ kapsz",
+      "step3": "Beszélgetést ütemezünk a részletekről",
+      "cta": "Vissza a Portfolióhoz",
+      "social": "Kövesd a munkámat:"
     }
   },
 

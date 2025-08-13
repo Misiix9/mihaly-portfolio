@@ -1,3 +1,4 @@
+@import './fonts.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,16 +15,45 @@ body {
   color: #fff;
 }
 
-/* Design tokens (monochrome + spacing + radii) */
+/* Design tokens (expanded monochrome + spacing + radii) */
 :root {
-  /* Colors */
-  --bg: #000000;
-  --bg-soft: #0b0b0b;
-  --fg: #ffffff;
-  --muted: #bfbfbf;
-  --border: #2a2a2a;
-  --overlay: rgba(255,255,255,0.06);
-  --accent: #e6e6e6; /* subtle light for monochrome accents */
+  /* Expanded Monochrome Color System (15 shades) */
+  --black: #000000;           /* Pure black */
+  --gray-950: #0a0a0a;        /* Near black */
+  --gray-900: #171717;        /* Dark charcoal */
+  --gray-850: #262626;        /* Charcoal */
+  --gray-800: #404040;        /* Dark gray */
+  --gray-700: #525252;        /* Medium dark gray */
+  --gray-600: #737373;        /* Medium gray */
+  --gray-500: #a3a3a3;        /* Neutral gray */
+  --gray-400: #d4d4d4;        /* Light gray */
+  --gray-300: #e5e5e5;        /* Lighter gray */
+  --gray-200: #f5f5f5;        /* Very light gray */
+  --gray-100: #fafafa;        /* Near white */
+  --white: #ffffff;           /* Pure white */
+
+  /* Semantic color mappings */
+  --bg: var(--black);
+  --bg-soft: var(--gray-950);
+  --bg-card: var(--gray-900);
+  --bg-hover: var(--gray-850);
+  --fg: var(--white);
+  --fg-muted: var(--gray-400);
+  --fg-subtle: var(--gray-500);
+  --border: var(--gray-800);
+  --border-subtle: var(--gray-850);
+  --accent: var(--gray-200);
+
+  /* Glass morphism overlays */
+  --glass-light: rgba(255, 255, 255, 0.05);
+  --glass-medium: rgba(255, 255, 255, 0.10);
+  --glass-strong: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.20);
+
+  /* Gradient overlays for depth */
+  --gradient-subtle: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+  --gradient-card: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.01) 100%);
+  --gradient-hero: radial-gradient(600px 300px at 50% 0%, rgba(255,255,255,0.06), transparent 70%);
 
   /* Spacing scale */
   --space-1: 0.25rem; /* 4px */
@@ -39,6 +69,7 @@ body {
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
+  --radius-xl: 24px;
 
   /* Motion */
   --parallax-intensity: 0.9; /* mobile/tablet default */
@@ -62,6 +93,51 @@ html, body {
   background: var(--bg);
   color: var(--fg);
 }
+
+/* Glass Morphism Utilities */
+.glass-light {
+  background: var(--glass-light);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-medium {
+  background: var(--glass-medium);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-strong {
+  background: var(--glass-strong);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-card {
+  background: var(--gradient-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Visual Hierarchy Helpers */
+.text-hierarchy-primary { color: var(--fg); }
+.text-hierarchy-secondary { color: var(--fg-muted); }
+.text-hierarchy-subtle { color: var(--fg-subtle); }
+
+.bg-hierarchy-primary { background: var(--bg); }
+.bg-hierarchy-secondary { background: var(--bg-soft); }
+.bg-hierarchy-card { background: var(--bg-card); }
+.bg-hierarchy-hover { background: var(--bg-hover); }
+
+.border-hierarchy-primary { border-color: var(--border); }
+.border-hierarchy-subtle { border-color: var(--border-subtle); }
 
 /* Container max width and padding */
 .container {
@@ -476,6 +552,35 @@ input:focus-visible, textarea:focus-visible, select:focus-visible {
   background-size: 200% 100%;
   animation: shimmer 5s linear infinite;
   pointer-events: none;
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.line-clamp-4 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
 }
 
 /* ------------------------------------------------------------

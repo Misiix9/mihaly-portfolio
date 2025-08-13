@@ -1,0 +1,115 @@
+{
+  "nav": {
+    "ho  "about": {
+    "title": "About",
+    "body": "I'm Mihály Győri, a passionate frontend developer from Hungary specializing in React ecosystems. I transform ideas into engaging digital experiences that captivate users and drive results. With a keen eye for design and obsession for performance, I bridge the gap between beautiful interfaces and flawless functionality.",
+    "strengths_title": "What I bring",
+    "stack_title": "Technologies",
+    "strengths": [
+      "Premium UI/UX implementation",
+      "Performance optimization expertise",
+      "Advanced animation & micro‑interactions",
+      "Problem‑solving with creative solutions",
+      "Pixel‑perfect responsive design"
+    ],
+    "stack": [
+      "React & Next.js",
+      "TypeScript",
+      "GSAP & Three.js",
+      "Tailwind CSS",
+      "Modern Build Tools"
+    ]
+  },bout": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "lang": { "en": "EN", "hu": "HU" },
+
+  "hero": {
+    "name": "Mihály Győri",
+    "role": "Frontend Developer & Digital Craftsman",
+    "title": "Mihály Győri — Portfolio",
+    "subtitle": "I craft premium web experiences with React, where minimal design meets sophisticated animation. From concept to deployment, I deliver pixel-perfect interfaces that perform beautifully.",
+    "value_proposition": "Building the future of web interaction",
+    "cta_primary": "Start a project",
+    "cta_secondary": "View my work"
+  },
+
+  "about": {
+    "title": "About",
+    "body": "I’m Mihály Győri, a Hungarian web and desktop developer student. I create modern, interactive experiences with React—balancing clean design, rich animation, and solid performance.",
+    "strengths_title": "Strengths",
+    "stack_title": "Stack",
+    "strengths": [
+      "Clean, minimal UIs",
+      "Performance-minded",
+      "Polished animations & micro‑interactions",
+      "Curious problem‑solver"
+    ],
+    "stack": [
+      "React",
+      "JavaScript",
+      "Vite",
+      "Tailwind CSS",
+      "i18next"
+    ]
+  },
+
+  "skills": {
+    "title": "Skills",
+    "categories": [
+      {
+        "title": "Frontend",
+        "items": ["React", "JavaScript", "HTML", "CSS", "Tailwind CSS"]
+      },
+      {
+        "title": "Tools",
+        "items": ["Vite", "Git", "GitHub", "Figma"]
+      },
+      {
+        "title": "Learning",
+        "items": ["Three.js", "GSAP", "Lottie", "i18n best practices"]
+      }
+    ]
+  },
+
+  "projects": {
+    "title": "Projects",
+    "view": "View project",
+    "items": [
+      {
+        "name": "Footify.hu",
+        "desc": "A football site for fixtures, results, and streamlined stats.",
+        "tech": ["React", "Vite", "Tailwind CSS"],
+        "url": "https://footify.hu"
+      }
+    ],
+    "footify": {
+      "title": "Footify.hu",
+      "description": "A modern football platform with live data and smooth interactions."
+    }
+  },
+
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Have a project in mind? Let’s talk.",
+    "form": {
+      "name": "Name",
+      "name_placeholder": "Your name",
+      "email": "Email",
+      "email_placeholder": "you@example.com",
+      "message": "Message",
+      "message_placeholder": "Tell me a bit about your project...",
+      "submit": "Send",
+      "sending": "Sending...",
+      "mailto_fallback": "or use your email client",
+      "success": "Thanks! Your message has been sent.",
+      "error": "Something went wrong. Please try again or email me directly."
+    }
+  },
+
+  "footer": {
+    "rights": "All rights reserved."
+  }
+}

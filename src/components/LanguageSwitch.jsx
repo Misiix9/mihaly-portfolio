@@ -26,6 +26,8 @@ export default function LanguageSwitch() {
       aria-label={lang === 'en' ? 'Switch language to Hungarian' : 'Váltás angol nyelvre'}
       onClick={toggle}
       className="relative inline-flex items-center border border-white/20 hover:border-white/40 rounded-[var(--radius-md)] px-2 py-1 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50"
+      data-magnetic="0.15"
+      data-cursor-text="Lang"
     >
       <span className="relative h-5 w-10 overflow-hidden">
         <span

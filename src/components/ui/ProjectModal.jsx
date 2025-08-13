@@ -1,0 +1,258 @@
+import React, { useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import useReducedMotion from '../../lib/anim/useReducedMotion'
+import Button from './Button'
+
+gsap.registerPlugin(ScrollTrigger)
+
+export default function ProjectModal({ project, isOpen, onClose }) {
+  const { t } = useTranslation()
+  const reduced = useReducedMotion()
+  const modalRef = useRef(null)
+  const contentRef = useRef(null)
+  const overlayRef = useRef(null)
+
+  useEffect(() => {
+    if (!modalRef.current || reduced) return
+
+    if (isOpen) {
+      // Animate modal in
+      gsap.set(modalRef.current, { display: 'flex' })
+      gsap.fromTo(overlayRef.current, 
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3, ease: 'power2.out' }
+      )
+      gsap.fromTo(contentRef.current,
+        { scale: 0.9, opacity: 0, y: 50 },
+        { scale: 1, opacity: 1, y: 0, duration: 0.4, ease: 'power3.out', delay: 0.1 }
+      )
+      document.body.style.overflow = 'hidden'
+    } else {
+      // Animate modal out
+      gsap.to(overlayRef.current, {
+        opacity: 0,
+        duration: 0.2,
+        ease: 'power2.in'
+      })
+      gsap.to(contentRef.current, {
+        scale: 0.95,
+        opacity: 0,
+        y: 30,
+        duration: 0.3,
+        ease: 'power2.in',
+        onComplete: () => {
+          gsap.set(modalRef.current, { display: 'none' })
+        }
+      })
+      document.body.style.overflow = ''
+    }
+
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen, reduced])
+
+  // Handle escape key
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose()
+      }
+    }
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [isOpen, onClose])
+
+  if (!project) return null
+
+  return (
+    <div 
+      ref={modalRef}
+      className="fixed inset-0 z-50 hidden items-center justify-center p-4"
+      style={{ display: 'none' }}
+    >
+      {/* Backdrop */}
+      <div 
+        ref={overlayRef}
+        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+        onClick={onClose}
+      />
+      
+      {/* Modal Content */}
+      <div 
+        ref={contentRef}
+        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl glass-card border border-white/20"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="sticky top-0 z-10 flex items-center justify-between p-6 border-b border-white/10 bg-black/50 backdrop-blur-sm rounded-t-2xl">
+          <div>
+            <h2 className="text-2xl font-bold text-white">{project.name}</h2>
+            <p className="text-hierarchy-secondary">{project.type} • {project.year}</p>
+          </div>
+          <button
+            onClick={onClose}
+            className="p-2 rounded-xl hover:bg-white/10 transition-colors duration-300 text-white/70 hover:text-white"
+            data-magnetic="0.15"
+            data-cursor-text="Close"
+            aria-label={t('projects.modal.close')}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div className="p-6 space-y-8">
+          {/* Hero Image */}
+          {project.image && (
+            <div className="relative rounded-xl overflow-hidden aspect-video bg-white/5">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              <div className="flex items-center justify-center h-full text-white/60">
+                <div className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-white/10 flex items-center justify-center">
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <p className="text-sm">Project Screenshot Preview</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Project Overview */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
+              <h3 className="text-xl font-semibold text-white mb-4">{t('projects.modal.overview')}</h3>
+              <p className="text-hierarchy-secondary leading-relaxed mb-6">{project.desc}</p>
+              
+              {project.solution && (
+                <div className="p-4 rounded-xl glass-light border border-white/10">
+                  <h4 className="font-semibold text-white mb-2">Solution Approach</h4>
+                  <p className="text-hierarchy-secondary text-sm leading-relaxed">{project.solution}</p>
+                </div>
+              )}
+            </div>
+
+            {/* Project Info Sidebar */}
+            <div className="space-y-4">
+              <div className="p-4 rounded-xl glass-light border border-white/10">
+                <h4 className="font-semibold text-white mb-3">Project Details</h4>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-hierarchy-secondary">{t('projects.modal.year')}:</span>
+                    <span className="text-white">{project.year}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-hierarchy-secondary">{t('projects.modal.status')}:</span>
+                    <span className="text-green-400">{project.status}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-hierarchy-secondary">{t('projects.modal.type')}:</span>
+                    <span className="text-white">{project.type}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Performance Metrics */}
+              {project.metrics && (
+                <div className="p-4 rounded-xl glass-light border border-white/10">
+                  <h4 className="font-semibold text-white mb-3">{t('projects.modal.metrics')}</h4>
+                  <div className="space-y-3 text-sm">
+                    {Object.entries(project.metrics).map(([key, value]) => (
+                      <div key={key} className="flex justify-between">
+                        <span className="text-hierarchy-secondary capitalize">{key}:</span>
+                        <span className="text-white font-medium">{value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Key Features */}
+          {project.features && (
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-4">{t('projects.modal.features')}</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {project.features.map((feature, index) => (
+                  <div key={index} className="flex items-start space-x-3 p-3 rounded-xl glass-light border border-white/10">
+                    <div className="w-2 h-2 rounded-full bg-white/60 mt-2 flex-shrink-0" />
+                    <span className="text-hierarchy-secondary text-sm leading-relaxed">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Technology Stack */}
+          <div>
+            <h3 className="text-xl font-semibold text-white mb-4">{t('projects.modal.technology')}</h3>
+            <div className="flex flex-wrap gap-3">
+              {project.tech.map((tech, index) => (
+                <span 
+                  key={index}
+                  className="px-4 py-2 rounded-full glass-light border border-white/10 text-white/80 text-sm hover:text-white hover:bg-white/10 transition-all duration-300"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Challenges & Solutions */}
+          {project.challenges && (
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-4">{t('projects.modal.challenges')}</h3>
+              <div className="space-y-4">
+                {project.challenges.map((challenge, index) => (
+                  <div key={index} className="p-4 rounded-xl glass-light border border-white/10">
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 rounded-full bg-orange-500/20 border border-orange-500/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <div className="w-2 h-2 rounded-full bg-orange-400" />
+                      </div>
+                      <span className="text-hierarchy-secondary text-sm leading-relaxed">{challenge}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap gap-4 pt-4 border-t border-white/10">
+            {project.url && (
+              <Button
+                as="a"
+                href={project.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                variant="primary"
+                size="md"
+                className="rounded-xl"
+                data-magnetic="0.25"
+                data-cursor-text="Visit"
+                data-cursor-scale="1.2"
+              >
+                {t('projects.viewDemo')}
+              </Button>
+            )}
+            <Button
+              onClick={onClose}
+              variant="secondary"
+              size="md"
+              className="rounded-xl"
+              data-magnetic="0.15"
+            >
+              {t('projects.modal.close')}
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

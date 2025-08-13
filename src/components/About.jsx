@@ -10,7 +10,39 @@ export default function About() {
   const reveal = useScrollReveal()
   return (
     <section className="relative py-20 md:py-28" id="about">
-      {/* Subtle background accents */}
+      {/* Dynamic Background Layer for About Section */}
+      <div
+        className="absolute inset-0 -z-20 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(500px 250px at 80% 20%, rgba(255,255,255,0.03), transparent 60%),
+            radial-gradient(400px 300px at 20% 80%, rgba(255,255,255,0.025), transparent 50%),
+            linear-gradient(45deg, rgba(255,255,255,0.01) 0%, transparent 40%, rgba(255,255,255,0.008) 100%)
+          `,
+          animation: 'globalFlow 28s ease-in-out infinite 2s'
+        }}
+        aria-hidden
+      />
+      
+      {/* Floating Dynamic Elements */}
+      <div
+        className="absolute top-16 right-16 w-32 h-32 rounded-full -z-19 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 70%)',
+          animation: 'globalFloat 22s ease-in-out infinite 1s'
+        }}
+        aria-hidden
+      />
+      <div
+        className="absolute bottom-20 left-20 w-24 h-24 rounded-full -z-19 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(255,255,255,0.025) 0%, transparent 70%)',
+          animation: 'globalPulse 16s ease-in-out infinite 4s'
+        }}
+        aria-hidden
+      />
+      
+      {/* Subtle background accents with enhanced animation */}
       <Parallax
         className="pointer-events-none absolute -z-10 -top-8 left-6 h-[420px] w-[420px]"
         aria-hidden
@@ -24,6 +56,7 @@ export default function About() {
         aria-hidden
         speedY={0.1}
         maxShift={70}
+        style={{ animation: 'globalPulse 14s ease-in-out infinite 2s' }}
       />
       <Parallax
         className="pointer-events-none absolute -z-10 bottom-0 left-1/4 h-24 w-24 rounded-full bg-white/4 blur-2xl"

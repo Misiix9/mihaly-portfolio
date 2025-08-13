@@ -1,4 +1,42 @@
+# Robot Exclusion Protocol
+# https://mihalygyori.dev/robots.txt
+
 User-agent: *
 Allow: /
 
-Sitemap: https://Misiix9.github.io/mihaly-portfolio/sitemap.xml
+# Important pages
+Allow: /index.html
+Allow: /hu/
+Allow: /en/
+
+# Assets and resources
+Allow: /assets/
+Allow: /fonts/
+Allow: /images/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.svg
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.webp
+
+# Disallow development and config files
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /.git/
+Disallow: /.vscode/
+Disallow: /package*.json
+Disallow: /vite.config.js
+Disallow: /tailwind.config.js
+Disallow: /postcss.config.js
+Disallow: /eslint.config.js
+
+# Sitemap location
+Sitemap: https://mihalygyori.dev/sitemap.xml
+
+# Crawl delay (optional, good for server performance)
+Crawl-delay: 1
+
+# Cache directive for bots
+Cache-directive: max-age=3600

@@ -138,3 +138,353 @@ a:hover::after { opacity: 0.8; transform: scaleX(1); }
 }
 
 .border-soft { border-color: var(--border); }
+
+/* ------------------------------------------------------------
+   Monochrome polish & utilities
+   ------------------------------------------------------------ */
+
+/* Subtle procedural background grid */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, #ffffff0d, #0000 60%),
+    radial-gradient(1000px 500px at 120% 10%, #ffffff0a, #0000 50%),
+    linear-gradient(to bottom, #ffffff08, #0000 20%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 23px,
+      color-mix(in oklab, var(--fg) 7%, transparent) 23px 24px
+    );
+  z-index: -1;
+}
+
+/* Container spacing on small screens */
+.container {
+  padding-inline: var(--space-4);
+}
+@media (min-width: 640px) {
+  .container { padding-inline: var(--space-6); }
+}
+@media (min-width: 1024px) {
+  .container { padding-inline: 0; }
+}
+
+/* Section vertical rhythm */
+section {
+  padding-block: clamp(var(--space-12), 6vw, var(--space-16));
+}
+
+/* Muted text helper */
+.text-muted { color: var(--muted); }
+
+/* Link refinements */
+a {
+  text-underline-offset: 4px;
+}
+
+/* Card styles */
+.card {
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--bg) 92%, var(--fg) 8%);
+  border-radius: var(--radius-md);
+}
+.card.glass { background: var(--overlay); }
+
+/* Button baseline (only for non-Tailwind fallback usage) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .6rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--bg) 85%, var(--fg) 15%);
+  color: var(--fg);
+  transition: background .2s ease, border-color .2s ease, opacity .2s ease;
+}
+.btn:hover { background: color-mix(in oklab, var(--bg) 80%, var(--fg) 20%); }
+.btn:disabled { opacity: .6; cursor: not-allowed; }
+
+/* Scrollbar styling */
+* {
+  scrollbar-color: color-mix(in oklab, var(--fg) 18%, transparent) var(--bg);
+  scrollbar-width: thin;
+}
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: var(--bg); }
+*::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--fg) 18%, transparent);
+  border: 2px solid var(--bg);
+  border-radius: 999px;
+}
+
+/* Small helpers */
+.tag {
+  display: inline-block;
+  padding: .25rem .55rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--bg) 92%, var(--fg) 8%);
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+.kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: .8rem;
+  padding: .15rem .35rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--bg) 90%, var(--fg) 10%);
+}
+
+/* ------------------------------------------------------------
+   Sticky header polish (strictly monochrome, translucent + blur)
+   ------------------------------------------------------------ */
+header.sticky {
+  background: color-mix(in oklab, var(--bg) 70%, transparent);
+  backdrop-filter: saturate(120%) blur(12px);
+  -webkit-backdrop-filter: saturate(120%) blur(12px);
+  border-bottom: 1px solid color-mix(in oklab, var(--fg) 12%, transparent);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+}
+header.sticky::after {
+  /* very subtle top highlight */
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, #fff0, #ffffff1a, #fff0);
+  pointer-events: none;
+}
+header.sticky a {
+  color: var(--fg);
+  text-underline-offset: 4px;
+}
+header.sticky a:hover {
+  text-decoration: underline;
+}
+
+/* ------------------------------------------------------------
+   Ambient noise + vignette for depth (monochrome)
+   ------------------------------------------------------------ */
+body::after {
+  content: "";
+  position: fixed;
+  inset: -20% -20% -10% -20%;
+  pointer-events: none;
+  background: radial-gradient(60% 40% at 50% -10%, #ffffff08, #0000 70%),
+              radial-gradient(60% 40% at 50% 110%, #ffffff05, #0000 70%);
+  mix-blend-mode: normal;
+  z-index: -1;
+}
+
+/* Fine noise layer (performance-friendly single PNG data URI fallback) */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .05;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AApMB7cQw3NQAAAAASUVORK5CYII=');
+  z-index: -1;
+}
+
+/* ------------------------------------------------------------
+   Cards: elevated glass/gradient frames + animated borders
+   ------------------------------------------------------------ */
+.card,
+.glass,
+[class*="shadow-"] {
+  transition: transform .35s cubic-bezier(.2,.8,.2,1),
+              box-shadow .35s cubic-bezier(.2,.8,.2,1),
+              border-color .3s ease, background-color .3s ease;
+  will-change: transform;
+}
+
+.card.hover-lift:hover,
+.glass.hover-lift:hover,
+[class*="shadow-"] .hover-lift:hover {
+  transform: translateY(-6px);
+}
+
+.card.frame::before,
+.glass.frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(180deg, #ffffff33, #ffffff0a);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------
+   Buttons: monochrome variants and micro-interactions
+   ------------------------------------------------------------ */
+.btn-primary {
+  background: color-mix(in oklab, var(--bg) 78%, var(--fg) 22%);
+  border: 1px solid color-mix(in oklab, var(--fg) 18%, transparent);
+}
+.btn-primary:hover { background: color-mix(in oklab, var(--bg) 72%, var(--fg) 28%); }
+
+.btn-secondary {
+  background: color-mix(in oklab, var(--bg) 90%, var(--fg) 10%);
+  border: 1px solid color-mix(in oklab, var(--fg) 14%, transparent);
+}
+.btn-secondary:hover { background: color-mix(in oklab, var(--bg) 86%, var(--fg) 14%); }
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid color-mix(in oklab, var(--fg) 12%, transparent);
+}
+.btn-ghost:hover { background: color-mix(in oklab, var(--bg) 92%, var(--fg) 8%); }
+
+.btn-sm { padding: .45rem .75rem; }
+.btn-md { padding: .6rem 1rem; }
+.btn-lg { padding: .8rem 1.2rem; }
+
+/* Press effect */
+.btn:active { transform: translateY(1px); }
+
+/* ------------------------------------------------------------
+   Headings: section decorations (rule + dot)
+   ------------------------------------------------------------ */
+.section-title {
+  position: relative;
+  display: inline-block;
+}
+.section-title .rule {
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 1px;
+  width: 44%;
+  background: color-mix(in oklab, var(--fg) 26%, transparent);
+}
+.section-title .dot {
+  position: absolute;
+  bottom: -8px;
+  left: calc(44% - 3px);
+  height: 6px;
+  width: 6px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--fg) 40%, transparent);
+}
+
+/* ------------------------------------------------------------
+   Links: underline grow + soft glow on hover
+   ------------------------------------------------------------ */
+a {
+  transition: color .2s ease;
+}
+a:hover { color: #fff; }
+a:hover::after { opacity: .9; transform: scaleX(1); }
+
+/* ------------------------------------------------------------
+   Animation utilities (strict monochrome)
+   ------------------------------------------------------------ */
+@keyframes fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-6px); } 100% { transform: translateY(0); } }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes shine { 0% { opacity: 0; transform: translateX(-40%) skewX(-15deg); } 60% { opacity: .55; } 100% { opacity: 0; transform: translateX(140%) skewX(-15deg); } }
+
+.fx-fade-up { animation: fade-up .6s cubic-bezier(.2,.8,.2,1) both; }
+.fx-fade-in { animation: fade-in .6s ease both; }
+.fx-float { animation: float 6s ease-in-out infinite; }
+
+.fx-tilt {
+  transition: transform .5s cubic-bezier(.2,.8,.2,1);
+  transform-style: preserve-3d;
+}
+.fx-tilt:hover { transform: perspective(800px) rotateX(3deg) rotateY(-3deg) translateY(-4px); }
+
+.fx-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.fx-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #0000, #ffffff14, #0000);
+  transform: translateX(-100%);
+  animation: shine 1.6s ease-in-out infinite;
+}
+
+.fx-border-shimmer {
+  position: relative;
+}
+.fx-border-shimmer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(90deg, #ffffff10, #ffffff30, #ffffff10);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  background-size: 200% 100%;
+  animation: shimmer 2.5s linear infinite;
+  pointer-events: none;
+}
+
+/* Hover glow for interactive elements */
+a:hover, button:hover, .btn:hover {
+  text-shadow: 0 0 12px rgba(255,255,255,0.12);
+}
+
+/* ------------------------------------------------------------
+   Forms: glossy monochrome inputs
+   ------------------------------------------------------------ */
+input, textarea, select {
+  background: color-mix(in oklab, var(--bg) 90%, var(--fg) 10%);
+  border: 1px solid color-mix(in oklab, var(--fg) 14%, transparent);
+  border-radius: var(--radius-md);
+}
+input:hover, textarea:hover, select:hover {
+  border-color: color-mix(in oklab, var(--fg) 20%, transparent);
+}
+input:focus-visible, textarea:focus-visible, select:focus-visible {
+  border-color: color-mix(in oklab, var(--fg) 30%, transparent);
+  outline: 2px solid color-mix(in oklab, var(--fg) 35%, transparent);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------
+   Section divider: subtle animated gradient
+   ------------------------------------------------------------ */
+.section-divider {
+  position: relative;
+  overflow: hidden;
+}
+.section-divider::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(90deg, #fff0, #ffffff24, #fff0);
+  background-size: 200% 100%;
+  animation: shimmer 5s linear infinite;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------
+   Reduced motion safety
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

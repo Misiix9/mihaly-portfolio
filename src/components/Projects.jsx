@@ -34,11 +34,13 @@ export default function Projects() {
       </div>
       <div className="container mx-auto px-4 sm:px-6">
         <div className="relative">
-          <h2 ref={reveal} className="text-2xl sm:text-3xl font-semibold">{t('projects.title')}</h2>
+          <h2 ref={reveal} className="text-2xl sm:text-3xl font-bold text-white hover:scale-105 transition-all duration-300 cursor-default">{t('projects.title')}</h2>
+          <div className="absolute -bottom-2 left-0 h-0.5 w-28 bg-gradient-to-r from-white/50 via-white/30 to-transparent rounded-full" />
+          <div className="absolute -bottom-3 left-24 w-1.5 h-1.5 bg-white/40 rounded-full animate-pulse" />
           {/* Decorative underline with GSAP parallax for precise scrubbing */}
           <Parallax
             mode="gsap"
-            className="absolute -bottom-2 left-0 h-px w-32 bg-white/30"
+            className="absolute -bottom-2 left-0 h-px w-32 bg-gradient-to-r from-white/40 to-transparent"
             speedY={0.6}
             start="top bottom"
             end="bottom top"
@@ -47,26 +49,29 @@ export default function Projects() {
           />
         </div>
 
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
           {Array.isArray(items) && items.map((p, idx) => (
             <article
               key={idx}
               ref={reveal}
-              className="relative rounded-2xl p-[1px] bg-gradient-to-b from-white/20 to-white/5 transition-transform duration-300 hover:-translate-y-1"
+              className="group relative rounded-2xl bg-gradient-to-br from-white/10 via-white/5 to-white/2 border border-white/20 hover:border-white/30 backdrop-blur-sm hover:backdrop-blur-md transition-all duration-500 hover:scale-105 hover:-translate-y-3 shadow-xl hover:shadow-2xl"
             >
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col justify-between shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)] backdrop-blur-sm">
-                <h3 className="text-xl font-semibold">{p.name}</h3>
-                <p className="mt-2 text-white/70">{p.desc}</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {Array.isArray(p.tech) && p.tech.map((tech, i) => (
-                    <span key={i} className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-white/80 transition-colors hover:bg-white/12">
-                      {tech}
-                    </span>
-                  ))}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative p-8 flex flex-col justify-between h-full">
+                <div>
+                  <h3 className="text-xl font-bold text-white group-hover:text-white/95 transition-colors duration-300">{p.name}</h3>
+                  <p className="mt-4 text-white/70 group-hover:text-white/80 transition-colors duration-300 leading-relaxed">{p.desc}</p>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    {Array.isArray(p.tech) && p.tech.map((tech, i) => (
+                      <span key={i} className="inline-block rounded-full border border-white/20 bg-white/10 hover:bg-white/20 hover:border-white/30 px-3 py-1.5 text-sm text-white/80 hover:text-white transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 cursor-default backdrop-blur-sm">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="mt-6">
+                <div className="mt-8">
                   {p.url && (
-                    <Button as="a" href={p.url} target="_blank" rel="noreferrer noopener" variant="secondary" size="md">
+                    <Button as="a" href={p.url} target="_blank" rel="noreferrer noopener" variant="secondary" size="md" className="bg-transparent hover:bg-white/15 border border-white/20 hover:border-white/30 rounded-xl px-6 py-3 font-semibold hover:scale-105 hover:-translate-y-1 transition-all duration-300 backdrop-blur-sm">
                       {t('projects.view')}
                     </Button>
                   )}

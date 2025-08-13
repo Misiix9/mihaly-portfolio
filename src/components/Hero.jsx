@@ -76,11 +76,13 @@ export default function Hero() {
 
       <div className="container mx-auto px-4 sm:px-6">
         <div className="relative inline-block">
-          <h1 ref={reveal} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">{t('hero.name')}</h1>
+          <h1 ref={reveal} className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent hover:scale-105 transition-all duration-500 cursor-default">{t('hero.name')}</h1>
+          <div className="absolute -bottom-3 left-0 h-0.5 w-32 bg-gradient-to-r from-white/60 via-white/40 to-transparent rounded-full" />
+          <div className="absolute -bottom-4 left-28 w-2 h-2 bg-white/50 rounded-full animate-pulse" />
           {!reduced && (
             <Parallax
               mode="gsap"
-              className="absolute -bottom-2 left-0 h-px w-40 bg-white/30"
+              className="absolute -bottom-2 left-0 h-px w-40 bg-gradient-to-r from-white/40 to-transparent"
               speedY={0.8}
               start="top bottom"
               end="bottom top"
@@ -89,12 +91,12 @@ export default function Hero() {
             />
           )}
         </div>
-        <h2 ref={reveal} className="mt-2 text-xl sm:text-2xl text-white/80">{t('hero.role')}</h2>
-        <p ref={reveal} className="mt-4 text-white/70 max-w-2xl">{t('hero.subtitle')}</p>
-        <div ref={reveal} className="mt-10 flex flex-wrap items-center gap-4 gap-y-3">
-          <Button variant="primary" size="md">{t('hero.cta_primary')}</Button>
-          <Button variant="secondary" size="md" as="a" href="#projects">{t('hero.cta_secondary')}</Button>
-          <MagneticButton>{t('lang.en')}/{t('lang.hu')}</MagneticButton>
+        <h2 ref={reveal} className="mt-6 text-xl sm:text-2xl text-white/90 font-medium hover:text-white transition-colors duration-300">{t('hero.role')}</h2>
+        <p ref={reveal} className="mt-6 text-white/70 max-w-2xl text-lg leading-relaxed hover:text-white/80 transition-colors duration-300">{t('hero.subtitle')}</p>
+        <div ref={reveal} className="mt-12 flex flex-wrap items-center gap-6 gap-y-4">
+          <Button variant="primary" size="md" className="bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 backdrop-blur-sm rounded-xl px-6 py-3 font-semibold hover:scale-105 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl">{t('hero.cta_primary')}</Button>
+          <Button variant="secondary" size="md" as="a" href="#projects" className="bg-transparent hover:bg-white/10 border border-white/15 hover:border-white/25 rounded-xl px-6 py-3 font-semibold hover:scale-105 hover:-translate-y-1 transition-all duration-300">{t('hero.cta_secondary')}</Button>
+          <MagneticButton className="text-white/60 hover:text-white/90 transition-colors duration-300">{t('lang.en')}/{t('lang.hu')}</MagneticButton>
         </div>
 
         {/* Social links */}

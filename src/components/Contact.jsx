@@ -78,11 +78,13 @@ export default function Contact() {
         maxShift={60}
       />
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="relative inline-block">
-          <h2 ref={reveal} className="text-3xl font-semibold">{t('contact.title')}</h2>
+        <div className="relative inline-block section-title">
+          <h2 ref={reveal} className="text-3xl font-semibold fx-tilt">{t('contact.title')}</h2>
+          <div className="rule fx-border-shimmer" />
+          <div className="dot fx-float" />
           <Parallax
             mode="gsap"
-            className="absolute -bottom-2 left-0 h-px w-28 bg-white/30"
+            className="absolute -bottom-2 left-0 h-px w-28 bg-white/30 fx-shimmer"
             speedY={0.6}
             start="top bottom"
             end="bottom top"
@@ -90,18 +92,18 @@ export default function Contact() {
             aria-hidden
           />
         </div>
-        <p ref={reveal} className="mt-3 text-white/70 max-w-2xl">{t('contact.subtitle')}</p>
+        <p ref={reveal} className="mt-3 text-white/70 max-w-2xl fx-fade-up">{t('contact.subtitle')}</p>
 
         <form onSubmit={onSubmit} className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6" noValidate>
           <div ref={reveal} className="lg:col-span-1 space-y-4">
-            <div>
+            <div className="fx-fade-up">
               <label htmlFor="name" className="block text-sm text-white/70">{t('contact.form.name')}</label>
               <input
                 id="name"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-white placeholder-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+                className="mt-1 w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-white placeholder-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 hover-lift fx-shimmer"
                 placeholder={t('contact.form.name_placeholder')}
                 required
                 aria-required="true"
@@ -112,14 +114,14 @@ export default function Contact() {
                 <p id="name-error" className="mt-1 text-sm text-red-400">{t('contact.form.error')}</p>
               )}
             </div>
-            <div>
+            <div className="fx-fade-up">
               <label htmlFor="email" className="block text-sm text-white/70">{t('contact.form.email')}</label>
               <input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-white placeholder-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+                className="mt-1 w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-white placeholder-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 hover-lift fx-shimmer"
                 placeholder={t('contact.form.email_placeholder')}
                 required
                 aria-required="true"
@@ -131,14 +133,14 @@ export default function Contact() {
               )}
             </div>
           </div>
-          <div ref={reveal} className="lg:col-span-1">
+          <div ref={reveal} className="lg:col-span-1 fx-fade-up">
             <label htmlFor="message" className="block text-sm text-white/70">{t('contact.form.message')}</label>
             <textarea
               id="message"
               rows={7}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-white placeholder-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+              className="mt-1 w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-white placeholder-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 hover-lift fx-shimmer"
               placeholder={t('contact.form.message_placeholder')}
               required
               aria-required="true"
@@ -150,7 +152,7 @@ export default function Contact() {
             )}
           </div>
 
-          <div ref={reveal} className="lg:col-span-2 flex items-center gap-4">
+          <div ref={reveal} className="lg:col-span-2 flex items-center gap-4 fx-fade-up">
             {/* Honeypot field (keep rendered) */}
             <input
               type="text"
@@ -162,12 +164,12 @@ export default function Contact() {
               className="absolute opacity-0 pointer-events-none -z-10"
             />
             <HCaptcha className="shrink-0" onVerify={setCaptcha} />
-            <Button type="submit" variant="primary" size="md" disabled={loading} aria-busy={loading ? 'true' : 'false'}>
+            <Button type="submit" variant="primary" size="md" disabled={loading} aria-busy={loading ? 'true' : 'false'} className="btn-primary hover-lift fx-shimmer">
               {loading ? t('contact.form.sending') : t('contact.form.submit')}
             </Button>
             <a
               href={`mailto:mihalygyori05@gmail.com?subject=${encodeURIComponent('Portfolio contact')}&body=${encodeURIComponent(message)}`}
-              className="text-white/70 underline-offset-4 hover:underline transition-colors hover:text-white/90"
+              className="text-white/70 underline-offset-4 hover:underline transition-colors hover:text-white/90 fx-float"
             >
               {t('contact.form.mailto_fallback')}
             </a>

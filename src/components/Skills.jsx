@@ -23,10 +23,12 @@ export default function Skills() {
       />
       <div className="container mx-auto px-4 sm:px-6">
         <div className="relative inline-block">
-          <h2 ref={reveal} className="text-2xl sm:text-3xl font-semibold">{t('skills.title')}</h2>
+          <h2 ref={reveal} className="text-2xl sm:text-3xl font-bold text-white hover:scale-105 transition-all duration-300 cursor-default">{t('skills.title')}</h2>
+          <div className="absolute -bottom-2 left-0 h-0.5 w-24 bg-gradient-to-r from-white/50 via-white/30 to-transparent rounded-full" />
+          <div className="absolute -bottom-3 left-20 w-1.5 h-1.5 bg-white/40 rounded-full animate-pulse" />
           <Parallax
             mode="gsap"
-            className="absolute -bottom-2 left-0 h-px w-28 bg-white/30"
+            className="absolute -bottom-2 left-0 h-px w-28 bg-gradient-to-r from-white/40 to-transparent"
             speedY={0.5}
             start="top bottom"
             end="bottom top"
@@ -35,18 +37,19 @@ export default function Skills() {
           />
         </div>
 
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {Array.isArray(categories) && categories.map((cat, idx) => (
             <div
               key={idx}
               ref={reveal}
-              className="group relative rounded-2xl p-[1px] bg-gradient-to-b from-white/20 to-white/5 transition-transform duration-300 will-change-transform hover:-translate-y-1"
+              className="group relative rounded-2xl bg-gradient-to-br from-white/10 via-white/5 to-white/2 border border-white/20 hover:border-white/30 backdrop-blur-sm hover:backdrop-blur-md transition-all duration-500 hover:scale-105 hover:-translate-y-2 shadow-xl hover:shadow-2xl"
             >
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)] backdrop-blur-sm">
-                <h3 className="text-sm uppercase tracking-wider text-white/60">{cat.title}</h3>
-                <div className="mt-3 flex flex-wrap gap-2">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative p-8">
+                <h3 className="text-sm uppercase tracking-widest text-white/70 font-semibold group-hover:text-white/90 transition-colors duration-300">{cat.title}</h3>
+                <div className="mt-4 flex flex-wrap gap-3">
                   {Array.isArray(cat.items) && cat.items.map((item, i) => (
-                    <span key={i} className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-white/80 transition-colors group-hover:bg-white/8 hover:bg-white/12">
+                    <span key={i} className="inline-block rounded-full border border-white/20 bg-white/10 hover:bg-white/20 hover:border-white/30 px-4 py-2 text-sm text-white/80 hover:text-white transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 cursor-default backdrop-blur-sm">
                       {item}
                     </span>
                   ))}

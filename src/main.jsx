@@ -7,6 +7,7 @@ import { setupI18n } from './lib/i18n/index.js'
 import { initSmoothScroll, getLenis } from './lib/scroll/smoothScroll.js'
 import { initGsapLenisBridge } from './lib/scroll/gsapBridge.js'
 import { initParallax, setParallaxGlobalIntensity } from './lib/anim/parallax.js'
+import { initScrollReveal } from './lib/anim/scrollReveal.js'
 import { initGA } from './lib/analytics/ga4.js'
 import GAListener from './lib/analytics/GAListener.jsx'
 import { setDefaultSiteMeta } from './lib/seo/meta.js'
@@ -71,7 +72,7 @@ try {
     jobTitle: 'Website and desktop developer student',
     email: 'mihalygyori05@gmail.com',
     url: origin,
-    image: '/og-image.svg',
+    image: new URL('og-image.svg', import.meta.env.BASE_URL).toString(),
     sameAs: [
       'https://github.com/Misiix9',
       'https://instagram.com/gyr.misi',
@@ -87,3 +88,10 @@ createRoot(document.getElementById('root')).render(
     </BrowserRouter>
   </StrictMode>,
 )
+
+// Initialize global scroll-reveal after first paint so DOM is present
+try {
+  setTimeout(() => {
+    initScrollReveal()
+  }, 0)
+} catch { /* no-op */ }

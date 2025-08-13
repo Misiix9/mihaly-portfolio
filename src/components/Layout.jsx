@@ -9,18 +9,31 @@ import Transitions from './ui/Transitions'
 
 export default function Layout() {
   return (
-    <div>
+    <div className="relative">
+      {/* Premium background effects */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-[-1]" 
+        style={{
+          background: `
+            radial-gradient(600px 300px at 20% -10%, rgba(255,255,255,0.08), transparent 60%),
+            radial-gradient(500px 250px at 80% 10%, rgba(255,255,255,0.06), transparent 50%),
+            linear-gradient(to bottom, rgba(255,255,255,0.04), transparent 20%)
+          `
+        }}
+        aria-hidden 
+      />
+      
       {/* Skip to content for keyboard users */}
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-3 focus:py-2 focus:bg-white/10 focus:border focus:border-white/20 focus:rounded"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white/20 focus:border focus:border-white/30 focus:rounded-lg focus:backdrop-blur-sm focus:shadow-lg"
       >
         Skip to content
       </a>
       <Transitions />
-      <header className="sticky top-0 z-50 bg-black/70 backdrop-blur border-b border-white/10">
-        <div className="container mx-auto px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between">
-          <span className="font-semibold tracking-tight">Mihaly Gyori</span>
+      <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/20 shadow-2xl">
+        <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+          <span className="font-bold text-lg tracking-tight text-white hover:text-white/90 transition-all duration-300 hover:scale-105">Mihaly Gyori</span>
           <LanguageSwitch />
         </div>
       </header>

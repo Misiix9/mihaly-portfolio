@@ -18,8 +18,8 @@ export default function Layout() {
       <SEOHead section="home" />
       <StructuredData />
       
-      {/* Global Never-Static Background System */}
-      <GlobalDynamicBackground />
+      {/* Global Never-Static Background System - TEMPORARILY DISABLED */}
+      {/* <GlobalDynamicBackground /> */}
       
       {/* Skip to content for keyboard users */}
       <a

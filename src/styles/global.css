@@ -94,32 +94,32 @@ html, body {
   color: var(--fg);
 }
 
-/* Glass Morphism Utilities */
+/* Glass Morphism Utilities - TEMPORARILY DISABLED FOR COMPOSITING */
 .glass-light {
   background: var(--glass-light);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  /* backdrop-filter: blur(8px); - DISABLED: Causes compositing issues */
+  /* -webkit-backdrop-filter: blur(8px); */
   border: 1px solid var(--glass-border);
 }
 
 .glass-medium {
   background: var(--glass-medium);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* backdrop-filter: blur(12px); - DISABLED: Causes compositing issues */
+  /* -webkit-backdrop-filter: blur(12px); */
   border: 1px solid var(--glass-border);
 }
 
 .glass-strong {
   background: var(--glass-strong);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  /* backdrop-filter: blur(16px); - DISABLED: Causes compositing issues */
+  /* -webkit-backdrop-filter: blur(16px); */
   border: 1px solid var(--glass-border);
 }
 
 .glass-card {
   background: var(--gradient-card);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  /* backdrop-filter: blur(20px); - DISABLED: Causes compositing issues */
+  /* -webkit-backdrop-filter: blur(20px); */
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.3),
@@ -208,8 +208,9 @@ a:hover::after { opacity: 0.8; transform: scaleX(1); }
 .shadow-soft { box-shadow: 0 10px 30px -15px rgba(0,0,0,0.7); }
 .glass {
   background: var(--overlay);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  /* DISABLED: backdrop-filter causes compositing failures */
+  /* backdrop-filter: blur(10px); */
+  /* -webkit-backdrop-filter: blur(10px); */
   border: 1px solid var(--border);
 }
 
@@ -285,9 +286,9 @@ a {
 .btn:hover { background: color-mix(in oklab, var(--bg) 80%, var(--fg) 20%); }
 .btn:disabled { opacity: .6; cursor: not-allowed; }
 
-/* Scrollbar styling */
+/* Scrollbar styling - FIXED FOR COMPOSITING */
+/* Removed scrollbar-color as it causes GPU compositing failures */
 * {
-  scrollbar-color: color-mix(in oklab, var(--fg) 18%, transparent) var(--bg);
   scrollbar-width: thin;
 }
 *::-webkit-scrollbar { width: 10px; height: 10px; }
@@ -323,8 +324,9 @@ a {
    ------------------------------------------------------------ */
 header.sticky {
   background: color-mix(in oklab, var(--bg) 70%, transparent);
-  backdrop-filter: saturate(120%) blur(12px);
-  -webkit-backdrop-filter: saturate(120%) blur(12px);
+  /* DISABLED: backdrop-filter causes compositing failures */
+  /* backdrop-filter: saturate(120%) blur(12px); */
+  /* -webkit-backdrop-filter: saturate(120%) blur(12px); */
   border-bottom: 1px solid color-mix(in oklab, var(--fg) 12%, transparent);
   box-shadow: 0 8px 30px rgba(0,0,0,0.35);
 }
@@ -395,10 +397,11 @@ body::after {
   border-radius: inherit;
   padding: 1px;
   background: linear-gradient(180deg, #ffffff33, #ffffff0a);
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
+  /* DISABLED: mask properties cause compositing failures */
+  /* mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); */
+  /* -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); */
+  /* -webkit-mask-composite: xor; */
+  /*         mask-composite: exclude; */
   pointer-events: none;
 }
 
@@ -479,9 +482,12 @@ a:hover::after { opacity: .9; transform: scaleX(1); }
 
 .fx-tilt {
   transition: transform .5s cubic-bezier(.2,.8,.2,1);
-  transform-style: preserve-3d;
+  /* DISABLED: transform-style: preserve-3d causes compositing failures */
+  /* transform-style: preserve-3d; */
 }
-.fx-tilt:hover { transform: perspective(800px) rotateX(3deg) rotateY(-3deg) translateY(-4px); }
+/* DISABLED: Complex 3D transforms cause compositing issues */
+/* .fx-tilt:hover { transform: perspective(800px) rotateX(3deg) rotateY(-3deg) translateY(-4px); } */
+.fx-tilt:hover { transform: translateY(-2px) scale(1.02); }
 
 .fx-shimmer {
   position: relative;
@@ -506,10 +512,11 @@ a:hover::after { opacity: .9; transform: scaleX(1); }
   border-radius: inherit;
   padding: 1px;
   background: linear-gradient(90deg, #ffffff10, #ffffff30, #ffffff10);
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
+  /* DISABLED: mask properties cause compositing failures */
+  /* mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); */
+  /* -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); */
+  /* -webkit-mask-composite: xor; */
+  /*         mask-composite: exclude; */
   background-size: 200% 100%;
   animation: shimmer 2.5s linear infinite;
   pointer-events: none;

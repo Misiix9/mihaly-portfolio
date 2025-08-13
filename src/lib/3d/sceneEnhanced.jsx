@@ -116,218 +116,234 @@ function EnhancedGeometry({
     }
   }, [gl, invalidate, mouseResponse, portalMode])
 
-  // Enhanced scroll-based animations with portal mode
+  // Enhanced scroll-based animations with portal mode - TEMPORARILY DISABLED
   useEffect(() => {
+    // Completely disable scroll influence to test if this is causing scroll issues
+    console.log('3D Scene scroll influence disabled for debugging')
+    return
+    
+    /* COMMENTED OUT FOR DEBUGGING
     if (!scrollInfluence || !groupRef.current) return
 
+    let ticking = false
+
     const handleScroll = () => {
-      const scrollY = window.scrollY
-      const windowHeight = window.innerHeight
-      const documentHeight = document.documentElement.scrollHeight
-      const maxScroll = documentHeight - windowHeight
-      const globalProgress = Math.min(scrollY / maxScroll, 1)
-      
-      // Get sections
-      const sections = ['hero', 'about', 'skills', 'projects', 'contact']
-      let currentSection = 'hero'
-      let sectionProgress = 0
-      
-      // Detect current section
-      sections.forEach((sectionId) => {
-        const element = document.getElementById(sectionId)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          const sectionTop = scrollY + rect.top
-          const sectionBottom = sectionTop + rect.height
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY
+          const windowHeight = window.innerHeight
+          const documentHeight = document.documentElement.scrollHeight
+          const maxScroll = documentHeight - windowHeight
+          const globalProgress = Math.min(scrollY / maxScroll, 1)
           
-          if (scrollY >= sectionTop - windowHeight / 2 && scrollY < sectionBottom) {
-            currentSection = sectionId
-            sectionProgress = (scrollY - sectionTop + windowHeight / 2) / rect.height
-          }
-        }
-      })
-
-      // Portal Mode: Massive scaling and tunneling effect
-      if (portalMode && groupRef.current) {
-        // Calculate portal expansion (grows dramatically as you scroll)
-        const heroElement = document.getElementById('hero')
-        const heroBottom = heroElement ? heroElement.offsetTop + heroElement.offsetHeight : windowHeight
-        
-        let portalScale = 1
-        let tunnelEffect = 0
-        let portalOpacity = 0.6
-        
-        if (scrollY > heroBottom * 0.3) {
-          // Start expanding dramatically after 30% of hero section
-          const expansionProgress = Math.min((scrollY - heroBottom * 0.3) / (windowHeight * 2), 1)
-          portalScale = 1 + expansionProgress * expansionFactor * 3 // Massive expansion
-          tunnelEffect = expansionProgress * 2 // Tunnel depth effect
-          portalOpacity = Math.max(0.2, 0.8 - expansionProgress * 0.4) // Fade as it expands
+          // Get sections
+          const sections = ['hero', 'about', 'skills', 'projects', 'contact']
+          let currentSection = 'hero'
+          let sectionProgress = 0
           
-          // Create wireframe tunnel effect
-          if (materialRef.current) {
-            materialRef.current.wireframe = true
-            materialRef.current.opacity = portalOpacity
-          }
-        } else {
-          // In hero section: normal interactive mode
-          portalScale = 1 + sectionProgress * 0.3
-          if (materialRef.current) {
-            materialRef.current.wireframe = false
-            materialRef.current.opacity = 0.6
-          }
-        }
-        
-        // Update portal state
-        setPortalState({
-          scale: portalScale,
-          opacity: portalOpacity,
-          rotation: {
-            x: globalProgress * Math.PI * 2 + tunnelEffect,
-            y: scrollY * 0.003,
-            z: Math.sin(globalProgress * Math.PI * 4) * 0.5
-          },
-          tunnelDepth: tunnelEffect,
-          sectionProgress: globalProgress
-        })
-        
-        // Apply portal transformations
-        gsap.to(groupRef.current.scale, {
-          x: portalScale,
-          y: portalScale,
-          z: portalScale + tunnelEffect * 0.5,
-          duration: 0.3,
-          ease: 'power2.out'
-        })
-        
-        gsap.to(groupRef.current.rotation, {
-          x: globalProgress * Math.PI * 2 + tunnelEffect,
-          y: scrollY * 0.003,
-          z: Math.sin(globalProgress * Math.PI * 4) * 0.5,
-          duration: 0.3,
-          ease: 'power2.out'
-        })
-        
-        // Position adjustment for tunnel effect
-        gsap.to(groupRef.current.position, {
-          z: tunnelEffect * -2,
-          duration: 0.3,
-          ease: 'power2.out'
-        })
-        
-        return // Skip regular section animations in portal mode
-      }
-
-      // Regular mode: Apply different animations based on current section
-      if (groupRef.current) {
-        // Update geometry based on section
-        const sectionGeometries = {
-          'hero': 'icosahedron',
-          'about': 'dodecahedron', 
-          'skills': 'octahedron',
-          'projects': 'torus',
-          'contact': 'torusKnot'
-        }
-        
-        if (sectionGeometries[currentSection] !== currentGeometry) {
-          setCurrentGeometry(sectionGeometries[currentSection])
-        }
-        
-        switch (currentSection) {
-          case 'hero':
-            gsap.to(groupRef.current.rotation, {
-              x: sectionProgress * 0.3,
-              y: scrollY * 0.001,
-              z: sectionProgress * 0.2,
-              duration: 0.5,
-              ease: 'power2.out'
-            })
-            gsap.to(groupRef.current.scale, {
-              x: 1 + sectionProgress * 0.2,
-              y: 1 + sectionProgress * 0.2,
-              z: 1 + sectionProgress * 0.2,
-              duration: 0.5
-            })
-            break
-            
-          case 'about':
-            gsap.to(groupRef.current.rotation, {
-              x: Math.PI * 0.2 + sectionProgress * 0.5,
-              y: scrollY * 0.002,
-              z: Math.sin(scrollY * 0.01) * 0.3,
-              duration: 0.5,
-              ease: 'power2.out'
-            })
-            gsap.to(groupRef.current.scale, {
-              x: 1.3 + Math.sin(sectionProgress * Math.PI) * 0.2,
-              y: 1.3 + Math.sin(sectionProgress * Math.PI) * 0.2,
-              z: 1.3 + Math.sin(sectionProgress * Math.PI) * 0.2,
-              duration: 0.5
-            })
-            break
-            
-          case 'skills':
-            gsap.to(groupRef.current.rotation, {
-              x: Math.PI * 0.5 + sectionProgress * Math.PI,
-              y: scrollY * 0.003,
-              z: sectionProgress * Math.PI * 0.5,
-              duration: 0.5,
-              ease: 'power2.out'
-            })
-            gsap.to(groupRef.current.scale, {
-              x: 1.5 + sectionProgress * 0.3,
-              y: 1.5 + sectionProgress * 0.3,
-              z: 1.5 + sectionProgress * 0.3,
-              duration: 0.5
-            })
-            break
-            
-          case 'projects':
-            gsap.to(groupRef.current.rotation, {
-              x: Math.PI + sectionProgress * 0.8,
-              y: scrollY * 0.004,
-              z: Math.cos(scrollY * 0.01) * 0.4,
-              duration: 0.5,
-              ease: 'power2.out'
-            })
-            gsap.to(groupRef.current.scale, {
-              x: 1.8 + sectionProgress * 0.4,
-              y: 1.8 + sectionProgress * 0.4,
-              z: 1.8 + sectionProgress * 0.4,
-              duration: 0.5
-            })
-            break
-            
-          case 'contact':
-            gsap.to(groupRef.current.rotation, {
-              x: Math.PI * 1.5 + sectionProgress * 0.6,
-              y: scrollY * 0.005,
-              z: sectionProgress * Math.PI,
-              duration: 0.5,
-              ease: 'power2.out'
-            })
-            gsap.to(groupRef.current.scale, {
-              x: 2 + Math.sin(sectionProgress * Math.PI * 2) * 0.3,
-              y: 2 + Math.sin(sectionProgress * Math.PI * 2) * 0.3,
-              z: 2 + Math.sin(sectionProgress * Math.PI * 2) * 0.3,
-              duration: 0.5
-            })
-            break
-        }
-        
-        // Update material opacity based on section
-        if (materialRef.current) {
-          const opacity = currentSection === 'hero' ? 0.6 : Math.max(0.3, 0.8 - sectionProgress * 0.3)
-          gsap.to(materialRef.current, {
-            opacity,
-            duration: 0.5
+          // Detect current section
+          sections.forEach((sectionId) => {
+            const element = document.getElementById(sectionId)
+            if (element) {
+              const rect = element.getBoundingClientRect()
+              const sectionTop = scrollY + rect.top
+              const sectionBottom = sectionTop + rect.height
+              
+              if (scrollY >= sectionTop - windowHeight / 2 && scrollY < sectionBottom) {
+                currentSection = sectionId
+                sectionProgress = (scrollY - sectionTop + windowHeight / 2) / rect.height
+              }
+            }
           })
-        }
+
+          // Portal Mode: Massive scaling and tunneling effect
+          if (portalMode && groupRef.current) {
+            // Calculate portal expansion (grows dramatically as you scroll)
+            const heroElement = document.getElementById('hero')
+            const heroBottom = heroElement ? heroElement.offsetTop + heroElement.offsetHeight : windowHeight
+            
+            let portalScale = 1
+            let tunnelEffect = 0
+            let portalOpacity = 0.6
+            
+            if (scrollY > heroBottom * 0.3) {
+              // Start expanding dramatically after 30% of hero section
+              const expansionProgress = Math.min((scrollY - heroBottom * 0.3) / (windowHeight * 2), 1)
+              portalScale = 1 + expansionProgress * expansionFactor * 3 // Massive expansion
+              tunnelEffect = expansionProgress * 2 // Tunnel depth effect
+              portalOpacity = Math.max(0.2, 0.8 - expansionProgress * 0.4) // Fade as it expands
+              
+              // Create wireframe tunnel effect
+              if (materialRef.current) {
+                materialRef.current.wireframe = true
+                materialRef.current.opacity = portalOpacity
+              }
+            } else {
+              // In hero section: normal interactive mode
+              portalScale = 1 + sectionProgress * 0.3
+              if (materialRef.current) {
+                materialRef.current.wireframe = false
+                materialRef.current.opacity = 0.6
+              }
+            }
+            
+            // Update portal state
+            setPortalState({
+              scale: portalScale,
+              opacity: portalOpacity,
+              rotation: {
+                x: globalProgress * Math.PI * 2 + tunnelEffect,
+                y: scrollY * 0.003,
+                z: Math.sin(globalProgress * Math.PI * 4) * 0.5
+              },
+              tunnelDepth: tunnelEffect,
+              sectionProgress: globalProgress
+            })
+            
+            // Apply portal transformations
+            gsap.to(groupRef.current.scale, {
+              x: portalScale,
+              y: portalScale,
+              z: portalScale + tunnelEffect * 0.5,
+              duration: 0.3,
+              ease: 'power2.out'
+            })
+            
+            gsap.to(groupRef.current.rotation, {
+              x: globalProgress * Math.PI * 2 + tunnelEffect,
+              y: scrollY * 0.003,
+              z: Math.sin(globalProgress * Math.PI * 4) * 0.5,
+              duration: 0.3,
+              ease: 'power2.out'
+            })
+            
+            // Position adjustment for tunnel effect
+            gsap.to(groupRef.current.position, {
+              z: tunnelEffect * -2,
+              duration: 0.3,
+              ease: 'power2.out'
+            })
+            
+            ticking = false
+            return // Skip regular section animations in portal mode
+          }
+
+          // Regular mode: Apply different animations based on current section
+          if (groupRef.current) {
+            // Update geometry based on section
+            const sectionGeometries = {
+              'hero': 'icosahedron',
+              'about': 'dodecahedron', 
+              'skills': 'octahedron',
+              'projects': 'torus',
+              'contact': 'torusKnot'
+            }
+            
+            if (sectionGeometries[currentSection] !== currentGeometry) {
+              setCurrentGeometry(sectionGeometries[currentSection])
+            }
+            
+            switch (currentSection) {
+              case 'hero':
+                gsap.to(groupRef.current.rotation, {
+                  x: sectionProgress * 0.3,
+                  y: scrollY * 0.001,
+                  z: sectionProgress * 0.2,
+                  duration: 0.5,
+                  ease: 'power2.out'
+                })
+                gsap.to(groupRef.current.scale, {
+                  x: 1 + sectionProgress * 0.2,
+                  y: 1 + sectionProgress * 0.2,
+                  z: 1 + sectionProgress * 0.2,
+                  duration: 0.5
+                })
+                break
+                
+              case 'about':
+                gsap.to(groupRef.current.rotation, {
+                  x: Math.PI * 0.2 + sectionProgress * 0.5,
+                  y: scrollY * 0.002,
+                  z: Math.sin(scrollY * 0.01) * 0.3,
+                  duration: 0.5,
+                  ease: 'power2.out'
+                })
+                gsap.to(groupRef.current.scale, {
+                  x: 1.3 + Math.sin(sectionProgress * Math.PI) * 0.2,
+                  y: 1.3 + Math.sin(sectionProgress * Math.PI) * 0.2,
+                  z: 1.3 + Math.sin(sectionProgress * Math.PI) * 0.2,
+                  duration: 0.5
+                })
+                break
+                
+              case 'skills':
+                gsap.to(groupRef.current.rotation, {
+                  x: Math.PI * 0.5 + sectionProgress * Math.PI,
+                  y: scrollY * 0.003,
+                  z: sectionProgress * Math.PI * 0.5,
+                  duration: 0.5,
+                  ease: 'power2.out'
+                })
+                gsap.to(groupRef.current.scale, {
+                  x: 1.5 + sectionProgress * 0.3,
+                  y: 1.5 + sectionProgress * 0.3,
+                  z: 1.5 + sectionProgress * 0.3,
+                  duration: 0.5
+                })
+                break
+                
+              case 'projects':
+                gsap.to(groupRef.current.rotation, {
+                  x: Math.PI + sectionProgress * 0.8,
+                  y: scrollY * 0.004,
+                  z: Math.cos(scrollY * 0.01) * 0.4,
+                  duration: 0.5,
+                  ease: 'power2.out'
+                })
+                gsap.to(groupRef.current.scale, {
+                  x: 1.8 + sectionProgress * 0.4,
+                  y: 1.8 + sectionProgress * 0.4,
+                  z: 1.8 + sectionProgress * 0.4,
+                  duration: 0.5
+                })
+                break
+                
+              case 'contact':
+                gsap.to(groupRef.current.rotation, {
+                  x: Math.PI * 1.5 + sectionProgress * 0.6,
+                  y: scrollY * 0.005,
+                  z: sectionProgress * Math.PI,
+                  duration: 0.5,
+                  ease: 'power2.out'
+                })
+                gsap.to(groupRef.current.scale, {
+                  x: 2 + Math.sin(sectionProgress * Math.PI * 2) * 0.3,
+                  y: 2 + Math.sin(sectionProgress * Math.PI * 2) * 0.3,
+                  z: 2 + Math.sin(sectionProgress * Math.PI * 2) * 0.3,
+                  duration: 0.5
+                })
+                break
+            }
+            
+            // Update material opacity based on section
+            if (materialRef.current) {
+              const opacity = currentSection === 'hero' ? 0.6 : Math.max(0.3, 0.8 - sectionProgress * 0.3)
+              gsap.to(materialRef.current, {
+                opacity,
+                duration: 0.5
+              })
+            }
+          }
+          
+          ticking = false
+        })
+        ticking = true
       }
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
+    */
   }, [scrollInfluence, currentGeometry, portalMode, expansionFactor])
 
   useFrame((state) => {

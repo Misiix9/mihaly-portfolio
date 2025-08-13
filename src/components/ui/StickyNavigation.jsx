@@ -61,6 +61,8 @@ export default function StickyNavigation() {
 
   // Track scroll progress and active section
   useEffect(() => {
+    let ticking = false
+
     const updateScrollProgress = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight
       const scrolled = window.scrollY
@@ -91,11 +93,17 @@ export default function StickyNavigation() {
     }
 
     const handleScroll = () => {
-      updateScrollProgress()
-      updateActiveSection()
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateScrollProgress()
+          updateActiveSection()
+          ticking = false
+        })
+        ticking = true
+      }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll() // Initial call
 
     return () => window.removeEventListener('scroll', handleScroll)

@@ -1,10 +1,16 @@
 import { lazy, Suspense, useState, useEffect } from 'react'
 
-// Lazy load heavy animation components
-export const LazyThreeScene = lazy(() => import('../3d/scene.jsx'))
-export const LazyThreeSceneEnhanced = lazy(() => import('../3d/sceneEnhanced.jsx'))
-export const LazyParticlesCanvas = lazy(() => import('../../components/ui/ParticlesCanvas.jsx'))
-export const LazyParticlesCanvasEnhanced = lazy(() => import('../../components/ui/ParticlesCanvasEnhanced.jsx'))
+// Lazy load heavy animation components - 3D DISABLED FOR DEBUGGING
+// export const LazyThreeScene = lazy(() => import('../3d/scene.jsx'))
+// export const LazyThreeSceneEnhanced = lazy(() => import('../3d/sceneEnhanced.jsx'))
+
+// Return null components to completely disable 3D rendering
+export const LazyThreeScene = lazy(() => Promise.resolve({ default: () => null }))
+export const LazyThreeSceneEnhanced = lazy(() => Promise.resolve({ default: () => null }))
+
+// Temporarily disable particles canvas too for debugging
+export const LazyParticlesCanvas = lazy(() => Promise.resolve({ default: () => null }))
+export const LazyParticlesCanvasEnhanced = lazy(() => Promise.resolve({ default: () => null }))
 export const LazyMorphingBlob = lazy(() => import('../../components/ui/MorphingBlob.jsx'))
 export const LazyMorphingBlobEnhanced = lazy(() => import('../../components/ui/MorphingBlobEnhanced.jsx'))
 export const LazyLottiePlayer = lazy(() => import('../../components/ui/LottiePlayer.jsx'))

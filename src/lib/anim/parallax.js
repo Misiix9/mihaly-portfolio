@@ -42,10 +42,17 @@ function ensureMouseListener() {
 function ensureLoop() {
   if (loopStarted) return
   loopStarted = true
+  
+  // DISABLED: This was causing 378 dropped frames and layout thrashing!
+  // getBoundingClientRect() on every frame is a performance killer
+  console.log('Parallax system disabled due to performance issues')
+  return
+  
+  /* COMMENTED OUT - PERFORMANCE KILLER
   const frame = () => {
     const vh = window.innerHeight
     for (const s of states) {
-      const rect = s.el.getBoundingClientRect()
+      const rect = s.el.getBoundingClientRect() // ← LAYOUT THRASHING!
       const centerDelta = (rect.top + rect.height / 2) - (vh / 2)
       const baseY = -centerDelta * s.speedY
       const baseX = 0 + (0 - 0) * s.speedX
@@ -58,9 +65,16 @@ function ensureLoop() {
     }
     rafId = requestAnimationFrame(frame)
   }
-  rafId = requestAnimationFrame(frame)
+  frame()
 
   if (import.meta && import.meta.hot) {
+    import.meta.hot.dispose(() => {
+      if (rafId) cancelAnimationFrame(rafId)
+      rafId = null
+      loopStarted = false
+    })
+  }
+  */  if (import.meta && import.meta.hot) {
     import.meta.hot.dispose(() => {
       if (rafId) cancelAnimationFrame(rafId)
       rafId = null

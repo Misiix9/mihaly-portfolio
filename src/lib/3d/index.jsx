@@ -3,7 +3,7 @@ import Scene from './scene'
 import SceneEnhanced from './sceneEnhanced'
 import useReducedMotion from '../anim/useReducedMotion'
 
-// Scene wrapper with adaptive features
+// Scene wrapper with adaptive features - COMPLETELY DISABLED FOR DEBUGGING
 export default function AdaptiveScene({ 
   enhanced = true,
   geometryType = 'icosahedron',
@@ -15,6 +15,11 @@ export default function AdaptiveScene({
   className = '',
   fallback = null
 }) {
+  // TEMPORARILY DISABLED: Return null to disable all 3D rendering
+  console.log('All 3D scenes disabled for scroll debugging')
+  return null
+  
+  /* ORIGINAL CODE COMMENTED OUT FOR DEBUGGING
   const isReducedMotion = useReducedMotion()
 
   // Use simpler scene for reduced motion preference
@@ -35,4 +40,5 @@ export default function AdaptiveScene({
       <SceneComponent {...sceneProps} />
     </Suspense>
   )
+  */
 }

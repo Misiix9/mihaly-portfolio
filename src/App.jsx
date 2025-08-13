@@ -1,20 +1,20 @@
 import { Routes, Route } from 'react-router-dom'
-import { useEffect } from 'react'
 import Layout from './components/Layout'
 import { ToastProvider } from './components/ui/ToastProvider'
 import MagneticCursor from './components/ui/MagneticCursor'
-import { initSmoothScrolling, destroySmoothScrolling } from './lib/scroll/smoothScroll-enhanced'
+// import { initSmoothScrolling, destroySmoothScrolling } from './lib/scroll/smoothScroll-enhanced'
 
 function App() {
-  useEffect(() => {
-    // Initialize smooth scrolling
-    initSmoothScrolling()
+  // Commented out duplicate Lenis initialization - already initialized in main.jsx
+  // useEffect(() => {
+  //   // Initialize smooth scrolling
+  //   initSmoothScrolling()
 
-    // Cleanup on unmount
-    return () => {
-      destroySmoothScrolling()
-    }
-  }, [])
+  //   // Cleanup on unmount
+  //   return () => {
+  //     destroySmoothScrolling()
+  //   }
+  // }, [])
 
   return (
     <ToastProvider>

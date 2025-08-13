@@ -6,7 +6,7 @@ import Parallax from './ui/Parallax'
 import ContactWizard from './ui/ContactWizard'
 import ContactSuccess from './ui/ContactSuccess'
 import { sendEmail } from '../lib/email/sendEmail'
-import { showToast } from './ui/toast'
+import { useToast } from './ui/toast'
 
 export default function Contact() {
   const { t } = useTranslation()
@@ -14,6 +14,7 @@ export default function Contact() {
   const [showSuccess, setShowSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
   const backgroundRef = useInteractiveEffect({ sensitivity: 0.15 })
+  const { push: showToast } = useToast()
 
   const handleFormSubmit = async (formData) => { 
     setLoading(true)
@@ -34,10 +35,10 @@ export default function Contact() {
       })
       
       setShowSuccess(true)
-      showToast.success(t('contact.form.success'))
+      showToast({ type: 'success', message: t('contact.form.success') })
     } catch (error) {
       console.error('Failed to send email:', error)
-      showToast.error(t('contact.form.error'))
+      showToast({ type: 'error', message: t('contact.form.error') })
     } finally {
       setLoading(false)
     }

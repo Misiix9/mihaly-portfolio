@@ -15,7 +15,7 @@ export default function Contact() {
   const [loading, setLoading] = useState(false)
   const backgroundRef = useInteractiveEffect({ sensitivity: 0.15 })
 
-  const handleFormSubmit = async (formData) => {
+  const handleFormSubmit = async (formData) => { 
     setLoading(true)
     
     try {

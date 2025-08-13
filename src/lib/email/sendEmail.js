@@ -1,4 +1,4 @@
-export async function sendEmail({ name, email, message, captchaToken }) {
+export async function sendEmail({ name, email, message, captchaToken, projectType, budget, timeline, features, company, phone }) {
   const service_id = import.meta.env.VITE_EMAILJS_SERVICE_ID
   const template_id = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
   const user_id = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
@@ -7,6 +7,19 @@ export async function sendEmail({ name, email, message, captchaToken }) {
     throw new Error('Email service is not configured. Missing environment variables.')
   }
 
+  // Create a comprehensive message including all form data
+  const fullMessage = `
+${message}
+
+--- Project Details ---
+Project Type: ${projectType || 'Not specified'}
+Budget: ${budget || 'Not specified'}
+Timeline: ${timeline || 'Not specified'}
+Features: ${features && features.length > 0 ? features.join(', ') : 'Not specified'}
+Company: ${company || 'Not specified'}
+Phone: ${phone || 'Not specified'}
+  `.trim()
+
   const payload = {
     service_id,
     template_id,
@@ -14,7 +27,13 @@ export async function sendEmail({ name, email, message, captchaToken }) {
     template_params: {
       from_name: name,
       reply_to: email,
-      message,
+      message: fullMessage,
+      project_type: projectType || '',
+      budget: budget || '',
+      timeline: timeline || '',
+      features: features && features.length > 0 ? features.join(', ') : '',
+      company: company || '',
+      phone: phone || '',
       // Captcha token is included to allow logging in template or for
       // forwarding when using a custom proxy/verification endpoint later.
       hcaptcha_token: captchaToken || '',

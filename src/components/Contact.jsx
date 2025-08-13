@@ -5,15 +5,42 @@ import { useInteractiveEffect } from '../lib/anim/useMicroInteractions'
 import Parallax from './ui/Parallax'
 import ContactWizard from './ui/ContactWizard'
 import ContactSuccess from './ui/ContactSuccess'
+import { sendEmail } from '../lib/email/sendEmail'
+import { showToast } from './ui/toast'
 
 export default function Contact() {
   const { t } = useTranslation()
   const reveal = useScrollReveal()
   const [showSuccess, setShowSuccess] = useState(false)
+  const [loading, setLoading] = useState(false)
   const backgroundRef = useInteractiveEffect({ sensitivity: 0.15 })
 
-  const handleFormSuccess = () => {
-    setShowSuccess(true)
+  const handleFormSubmit = async (formData) => {
+    setLoading(true)
+    
+    try {
+      // Send the email
+      await sendEmail({
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        // Add additional form data to the message
+        projectType: formData.projectType,
+        budget: formData.budget,
+        timeline: formData.timeline,
+        features: formData.features,
+        company: formData.company,
+        phone: formData.phone
+      })
+      
+      setShowSuccess(true)
+      showToast.success(t('contact.form.success'))
+    } catch (error) {
+      console.error('Failed to send email:', error)
+      showToast.error(t('contact.form.error'))
+    } finally {
+      setLoading(false)
+    }
   }
 
   const handleBackToForm = () => {
@@ -98,7 +125,7 @@ export default function Contact() {
           {showSuccess ? (
             <ContactSuccess onBack={handleBackToForm} />
           ) : (
-            <ContactWizard onSuccess={handleFormSuccess} />
+            <ContactWizard onSubmit={handleFormSubmit} loading={loading} />
           )}
         </div>
       </div>

@@ -54,12 +54,21 @@ export default function TypewriterText({
       if (index < texts.length - 1) {
         tl.to({}, { duration: delay / 1000 })
         
-        // Type out effect (erase)
-        tl.to(element, {
-          duration: text.length * (speed / 2000), // Faster erase
-          text: '',
-          ease: 'none'
+        // Custom backspace animation (delete from end)
+        tl.call(() => {
+          let currentText = text
+          const deleteChar = () => {
+            currentText = currentText.slice(0, -1)
+            element.textContent = currentText
+            if (currentText.length > 0) {
+              gsap.delayedCall(speed / 2000, deleteChar)
+            }
+          }
+          deleteChar()
         })
+        
+        // Wait for deletion to complete
+        tl.to({}, { duration: text.length * (speed / 2000) })
         
         // Short pause before next text
         tl.to({}, { duration: 0.3 })

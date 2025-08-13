@@ -47,9 +47,9 @@ const Button = forwardRef(function Button({
   }
 
   const variants = {
-    primary: 'bg-white text-black border-transparent hover:bg-white/90 hover:shadow-lg',
-    secondary: 'bg-[var(--bg-soft)] text-white border-[var(--border)] hover:bg-white/10 hover:border-white/30',
-    ghost: 'bg-transparent text-white border-[var(--border)] hover:bg-white/10 hover:border-white/30',
+    primary: 'bg-white text-black border-transparent hover:bg-gray-50 hover:shadow-lg font-semibold',
+    secondary: 'bg-gray-800/90 text-white border-gray-600 hover:bg-gray-700/90 hover:border-gray-500 font-medium',
+    ghost: 'bg-transparent text-gray-200 border-gray-600 hover:bg-white/10 hover:border-gray-400 hover:text-white font-medium',
   }
 
   const states = {

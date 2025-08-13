@@ -117,7 +117,8 @@ export default function RoleAnimations({ className = '' }) {
           // Very subtle continuous animations based on role
           switch (role.animation) {
             case 'rotate':
-              // Slow, gentle rotation
+              // Slow, gentle rotation with seamless loop
+              gsap.set(icon, { rotation: 0 })
               gsap.to(icon, {
                 rotation: 360,
                 duration: 20,
@@ -126,7 +127,7 @@ export default function RoleAnimations({ className = '' }) {
               })
               break
             case 'pulse':
-              // Gentle breathing effect
+              // Gentle breathing effect with seamless transition
               gsap.to(orb, {
                 opacity: 0.6,
                 duration: 3,
@@ -136,7 +137,7 @@ export default function RoleAnimations({ className = '' }) {
               })
               break
             case 'bounce':
-              // Very subtle floating
+              // Very subtle floating with seamless motion
               gsap.to(icon, {
                 y: -3,
                 duration: 2.5,
@@ -146,7 +147,7 @@ export default function RoleAnimations({ className = '' }) {
               })
               break
             case 'glow':
-              // Gentle pulsing glow
+              // Gentle pulsing glow with smooth transitions
               gsap.to(orb, {
                 opacity: 0.6,
                 duration: 2.8,

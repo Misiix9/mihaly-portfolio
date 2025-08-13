@@ -106,27 +106,27 @@ export default function Hero() {
               <Button 
                 variant="primary" 
                 size="md" 
-                className="bg-white text-black rounded-xl px-8 py-4 font-semibold hover:scale-105 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-2xl hover:bg-gray-100 group border-0"
+                className="rounded-xl px-8 py-4 hover:scale-105 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-2xl"
                 data-magnetic="0.3"
                 data-cursor-text="Click me"
                 data-cursor-scale="1.5"
               >
-                <span className="relative z-10 text-black font-semibold">{t('hero.cta_primary')}</span>
+                {t('hero.cta_primary')}
               </Button>
               <Button 
                 variant="secondary" 
                 size="md" 
                 as="a" 
                 href="#projects" 
-                className="bg-gray-800/80 backdrop-blur-sm border border-gray-600 text-white rounded-xl px-8 py-4 font-semibold hover:scale-105 hover:-translate-y-1 transition-all duration-300 hover:bg-gray-700/80 hover:border-gray-500"
+                className="rounded-xl px-8 py-4 hover:scale-105 hover:-translate-y-1 transition-all duration-300"
                 data-magnetic="0.25"
                 data-cursor-text="View Work"
                 data-cursor-scale="1.3"
               >
-                <span className="text-white font-semibold">{t('hero.cta_secondary')}</span>
+                {t('hero.cta_secondary')}
               </Button>
               <MagneticButton 
-                className="text-gray-400 hover:text-gray-100 transition-colors duration-300 font-medium"
+                className="text-gray-300 hover:text-white transition-colors duration-300 font-medium underline-offset-4 hover:underline"
                 data-magnetic="0.2"
                 data-cursor-text="Switch"
               >

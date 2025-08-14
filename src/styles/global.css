@@ -195,7 +195,67 @@ a::after {
   transform-origin: left;
 }
 
-a:hover::after { opacity: 0.8; transform: scaleX(1); }
+a:hover::after { opacity: .9; transform: scaleX(1); }
+
+/* ------------------------------------------------------------
+   Animation utilities (strict monochrome)
+   ------------------------------------------------------------ */
+@keyframes fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-6px); } 100% { transform: translateY(0); } }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes shine { 0% { opacity: 0; transform: translateX(-40%) skewX(-15deg); } 60% { opacity: .55; } 100% { opacity: 0; transform: translateX(140%) skewX(-15deg); } }
+
+.fx-fade-up { animation: fade-up .6s cubic-bezier(.2,.8,.2,1) both; }
+.fx-fade-in { animation: fade-in .6s ease both; }
+.fx-float { animation: float 6s ease-in-out infinite; }
+
+.fx-tilt {
+  transition: transform .5s cubic-bezier(.2,.8,.2,1);
+  /* DISABLED: transform-style: preserve-3d causes compositing failures */
+  /* transform-style: preserve-3d; */
+}
+/* DISABLED: Complex 3D transforms cause compositing issues */
+/* .fx-tilt:hover { transform: perspective(800px) rotateX(3deg) rotateY(-3deg) translateY(-4px); } */
+.fx-tilt:hover { transform: translateY(-2px) scale(1.02); }
+
+.fx-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.fx-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #0000, #ffffff14, #0000);
+  transform: translateX(-100%);
+  animation: shine 1.6s ease-in-out infinite;
+}
+
+.fx-border-shimmer {
+  position: relative;
+}
+.fx-border-shimmer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(90deg, #ffffff10, #ffffff30, #ffffff10);
+  /* DISABLED: mask properties cause compositing failures */
+  /* mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); */
+  /* -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); */
+  /* -webkit-mask-composite: xor; */
+  /*         mask-composite: exclude; */
+  background-size: 200% 100%;
+  animation: shimmer 2.5s linear infinite;
+  pointer-events: none;
+}
+
+/* Hover glow for interactive elements */
+a:hover, button:hover, .btn:hover {
+  text-shadow: 0 0 12px rgba(255,255,255,0.12);
+}
 
 /* Focus ring */
 :focus-visible {
@@ -468,6 +528,279 @@ a:hover { color: #fff; }
 a:hover::after { opacity: .9; transform: scaleX(1); }
 
 /* ------------------------------------------------------------
+   REVOLUTIONARY QUANTUM LOGO ANIMATIONS - Mind-Blowing! 🤯�
+   ------------------------------------------------------------ */
+.epic-logo {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+/* Quantum field hover effects that blow minds */
+.epic-logo:hover {
+  transform: scale(1.1) translateY(-2px);
+  filter: drop-shadow(0 6px 30px rgba(255,255,255,0.6));
+}
+
+/* Quantum field breathes with cosmic energy */
+.quantum-field {
+  animation: quantum-breathe 5s ease-in-out infinite;
+}
+
+@keyframes quantum-breathe {
+  0%, 100% { 
+    opacity: 0.5; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 0.8; 
+    transform: scale(1.06); 
+  }
+}
+
+/* Neural ring rotates with cosmic precision */
+.neural-ring > circle:first-child {
+  animation: neural-rotate 15s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes neural-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Neural nodes pulse with quantum energy */
+.neural-node {
+  animation: neural-pulse 2s ease-in-out infinite;
+}
+
+.neural-node:nth-child(2) { animation-delay: 0s; }
+.neural-node:nth-child(3) { animation-delay: 0.3s; }
+.neural-node:nth-child(4) { animation-delay: 0.6s; }
+.neural-node:nth-child(5) { animation-delay: 0.9s; }
+.neural-node:nth-child(6) { animation-delay: 1.2s; }
+.neural-node:nth-child(7) { animation-delay: 1.5s; }
+.neural-node:nth-child(8) { animation-delay: 1.8s; }
+.neural-node:nth-child(9) { animation-delay: 2.1s; }
+
+@keyframes neural-pulse {
+  0%, 100% { 
+    opacity: 0.6; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.5); 
+  }
+}
+
+/* Quantum letters breathe with cosmic power */
+.quantum-letter-m, .quantum-letter-g {
+  animation: quantum-letter-glow 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes quantum-letter-glow {
+  0% { 
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+  }
+  100% { 
+    filter: drop-shadow(0 0 15px rgba(255,255,255,0.9));
+  }
+}
+
+/* Quantum core - the ultimate centerpiece */
+.quantum-core > circle:first-child {
+  animation: quantum-core-rotate 10s linear infinite;
+  transform-origin: center;
+}
+
+.quantum-core > circle:nth-child(2) {
+  animation: quantum-core-counter 12s linear infinite reverse;
+  transform-origin: center;
+}
+
+@keyframes quantum-core-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes quantum-core-counter {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Quantum spark pulses with energy */
+.quantum-spark {
+  animation: quantum-spark-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes quantum-spark-pulse {
+  0%, 100% { 
+    opacity: 0.95; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.8); 
+  }
+}
+
+/* Quantum orbitals spin in perfect harmony */
+.quantum-orbitals ellipse:first-child {
+  animation: quantum-orbital-1 8s linear infinite;
+  transform-origin: center;
+}
+
+.quantum-orbitals ellipse:nth-child(2) {
+  animation: quantum-orbital-2 6s linear infinite reverse;
+  transform-origin: center;
+}
+
+@keyframes quantum-orbital-1 {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes quantum-orbital-2 {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Neural network connections shimmer with data */
+.neural-network line {
+  animation: neural-data-flow 4s ease-in-out infinite;
+}
+
+.neural-network line:nth-child(1) { animation-delay: 0s; }
+.neural-network line:nth-child(2) { animation-delay: 0.5s; }
+.neural-network line:nth-child(3) { animation-delay: 1s; }
+.neural-network line:nth-child(4) { animation-delay: 1.5s; }
+.neural-network line:nth-child(5) { animation-delay: 2s; }
+.neural-network line:nth-child(6) { animation-delay: 2.5s; }
+.neural-network line:nth-child(7) { animation-delay: 3s; }
+.neural-network line:nth-child(8) { animation-delay: 3.5s; }
+
+@keyframes neural-data-flow {
+  0%, 100% { 
+    opacity: 0.2; 
+    stroke-width: 0.2; 
+  }
+  50% { 
+    opacity: 0.8; 
+    stroke-width: 0.6; 
+  }
+}
+
+/* Holographic accents float in quantum space */
+.holo-accents > g {
+  animation: holo-float 4s ease-in-out infinite;
+}
+
+.holo-accents > g:nth-child(1) { animation-delay: 0s; }
+.holo-accents > g:nth-child(2) { animation-delay: 1s; }
+.holo-accents > g:nth-child(3) { animation-delay: 2s; }
+.holo-accents > g:nth-child(4) { animation-delay: 3s; }
+
+@keyframes holo-float {
+  0%, 100% { 
+    transform: translateY(0px) scale(1); 
+    opacity: 0.6; 
+  }
+  50% { 
+    transform: translateY(-4px) scale(1.1); 
+    opacity: 0.95; 
+  }
+}
+
+/* Quantum particles orbit with cosmic precision */
+.quantum-particles circle {
+  animation: quantum-orbit 6s ease-in-out infinite;
+}
+
+.quantum-particles circle:nth-child(1) { animation-delay: 0s; }
+.quantum-particles circle:nth-child(2) { animation-delay: 0.75s; }
+.quantum-particles circle:nth-child(3) { animation-delay: 1.5s; }
+.quantum-particles circle:nth-child(4) { animation-delay: 2.25s; }
+.quantum-particles circle:nth-child(5) { animation-delay: 3s; }
+.quantum-particles circle:nth-child(6) { animation-delay: 3.75s; }
+.quantum-particles circle:nth-child(7) { animation-delay: 4.5s; }
+.quantum-particles circle:nth-child(8) { animation-delay: 5.25s; }
+
+@keyframes quantum-orbit {
+  0%, 100% { 
+    opacity: 0.7; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(2); 
+  }
+}
+
+/* HOVER EFFECTS - ABSOLUTELY MIND-BLOWING! */
+.epic-logo:hover .quantum-field {
+  animation-duration: 2s;
+}
+
+.epic-logo:hover .neural-ring > circle:first-child {
+  animation-duration: 3s;
+  stroke-width: 1.8;
+}
+
+.epic-logo:hover .neural-node {
+  animation-duration: 1s;
+  opacity: 1 !important;
+}
+
+.epic-logo:hover .quantum-letter-m,
+.epic-logo:hover .quantum-letter-g {
+  filter: drop-shadow(0 0 20px rgba(255,255,255,1)) !important;
+}
+
+.epic-logo:hover .quantum-core > circle:first-child {
+  animation-duration: 2s;
+}
+
+.epic-logo:hover .quantum-core > circle:nth-child(2) {
+  animation-duration: 1.5s;
+}
+
+.epic-logo:hover .quantum-spark {
+  animation-duration: 0.8s;
+}
+
+.epic-logo:hover .quantum-orbitals ellipse {
+  animation-duration: 2s;
+  opacity: 0.9 !important;
+}
+
+.epic-logo:hover .neural-network line {
+  animation-duration: 1.5s;
+  opacity: 0.9 !important;
+}
+
+.epic-logo:hover .holo-accents > g {
+  animation-duration: 1.5s;
+  opacity: 1 !important;
+}
+
+.epic-logo:hover .quantum-particles circle {
+  animation-duration: 2s;
+  opacity: 1 !important;
+}
+
+/* Focus state for accessibility */
+.epic-logo:focus-visible {
+  outline: 3px solid rgba(255,255,255,0.7);
+  outline-offset: 8px;
+  border-radius: 16px;
+}
+
+/* Performance optimization for quantum effects */
+.epic-logo * {
+  will-change: transform, opacity;
+}
+
+/* ------------------------------------------------------------
    Animation utilities (strict monochrome)
    ------------------------------------------------------------ */
 @keyframes fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
@@ -588,6 +921,24 @@ input:focus-visible, textarea:focus-visible, select:focus-visible {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
+}
+
+/* ------------------------------------------------------------
+   Logo Styles - Clean and Simple
+   ------------------------------------------------------------ */
+.logo-container {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.logo-container:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.logo-svg {
+  width: 100%;
+  height: 100%;
 }
 
 /* ------------------------------------------------------------

@@ -55,6 +55,7 @@ export default function Hero() {
           backgroundColor: '#000000'
         }}
         data-lcp-critical
+        data-section="hero"
       >
         {/* Simplified single background layer for better performance */}
         <div
@@ -69,14 +70,14 @@ export default function Hero() {
         <div className="container mx-auto px-4 sm:px-6 flex items-center justify-start min-h-screen relative z-10">
           <div className="max-w-4xl">
             <div className="relative inline-block" ref={titleRef}>
-              <h1 ref={reveal} className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent hover:scale-105 transition-all duration-500 cursor-default">
+              <h1 ref={reveal} className="hero-title text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tighter bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent hover:scale-105 transition-all duration-500 cursor-default" data-lang-text="hero.name">
                 {t('hero.name')}
               </h1>
             </div>
             
             <div ref={subtitleRef}>
-              <div className="mt-6 text-xl sm:text-2xl text-gray-100 font-medium flex items-center">
-                <span className="mr-2">{t('hero.im')}</span>
+              <div className="mt-6 text-xl sm:text-2xl lg:text-3xl text-gray-100 font-medium flex items-center">
+                <span className="mr-2 hero-subtitle" data-lang-text="hero.im">{t('hero.im')}</span>
                 {!reduced ? (
                   <TypewriterText
                     texts={[
@@ -88,16 +89,17 @@ export default function Hero() {
                     speed={80}
                     delay={2000}
                     loop={true}
-                    className="text-white font-semibold"
+                    className="text-white font-semibold hero-role"
+                    data-lang-animation="typewriter"
                   />
                 ) : (
-                  <span className="text-white font-semibold">{t('hero.role')}</span>
+                  <span className="text-white font-semibold hero-role" data-lang-text="hero.role">{t('hero.role')}</span>
                 )}
               </div>
-              <div ref={reveal} className="mt-4 text-sm sm:text-base text-gray-300 font-medium tracking-wide uppercase hover:text-gray-100 transition-colors duration-300">
+              <div ref={reveal} className="mt-4 text-base sm:text-lg lg:text-xl text-gray-300 font-medium tracking-wide uppercase hover:text-gray-100 transition-colors duration-300 hero-subtitle" data-lang-text="hero.value_proposition">
                 {t('hero.value_proposition')}
               </div>
-              <p ref={reveal} className="mt-6 text-gray-200 max-w-2xl text-lg leading-relaxed hover:text-white transition-colors duration-300">
+              <p ref={reveal} className="mt-6 text-gray-200 max-w-2xl text-lg sm:text-xl leading-relaxed hover:text-white transition-colors duration-300 hero-subtitle" data-lang-text="hero.subtitle">
                 {t('hero.subtitle')}
               </p>
             </div>
@@ -106,32 +108,27 @@ export default function Hero() {
               <Button 
                 variant="primary" 
                 size="md" 
-                className="rounded-xl px-8 py-4 hover:scale-105 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-2xl"
+                as="a" 
+                href="#contact" 
+                className="hero-cta rounded-xl px-8 py-4 hover:scale-105 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-2xl"
                 data-magnetic="0.3"
-                data-cursor-text="Click me"
+                data-cursor-text="Start Project"
                 data-cursor-scale="1.5"
               >
-                {t('hero.cta_primary')}
+                <span className="button-text" data-lang-text="hero.cta_primary">{t('hero.cta_primary')}</span>
               </Button>
               <Button 
                 variant="secondary" 
                 size="md" 
                 as="a" 
                 href="#projects" 
-                className="rounded-xl px-8 py-4 hover:scale-105 hover:-translate-y-1 transition-all duration-300"
+                className="hero-cta rounded-xl px-8 py-4 hover:scale-105 hover:-translate-y-1 transition-all duration-300"
                 data-magnetic="0.25"
                 data-cursor-text="View Work"
                 data-cursor-scale="1.3"
               >
-                {t('hero.cta_secondary')}
+                <span className="button-text" data-lang-text="hero.cta_secondary">{t('hero.cta_secondary')}</span>
               </Button>
-              <MagneticButton 
-                className="text-gray-300 hover:text-white transition-colors duration-300 font-medium underline-offset-4 hover:underline"
-                data-magnetic="0.2"
-                data-cursor-text="Switch"
-              >
-                {t('lang.en')}/{t('lang.hu')}
-              </MagneticButton>
             </div>
 
             {/* Social links with better contrast */}

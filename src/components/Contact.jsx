@@ -49,7 +49,7 @@ export default function Contact() {
   }
 
   return (
-    <section className="relative py-20 md:py-28" id="contact">
+    <section className="relative py-20 md:py-28" id="contact" data-section="contact">
       {/* Dynamic Background Layer for Contact Section */}
       <div
         className="absolute inset-0 -z-20 pointer-events-none"

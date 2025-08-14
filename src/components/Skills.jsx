@@ -53,7 +53,7 @@ export default function Skills() {
   }, [reduced])
 
   return (
-    <section ref={skillsRef} className="relative py-20 md:py-28" id="skills">
+    <section ref={skillsRef} className="relative py-20 md:py-28" id="skills" data-section="skills">
       {/* Dynamic Background Layer for Skills Section */}
       <div
         className="absolute inset-0 -z-20 pointer-events-none"

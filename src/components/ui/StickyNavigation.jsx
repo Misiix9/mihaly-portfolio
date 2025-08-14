@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import useReducedMotion from '../../lib/anim/useReducedMotion'
 import LanguageSwitch from '../LanguageSwitch'
+import Logo from './Logo'
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
@@ -181,14 +182,17 @@ export default function StickyNavigation() {
 
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between py-3 sm:py-4">
-            {/* Logo */}
+            {/* Epic Logo */}
             <button
               onClick={() => scrollToSection('#hero')}
-              className="font-bold text-lg tracking-tight text-white hover:text-white/90 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/40 rounded"
+              className="flex items-center gap-3 font-bold text-lg tracking-tight text-white hover:text-white/90 transition-all duration-500 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/40 rounded-lg p-2"
               data-magnetic="0.2"
               data-cursor-text="Home"
             >
-              Mihaly Gyori
+              <Logo 
+                size={36} 
+                className="transition-all duration-500 hover:scale-110" 
+              />
             </button>
 
             {/* Desktop Navigation */}

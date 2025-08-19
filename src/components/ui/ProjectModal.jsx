@@ -83,11 +83,19 @@ export default function ProjectModal({ project, isOpen, onClose }) {
       {/* Modal Content */}
       <div 
         ref={contentRef}
-        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl glass-card border border-white/20"
+        className="relative w-full max-w-4xl max-h-[90vh] bg-black/90 backdrop-blur-md rounded-2xl border border-white/20 flex flex-col"
+        style={{
+          background: 'linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.85) 100%)',
+          boxShadow: '0 25px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1)'
+        }}
         onClick={(e) => e.stopPropagation()}
+        onWheel={(e) => {
+          // Prevent wheel events from bubbling to prevent body scroll
+          e.stopPropagation()
+        }}
       >
         {/* Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between p-6 border-b border-white/10 bg-black/50 backdrop-blur-sm rounded-t-2xl">
+        <div className="flex items-center justify-between p-6 border-b border-white/10 bg-black/60 backdrop-blur-sm rounded-t-2xl flex-shrink-0">
           <div>
             <h2 className="text-2xl font-bold text-white">{project.name}</h2>
             <p className="text-hierarchy-secondary">{project.type} • {project.year}</p>
@@ -105,7 +113,19 @@ export default function ProjectModal({ project, isOpen, onClose }) {
           </button>
         </div>
 
-        <div className="p-6 space-y-8">
+        {/* Scrollable Content */}
+        <div 
+          className="flex-1 overflow-y-auto overscroll-contain scrollbar-thin scrollbar-track-white/5 scrollbar-thumb-white/20 hover:scrollbar-thumb-white/30" 
+          style={{ 
+            scrollbarWidth: 'thin',
+            scrollbarColor: 'rgba(255,255,255,0.2) rgba(255,255,255,0.05)'
+          }}
+          onWheel={(e) => {
+            // Allow scrolling within the modal content
+            e.stopPropagation()
+          }}
+        >
+          <div className="p-6 space-y-8">
           {/* Hero Image */}
           {project.image && (
             <div className="relative rounded-xl overflow-hidden aspect-video bg-white/5">
@@ -250,6 +270,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
             >
               {t('projects.modal.close')}
             </Button>
+          </div>
           </div>
         </div>
       </div>

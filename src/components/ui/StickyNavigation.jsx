@@ -169,14 +169,30 @@ export default function StickyNavigation() {
     <>
       <header 
         ref={navRef}
-        className="sticky top-0 z-50 bg-black/90 backdrop-blur-md border-b border-white/20 shadow-2xl"
+        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/20 shadow-2xl"
+        style={{ 
+          position: 'fixed', 
+          top: 0, 
+          left: 0, 
+          right: 0, 
+          zIndex: 50,
+          background: 'linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0.85) 100%)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderBottom: '1px solid rgba(255,255,255,0.15)',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)'
+        }}
       >
         {/* Progress bar */}
-        <div className="absolute bottom-0 left-0 h-0.5 w-full bg-white/10">
+        <div className="absolute bottom-0 left-0 h-0.5 w-full bg-white/5">
           <div 
             ref={progressBarRef}
-            className="h-full bg-gradient-to-r from-white/60 via-white/80 to-white/60 origin-left"
-            style={{ transform: 'scaleX(0)' }}
+            className="h-full origin-left"
+            style={{ 
+              transform: 'scaleX(0)',
+              background: 'linear-gradient(90deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.6) 100%)',
+              boxShadow: '0 0 8px rgba(255,255,255,0.3)'
+            }}
           />
         </div>
 
@@ -219,7 +235,12 @@ export default function StickyNavigation() {
                   />
                   
                   {/* Hover effect */}
-                  <div className="absolute inset-0 rounded bg-white/5 opacity-0 hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 rounded bg-white/8 backdrop-blur-sm opacity-0 hover:opacity-100 transition-all duration-300"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+                      border: '1px solid rgba(255,255,255,0.1)'
+                    }}
+                  />
                 </button>
               ))}
             </nav>
@@ -260,9 +281,16 @@ export default function StickyNavigation() {
         {/* Mobile Menu */}
         <div
           ref={mobileMenuRef}
-          className={`md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-lg border-b border-white/20 shadow-2xl ${
+          className={`md:hidden absolute top-full left-0 w-full backdrop-blur-lg border-b border-white/20 shadow-2xl ${
             isMenuOpen ? 'block' : 'hidden'
           }`}
+          style={{
+            background: 'linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.9) 100%)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            borderBottom: '1px solid rgba(255,255,255,0.15)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)'
+          }}
         >
           <nav className="container mx-auto px-4 py-6" aria-label="Mobile navigation">
             <div className="space-y-4">
@@ -270,12 +298,35 @@ export default function StickyNavigation() {
                 <button
                   key={item.key}
                   onClick={() => scrollToSection(item.href)}
-                  className={`block w-full text-left px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/40 ${
+                  className={`block w-full text-left px-4 py-3 rounded-xl text-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/40 ${
                     activeSection === item.key
-                      ? 'text-white bg-white/5'
+                      ? 'text-white'
                       : 'text-white/70'
                   }`}
-                  style={{ animationDelay: `${index * 50}ms` }}
+                  style={{ 
+                    animationDelay: `${index * 50}ms`,
+                    background: activeSection === item.key 
+                      ? 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)'
+                      : 'transparent',
+                    border: activeSection === item.key 
+                      ? '1px solid rgba(255,255,255,0.15)'
+                      : '1px solid transparent',
+                    backdropFilter: activeSection === item.key ? 'blur(8px)' : 'none'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (activeSection !== item.key) {
+                      e.target.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.04) 100%)'
+                      e.target.style.border = '1px solid rgba(255,255,255,0.1)'
+                      e.target.style.backdropFilter = 'blur(6px)'
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (activeSection !== item.key) {
+                      e.target.style.background = 'transparent'
+                      e.target.style.border = '1px solid transparent'
+                      e.target.style.backdropFilter = 'none'
+                    }
+                  }}
                 >
                   <div className="flex items-center justify-between">
                     <span>{item.label}</span>
@@ -293,10 +344,14 @@ export default function StickyNavigation() {
                 <span>Page Progress</span>
                 <span>{Math.round(scrollProgress * 100)}%</span>
               </div>
-              <div className="h-1 bg-white/10 rounded-full">
+              <div className="h-1 bg-white/10 rounded-full backdrop-blur-sm border border-white/10">
                 <div 
-                  className="h-full bg-gradient-to-r from-white/60 to-white/80 rounded-full transition-all duration-300"
-                  style={{ width: `${scrollProgress * 100}%` }}
+                  className="h-full rounded-full transition-all duration-300"
+                  style={{ 
+                    width: `${scrollProgress * 100}%`,
+                    background: 'linear-gradient(90deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.6) 100%)',
+                    boxShadow: '0 0 8px rgba(255,255,255,0.3)'
+                  }}
                 />
               </div>
             </div>

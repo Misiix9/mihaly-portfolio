@@ -148,7 +148,7 @@ export default function Projects() {
           />
         </div>
 
-        <div ref={cardsRef} className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div ref={cardsRef} className="mt-16 px-6 py-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
           {Array.isArray(items) && items.map((project, idx) => (
             <ProjectCard
               key={idx}

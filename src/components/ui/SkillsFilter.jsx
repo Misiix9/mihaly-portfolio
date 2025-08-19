@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { gsap } from 'gsap'
 import useReducedMotion from '../../lib/anim/useReducedMotion'
@@ -10,28 +10,46 @@ export default function SkillsFilter({ categories, activeFilter, onFilterChange 
   const filtersRef = useRef(null)
   const [activeIndex, setActiveIndex] = useState(0)
 
-  // All filter options
-  const filterOptions = [
+  // All filter options - memoized to prevent re-creation
+  const filterOptions = useMemo(() => [
     { id: 'all', label: t('skills.filter.all') },
     ...categories.map(cat => ({ id: cat.id, label: cat.title }))
-  ]
+  ], [t, categories])
+
+  // Update activeIndex when activeFilter changes from parent
+  useEffect(() => {
+    const newIndex = filterOptions.findIndex(option => option.id === activeFilter)
+    if (newIndex !== -1 && newIndex !== activeIndex) {
+      setActiveIndex(newIndex)
+    }
+  }, [activeFilter, filterOptions, activeIndex])
 
   // Animate active indicator
   useEffect(() => {
     if (reduced || !indicatorRef.current || !filtersRef.current) return
 
-    const activeButton = filtersRef.current.children[activeIndex]
+    // Find the actual active button by matching the activeFilter ID
+    const buttons = Array.from(filtersRef.current.children).filter(child => child.tagName === 'BUTTON')
+    const activeButton = buttons[activeIndex]
+    
     if (activeButton) {
-      const { offsetLeft, offsetWidth } = activeButton
+      const containerRect = filtersRef.current.getBoundingClientRect()
+      const buttonRect = activeButton.getBoundingClientRect()
+      
+      // Calculate position relative to container
+      const offsetLeft = buttonRect.left - containerRect.left
+      const offsetTop = buttonRect.top - containerRect.top
       
       gsap.to(indicatorRef.current, {
         x: offsetLeft,
-        width: offsetWidth,
-        duration: 0.3,
-        ease: 'power2.out'
+        y: offsetTop,
+        width: buttonRect.width,
+        height: buttonRect.height,
+        duration: 0.4,
+        ease: 'power3.out'
       })
     }
-  }, [activeIndex, reduced])
+  }, [activeIndex, reduced, activeFilter])
 
   const handleFilterChange = (filterId, index) => {
     setActiveIndex(index)
@@ -45,13 +63,20 @@ export default function SkillsFilter({ categories, activeFilter, onFilterChange 
         ref={filtersRef}
         className="relative flex flex-wrap justify-center gap-2 p-2 rounded-xl glass-light border border-white/10"
       >
-        {/* Active indicator */}
+        {/* Active indicator - positioned behind text */}
         <div 
           ref={indicatorRef}
-          className="absolute top-2 h-10 bg-white/10 rounded-lg border border-white/20 transition-all duration-300"
+          className="absolute rounded-xl backdrop-blur-md transition-all duration-300 pointer-events-none z-0"
           style={{ 
             width: '0px',
-            transform: 'translateX(0px)'
+            height: '0px',
+            left: '0px',
+            top: '0px',
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 100%)',
+            border: '1px solid rgba(255,255,255,0.3)',
+            boxShadow: '0 4px 20px rgba(255,255,255,0.1), inset 0 1px 0 rgba(255,255,255,0.2)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)'
           }}
         />
         
@@ -60,9 +85,9 @@ export default function SkillsFilter({ categories, activeFilter, onFilterChange 
             key={option.id}
             onClick={() => handleFilterChange(option.id, index)}
             className={`
-              relative z-10 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300
+              relative z-10 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
               ${activeFilter === option.id 
-                ? 'text-white' 
+                ? 'text-white font-semibold' 
                 : 'text-white/60 hover:text-white/80'
               }
             `}

@@ -6,13 +6,15 @@ import MagneticCursor from './components/ui/MagneticCursor'
 function App() {
 
   return (
-    <ToastProvider>
-      <MagneticCursor />
-      <Routes>
-        <Route path="/" element={<Layout />} />
-        <Route path="*" element={<Layout />} />
-      </Routes>
-    </ToastProvider>
+    <div className="overflow-x-hidden">
+      <ToastProvider>
+        <MagneticCursor />
+        <Routes>
+          <Route path="/" element={<Layout />} />
+          <Route path="*" element={<Layout />} />
+        </Routes>
+      </ToastProvider>
+    </div>
   )
 }
 

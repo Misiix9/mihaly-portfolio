@@ -262,12 +262,12 @@
           "Advanced Lighthouse optimizations achieving 95+ scores",
           "TypeScript integration for type safety and developer experience"
         ],
-        "image": "/screenshots/footify-hero.jpg",
+        "image": "/mihaly-portfolio/src/assets/img/Footify.png",
         "gallery": [
-          "/screenshots/footify-desktop.jpg",
-          "/screenshots/footify-mobile.jpg", 
-          "/screenshots/footify-stats.jpg",
-          "/screenshots/footify-live.jpg"
+          "/mihaly-portfolio/src/assets/img/Footify.png",
+          "/mihaly-portfolio/src/assets/img/footify-1.svg",
+          "/mihaly-portfolio/src/assets/img/footify-2.png",
+          "/mihaly-portfolio/src/assets/img/footify-3.png"
         ]
       },
       {

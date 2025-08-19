@@ -13,7 +13,7 @@ import GlobalDynamicBackground from './ui/GlobalDynamicBackground'
 
 export default function Layout() {
   return (
-    <div className="relative">
+    <div className="relative overflow-x-hidden">
       {/* SEO and Structured Data */}
       <SEOHead section="home" />
       <StructuredData />
@@ -36,7 +36,7 @@ export default function Layout() {
       {/* Section Progress Indicator */}
       <SectionProgressIndicator />
       
-      <main id="main">
+      <main id="main" className="overflow-x-hidden pt-20">
         <section id="hero">
           <Hero />
         </section>

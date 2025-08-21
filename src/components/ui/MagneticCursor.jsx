@@ -7,6 +7,14 @@ const MagneticCursor = () => {
   const [cursorText, setCursorText] = useState('');
 
   useEffect(() => {
+    // Check if device is mobile
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                     ('ontouchstart' in window) || 
+                     (window.innerWidth <= 768);
+
+    // Don't initialize cursor on mobile devices
+    if (isMobile) return;
+
     const cursor = cursorRef.current;
     const cursorDot = cursorDotRef.current;
     

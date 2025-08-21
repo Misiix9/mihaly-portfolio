@@ -138,11 +138,11 @@ export default function Hero() {
                 target="_blank"
                 rel="noreferrer noopener"
                 className="underline-offset-4 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 rounded hover:text-gray-100 transition-colors duration-300"
-                aria-label="GitHub"
+                aria-label={t('common.social.github')}
                 data-magnetic="0.15"
-                data-cursor-text="GitHub"
+                data-cursor-text={t('common.social.github')}
               >
-                GitHub
+                {t('common.social.github')}
               </a>
               <a
                 href="https://instagram.com/gyr.misi"
@@ -150,17 +150,17 @@ export default function Hero() {
                 rel="noreferrer noopener"
                 className="underline-offset-4 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 rounded hover:text-gray-100 transition-colors duration-300"
                 data-magnetic="0.15"
-                data-cursor-text="Instagram"
-                aria-label="Instagram"
+                data-cursor-text={t('common.social.instagram')}
+                aria-label={t('common.social.instagram')}
               >
-                Instagram
+                {t('common.social.instagram')}
               </a>
               <a
                 href="mailto:mihalygyori05@gmail.com"
                 className="underline-offset-4 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 rounded hover:text-gray-100 transition-colors duration-300"
-                aria-label="Email"
+                aria-label={t('common.social.email')}
               >
-                Email
+                {t('common.social.email')}
               </a>
             </nav>
           </div>
@@ -179,7 +179,7 @@ export default function Hero() {
             <svg className="h-5 w-5 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M6 9l6 6 6-6" />
             </svg>
-            <span className="text-xs tracking-wider">scroll</span>
+            <span className="text-xs tracking-wider">{t('common.scroll')}</span>
           </div>
         </div>
       </section>

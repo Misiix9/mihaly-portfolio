@@ -341,7 +341,7 @@ export default function StickyNavigation() {
             {/* Mobile scroll progress indicator */}
             <div className="mt-6 px-4">
               <div className="flex items-center justify-between text-xs text-white/50 mb-2">
-                <span>Page Progress</span>
+                <span>{t('common.page_progress')}</span>
                 <span>{Math.round(scrollProgress * 100)}%</span>
               </div>
               <div className="h-1 bg-white/10 rounded-full backdrop-blur-sm border border-white/10">

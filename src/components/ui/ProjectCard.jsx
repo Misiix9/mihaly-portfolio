@@ -243,7 +243,7 @@ export default function ProjectCard({ project, onOpenModal }) {
       {/* Featured badge */}
       {project.featured && (
         <div className="absolute top-4 right-4 z-10 px-3 py-1 rounded-full glass-light border border-white/20 text-xs text-white/80 font-medium">
-          Featured
+          {t('common.featured')}
         </div>
       )}
 
@@ -282,21 +282,23 @@ export default function ProjectCard({ project, onOpenModal }) {
         <div className="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none"></div>
         
         {/* Overlay buttons - separate from background to allow clicks */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center pointer-events-none">
           <div 
             ref={overlayButtonsRef}
-            className="flex space-x-3"
+            className="flex space-x-3 pointer-events-auto"
             style={{ transformStyle: 'preserve-3d' }}
           >
             <button
               onClick={(e) => {
+                e.preventDefault()
                 e.stopPropagation()
-                window.open(project.url, '_blank')
+                window.open(project.url, '_blank', 'noopener,noreferrer')
               }}
-              className="p-3 rounded-xl glass-light border border-white/20 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 shadow-lg relative z-50 pointer-events-auto"
+              className="p-3 rounded-xl glass-light border border-white/20 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 shadow-lg relative z-50 cursor-pointer"
               style={{ 
                 transformStyle: 'preserve-3d',
-                boxShadow: '0 8px 25px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1)'
+                boxShadow: '0 8px 25px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1)',
+                pointerEvents: 'auto'
               }}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -305,13 +307,15 @@ export default function ProjectCard({ project, onOpenModal }) {
             </button>
             <button
               onClick={(e) => {
+                e.preventDefault()
                 e.stopPropagation()
                 onOpenModal(project)
               }}
-              className="p-3 rounded-xl glass-light border border-white/20 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 shadow-lg relative z-50 pointer-events-auto"
+              className="p-3 rounded-xl glass-light border border-white/20 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 shadow-lg relative z-50 cursor-pointer"
               style={{ 
                 transformStyle: 'preserve-3d',
-                boxShadow: '0 8px 25px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1)'
+                boxShadow: '0 8px 25px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1)',
+                pointerEvents: 'auto'
               }}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -384,7 +388,7 @@ export default function ProjectCard({ project, onOpenModal }) {
     {/* Floating action buttons positioned outside card boundary - stable and scroll-independent */}
     <div 
       ref={buttonsRef}
-      className="absolute bottom-2 left-6 right-6 flex space-x-3 z-30 pointer-events-none"
+      className="absolute bottom-2 left-6 right-6 flex space-x-3 z-30"
       style={{ 
         transformStyle: 'preserve-3d',
         filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.6))',
@@ -393,24 +397,28 @@ export default function ProjectCard({ project, onOpenModal }) {
         perspective: 1000,
         visibility: 'visible',
         opacity: 1,
-        position: 'absolute'
+        position: 'absolute',
+        pointerEvents: 'auto'
       }}
     >
       <Button
         onClick={(e) => {
+          e.preventDefault()
           e.stopPropagation()
           onOpenModal(project)
         }}
         variant="primary"
         size="sm"
-        className="flex-1 rounded-xl text-sm border-2 border-white/30 backdrop-blur-xl pointer-events-auto text-black font-medium"
+        className="flex-1 rounded-xl text-sm border-2 border-white/30 backdrop-blur-xl text-black font-medium cursor-pointer"
         style={{ 
           transformStyle: 'preserve-3d',
           background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%)',
           boxShadow: '0 12px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.6), 0 0 0 1px rgba(255,255,255,0.3)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          color: '#000000'
+          color: '#000000',
+          pointerEvents: 'auto',
+          zIndex: 100
         }}
       >
         {t('projects.viewCase')}
@@ -420,17 +428,23 @@ export default function ProjectCard({ project, onOpenModal }) {
         href={project.url}
         target="_blank"
         rel="noreferrer noopener"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          window.open(project.url, '_blank', 'noopener,noreferrer')
+        }}
         variant="secondary"
         size="sm"
-        className="rounded-xl text-sm border-2 border-white/20 backdrop-blur-xl pointer-events-auto text-white font-medium"
+        className="rounded-xl text-sm border-2 border-white/20 backdrop-blur-xl text-white font-medium cursor-pointer"
         style={{ 
           transformStyle: 'preserve-3d',
           background: 'linear-gradient(135deg, rgba(100,100,100,0.7) 0%, rgba(80,80,80,0.6) 100%)',
           boxShadow: '0 12px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.2), 0 0 0 1px rgba(255,255,255,0.1)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          color: '#ffffff'
+          color: '#ffffff',
+          pointerEvents: 'auto',
+          zIndex: 100
         }}
       >
         {t('projects.viewDemo')}

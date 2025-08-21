@@ -264,10 +264,10 @@
         ],
         "image": "/src/assets/img/Footify.png",
         "gallery": [
-          "/mihaly-portfolio/src/assets/img/Footify.png",
-          "/mihaly-portfolio/src/assets/img/footify-1.svg",
-          "/mihaly-portfolio/src/assets/img/footify-2.png",
-          "/mihaly-portfolio/src/assets/img/footify-3.png"
+          "/src/assets/img/Footify.png",
+          "/src/assets/img/footify-1.svg",
+          "/src/assets/img/footify-2.png",
+          "/src/assets/img/footify-3.png"
         ]
       },
       {
@@ -523,5 +523,34 @@
 
   "footer": {
     "rights": "All rights reserved."
+  },
+
+  "common": {
+    "skip_to_content": "Skip to content",
+    "project_summary": "Project Summary",
+    "page_progress": "Page Progress",
+    "step_number": "Step {{number}}",
+    "featured": "Featured",
+    "year": "year",
+    "years": "years",
+    "skills": "skills",
+    "avg": "Avg",
+    "scroll": "scroll",
+    "close_menu": "Close menu",
+    "open_menu": "Open menu",
+    "total": "total",
+    "in_category": "in category",
+    "social": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn", 
+      "instagram": "Instagram",
+      "email": "Email"
+    },
+    "project_details": {
+      "type": "Type:",
+      "budget": "Budget:",
+      "timeline": "Timeline:",
+      "features": "Features:"
+    }
   }
 }

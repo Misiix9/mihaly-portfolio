@@ -10,7 +10,7 @@ export default function SEOHead({
 }) {
   const { i18n } = useTranslation()
   const currentLang = i18n.language
-  const baseUrl = 'https://mihalygyori.dev'
+  const baseUrl = 'https://selora.dev'
   const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`
   
   // Dynamic titles and descriptions per language and section

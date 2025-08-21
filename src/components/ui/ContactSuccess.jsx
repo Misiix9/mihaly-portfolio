@@ -106,7 +106,7 @@ export default function ContactSuccess({ onBack }) {
               <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white/80">
                 {icon}
               </div>
-              <div className="text-sm font-medium text-white mb-1">Step {step}</div>
+              <div className="text-sm font-medium text-white mb-1">{t('common.step_number', { number: step })}</div>
               <div className="text-sm text-white/70">{text}</div>
             </div>
           ))}

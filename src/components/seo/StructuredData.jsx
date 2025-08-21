@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 export default function StructuredData() {
   const { i18n } = useTranslation()
   const currentLang = i18n.language
-  const baseUrl = 'https://mihalygyori.dev'
+  const baseUrl = 'https://selora.dev'
   
   // Person/Professional Schema
   const personSchema = {

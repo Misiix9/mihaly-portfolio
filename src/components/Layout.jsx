@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import Hero from './Hero'
 import About from './About'
 import Skills from './Skills'
@@ -12,6 +13,8 @@ import Transitions from './ui/Transitions'
 import GlobalDynamicBackground from './ui/GlobalDynamicBackground'
 
 export default function Layout() {
+  const { t } = useTranslation()
+  
   return (
     <div className="relative overflow-x-hidden">
       {/* SEO and Structured Data */}
@@ -26,7 +29,7 @@ export default function Layout() {
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white/20 focus:border focus:border-white/30 focus:rounded-lg focus:backdrop-blur-sm focus:shadow-lg"
       >
-        Skip to content
+        {t('common.skip_to_content')}
       </a>
       <Transitions />
       

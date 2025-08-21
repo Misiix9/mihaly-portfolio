@@ -102,8 +102,8 @@ export default function SkillsFilter({ categories, activeFilter, onFilterChange 
       <div className="text-center mt-3">
         <span className="text-xs text-hierarchy-secondary">
           {activeFilter === 'all' 
-            ? `${categories.reduce((total, cat) => total + cat.items.length, 0)} skills total`
-            : `${categories.find(cat => cat.id === activeFilter)?.items.length || 0} skills in category`
+            ? `${categories.reduce((total, cat) => total + cat.items.length, 0)} ${t('common.skills')} ${t('common.total')}`
+            : `${categories.find(cat => cat.id === activeFilter)?.items.length || 0} ${t('common.skills')} ${t('common.in_category')}`
           }
         </span>
       </div>

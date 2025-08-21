@@ -30,8 +30,8 @@ export default defineConfig({
       ]
     })
   ],
-  // Set base for GitHub Pages (repo name). Update/remove when using a custom domain.
-  base: '/mihaly-portfolio/',
+  // Using custom domain - no base path needed
+  base: '/',
   build: {
     rollupOptions: {
       output: {

@@ -330,13 +330,13 @@ export default function ContactWizard({ onSubmit, loading }) {
             
             {/* Summary */}
             <div className="p-4 rounded-xl glass-light border border-white/10 space-y-3">
-              <h4 className="font-medium text-white">Project Summary</h4>
+              <h4 className="font-medium text-white">{t('common.project_summary')}</h4>
               <div className="text-sm text-white/70 space-y-1">
-                <p><span className="text-white">Type:</span> {formData.projectType && t(`contact.projectType.${formData.projectType}`)}</p>
-                {formData.budget && <p><span className="text-white">Budget:</span> {t(`contact.budget.${formData.budget}`)}</p>}
-                {formData.timeline && <p><span className="text-white">Timeline:</span> {t(`contact.timeline.${formData.timeline}`)}</p>}
+                <p><span className="text-white">{t('common.project_details.type')}</span> {formData.projectType && t(`contact.projectType.${formData.projectType}`)}</p>
+                {formData.budget && <p><span className="text-white">{t('common.project_details.budget')}</span> {t(`contact.budget.${formData.budget}`)}</p>}
+                {formData.timeline && <p><span className="text-white">{t('common.project_details.timeline')}</span> {t(`contact.timeline.${formData.timeline}`)}</p>}
                 {formData.features.length > 0 && (
-                  <p><span className="text-white">Features:</span> {formData.features.map(f => t(`contact.features.${f}`)).join(', ')}</p>
+                  <p><span className="text-white">{t('common.project_details.features')}</span> {formData.features.map(f => t(`contact.features.${f}`)).join(', ')}</p>
                 )}
               </div>
             </div>

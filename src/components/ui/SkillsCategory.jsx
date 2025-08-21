@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import useReducedMotion from '../../lib/anim/useReducedMotion'
@@ -7,6 +8,7 @@ import SkillCard from './SkillCard'
 gsap.registerPlugin(ScrollTrigger)
 
 export default function SkillsCategory({ category, isVisible }) {
+  const { t } = useTranslation()
   const reduced = useReducedMotion()
   const categoryRef = useRef(null)
   const headerRef = useRef(null)
@@ -90,10 +92,10 @@ export default function SkillsCategory({ category, isVisible }) {
           <div>
             <h3 className="text-xl font-semibold text-white">{category.title}</h3>
             <div className="flex items-center justify-center space-x-2 mt-1">
-              <span className="text-hierarchy-secondary text-sm">{category.items.length} skills</span>
+              <span className="text-hierarchy-secondary text-sm">{category.items.length} {t('common.skills')}</span>
               <span className="w-1 h-1 rounded-full bg-white/30" />
               <span className="text-hierarchy-secondary text-sm">
-                Avg: {Math.round(category.items.reduce((sum, skill) => sum + skill.level, 0) / category.items.length)}%
+                {t('common.avg')}: {Math.round(category.items.reduce((sum, skill) => sum + skill.level, 0) / category.items.length)}%
               </span>
             </div>
           </div>

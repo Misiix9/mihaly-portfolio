@@ -244,10 +244,10 @@
         "solution": "React és Vite segítségével építve az optimális teljesítményért, élő futball API-k integrálásával, és reszponzív dizájn minták implementálásával Tailwind CSS-sel.",
         "image": "/src/assets/img/Footify.png",
         "gallery": [
-          "/mihaly-portfolio/src/assets/img/Footify.png",
-          "/mihaly-portfolio/src/assets/img/footify-1.svg",
-          "/mihaly-portfolio/src/assets/img/footify-2.png",
-          "/mihaly-portfolio/src/assets/img/footify-3.png"
+          "/src/assets/img/Footify.png",
+          "/src/assets/img/footify-1.svg",
+          "/src/assets/img/footify-2.png",
+          "/src/assets/img/footify-3.png"
         ]
       }
     ],
@@ -362,5 +362,34 @@
 
   "footer": {
     "rights": "Minden jog fenntartva."
+  },
+
+  "common": {
+    "skip_to_content": "Ugrás a tartalomhoz",
+    "project_summary": "Projekt Összefoglaló",
+    "page_progress": "Oldal Haladás",
+    "step_number": "{{number}}. lépés",
+    "featured": "Kiemelt",
+    "year": "év",
+    "years": "évek",
+    "skills": "készségek",
+    "avg": "Átlag",
+    "scroll": "görgetés",
+    "close_menu": "Menü bezárása",
+    "open_menu": "Menú megnyitása",
+    "total": "összesen",
+    "in_category": "kategóriában",
+    "social": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn", 
+      "instagram": "Instagram",
+      "email": "Email"
+    },
+    "project_details": {
+      "type": "Típus:",
+      "budget": "Költségvetés:",
+      "timeline": "Időkeret:",
+      "features": "Funkciók:"
+    }
   }
 }

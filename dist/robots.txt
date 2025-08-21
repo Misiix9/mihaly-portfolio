@@ -1,5 +1,5 @@
 # Robot Exclusion Protocol
-# https://mihalygyori.dev/robots.txt
+# https://selora.dev/robots.txt
 
 User-agent: *
 Allow: /
@@ -33,7 +33,7 @@ Disallow: /postcss.config.js
 Disallow: /eslint.config.js
 
 # Sitemap location
-Sitemap: https://mihalygyori.dev/sitemap.xml
+Sitemap: https://selora.dev/sitemap.xml
 
 # Crawl delay (optional, good for server performance)
 Crawl-delay: 1

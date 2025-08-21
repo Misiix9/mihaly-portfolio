@@ -18,6 +18,24 @@
       "problem_solver": "Innovation Partner",
       "innovator": "UX Architect"
     },
+    "role_animations": {
+      "developer": {
+        "name": "Developer",
+        "description": "Full-stack development with modern technologies"
+      },
+      "designer": {
+        "name": "Designer", 
+        "description": "UI/UX design with attention to detail"
+      },
+      "problem_solver": {
+        "name": "Problem Solver",
+        "description": "Analytical thinking and creative solutions"
+      },
+      "innovator": {
+        "name": "Innovator",
+        "description": "Forward-thinking and cutting-edge solutions"
+      }
+    },
     "title": "Mihály Győri — Portfolio",
     "subtitle": "I craft premium web experiences where elegant design meets flawless engineering. Specializing in React applications that deliver exceptional user experiences and drive real business results. From concept to launch, every pixel serves a purpose.",
     "value_proposition": "Building tomorrow's web experiences today",

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import useReducedMotion from '../../lib/anim/useReducedMotion'
@@ -7,28 +8,30 @@ import ConnectionLines from './ConnectionLines'
 gsap.registerPlugin(ScrollTrigger)
 
 export default function RoleAnimations({ className = '' }) {
+  const { t } = useTranslation()
   const containerRef = useRef(null)
   const iconsRef = useRef([])
   const orbsRef = useRef([])
   const reduced = useReducedMotion()
 
-  // Enhanced role-based icons and animations
+  // Enhanced role-based icons and animations with internationalization
   const roles = useMemo(() => [
     {
-      name: 'Developer',
-      description: 'Full-stack development with modern technologies',
+      key: 'developer',
+      name: t('hero.role_animations.developer.name'),
+      description: t('hero.role_animations.developer.description'),
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <path d="M16 18L22 12L16 6M8 6L2 12L8 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
-      animation: 'rotate',
       color: 'from-blue-500/20 to-purple-500/20',
       accent: 'bg-blue-400/30'
     },
     {
-      name: 'Designer',
-      description: 'UI/UX design with attention to detail',
+      key: 'designer',
+      name: t('hero.role_animations.designer.name'),
+      description: t('hero.role_animations.designer.description'),
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -36,13 +39,13 @@ export default function RoleAnimations({ className = '' }) {
           <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
-      animation: 'pulse',
       color: 'from-green-500/20 to-emerald-500/20',
       accent: 'bg-green-400/30'
     },
     {
-      name: 'Problem Solver',
-      description: 'Analytical thinking and creative solutions',
+      key: 'problem_solver',
+      name: t('hero.role_animations.problem_solver.name'),
+      description: t('hero.role_animations.problem_solver.description'),
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <path d="M12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3Z" stroke="currentColor" strokeWidth="2"/>
@@ -50,23 +53,22 @@ export default function RoleAnimations({ className = '' }) {
           <circle cx="12" cy="6" r="1" fill="currentColor"/>
         </svg>
       ),
-      animation: 'bounce',
       color: 'from-orange-500/20 to-red-500/20',
       accent: 'bg-orange-400/30'
     },
     {
-      name: 'Innovator',
-      description: 'Forward-thinking and cutting-edge solutions',
+      key: 'innovator',
+      name: t('hero.role_animations.innovator.name'),
+      description: t('hero.role_animations.innovator.description'),
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
-      animation: 'glow',
       color: 'from-purple-500/20 to-pink-500/20',
       accent: 'bg-purple-400/30'
     }
-  ], [])
+  ], [t])
 
   useEffect(() => {
     if (!containerRef.current || reduced) return
@@ -114,49 +116,14 @@ export default function RoleAnimations({ className = '' }) {
             delay: index * 0.1
           })
 
-          // Very subtle continuous animations based on role
-          switch (role.animation) {
-            case 'rotate':
-              // Slow, gentle rotation with seamless loop
-              gsap.set(icon, { rotation: 0 })
-              gsap.to(icon, {
-                rotation: 360,
-                duration: 20,
-                repeat: -1,
-                ease: 'none'
-              })
-              break
-            case 'pulse':
-              // Gentle breathing effect with seamless transition
-              gsap.to(orb, {
-                opacity: 0.6,
-                duration: 3,
-                repeat: -1,
-                yoyo: true,
-                ease: 'sine.inOut'
-              })
-              break
-            case 'bounce':
-              // Very subtle floating with seamless motion
-              gsap.to(icon, {
-                y: -3,
-                duration: 2.5,
-                repeat: -1,
-                yoyo: true,
-                ease: 'sine.inOut'
-              })
-              break
-            case 'glow':
-              // Gentle pulsing glow with smooth transitions
-              gsap.to(orb, {
-                opacity: 0.6,
-                duration: 2.8,
-                repeat: -1,
-                yoyo: true,
-                ease: 'sine.inOut'
-              })
-              break
-          }
+          // Only subtle opacity pulsing for orbs - no moving animations
+          gsap.to(orb, {
+            opacity: 0.6,
+            duration: 3,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut'
+          })
         },
         onLeave: () => {
           gsap.to([icon, orb], {
@@ -183,7 +150,7 @@ export default function RoleAnimations({ className = '' }) {
         }
       })
 
-      // Subtle hover interactions - no crazy scaling or rotation
+      // Clean hover interactions - only scaling, no rotation or bouncing
       icon.addEventListener('mouseenter', () => {
         if (!reduced) {
           gsap.to(icon, {
@@ -237,7 +204,7 @@ export default function RoleAnimations({ className = '' }) {
         
         {roles.map((role, index) => (
           <div
-            key={role.name}
+            key={role.key}
             className="relative group cursor-pointer z-10"
           >
             {/* Animated Background Orb */}
@@ -261,16 +228,16 @@ export default function RoleAnimations({ className = '' }) {
               <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full ${role.accent} blur-sm`} />
             </div>
             
-            {/* Enhanced Tooltip */}
-            <div className="absolute right-20 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none group-hover:translate-x-1">
-              <div className="bg-black/90 backdrop-blur-md text-white rounded-xl border border-white/20 shadow-2xl overflow-hidden w-64">
+            {/* Enhanced Tooltip with proper sizing - positioned very far to the left */}
+            <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-full opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none group-hover:-translate-x-[calc(100%+160px)] pr-40">
+              <div className="bg-black/90 backdrop-blur-md text-white rounded-xl border border-white/20 shadow-2xl overflow-hidden min-w-[280px] max-w-[320px]">
                 <div className="px-4 py-3">
-                  <div className="font-semibold text-sm text-white mb-1">{role.name}</div>
-                  <div className="text-xs text-white/70 leading-relaxed">{role.description}</div>
+                  <div className="font-semibold text-sm text-white mb-1 whitespace-nowrap">{role.name}</div>
+                  <div className="text-xs text-white/70 leading-relaxed break-words">{role.description}</div>
                 </div>
                 <div className={`h-1 bg-gradient-to-r ${role.color}`} />
                 
-                {/* Arrow */}
+                {/* Arrow pointing right */}
                 <div className="absolute left-full top-1/2 transform -translate-y-1/2">
                   <div className="w-0 h-0 border-t-[6px] border-b-[6px] border-l-[8px] border-transparent border-l-black/90" />
                 </div>

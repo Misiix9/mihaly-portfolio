@@ -18,6 +18,24 @@
       "problem_solver": "Innovációs Partner vagyok",
       "innovator": "UX Építész vagyok"
     },
+    "role_animations": {
+      "developer": {
+        "name": "Fejlesztő",
+        "description": "Full-stack fejlesztés modern technológiákkal"
+      },
+      "designer": {
+        "name": "Tervező", 
+        "description": "UI/UX tervezés részletekre való odafigyeléssel"
+      },
+      "problem_solver": {
+        "name": "Problémamegoldó",
+        "description": "Analitikus gondolkodás és kreatív megoldások"
+      },
+      "innovator": {
+        "name": "Innovátor",
+        "description": "Előremutató és élvonalbeli megoldások"
+      }
+    },
     "title": "Győri Mihály — Portfólió",
     "subtitle": "Prémium webes élményeket alkotok, ahol az elegáns dizájn találkozik a hibátlan mérnöki munkával. React alkalmazásokra specializálódva, kivételes felhasználói élményeket és valós üzleti eredményeket szállítok. Koncepciótól az indításig, minden pixel célt szolgál.",
     "value_proposition": "A holnap webes élményeit építem ma",

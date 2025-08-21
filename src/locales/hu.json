@@ -81,6 +81,11 @@
   "skills": {
     "title": "Készségek",
     "subtitle": "Technikai szakértelem a teljes fejlesztési stacken keresztül",
+    "stats": {
+      "totalSkills": "Összes Készség",
+      "avgLevel": "Átlagos Szint",
+      "totalYears": "Év Tapasztalat"
+    },
     "filter": {
       "all": "Minden Készség",
       "frontend": "Frontend",
@@ -368,7 +373,7 @@
     },
     "success": {
       "title": "Üzenet Elküldve!",
-      "subtitle": "Köszönöm a megkeresést. 24 órán belül válaszolok.",
+      "subtitle": "Köszönöm a megkeresést. 48 órán belül válaszolok.",
       "next_steps": "Mi következik?",
       "step1": "Átnézem a projekt részleteit",
       "step2": "Személyre szabott választ kapsz",
@@ -376,6 +381,113 @@
       "cta": "Vissza a Portfolióhoz",
       "social": "Kövesd a munkámat:"
     }
+  },
+
+  "services": {
+    "title": "Szolgáltatások",
+    "subtitle": "Egyértelmű ajánlatok, a kapcsolatfelvételi varázsló opcióihoz igazítva.",
+    "from": "Ettől",
+    "note": "Az árak kiindulási pontok. A végső ajánlat a terjedelemtől függ. EUR és HUF együtt megjelenítve (1 EUR = 400 HUF).",
+    "items": {
+      "website": { "desc": "Modern, reszponzív weboldalak, gyorsaságra és igényességre hangolva." },
+      "webapp": { "desc": "Egyedi React webalkalmazások robusztus architektúrával." },
+      "ecommerce": { "desc": "E-kereskedelmi áruházak biztonságos fizetéssel és CMS-sel." },
+      "redesign": { "desc": "UX/UI frissítés a tisztább, gyorsabb és szebb élményért." },
+      "maintenance": { "desc": "Folyamatos frissítések, hibajavítások és teljesítmény gondozás." }
+    }
+  },
+
+  "process": {
+    "title": "Folyamat",
+    "subtitle": "Fókuszált, átlátható munkafolyamat az ötlettől az indításig.",
+    "steps": {
+      "discovery": {
+        "title": "Feltérképezés",
+        "desc": "Célok, célközönség, korlátok és sikerkritériumok tisztázása."
+      },
+      "planning": {
+        "title": "Tervezés",
+        "desc": "Terjedelem, oldalstruktúra, funkciók és ütemezés közös meghatározása."
+      },
+      "design": {
+        "title": "Dizájn",
+        "desc": "Drótvázak és vizuális rendszer animációs koncepciókkal."
+      },
+      "development": {
+        "title": "Fejlesztés",
+        "desc": "Hozzáférhető, nagy teljesítményű React megvalósítás tiszta kóddal."
+      },
+      "testing": {
+        "title": "Tesztelés",
+        "desc": "Böngésző kompatibilitás, reszponzivitás, teljesítmény és minőségbiztosítás."
+      },
+      "launch": {
+        "title": "Indítás & Támogatás",
+        "desc": "Telepítés, monitorozás és támogatás konkrét következő lépésekkel."
+      }
+    }
+  },
+
+  "faq": {
+    "title": "GYIK",
+    "subtitle": "Gyakori kérdések a szolgáltatásaimról.",
+    "items": {
+      "project_types": {
+        "q": "Milyen projekteket vállalsz?",
+        "a": "Weboldalak, webalkalmazások, e-kereskedelem, redesign és karbantartás — pontosan ahogy a kapcsolatfelvételi varázslóban."
+      },
+      "pricing": {
+        "q": "Hogyan alakulnak az árak?",
+        "a": "Az árak \"ettől\" összegek. A pontos ajánlat egy rövid egyeztetés után készül a terjedelem, funkciók és határidő alapján."
+      },
+      "timeline": {
+        "q": "Mennyi ideig tart a projekt?",
+        "a": "Kis weboldalak: 1–3 hét. Webalkalmazás / e-kereskedelem: 3–8+ hét a komplexitástól és a tartalom készenlététől függően."
+      },
+      "features": {
+        "q": "Milyen funkciók kérhetők?",
+        "a": "Reszponzív dizájn, CMS, e‑kereskedelem, egyedi animációk, SEO, analitika, többnyelvűség és API integrációk."
+      },
+      "cms": {
+        "q": "Integrálsz CMS-t?",
+        "a": "Igen — headless CMS vagy WordPress az igények és a költségkeret alapján."
+      },
+      "maintenance": {
+        "q": "Vállalsz karbantartást?",
+        "a": "Igen. Frissítések, hibajavítások, teljesítményjavítás és kisebb fejlesztések."
+      },
+      "redesign": {
+        "q": "Vállalsz meglévő oldal redesignját?",
+        "a": "Természetesen. Modernizálom a UI/UX-et, javítom a teljesítményt és finomítom a tartalomstruktúrát."
+      },
+      "animations_performance": {
+        "q": "Az animációk lassítják az oldalt?",
+        "a": "Teljesítmény-első megközelítést használok (GSAP, lazy-loading, csökkentett mozgás támogatás) a gördülékenységért."
+      },
+      "multilingual": {
+        "q": "Támogatod a többnyelvűséget?",
+        "a": "Igen. Az oldal már EN/HU kétnyelvű, és bővíthető további nyelvekre."
+      },
+      "seo_analytics": {
+        "q": "Van SEO és analitika?",
+        "a": "Igen. Best practice SEO-t állítok be és igény szerint integrálom az analitikát."
+      },
+      "communication_process": {
+        "q": "Hogyan kommunikálunk és követjük a haladást?",
+        "a": "Rendszeres egyeztetések chat/telefonon, megosztott feladatok és mérföldkő áttekintések."
+      },
+      "payments": {
+        "q": "Hogyan történnek a fizetések?",
+        "a": "Jellemzően 30–50% előleg, a fennmaradó rész mérföldköveknél vagy átadáskor (számla)."
+      }
+    }
+  },
+
+  "cta": {
+    "title": "Készen állsz valami nagyszerűre?",
+    "subtitle": "Mesélj az ötletedről — 48 órán belül válaszolok.",
+    "button": "Projekt indítása",
+    "note": "Válaszidő: 48 órán belül"
   },
 
   "footer": {

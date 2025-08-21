@@ -149,18 +149,22 @@ export default function ContactWizard({ onSubmit, loading }) {
                     type="button"
                     onClick={() => updateFormData('projectType', key)}
                     className={`
-                      p-4 rounded-xl border text-left transition-all duration-300 hover:scale-105
+                      p-4 rounded-xl border text-left transition-all duration-300 hover:scale-105 relative overflow-hidden group/option
                       ${formData.projectType === key
-                        ? 'border-white/30 bg-white/10 text-white'
-                        : 'border-white/10 bg-white/5 text-white/70 hover:bg-white/8'
+                        ? 'border-white/30 bg-white/10 text-white shadow-lg'
+                        : 'border-white/10 bg-white/5 text-white/70 hover:bg-white/8 hover:border-white/20'
                       }
                     `}
                     data-magnetic="0.1"
                   >
-                    <div className="flex items-center space-x-3">
-                      <span className="text-2xl">{icon}</span>
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/10 opacity-0 group-hover/option:opacity-100 transition-opacity duration-300" />
+                    <div className="flex items-center space-x-3 relative z-10">
+                      <span className="text-2xl transform group-hover/option:scale-110 transition-transform duration-300">{icon}</span>
                       <span className="font-medium">{t(`contact.projectType.${key}`)}</span>
                     </div>
+                    {formData.projectType === key && (
+                      <div className="absolute inset-0 ring-1 ring-white/20 rounded-xl pointer-events-none" />
+                    )}
                   </button>
                 ))}
               </div>
@@ -186,15 +190,19 @@ export default function ContactWizard({ onSubmit, loading }) {
                     type="button"
                     onClick={() => updateFormData('budget', budget)}
                     className={`
-                      w-full p-3 rounded-lg border text-left transition-all duration-300
+                      w-full p-3 rounded-lg border text-left transition-all duration-300 relative overflow-hidden group/budget hover:scale-[1.02]
                       ${formData.budget === budget
-                        ? 'border-white/30 bg-white/10 text-white'
-                        : 'border-white/10 bg-white/5 text-white/70 hover:bg-white/8'
+                        ? 'border-white/30 bg-white/10 text-white shadow-md'
+                        : 'border-white/10 bg-white/5 text-white/70 hover:bg-white/8 hover:border-white/20'
                       }
                     `}
                     data-magnetic="0.05"
                   >
-                    {t(`contact.budget.${budget}`)}
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5 opacity-0 group-hover/budget:opacity-100 transition-opacity duration-300" />
+                    <span className="relative z-10">{t(`contact.budget.${budget}`)}</span>
+                    {formData.budget === budget && (
+                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-white/60 rounded-full" />
+                    )}
                   </button>
                 ))}
               </div>
@@ -365,27 +373,47 @@ export default function ContactWizard({ onSubmit, loading }) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
-      {/* Progress Bar */}
+    <div className="relative">
+      {/* Enhanced Progress Bar */}
       <div className="mb-8">
-        <div className="flex items-center justify-between mb-4">
-          <span className="text-sm text-white/70">
-            {t('contact.wizard.progress', { current: currentStep, total: totalSteps })}
-          </span>
-          <span className="text-sm text-white/70">
-            {Math.round((currentStep / totalSteps) * 100)}%
-          </span>
+        <div className="flex justify-between items-center mb-4">
+          <span className="text-sm text-white/60 hover:text-white/80 transition-colors duration-300">{t('contact.form.step')} {currentStep} {t('contact.form.of')} {totalSteps}</span>
+          <span className="text-sm text-white/60 hover:text-white/80 transition-colors duration-300">{Math.round((currentStep / totalSteps) * 100)}%</span>
         </div>
-        <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+        <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden relative">
+          {/* Background glow effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-white/10 to-white/5 rounded-full" />
           <div 
             ref={progressBarRef}
-            className="h-full bg-gradient-to-r from-white/80 to-white/60 rounded-full origin-left transform scale-x-0"
+            className="h-full bg-gradient-to-r from-white/70 via-white/90 to-white/70 rounded-full origin-left transform scale-x-0 relative z-10"
+            style={{ 
+              transformOrigin: 'left',
+              boxShadow: '0 0 10px rgba(255,255,255,0.3)'
+            }}
+          />
+          {/* Progress glow */}
+          <div 
+            className="absolute top-0 left-0 h-full bg-gradient-to-r from-white/30 to-white/50 rounded-full blur-sm opacity-60"
+            style={{ 
+              width: `${(currentStep / totalSteps) * 100}%`,
+              transition: 'width 0.5s ease-out'
+            }}
           />
         </div>
       </div>
 
-      {/* Step Content */}
-      <div ref={stepContainerRef} className="min-h-[400px]">
+      {/* Enhanced Form Container */}
+      <div 
+        ref={stepContainerRef}
+        className="bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 p-8 relative overflow-hidden group"
+        style={{
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0.06) 100%)',
+          boxShadow: '0 20px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)'
+        }}
+      >
+        {/* Form background effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
         {renderStep()}
       </div>
 

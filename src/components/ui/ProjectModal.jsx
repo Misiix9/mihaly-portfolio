@@ -73,20 +73,39 @@ export default function ProjectModal({ project, isOpen, onClose }) {
       className="fixed inset-0 z-50 hidden items-center justify-center p-4"
       style={{ display: 'none' }}
     >
-      {/* Backdrop */}
+      {/* Enhanced Backdrop */}
       <div 
         ref={overlayRef}
-        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/85 backdrop-blur-md"
+        style={{
+          background: 'radial-gradient(circle at center, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%)'
+        }}
         onClick={onClose}
       />
+      
+      {/* Animated backdrop particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div 
+          className="absolute top-1/4 left-1/4 w-1 h-1 bg-white/20 rounded-full"
+          style={{ animation: 'particleFloat 15s ease-in-out infinite' }}
+        />
+        <div 
+          className="absolute bottom-1/3 right-1/3 w-0.5 h-0.5 bg-white/15 rounded-full"
+          style={{ animation: 'particleFloat 20s ease-in-out infinite 3s reverse' }}
+        />
+        <div 
+          className="absolute top-1/2 right-1/4 w-0.5 h-0.5 bg-white/25 rounded-full"
+          style={{ animation: 'particlePulse 12s ease-in-out infinite 1s' }}
+        />
+      </div>
       
       {/* Modal Content */}
       <div 
         ref={contentRef}
-        className="relative w-full max-w-4xl max-h-[90vh] bg-black/90 backdrop-blur-md rounded-2xl border border-white/20 flex flex-col"
+        className="relative w-full max-w-4xl max-h-[90vh] bg-black/90 backdrop-blur-md rounded-2xl border border-white/20 flex flex-col overflow-hidden"
         style={{
-          background: 'linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.85) 100%)',
-          boxShadow: '0 25px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1)'
+          background: 'linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.9) 100%)',
+          boxShadow: '0 25px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.15), inset 0 1px 0 rgba(255,255,255,0.1)'
         }}
         onClick={(e) => e.stopPropagation()}
         onWheel={(e) => {
@@ -94,19 +113,30 @@ export default function ProjectModal({ project, isOpen, onClose }) {
           e.stopPropagation()
         }}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-white/10 bg-black/60 backdrop-blur-sm rounded-t-2xl flex-shrink-0">
-          <div>
-            <h2 className="text-2xl font-bold text-white">{project.name}</h2>
-            <p className="text-hierarchy-secondary">{project.type} • {project.year}</p>
+        {/* Enhanced Header */}
+        <div className="flex items-center justify-between p-6 border-b border-white/10 bg-black/60 backdrop-blur-sm rounded-t-2xl flex-shrink-0 relative overflow-hidden">
+          {/* Header background gradient */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-white/2 to-white/5 opacity-50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/5" />
+          <div className="relative z-10">
+            <h2 className="text-2xl font-bold text-white relative">
+              {project.name}
+              {/* Subtle text glow */}
+              <div className="absolute inset-0 text-2xl font-bold text-white/20 blur-sm -z-10 pointer-events-none">
+                {project.name}
+              </div>
+            </h2>
+            <p className="text-hierarchy-secondary hover:text-white/80 transition-colors duration-300">{project.type} • {project.year}</p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl hover:bg-white/10 transition-colors duration-300 text-white/70 hover:text-white"
+            className="relative z-10 p-2 rounded-xl hover:bg-white/10 transition-all duration-300 text-white/70 hover:text-white hover:scale-110 group/close"
             data-magnetic="0.15"
             data-cursor-text="Close"
             aria-label={t('projects.modal.close')}
           >
+            {/* Button glow effect */}
+            <div className="absolute inset-0 rounded-xl bg-white/5 opacity-0 group-hover/close:opacity-100 transition-opacity duration-300" />
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -126,13 +156,14 @@ export default function ProjectModal({ project, isOpen, onClose }) {
           }}
         >
           <div className="p-6 space-y-8">
-          {/* Hero Image */}
+          {/* Enhanced Hero Image */}
           {project.image && (
-            <div className="relative rounded-xl overflow-hidden aspect-video bg-white/5">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-              <div className="flex items-center justify-center h-full text-white/60">
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-white/10 flex items-center justify-center">
+            <div className="relative rounded-xl overflow-hidden aspect-video bg-white/5 group/hero">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/10" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/10 opacity-0 group-hover/hero:opacity-100 transition-opacity duration-500" />
+              <div className="flex items-center justify-center h-full text-white/60 group-hover/hero:text-white/80 transition-colors duration-300">
+                <div className="text-center transform group-hover/hero:scale-105 transition-transform duration-300">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-white/10 flex items-center justify-center border border-white/20 group-hover/hero:border-white/30 transition-colors duration-300">
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
@@ -140,6 +171,8 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                   <p className="text-sm">Project Screenshot Preview</p>
                 </div>
               </div>
+              {/* Animated border */}
+              <div className="absolute inset-0 rounded-xl ring-1 ring-white/10 group-hover/hero:ring-white/20 transition-all duration-300" />
             </div>
           )}
 
@@ -159,8 +192,9 @@ export default function ProjectModal({ project, isOpen, onClose }) {
 
             {/* Project Info Sidebar */}
             <div className="space-y-4">
-              <div className="p-4 rounded-xl glass-light border border-white/10">
-                <h4 className="font-semibold text-white mb-3">Project Details</h4>
+              <div className="p-4 rounded-xl glass-light border border-white/10 hover:border-white/20 transition-colors duration-300 group/details">
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/5 via-transparent to-white/10 opacity-0 group-hover/details:opacity-100 transition-opacity duration-300" />
+                <h4 className="font-semibold text-white mb-3 relative z-10">Project Details</h4>
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
                     <span className="text-hierarchy-secondary">{t('projects.modal.year')}:</span>
@@ -179,8 +213,9 @@ export default function ProjectModal({ project, isOpen, onClose }) {
 
               {/* Performance Metrics */}
               {project.metrics && (
-                <div className="p-4 rounded-xl glass-light border border-white/10">
-                  <h4 className="font-semibold text-white mb-3">{t('projects.modal.metrics')}</h4>
+                <div className="p-4 rounded-xl glass-light border border-white/10 hover:border-white/20 transition-colors duration-300 group/metrics relative overflow-hidden">
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/5 via-transparent to-white/10 opacity-0 group-hover/metrics:opacity-100 transition-opacity duration-300" />
+                  <h4 className="font-semibold text-white mb-3 relative z-10">{t('projects.modal.metrics')}</h4>
                   <div className="space-y-3 text-sm">
                     {Object.entries(project.metrics).map(([key, value]) => (
                       <div key={key} className="flex justify-between">

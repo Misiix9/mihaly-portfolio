@@ -133,7 +133,7 @@ export default function ProjectCard({ project, onOpenModal }) {
         })
       }
       
-      // Reset bottom floating buttons separately with stable animation - always keep visible
+      // Reset bottom floating buttons completely - ensure all transforms are cleared
       if (buttonsRef.current) {
         gsap.to(buttonsRef.current, {
           rotationY: 0,
@@ -141,33 +141,67 @@ export default function ProjectCard({ project, onOpenModal }) {
           x: 0,
           y: 0,
           z: 0,
+          scale: 1, // Ensure scale is also reset
           duration: 0.6,
           ease: 'power2.out',
           overwrite: 'auto',
           force3D: true,
           opacity: 1,
-          visibility: 'visible'
+          visibility: 'visible',
+          clearProps: 'transform' // Clear all transform properties after animation
         })
       }
     }
 
-    // Button-specific hover effects
-    const handleButtonMouseEnter = () => {
+    // Enhanced button-specific hover effects with proper reset
+    const handleButtonMouseEnter = (e) => {
+      e.stopPropagation() // Prevent card hover interference
       if (buttonsRef.current) {
         gsap.to(buttonsRef.current, {
           scale: 1.05,
           duration: 0.2,
           ease: 'power2.out',
+          overwrite: 'auto'
         })
       }
     }
 
-    const handleButtonMouseLeave = () => {
+    const handleButtonMouseLeave = (e) => {
+      e.stopPropagation() // Prevent card hover interference
       if (buttonsRef.current) {
         gsap.to(buttonsRef.current, {
           scale: 1,
+          rotationY: 0,
+          rotationX: 0,
+          x: 0,
+          y: 0,
+          z: 0,
           duration: 0.3,
           ease: 'power2.out',
+          overwrite: 'auto',
+          force3D: true,
+          clearProps: 'transform' // Ensure complete reset
+        })
+      }
+    }
+    
+    // Global mouse leave handler for the entire wrapper to ensure reset
+    const handleGlobalMouseLeave = () => {
+      if (buttonsRef.current) {
+        gsap.to(buttonsRef.current, {
+          scale: 1,
+          rotationY: 0,
+          rotationX: 0,
+          x: 0,
+          y: 0,
+          z: 0,
+          duration: 0.4,
+          ease: 'power2.out',
+          overwrite: 'auto',
+          force3D: true,
+          opacity: 1,
+          visibility: 'visible',
+          clearProps: 'transform'
         })
       }
     }
@@ -175,12 +209,15 @@ export default function ProjectCard({ project, onOpenModal }) {
     wrapperElement.addEventListener('mouseenter', handleMouseEnter)
     wrapperElement.addEventListener('mousemove', handleMouseMove)
     wrapperElement.addEventListener('mouseleave', handleMouseLeave)
+    
+    // Add global mouse leave to document to catch when mouse leaves entirely
+    document.addEventListener('mouseleave', handleGlobalMouseLeave)
 
     // Add button hover effects
     const buttonsElement = buttonsRef.current
     if (buttonsElement) {
-      buttonsElement.addEventListener('mouseenter', handleButtonMouseEnter)
-      buttonsElement.addEventListener('mouseleave', handleButtonMouseLeave)
+      buttonsElement.addEventListener('mouseenter', handleButtonMouseEnter, { passive: false })
+      buttonsElement.addEventListener('mouseleave', handleButtonMouseLeave, { passive: false })
       
       // Protect buttons from scroll events that might hide them
       const scrollHandler = () => {
@@ -200,6 +237,7 @@ export default function ProjectCard({ project, onOpenModal }) {
         wrapperElement.removeEventListener('mouseenter', handleMouseEnter)
         wrapperElement.removeEventListener('mousemove', handleMouseMove)
         wrapperElement.removeEventListener('mouseleave', handleMouseLeave)
+        document.removeEventListener('mouseleave', handleGlobalMouseLeave)
         
         if (buttonsElement) {
           buttonsElement.removeEventListener('mouseenter', handleButtonMouseEnter)
@@ -215,6 +253,7 @@ export default function ProjectCard({ project, onOpenModal }) {
       wrapperElement.removeEventListener('mouseenter', handleMouseEnter)
       wrapperElement.removeEventListener('mousemove', handleMouseMove)
       wrapperElement.removeEventListener('mouseleave', handleMouseLeave)
+      document.removeEventListener('mouseleave', handleGlobalMouseLeave)
       
       if (buttonsElement) {
         buttonsElement.removeEventListener('mouseenter', handleButtonMouseEnter)
@@ -237,13 +276,16 @@ export default function ProjectCard({ project, onOpenModal }) {
         }}
         onClick={() => onOpenModal(project)}
       >
-      {/* Animated gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      {/* Enhanced animated gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/8 via-white/3 to-white/12 opacity-0 group-hover:opacity-100 transition-all duration-700" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/2 to-white/6 opacity-0 group-hover:opacity-60 transition-all duration-500 delay-100" />
       
-      {/* Featured badge */}
+      {/* Enhanced featured badge */}
       {project.featured && (
-        <div className="absolute top-4 right-4 z-10 px-3 py-1 rounded-full glass-light border border-white/20 text-xs text-white/80 font-medium">
-          {t('common.featured')}
+        <div className="absolute top-4 right-4 z-10 px-3 py-1 rounded-full glass-light border border-white/20 text-xs text-white/80 font-medium hover:scale-110 transition-all duration-300 cursor-default">
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/10 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <span className="relative z-10">{t('common.featured')}</span>
+          <div className="absolute -inset-1 rounded-full bg-white/5 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         </div>
       )}
 
@@ -278,8 +320,9 @@ export default function ProjectCard({ project, onOpenModal }) {
           </div>
         )}
 
-        {/* Hover overlay background */}
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none"></div>
+        {/* Enhanced hover overlay background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/40 to-black/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-400 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 delay-100 pointer-events-none"></div>
         
         {/* Overlay buttons - separate from background to allow clicks */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center pointer-events-none">
@@ -363,26 +406,29 @@ export default function ProjectCard({ project, onOpenModal }) {
           </div>
         )}
 
-        {/* Technology stack */}
+        {/* Enhanced technology stack */}
         <div className="flex flex-wrap gap-2">
           {project.tech.slice(0, 4).map((tech, i) => (
             <span 
               key={i}
-              className="inline-block rounded-full glass-light px-3 py-1 text-xs text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20"
+              className="inline-block rounded-full glass-light px-3 py-1 text-xs text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20 hover:scale-105 cursor-default relative overflow-hidden group/tech"
             >
-              {tech}
+              <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover/tech:opacity-100 transition-opacity duration-300" />
+              <span className="relative z-10">{tech}</span>
             </span>
           ))}
           {project.tech.length > 4 && (
-            <span className="inline-block rounded-full glass-light px-3 py-1 text-xs text-white/50 border border-white/10">
+            <span className="inline-block rounded-full glass-light px-3 py-1 text-xs text-white/50 border border-white/10 hover:text-white/70 hover:border-white/20 transition-all duration-300 cursor-default">
               +{project.tech.length - 4} more
             </span>
           )}
         </div>
       </div>
 
-      {/* Subtle border glow on hover */}
-      <div className="absolute inset-0 rounded-2xl ring-1 ring-white/10 group-hover:ring-white/20 transition-all duration-500 pointer-events-none" />
+      {/* Enhanced border glow on hover */}
+      <div className="absolute inset-0 rounded-2xl ring-1 ring-white/10 group-hover:ring-white/25 transition-all duration-500 pointer-events-none" />
+      <div className="absolute inset-0 rounded-2xl ring-1 ring-white/5 group-hover:ring-white/15 transition-all duration-700 delay-100 pointer-events-none" />
+      <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-br from-white/5 via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm pointer-events-none" />
     </article>
 
     {/* Floating action buttons positioned outside card boundary - stable and scroll-independent */}
@@ -407,9 +453,11 @@ export default function ProjectCard({ project, onOpenModal }) {
           e.stopPropagation()
           onOpenModal(project)
         }}
+        onMouseEnter={(e) => e.stopPropagation()}
+        onMouseLeave={(e) => e.stopPropagation()}
         variant="primary"
         size="sm"
-        className="flex-1 rounded-xl text-sm border-2 border-white/30 backdrop-blur-xl text-black font-medium cursor-pointer"
+        className="flex-1 rounded-xl text-sm border-2 border-white/30 backdrop-blur-xl text-black font-medium cursor-pointer hover:scale-105 transition-transform duration-200"
         style={{ 
           transformStyle: 'preserve-3d',
           background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%)',
@@ -433,9 +481,11 @@ export default function ProjectCard({ project, onOpenModal }) {
           e.stopPropagation()
           window.open(project.url, '_blank', 'noopener,noreferrer')
         }}
+        onMouseEnter={(e) => e.stopPropagation()}
+        onMouseLeave={(e) => e.stopPropagation()}
         variant="secondary"
         size="sm"
-        className="rounded-xl text-sm border-2 border-white/20 backdrop-blur-xl text-white font-medium cursor-pointer"
+        className="rounded-xl text-sm border-2 border-white/20 backdrop-blur-xl text-white font-medium cursor-pointer hover:scale-105 transition-transform duration-200"
         style={{ 
           transformStyle: 'preserve-3d',
           background: 'linear-gradient(135deg, rgba(100,100,100,0.7) 0%, rgba(80,80,80,0.6) 100%)',

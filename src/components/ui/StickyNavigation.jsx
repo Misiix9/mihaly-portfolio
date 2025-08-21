@@ -20,11 +20,15 @@ export default function StickyNavigation() {
   const reduced = useReducedMotion()
 
   const navItems = useMemo(() => [
-    { key: 'home', href: '#hero', label: t('nav.home') },
-    { key: 'about', href: '#about', label: t('nav.about') },
-    { key: 'skills', href: '#skills', label: t('nav.skills') },
-    { key: 'projects', href: '#projects', label: t('nav.projects') },
-    { key: 'contact', href: '#contact', label: t('nav.contact') }
+    { key: 'home', href: '#hero', label: t('nav.home', 'Home') },
+    { key: 'about', href: '#about', label: t('nav.about', 'About') },
+    { key: 'skills', href: '#skills', label: t('nav.skills', 'Skills') },
+    { key: 'projects', href: '#projects', label: t('nav.projects', 'Projects') },
+    { key: 'services', href: '#services', label: t('nav.services', t('services.title', 'Services')) },
+    { key: 'process', href: '#process', label: t('nav.process', t('process.title', 'Process')) },
+    { key: 'faq', href: '#faq', label: t('nav.faq', t('faq.title', 'FAQ')) },
+    { key: 'cta', href: '#cta', label: t('nav.cta', 'Get Started') },
+    { key: 'contact', href: '#contact', label: t('nav.contact', 'Contact') }
   ], [t])
 
   // Smooth scroll to section

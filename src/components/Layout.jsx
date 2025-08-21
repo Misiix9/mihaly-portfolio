@@ -11,6 +11,10 @@ import SEOHead from './seo/SEOHead'
 import StructuredData from './seo/StructuredData'
 import Transitions from './ui/Transitions'
 import GlobalDynamicBackground from './ui/GlobalDynamicBackground'
+import Services from './sections/Services'
+import ProcessTimeline from './sections/ProcessTimeline'
+import FAQ from './sections/FAQ'
+import CTABanner from './sections/CTABanner'
 
 export default function Layout() {
   const { t } = useTranslation()
@@ -54,6 +58,23 @@ export default function Layout() {
         <div className="section-divider container mx-auto px-4 sm:px-6" />
         <section id="projects">
           <Projects />
+        </section>
+        <div className="section-divider container mx-auto px-4 sm:px-6" />
+        {/* New Sections: Services, Process, FAQ, CTA */}
+        <section id="services">
+          <Services />
+        </section>
+        <div className="section-divider container mx-auto px-4 sm:px-6" />
+        <section id="process">
+          <ProcessTimeline />
+        </section>
+        <div className="section-divider container mx-auto px-4 sm:px-6" />
+        <section id="faq">
+          <FAQ />
+        </section>
+        <div className="section-divider container mx-auto px-4 sm:px-6" />
+        <section id="cta">
+          <CTABanner />
         </section>
         <div className="section-divider container mx-auto px-4 sm:px-6" />
         <section id="contact">

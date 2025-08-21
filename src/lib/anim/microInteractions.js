@@ -18,14 +18,21 @@ export const createHoverEffect = (element, options = {}) => {
     shadow: true,
     magnetic: false,
     magnetStrength: 0.2,
+    bounceBack: true,
+    bounceEase: 'elastic.out(1, 0.4)',
+    bounceDuration: 0.6,
   }
 
   const config = { ...defaults, ...options }
   let isHovering = false
+  let lastDX = 0
+  let lastDY = 0
 
   const handleMouseEnter = () => {
     if (isHovering) return
     isHovering = true
+    lastDX = 0
+    lastDY = 0
 
     const tl = gsap.timeline()
     
@@ -47,15 +54,48 @@ export const createHoverEffect = (element, options = {}) => {
 
   const handleMouseLeave = () => {
     isHovering = false
-    
-    gsap.to(element, {
+    // Prevent conflicts with ongoing tweens
+    gsap.killTweensOf(element)
+    // Reset transform and styles; if magnetic, bounce x/y back to origin
+    const baseReset = {
       scale: 1,
-      y: 0,
-      duration: config.duration,
-      ease: config.ease,
       filter: 'brightness(1)',
       boxShadow: '0 0 0 rgba(0,0,0,0)',
-    })
+    }
+
+    if (config.magnetic && config.bounceBack) {
+      const mag = Math.hypot(lastDX, lastDY)
+      // If near center, create a tiny impulse opposite the last direction so bounce is noticeable
+      if (mag < 2) {
+        const sgnX = lastDX >= 0 ? -1 : 1
+        const sgnY = lastDY >= 0 ? -1 : 1
+        gsap.fromTo(
+          element,
+          { x: sgnX * 6, y: sgnY * 3, ...baseReset },
+          { x: 0, y: 0, duration: config.bounceDuration, ease: config.bounceEase, overwrite: 'auto' }
+        )
+      } else {
+        gsap.to(element, {
+          ...baseReset,
+          x: 0,
+          y: 0,
+          duration: config.bounceDuration,
+          ease: config.bounceEase,
+          overwrite: 'auto',
+        })
+      }
+    } else {
+      gsap.to(element, {
+        ...baseReset,
+        y: 0,
+        duration: config.duration,
+        ease: config.ease,
+        overwrite: 'auto',
+      })
+      if (config.magnetic) {
+        gsap.to(element, { x: 0, duration: config.duration, ease: config.ease, overwrite: 'auto' })
+      }
+    }
   }
 
   const handleMouseMove = (e) => {
@@ -67,6 +107,8 @@ export const createHoverEffect = (element, options = {}) => {
     
     const deltaX = (e.clientX - centerX) * config.magnetStrength
     const deltaY = (e.clientY - centerY) * config.magnetStrength
+    lastDX = deltaX
+    lastDY = deltaY
 
     gsap.to(element, {
       x: deltaX,
@@ -76,19 +118,23 @@ export const createHoverEffect = (element, options = {}) => {
     })
   }
 
-  element.addEventListener('mouseenter', handleMouseEnter)
-  element.addEventListener('mouseleave', handleMouseLeave)
-  
+  const hasPointer = typeof window !== 'undefined' && 'PointerEvent' in window
+  const enterEvt = hasPointer ? 'pointerenter' : 'mouseenter'
+  const leaveEvt = hasPointer ? 'pointerleave' : 'mouseleave'
+  const moveEvt = hasPointer ? 'pointermove' : 'mousemove'
+
+  element.addEventListener(enterEvt, handleMouseEnter)
+  element.addEventListener(leaveEvt, handleMouseLeave)
   if (config.magnetic) {
-    element.addEventListener('mousemove', handleMouseMove)
+    element.addEventListener(moveEvt, handleMouseMove)
   }
 
   // Return cleanup function
   return () => {
-    element.removeEventListener('mouseenter', handleMouseEnter)
-    element.removeEventListener('mouseleave', handleMouseLeave)
+    element.removeEventListener(enterEvt, handleMouseEnter)
+    element.removeEventListener(leaveEvt, handleMouseLeave)
     if (config.magnetic) {
-      element.removeEventListener('mousemove', handleMouseMove)
+      element.removeEventListener(moveEvt, handleMouseMove)
     }
   }
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
@@ -7,17 +8,22 @@ import useReducedMotion from '../../lib/anim/useReducedMotion'
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 export default function SectionProgressIndicator() {
+  const { t } = useTranslation()
   const [currentSection, setCurrentSection] = useState(0)
   const [sectionProgress, setSectionProgress] = useState([])
   const reduced = useReducedMotion()
 
   const sections = useMemo(() => [
-    { id: 'hero', name: 'Hero', color: 'from-white/60 to-white/80' },
-    { id: 'about', name: 'About', color: 'from-white/50 to-white/70' },
-    { id: 'skills', name: 'Skills', color: 'from-white/60 to-white/80' },
-    { id: 'projects', name: 'Projects', color: 'from-white/50 to-white/70' },
-    { id: 'contact', name: 'Contact', color: 'from-white/60 to-white/80' }
-  ], [])
+    { id: 'hero', name: t('nav.home', 'Home'), color: 'from-white/60 to-white/80' },
+    { id: 'about', name: t('nav.about', 'About'), color: 'from-white/50 to-white/70' },
+    { id: 'skills', name: t('nav.skills', 'Skills'), color: 'from-white/60 to-white/80' },
+    { id: 'projects', name: t('nav.projects', 'Projects'), color: 'from-white/50 to-white/70' },
+    { id: 'services', name: t('nav.services', t('services.title', 'Services')), color: 'from-white/60 to-white/80' },
+    { id: 'process', name: t('nav.process', t('process.title', 'Process')), color: 'from-white/50 to-white/70' },
+    { id: 'faq', name: t('nav.faq', t('faq.title', 'FAQ')), color: 'from-white/60 to-white/80' },
+    { id: 'cta', name: t('nav.cta', 'Get Started'), color: 'from-white/50 to-white/70' },
+    { id: 'contact', name: t('nav.contact', 'Contact'), color: 'from-white/60 to-white/80' }
+  ], [t])
 
   useEffect(() => {
     if (reduced) return

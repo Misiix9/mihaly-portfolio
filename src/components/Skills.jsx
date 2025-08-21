@@ -1,11 +1,12 @@
 import { useTranslation } from 'react-i18next'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useMemo } from 'react'
 import useScrollReveal from '../lib/anim/useScrollReveal'
 import { createAdvancedGsapParallax, createScrollReveal } from '../lib/anim/parallax-enhanced'
 import useReducedMotion from '../lib/anim/useReducedMotion'
 import Parallax from './ui/Parallax'
 import SkillsFilter from './ui/SkillsFilter'
 import SkillsCategory from './ui/SkillsCategory'
+import MorphingBlob from './ui/MorphingBlob'
 
 export default function Skills() {
   const { t } = useTranslation()
@@ -14,6 +15,7 @@ export default function Skills() {
   const reduced = useReducedMotion()
   const skillsRef = useRef(null)
   const titleRef = useRef(null)
+  const statsRef = useRef(null)
   const [activeFilter, setActiveFilter] = useState('all')
 
   // Filter categories based on active filter
@@ -24,6 +26,18 @@ export default function Skills() {
   const handleFilterChange = (filterId) => {
     setActiveFilter(filterId)
   }
+
+  // Calculate statistics from skills data
+  const skillsStats = useMemo(() => {
+    if (!Array.isArray(categories)) return { total: 0, avgLevel: 0, totalYears: 0 }
+    
+    const allSkills = categories.flatMap(cat => cat.items || [])
+    const totalSkills = allSkills.length
+    const avgLevel = totalSkills > 0 ? Math.round(allSkills.reduce((sum, skill) => sum + (skill.level || 0), 0) / totalSkills) : 0
+    const totalYears = allSkills.reduce((sum, skill) => sum + (skill.yearsExperience || 0), 0)
+    
+    return { total: totalSkills, avgLevel, totalYears }
+  }, [categories])
 
   // Enhanced scroll effects for skills section
   useEffect(() => {
@@ -116,6 +130,60 @@ export default function Skills() {
             maxShift={50}
             aria-hidden
           />
+        </div>
+
+        {/* Enhanced Statistics Display */}
+        <div ref={statsRef} className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          {/* Total Skills Card */}
+          <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md border border-white/10 p-6 hover:border-white/20 transition-all duration-500 hover:scale-105">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative z-10">
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-white/20 to-white/10 flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <MorphingBlob className="w-8 h-8 opacity-30" />
+              </div>
+              <div className="text-3xl font-bold text-white mb-1">{skillsStats.total}</div>
+              <div className="text-sm text-white/70">{t('skills.stats.totalSkills', 'Total Skills')}</div>
+            </div>
+          </div>
+
+          {/* Average Level Card */}
+          <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md border border-white/10 p-6 hover:border-white/20 transition-all duration-500 hover:scale-105">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative z-10">
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-white/20 to-white/10 flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <MorphingBlob className="w-8 h-8 opacity-30" />
+              </div>
+              <div className="text-3xl font-bold text-white mb-1">{skillsStats.avgLevel}/10</div>
+              <div className="text-sm text-white/70">{t('skills.stats.avgLevel', 'Average Level')}</div>
+            </div>
+          </div>
+
+          {/* Total Experience Card */}
+          <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md border border-white/10 p-6 hover:border-white/20 transition-all duration-500 hover:scale-105">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative z-10">
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-white/20 to-white/10 flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <MorphingBlob className="w-8 h-8 opacity-30" />
+              </div>
+              <div className="text-3xl font-bold text-white mb-1">{skillsStats.totalYears}+</div>
+              <div className="text-sm text-white/70">{t('skills.stats.totalYears', 'Years Experience')}</div>
+            </div>
+          </div>
         </div>
 
         {/* Skills Filter */}

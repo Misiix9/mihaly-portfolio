@@ -50,34 +50,77 @@ export default function Contact() {
 
   return (
     <section className="relative py-20 md:py-28" id="contact" data-section="contact">
-      {/* Dynamic Background Layer for Contact Section */}
+      {/* Enhanced Dynamic Background Layer for Contact Section */}
       <div
-        className="absolute inset-0 -z-20 pointer-events-none"
+        className="absolute inset-0 -z-20 pointer-events-none overflow-hidden"
         style={{
           background: `
-            radial-gradient(500px 400px at 30% 30%, rgba(255,255,255,0.03), transparent 60%),
-            radial-gradient(400px 200px at 90% 70%, rgba(255,255,255,0.02), transparent 50%),
-            linear-gradient(225deg, rgba(255,255,255,0.012) 0%, transparent 40%, rgba(255,255,255,0.008) 100%)
+            radial-gradient(600px 500px at 30% 30%, rgba(255,255,255,0.04), transparent 60%),
+            radial-gradient(500px 300px at 90% 70%, rgba(255,255,255,0.03), transparent 50%),
+            linear-gradient(225deg, rgba(255,255,255,0.02) 0%, transparent 40%, rgba(255,255,255,0.015) 100%),
+            conic-gradient(from 45deg at 70% 20%, rgba(255,255,255,0.01), transparent 30%, rgba(255,255,255,0.02))
           `,
           animation: 'globalWave 26s ease-in-out infinite 5s'
         }}
         aria-hidden
       />
       
-      {/* Floating Dynamic Elements */}
+      {/* Animated contact mesh overlay */}
+      <div
+        className="absolute inset-0 -z-19 pointer-events-none opacity-30"
+        style={{
+          background: `
+            radial-gradient(circle at 20% 80%, rgba(255,255,255,0.06) 0%, transparent 40%),
+            radial-gradient(circle at 80% 20%, rgba(255,255,255,0.04) 0%, transparent 40%),
+            linear-gradient(135deg, transparent 20%, rgba(255,255,255,0.015) 50%, transparent 80%)
+          `,
+          animation: 'meshFlow 35s ease-in-out infinite'
+        }}
+        aria-hidden
+      />
+      
+      {/* Enhanced Floating Dynamic Elements */}
       <div
         className="absolute top-20 left-24 w-32 h-32 rounded-full -z-19 pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, rgba(255,255,255,0.025) 0%, transparent 70%)',
-          animation: 'globalFloat 24s ease-in-out infinite 2s'
+          background: 'radial-gradient(circle, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.015) 40%, transparent 70%)',
+          animation: 'globalFloat 24s ease-in-out infinite 2s',
+          filter: 'blur(1px)'
         }}
         aria-hidden
       />
       <div
         className="absolute bottom-32 right-20 w-28 h-28 rounded-full -z-19 pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 70%)',
-          animation: 'globalPulse 16s ease-in-out infinite 4.5s'
+          background: 'radial-gradient(circle, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 40%, transparent 70%)',
+          animation: 'globalPulse 16s ease-in-out infinite 4.5s',
+          filter: 'blur(0.5px)'
+        }}
+        aria-hidden
+      />
+      
+      {/* Additional contact-specific particles */}
+      <div
+        className="absolute top-1/4 right-1/3 w-3 h-3 rounded-full -z-18 pointer-events-none bg-white/15"
+        style={{
+          animation: 'particleFloat 18s ease-in-out infinite 1s',
+          filter: 'blur(0.5px)'
+        }}
+        aria-hidden
+      />
+      <div
+        className="absolute bottom-1/4 left-1/4 w-2 h-2 rounded-full -z-18 pointer-events-none bg-white/20"
+        style={{
+          animation: 'particleFloat 22s ease-in-out infinite 3s reverse',
+          filter: 'blur(0.25px)'
+        }}
+        aria-hidden
+      />
+      <div
+        className="absolute top-2/3 left-1/2 w-1.5 h-1.5 rounded-full -z-18 pointer-events-none bg-white/25"
+        style={{
+          animation: 'particlePulse 12s ease-in-out infinite 2s',
+          filter: 'blur(0.25px)'
         }}
         aria-hidden
       />
@@ -114,12 +157,25 @@ export default function Contact() {
 
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center" ref={reveal}>
-          <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+          <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl relative">
             {t('contact.title')}
+            {/* Enhanced text glow effect */}
+            <div className="absolute inset-0 text-4xl sm:text-6xl font-bold text-white/15 blur-sm -z-10 pointer-events-none">
+              {t('contact.title')}
+            </div>
           </h2>
-          <p className="mt-6 text-lg leading-8 text-white/70">
+          <p className="mt-6 text-lg leading-8 text-white/70 hover:text-white/90 transition-colors duration-500">
             {t('contact.subtitle')}
           </p>
+          
+          {/* Enhanced decorative elements */}
+          <div className="flex justify-center mt-8">
+            <div className="flex items-center space-x-2">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+              <div className="w-2 h-2 rounded-full bg-white/30 animate-pulse" />
+              <div className="h-px w-16 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+            </div>
+          </div>
         </div>
 
         <div className="mx-auto mt-16 max-w-4xl">

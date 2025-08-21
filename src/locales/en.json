@@ -81,6 +81,11 @@
   "skills": {
     "title": "Skills",
     "subtitle": "Technical expertise across the full development stack",
+    "stats": {
+      "totalSkills": "Total Skills",
+      "avgLevel": "Average Level",
+      "totalYears": "Years Experience"
+    },
     "filter": {
       "all": "All Skills",
       "frontend": "Frontend",
@@ -541,6 +546,113 @@
 
   "footer": {
     "rights": "All rights reserved."
+  },
+
+  "services": {
+    "title": "Services",
+    "subtitle": "Clear offerings aligned with my contact wizard options.",
+    "from": "From",
+    "note": "Prices are starting points. Final quotes depend on scope. EUR and HUF shown (1 EUR = 400 HUF).",
+    "items": {
+      "website": { "desc": "Modern, responsive websites crafted for speed and polish." },
+      "webapp": { "desc": "Custom React web applications with robust architecture." },
+      "ecommerce": { "desc": "E-commerce storefronts with secure checkout and CMS." },
+      "redesign": { "desc": "UX/UI refresh to elevate clarity, performance, and look." },
+      "maintenance": { "desc": "Ongoing updates, fixes, and performance care." }
+    }
+  },
+
+  "process": {
+    "title": "Process",
+    "subtitle": "A focused, transparent workflow from idea to launch.",
+    "steps": {
+      "discovery": {
+        "title": "Discovery",
+        "desc": "We clarify goals, audience, constraints, and success metrics."
+      },
+      "planning": {
+        "title": "Planning",
+        "desc": "Scope, sitemap, features, and timeline are defined with you."
+      },
+      "design": {
+        "title": "Design",
+        "desc": "Wireframes and visual system with animation concepts."
+      },
+      "development": {
+        "title": "Development",
+        "desc": "Accessible, performant React implementation with clean code."
+      },
+      "testing": {
+        "title": "Testing",
+        "desc": "Cross-browser, responsiveness, performance, and QA checks."
+      },
+      "launch": {
+        "title": "Launch & Support",
+        "desc": "Deploy, monitor, and support with actionable next steps."
+      }
+    }
+  },
+
+  "faq": {
+    "title": "FAQ",
+    "subtitle": "Answers to common questions about my services.",
+    "items": {
+      "project_types": {
+        "q": "What project types do you build?",
+        "a": "Websites, web apps, e-commerce, redesigns, and maintenance — exactly as in the contact wizard."
+      },
+      "pricing": {
+        "q": "How does pricing work?",
+        "a": "Prices are \"from\" amounts. A precise quote follows a short discovery based on scope, features, and deadline."
+      },
+      "timeline": {
+        "q": "How long will my project take?",
+        "a": "Small websites: 1–3 weeks. Web apps/e-commerce: 3–8+ weeks depending on complexity and content readiness."
+      },
+      "features": {
+        "q": "Which features can I include?",
+        "a": "Responsive design, CMS, e‑commerce, custom animations, SEO, analytics, multilingual, and API integrations."
+      },
+      "cms": {
+        "q": "Can you integrate a CMS?",
+        "a": "Yes — headless CMS or WordPress depending on needs and budget."
+      },
+      "maintenance": {
+        "q": "Do you offer maintenance?",
+        "a": "Yes. I provide updates, fixes, performance improvements, and small feature work."
+      },
+      "redesign": {
+        "q": "Do you redesign existing sites?",
+        "a": "Absolutely. I modernize UI/UX, improve performance, and refine content structure."
+      },
+      "animations_performance": {
+        "q": "Will animations affect performance?",
+        "a": "I use performance-first techniques (GSAP, lazy-loading, reduced-motion support) to keep things smooth."
+      },
+      "multilingual": {
+        "q": "Do you support bilingual or multilingual sites?",
+        "a": "Yes. The site already supports EN/HU with i18n and can scale to more languages."
+      },
+      "seo_analytics": {
+        "q": "Is SEO and analytics included?",
+        "a": "Yes. I set up best-practice SEO and integrate analytics on request."
+      },
+      "communication_process": {
+        "q": "How will we communicate and track progress?",
+        "a": "Regular check-ins via chat/call, shared tasks, and milestone reviews."
+      },
+      "payments": {
+        "q": "How do payments work?",
+        "a": "Typically 30–50% upfront, remainder on milestones or delivery (invoice provided)."
+      }
+    }
+  },
+
+  "cta": {
+    "title": "Ready to build something great?",
+    "subtitle": "Tell me about your idea — I’ll reply within 48 hours.",
+    "button": "Start your project",
+    "note": "Response time: within 48 hours"
   },
 
   "common": {

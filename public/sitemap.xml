@@ -23,6 +23,108 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- Legal Pages - English/Hungarian (with hreflang alternates) -->
+  <url>
+    <loc>https://selora.dev/legal/en/legal-notice.md</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/legal-notice.md" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/legal-notice.md" />
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://selora.dev/legal/hu/legal-notice.md</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/legal-notice.md" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/legal-notice.md" />
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://selora.dev/legal/en/privacy-policy.md</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/privacy-policy.md" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/privacy-policy.md" />
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://selora.dev/legal/hu/privacy-policy.md</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/privacy-policy.md" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/privacy-policy.md" />
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://selora.dev/legal/en/terms-of-service.md</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/terms-of-service.md" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/terms-of-service.md" />
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://selora.dev/legal/hu/terms-of-service.md</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/terms-of-service.md" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/terms-of-service.md" />
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://selora.dev/legal/en/cookie-policy.md</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/cookie-policy.md" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/cookie-policy.md" />
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://selora.dev/legal/hu/cookie-policy.md</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/cookie-policy.md" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/cookie-policy.md" />
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://selora.dev/legal/en/refunds-cancellations.md</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/refunds-cancellations.md" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/refunds-cancellations.md" />
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://selora.dev/legal/hu/refunds-cancellations.md</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/refunds-cancellations.md" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/refunds-cancellations.md" />
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://selora.dev/legal/en/support-maintenance.md</loc>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/support-maintenance.md" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/support-maintenance.md" />
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://selora.dev/legal/hu/support-maintenance.md</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/support-maintenance.md" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/support-maintenance.md" />
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
   <!-- About Section - English -->
   <url>
     <loc>https://selora.dev/#about</loc>

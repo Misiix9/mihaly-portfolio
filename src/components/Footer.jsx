@@ -1,4 +1,6 @@
 import { useTranslation } from 'react-i18next'
+import { useState } from 'react'
+import LegalModal from './ui/LegalModal'
 import useScrollReveal from '../lib/anim/useScrollReveal'
 import LanguageSwitch from './LanguageSwitch'
 import Parallax from './ui/Parallax'
@@ -6,8 +8,18 @@ import useBudapestTime from '../lib/time/useBudapestTime'
 
 export default function Footer() {
   const { t } = useTranslation()
+  const [legalOpen, setLegalOpen] = useState(false)
+  const [legalDoc, setLegalDoc] = useState(null)
   const reveal = useScrollReveal()
   const time = useBudapestTime()
+
+  const openLegal = (docKey) => {
+    setLegalDoc(docKey)
+    setLegalOpen(true)
+  }
+
+  const lang = typeof navigator !== 'undefined' && navigator.language?.startsWith('hu') ? 'hu' : 'en'
+  const label = (en, hu) => (lang === 'hu' ? hu : en)
   return (
     <footer className="relative py-10 md:py-12 border-t border-white/10">
       {/* Dynamic Background Layer for Footer Section */}
@@ -102,6 +114,35 @@ export default function Footer() {
           <LanguageSwitch />
         </div>
       </div>
+
+      {/* Legal links row */}
+      <div className="container mx-auto px-4 sm:px-6 mt-6 text-xs text-white/60 flex flex-wrap gap-x-4 gap-y-2">
+        <button onClick={() => openLegal('legal-notice')} className="hover:text-white/90 underline-offset-2 hover:underline">
+          {label('Legal Notice', 'Impresszum')}
+        </button>
+        <span className="opacity-40">•</span>
+        <button onClick={() => openLegal('privacy-policy')} className="hover:text-white/90 underline-offset-2 hover:underline">
+          {label('Privacy Policy', 'Adatvédelmi Tájékoztató')}
+        </button>
+        <span className="opacity-40">•</span>
+        <button onClick={() => openLegal('cookie-policy')} className="hover:text-white/90 underline-offset-2 hover:underline">
+          {label('Cookie Policy', 'Sütiszabályzat')}
+        </button>
+        <span className="opacity-40">•</span>
+        <button onClick={() => openLegal('terms-of-service')} className="hover:text-white/90 underline-offset-2 hover:underline">
+          {label('Terms of Service', 'Általános Szerződési Feltételek')}
+        </button>
+        <span className="opacity-40">•</span>
+        <button onClick={() => openLegal('refunds-cancellations')} className="hover:text-white/90 underline-offset-2 hover:underline">
+          {label('Refunds & Cancellations', 'Visszatérítés és Lemondás')}
+        </button>
+        <span className="opacity-40">•</span>
+        <button onClick={() => openLegal('support-maintenance')} className="hover:text-white/90 underline-offset-2 hover:underline">
+          {label('Support & Maintenance', 'Támogatás és Karbantartás')}
+        </button>
+      </div>
+
+      <LegalModal isOpen={legalOpen} onClose={() => setLegalOpen(false)} docKey={legalDoc} />
     </footer>
   )
 }

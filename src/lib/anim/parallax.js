@@ -1,12 +1,6 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-let rafId = null
-let mouseX = 0
-let mouseY = 0
-let loopStarted = false
-let mouseBound = false
-const states = new Set()
 let globalIntensity = 1
 
 export function setParallaxGlobalIntensity(v = 1) {
@@ -18,96 +12,21 @@ export function getParallaxGlobalIntensity() {
   return globalIntensity
 }
 
-function lerp(a, b, t) { return a + (b - a) * t }
-
-function ensureMouseListener() {
-  if (mouseBound) return
-  const onMouse = (e) => {
-    const vw = window.innerWidth
-    const vh = window.innerHeight
-    mouseX = (e.clientX / vw) * 2 - 1 // -1..1
-    mouseY = (e.clientY / vh) * 2 - 1 // -1..1
-  }
-  window.addEventListener('mousemove', onMouse)
-  mouseBound = true
-
-  if (import.meta && import.meta.hot) {
-    import.meta.hot.dispose(() => {
-      window.removeEventListener('mousemove', onMouse)
-      mouseBound = false
-    })
-  }
-}
-
-function ensureLoop() {
-  if (loopStarted) return
-  loopStarted = true
-  
-  // DISABLED: This was causing 378 dropped frames and layout thrashing!
-  // getBoundingClientRect() on every frame is a performance killer
-  console.log('Parallax system disabled due to performance issues')
-  return
-  
-  /* COMMENTED OUT - PERFORMANCE KILLER
-  const frame = () => {
-    const vh = window.innerHeight
-    for (const s of states) {
-      const rect = s.el.getBoundingClientRect() // ← LAYOUT THRASHING!
-      const centerDelta = (rect.top + rect.height / 2) - (vh / 2)
-      const baseY = -centerDelta * s.speedY
-      const baseX = 0 + (0 - 0) * s.speedX
-      const mx = mouseX * s.maxShift * s.mouse
-      const my = mouseY * s.maxShift * s.mouse
-      s.tx = lerp(s.tx, (baseX + mx) * globalIntensity, 0.08)
-      s.ty = lerp(s.ty, (baseY + my) * globalIntensity, 0.08)
-      s.el.style.transform = `translate3d(${s.tx.toFixed(2)}px, ${s.ty.toFixed(2)}px, 0)`
-      s.el.style.willChange = 'transform'
-    }
-    rafId = requestAnimationFrame(frame)
-  }
-  frame()
-
-  if (import.meta && import.meta.hot) {
-    import.meta.hot.dispose(() => {
-      if (rafId) cancelAnimationFrame(rafId)
-      rafId = null
-      loopStarted = false
-    })
-  }
-  */  if (import.meta && import.meta.hot) {
-    import.meta.hot.dispose(() => {
-      if (rafId) cancelAnimationFrame(rafId)
-      rafId = null
-      loopStarted = false
-      states.clear()
-    })
-  }
-}
-
 export function registerParallax(el, options = {}) {
   if (!el) return () => {}
-  ensureMouseListener()
-  ensureLoop()
-
-  const s = {
-    el,
-    speedY: Number(options.speedY ?? el.dataset.speedY ?? el.dataset.speed ?? 0.2),
-    speedX: Number(options.speedX ?? el.dataset.speedX ?? 0),
-    maxShift: Number(options.maxShift ?? el.dataset.maxShift ?? 60),
-    mouse: Number(options.mouse ?? el.dataset.mouse ?? 0.06),
-    tx: 0,
-    ty: 0,
-  }
-  states.add(s)
-  return () => {
-    states.delete(s)
-  }
+  const speedY = Number(options.speedY ?? el.dataset.speedY ?? el.dataset.speed ?? 0.2)
+  const maxShift = Number(options.maxShift ?? el.dataset.maxShift ?? 100)
+  return createGsapParallax(el, { speedY, maxShift, scrub: true })
 }
 
 // Backwards-compatible initializer for data-attribute usage
 export function initParallax({ selector = '[data-parallax]' } = {}) {
   const els = Array.from(document.querySelectorAll(selector))
-  els.forEach(el => registerParallax(el))
+  els.forEach(el => {
+    const speedY = Number(el.dataset.speedY ?? el.dataset.speed ?? 0.2)
+    const maxShift = Number(el.dataset.maxShift ?? 100)
+    createGsapParallax(el, { speedY, maxShift, scrub: true })
+  })
 }
 
 // GSAP variant for exact control/scrubbing (uses ScrollTrigger + Lenis bridge)

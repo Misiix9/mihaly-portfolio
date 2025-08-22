@@ -15,6 +15,15 @@ import { initPortfolioSchema } from './lib/seo/schema.js'
 import { initDynamicSEO, preloadCriticalImages } from './lib/seo/sectionSEO.js'
 import { initPerformanceOptimizations } from './lib/performance/criticalCSS.js'
 import { initWebVitalsOptimizations, performanceMonitor, useWebVitals } from './lib/performance/webVitals.js'
+// PWA: register service worker in production
+// Will be tree-shaken in dev; plugin injects virtual module
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+  import('virtual:pwa-register').then(({ registerSW }) => {
+    try {
+      registerSW({ immediate: true })
+    } catch { /* no-op */ }
+  }).catch(() => {})
+}
 
 // Reduced motion detection
 function detectReducedMotion() {

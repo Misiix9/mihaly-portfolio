@@ -33,21 +33,15 @@ export const webVitals = {
     //   }
     // })
 
-    // Preload critical resources
+    // Preload critical resources (fonts moved to Google Fonts; no local TTF preloads)
     const criticalResources = [
-      '/fonts/lexend-400.ttf',
-      '/fonts/lexend-600.ttf'
     ]
 
     criticalResources.forEach(resource => {
       const link = document.createElement('link')
       link.rel = 'preload'
       link.href = resource
-      link.as = resource.includes('.ttf') ? 'font' : 'style'
-      if (resource.includes('.ttf')) {
-        link.type = 'font/ttf'
-        link.crossOrigin = 'anonymous'
-      }
+      link.as = 'style'
       document.head.appendChild(link)
     })
   },

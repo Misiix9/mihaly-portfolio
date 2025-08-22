@@ -20,26 +20,7 @@ export const criticalCSS = `
   }
 
   /* Typography - critical */
-  @font-face {
-    font-family: 'Lexend';
-    src: url('/fonts/lexend-400.ttf') format('truetype');
-    font-weight: 400;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: 'Lexend';
-    src: url('/fonts/lexend-600.ttf') format('truetype');
-    font-weight: 600;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: 'Lexend';
-    src: url('/fonts/lexend-700.ttf') format('truetype');
-    font-weight: 700;
-    font-display: swap;
-  }
+  /* Using Google Fonts (Lexend) via <link> in index.html */
 
   /* Base styles */
   * {
@@ -183,21 +164,7 @@ export const injectCriticalCSS = () => {
 export const preloadFonts = () => {
   if (typeof document === 'undefined') return
 
-  const fonts = [
-    '/fonts/lexend-400.ttf',
-    '/fonts/lexend-600.ttf',
-    '/fonts/lexend-700.ttf'
-  ]
-
-  fonts.forEach(font => {
-    const link = document.createElement('link')
-    link.rel = 'preload'
-    link.href = font
-    link.as = 'font'
-    link.type = 'font/ttf'
-    link.crossOrigin = 'anonymous'
-    document.head.appendChild(link)
-  })
+  // Local font preloading disabled — using Google Fonts via <link> in index.html
 }
 
 // Resource hints

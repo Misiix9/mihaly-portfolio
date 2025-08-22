@@ -54,6 +54,25 @@ export default defineConfig({
             }
           },
           {
+            // Google Fonts stylesheets
+            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*$/,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'gfonts-stylesheets',
+              cacheableResponse: { statuses: [0, 200] }
+            }
+          },
+          {
+            // Google Fonts font files
+            urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'gfonts-webfonts',
+              expiration: { maxEntries: 30, maxAgeSeconds: 31536000 },
+              cacheableResponse: { statuses: [0, 200] }
+            }
+          },
+          {
             urlPattern: /\/fonts\/.*\.(?:woff2|woff|ttf)(?:\?.*)?$/,
             handler: 'CacheFirst',
             options: {

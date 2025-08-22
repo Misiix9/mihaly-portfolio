@@ -4,6 +4,8 @@ import legacy from '@vitejs/plugin-legacy'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Using custom domain - serve from root
+  base: '/',
   plugins: [
     react(),
     legacy({
@@ -30,8 +32,6 @@ export default defineConfig({
       ]
     })
   ],
-  // Using custom domain - no base path needed
-  base: '/',
   build: {
     rollupOptions: {
       output: {

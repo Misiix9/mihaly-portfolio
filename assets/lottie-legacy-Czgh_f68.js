@@ -1,0 +1,1 @@
+System.register(["./three-legacy-wrlTaH8S.js","./lottie-legacy-W1A0i238.js"],function(e,t){"use strict";var r,l;return{setters:[e=>{r=e.g},e=>{l=e.r}],execute:function(){const t=r(l()),o=Object.freeze(Object.defineProperty({__proto__:null,default:t},Symbol.toStringTag,{value:"Module"}));e("l",o)}}});

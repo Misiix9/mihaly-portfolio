@@ -1,17 +1,40 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#000000" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <title>Mihaly Gyori — Portfolio</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Page Not Found</title>
+    <meta http-equiv="refresh" content="0; url=/mihaly-portfolio/" />
+    <script>
+      // Client-side redirect to support SPA routing on GitHub Pages
+      (function () {
+        var base = '/mihaly-portfolio/';
+        var path = location.pathname;
+        // If directly on 404.html (e.g. /mihaly-portfolio/404.html) just go home
+        if (!path || path.indexOf(base) !== 0) {
+          location.replace(base);
+          return;
+        }
+        var route = path.substring(base.length);
+        if (!route || route === '404.html') {
+          location.replace(base);
+        } else {
+          location.replace(base + '#/' + route + location.search + location.hash);
+        }
+      })();
+    </script>
+    <style>
+      html, body { height: 100%; margin: 0; background: #000; color: #fff; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+      .wrap { height: 100%; display: grid; place-items: center; text-align: center; padding: 2rem; }
+      a { color: #9ae6b4; }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <div class="wrap">
+      <div>
+        <h1>Redirecting…</h1>
+        <p>If you are not redirected, <a href="/mihaly-portfolio/">click here</a>.</p>
+      </div>
+    </div>
   </body>
 </html>

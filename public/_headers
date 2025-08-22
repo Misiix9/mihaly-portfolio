@@ -1,0 +1,23 @@
+# Long-lived caching for hashed static assets
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Also cache top-level hashed files (if any)
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML should have a short TTL so new deployments swap to new hashed assets quickly
+/*.html
+  Cache-Control: public, max-age=600, must-revalidate
+
+/
+  Cache-Control: public, max-age=600, must-revalidate

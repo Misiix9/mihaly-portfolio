@@ -38,5 +38,4 @@ Sitemap: https://selora.dev/sitemap.xml
 # Crawl delay (optional, good for server performance)
 Crawl-delay: 1
 
-# Cache directive for bots
-Cache-directive: max-age=3600
+# Note: Caching must be configured via HTTP response headers, not robots.txt directives

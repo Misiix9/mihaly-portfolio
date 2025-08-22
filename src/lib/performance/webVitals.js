@@ -44,7 +44,7 @@ export const webVitals = {
       link.href = resource
       link.as = resource.includes('.ttf') ? 'font' : 'style'
       if (resource.includes('.ttf')) {
-        link.type = 'font/truetype'
+        link.type = 'font/ttf'
         link.crossOrigin = 'anonymous'
       }
       document.head.appendChild(link)

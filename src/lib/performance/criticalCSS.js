@@ -194,7 +194,7 @@ export const preloadFonts = () => {
     link.rel = 'preload'
     link.href = font
     link.as = 'font'
-    link.type = 'font/truetype'
+    link.type = 'font/ttf'
     link.crossOrigin = 'anonymous'
     document.head.appendChild(link)
   })

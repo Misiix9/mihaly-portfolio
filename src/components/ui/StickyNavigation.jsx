@@ -14,9 +14,12 @@ export default function StickyNavigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [scrolled, setScrolled] = useState(false)
+  const [navHidden, setNavHidden] = useState(false)
   const navRef = useRef(null)
   const mobileMenuRef = useRef(null)
   const progressBarRef = useRef(null)
+  const lastScrollYRef = useRef(0)
   const reduced = useReducedMotion()
 
   const navItems = useMemo(() => [
@@ -102,6 +105,26 @@ export default function StickyNavigation() {
         requestAnimationFrame(() => {
           updateScrollProgress()
           updateActiveSection()
+          // Toggle scrolled state after a small threshold
+          const y = window.scrollY || window.pageYOffset || 0
+          setScrolled(y > 60)
+
+          // Auto-hide logic: hide when scrolling down beyond threshold, reveal on scroll up
+          const lastY = lastScrollYRef.current
+          const delta = Math.abs(y - lastY)
+          const threshold = 8
+          if (delta > threshold) {
+            const scrollingDown = y > lastY
+            // Do not hide near top; do not hide if mobile menu is open
+            if (!isMenuOpen) {
+              if (scrollingDown && y > 140) {
+                setNavHidden(true)
+              } else {
+                setNavHidden(false)
+              }
+            }
+            lastScrollYRef.current = y
+          }
           ticking = false
         })
         ticking = true
@@ -112,7 +135,7 @@ export default function StickyNavigation() {
     handleScroll() // Initial call
 
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [navItems])
+  }, [navItems, isMenuOpen])
 
   // Mobile menu animations
   useEffect(() => {
@@ -124,6 +147,20 @@ export default function StickyNavigation() {
         { opacity: 0, y: -20 },
         { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }
       )
+
+      // Stagger in menu items for polish
+      const buttons = mobileMenuRef.current.querySelectorAll('nav button')
+      if (buttons && buttons.length) {
+        gsap.fromTo(buttons,
+          { opacity: 0, y: 8 },
+          { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out', stagger: 0.05, delay: 0.05 }
+        )
+        // Focus the first interactive element for accessibility
+        setTimeout(() => {
+          const first = buttons[0]
+          if (first && typeof first.focus === 'function') first.focus()
+        }, 60)
+      }
     } else {
       gsap.to(mobileMenuRef.current, {
         opacity: 0,
@@ -136,6 +173,47 @@ export default function StickyNavigation() {
       })
     }
   }, [isMenuOpen, reduced])
+
+  // Focus trap within mobile menu when open
+  useEffect(() => {
+    if (!isMenuOpen || !mobileMenuRef.current) return
+
+    const container = mobileMenuRef.current
+    const selector = [
+      'a[href]',
+      'button:not([disabled])',
+      'textarea:not([disabled])',
+      'input[type="text"]:not([disabled])',
+      'input[type="email"]:not([disabled])',
+      'input[type="search"]:not([disabled])',
+      'select:not([disabled])',
+      '[tabindex]:not([tabindex="-1"])'
+    ].join(',')
+
+    const getFocusable = () => Array.from(container.querySelectorAll(selector))
+
+    const onKeyDown = (e) => {
+      if (e.key !== 'Tab') return
+      const focusables = getFocusable()
+      if (!focusables.length) return
+      const first = focusables[0]
+      const last = focusables[focusables.length - 1]
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
+    }
+
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [isMenuOpen])
 
   // Progress bar animation
   useEffect(() => {
@@ -173,18 +251,23 @@ export default function StickyNavigation() {
     <>
       <header 
         ref={navRef}
-        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/20 shadow-2xl"
+        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b shadow-2xl transition-[background,border-color,box-shadow,transform] duration-300 will-change-transform"
         style={{ 
           position: 'fixed', 
           top: 0, 
           left: 0, 
           right: 0, 
           zIndex: 50,
-          background: 'linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0.85) 100%)',
+          transform: navHidden && !isMenuOpen ? 'translateY(-100%)' : 'translateY(0)',
+          background: scrolled
+            ? 'linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,0.95) 100%)'
+            : 'linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0.85) 100%)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(255,255,255,0.15)',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)'
+          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.2)' : '1px solid rgba(255,255,255,0.15)',
+          boxShadow: scrolled
+            ? '0 10px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.12)'
+            : '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)'
         }}
       >
         {/* Progress bar */}
@@ -201,7 +284,9 @@ export default function StickyNavigation() {
         </div>
 
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between py-3 sm:py-4">
+          <div
+            className={`flex items-center justify-between ${scrolled ? 'py-2 sm:py-3' : 'py-3 sm:py-4'} transition-[padding] duration-300`}
+          >
             {/* Epic Logo */}
             <button
               onClick={() => scrollToSection('#hero')}
@@ -209,9 +294,14 @@ export default function StickyNavigation() {
               data-magnetic="0.2"
               data-cursor-text="Home"
             >
-              <Logo 
-                size={36} 
-                className="transition-all duration-500 hover:scale-110" 
+              {/* Responsive logo sizes: 48px on mobile, 56px on md+ */}
+              <Logo
+                size={72}
+                className="transition-all duration-500 hover:scale-110 md:hidden"
+              />
+              <Logo
+                size={164}
+                className="transition-all duration-500 hover:scale-110 hidden md:block"
               />
             </button>
 
@@ -221,15 +311,16 @@ export default function StickyNavigation() {
                 <button
                   key={item.key}
                   onClick={() => scrollToSection(item.href)}
-                  className={`relative text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/40 rounded px-2 py-1 ${
+                  className={`relative group text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/40 rounded px-2 py-1 ${
                     activeSection === item.key
                       ? 'text-white'
                       : 'text-white/70 hover:text-white/90'
                   }`}
                   data-magnetic="0.15"
                   data-cursor-text={item.label}
+                  style={{ willChange: 'transform, box-shadow' }}
                 >
-                  {item.label}
+                  <span className="relative z-10">{item.label}</span>
                   
                   {/* Active indicator */}
                   <div 
@@ -239,10 +330,26 @@ export default function StickyNavigation() {
                   />
                   
                   {/* Hover effect */}
-                  <div className="absolute inset-0 rounded bg-white/8 backdrop-blur-sm opacity-0 hover:opacity-100 transition-all duration-300"
+                  <div className="pointer-events-none absolute inset-0 rounded bg-white/8 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 z-0"
                     style={{
                       background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
                       border: '1px solid rgba(255,255,255,0.1)'
+                    }}
+                  />
+
+                  {/* Soft outer glow on hover/press */}
+                  <div
+                    className="pointer-events-none absolute -inset-1 rounded-lg opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300 z-0"
+                    style={{
+                      boxShadow: '0 0 16px rgba(255,255,255,0.22), 0 0 32px rgba(255,255,255,0.12)'
+                    }}
+                  />
+
+                  {/* Subtle inner highlight */}
+                  <div
+                    className="pointer-events-none absolute inset-0 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+                    style={{
+                      boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.16), inset 0 -1px 0 rgba(255,255,255,0.08)'
                     }}
                   />
                 </button>

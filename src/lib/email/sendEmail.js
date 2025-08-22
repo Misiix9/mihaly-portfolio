@@ -7,7 +7,7 @@ export async function sendEmail({ name, email, message, captchaToken, projectTyp
   // If EmailJS is not configured, do NOT use fallbacks
   if (!service_id || !template_id || !user_id) {
     console.error('EmailJS not configured. Please set VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, VITE_EMAILJS_PUBLIC_KEY in .env')
-    return { success: false, method: 'emailjs', error: 'EmailJS not configured' }
+    return { success: false, method: 'emailjs', error: 'EmailJS not configured. Missing one or more of: VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, VITE_EMAILJS_PUBLIC_KEY' }
   }
 
   // Create a comprehensive message including all form data
@@ -44,6 +44,14 @@ Phone: ${phone || 'Not specified'}
   }
 
   try {
+    // Log non-sensitive payload for debugging
+    console.debug('[sendEmail] Sending via EmailJS', {
+      service_id,
+      template_id,
+      // user_id intentionally not logged
+      template_params: { ...payload.template_params, hcaptcha_token: payload.template_params.hcaptcha_token ? 'present' : 'absent' },
+    })
+
     const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -52,11 +60,13 @@ Phone: ${phone || 'Not specified'}
 
     if (!res.ok) {
       const text = await res.text()
-      console.error('EmailJS failed:', text)
+      const error = `EmailJS HTTP ${res.status}: ${text || 'No response body'}`
+      console.error('EmailJS failed:', error)
       // Fallbacks disabled: return error
-      return { success: false, method: 'emailjs', error: text || 'EmailJS request failed' }
+      return { success: false, method: 'emailjs', status: res.status, error }
     }
 
+    // EmailJS success returns 200 with empty body
     return { success: true, method: 'emailjs' }
   } catch (error) {
     console.error('EmailJS error:', error)

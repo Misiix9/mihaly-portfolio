@@ -18,22 +18,26 @@ export default function Contact() {
 
   const handleFormSubmit = async (formData) => { 
     setLoading(true)
-    
     try {
-      // Send the email
-      await sendEmail({
+      // Send the email and verify result
+      const result = await sendEmail({
         name: formData.name,
         email: formData.email,
         message: formData.message,
-        // Add additional form data to the message
+        // Additional details
         projectType: formData.projectType,
         budget: formData.budget,
         timeline: formData.timeline,
         features: formData.features,
         company: formData.company,
-        phone: formData.phone
+        phone: formData.phone,
       })
-      
+
+      if (!result?.success) {
+        console.error('Email send failed:', result)
+        throw new Error(result?.error || 'Email send failed')
+      }
+
       setShowSuccess(true)
       showToast({ type: 'success', message: t('contact.form.success') })
     } catch (error) {

@@ -11,7 +11,8 @@ import { initScrollReveal } from './lib/anim/scrollReveal.js'
 import { initGA } from './lib/analytics/ga4.js'
 import GAListener from './lib/analytics/GAListener.jsx'
 import { setDefaultSiteMeta } from './lib/seo/meta.js'
-import { setPersonSchema } from './lib/seo/schema.js'
+import { initPortfolioSchema } from './lib/seo/schema.js'
+import { initDynamicSEO, preloadCriticalImages } from './lib/seo/sectionSEO.js'
 import { initPerformanceOptimizations } from './lib/performance/criticalCSS.js'
 import { initWebVitalsOptimizations, performanceMonitor, useWebVitals } from './lib/performance/webVitals.js'
 
@@ -60,23 +61,21 @@ try {
   void e 
 }
 
-// Inject JSON-LD Person schema
+// Initialize comprehensive JSON-LD structured data
 try {
-  const origin = window.location.origin
-  setPersonSchema({
-    name: 'Győri Mihály',
-    alternateName: 'Mihaly Gyori',
-    jobTitle: 'Website and desktop developer student',
-    email: 'mihalygyori05@gmail.com',
-    url: origin,
-    image: new URL('og-image.svg', import.meta.env.BASE_URL).toString(),
-    sameAs: [
-      'https://github.com/Misiix9',
-      'https://instagram.com/gyr.misi',
-    ],
-  })
+  initPortfolioSchema()
 } catch (e) { 
   void e 
+}
+
+// Initialize dynamic SEO and preload critical images after initial mount
+try {
+  setTimeout(() => {
+    preloadCriticalImages()
+    initDynamicSEO()
+  }, 0)
+} catch (e) {
+  void e
 }
 
 // Performance monitoring wrapper
@@ -113,3 +112,6 @@ try {
 } catch { 
   /* no-op */ 
 }
+ 
+// Export to satisfy Fast Refresh expectations
+export { AppWithMonitoring }

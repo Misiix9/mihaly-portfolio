@@ -69,7 +69,7 @@ export default function Services() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="container mx-auto px-4 sm:px-6 py-16">
+    <section id="services" ref={sectionRef} className="container mx-auto px-4 sm:px-6 py-16">
       <div className="relative mb-10">
         <h2 data-svc-title className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
           {t('services.title')}

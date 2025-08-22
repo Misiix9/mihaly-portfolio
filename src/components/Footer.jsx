@@ -2,10 +2,12 @@ import { useTranslation } from 'react-i18next'
 import useScrollReveal from '../lib/anim/useScrollReveal'
 import LanguageSwitch from './LanguageSwitch'
 import Parallax from './ui/Parallax'
+import useBudapestTime from '../lib/time/useBudapestTime'
 
 export default function Footer() {
   const { t } = useTranslation()
   const reveal = useScrollReveal()
+  const time = useBudapestTime()
   return (
     <footer className="relative py-10 md:py-12 border-t border-white/10">
       {/* Dynamic Background Layer for Footer Section */}
@@ -56,10 +58,15 @@ export default function Footer() {
         style={{ animation: 'globalFloat 22s ease-in-out infinite 4s' }}
       />
       <div ref={reveal} className="container mx-auto px-4 sm:px-6 text-sm text-white/60 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-        <div className="flex items-center gap-3">
-          <span className="text-white/80">© {new Date().getFullYear()} Mihaly Gyori</span>
-          <span className="hidden md:inline">•</span>
-          <span>{t('footer.rights')}</span>
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-3">
+            <span className="text-white/80">© {new Date().getFullYear()} Mihaly Gyori</span>
+            <span className="hidden md:inline">•</span>
+            <span>{t('footer.rights')}</span>
+          </div>
+          <div className="text-white/70">
+            {t('footer.tagline', { time })}
+          </div>
         </div>
 
         <nav aria-label="Footer navigation">
@@ -72,6 +79,18 @@ export default function Footer() {
             </li>
             <li>
               <a href="#projects" className="hover:text-white/90 transition-colors">{t('nav.projects')}</a>
+            </li>
+            <li>
+              <a href="#services" className="hover:text-white/90 transition-colors">{t('nav.services', t('services.title'))}</a>
+            </li>
+            <li>
+              <a href="#process" className="hover:text-white/90 transition-colors">{t('nav.process', t('process.title'))}</a>
+            </li>
+            <li>
+              <a href="#faq" className="hover:text-white/90 transition-colors">{t('nav.faq', t('faq.title'))}</a>
+            </li>
+            <li>
+              <a href="#cta" className="hover:text-white/90 transition-colors">{t('nav.cta', 'Get Started')}</a>
             </li>
             <li>
               <a href="#contact" className="hover:text-white/90 transition-colors">{t('nav.contact')}</a>

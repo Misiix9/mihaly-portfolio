@@ -49,7 +49,7 @@ export default function CTABanner() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="container mx-auto px-4 sm:px-6 py-14">
+    <section id="cta" ref={sectionRef} className="container mx-auto px-4 sm:px-6 py-14">
       <div data-cta-card className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 sm:p-8 will-change-transform">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-24 -left-24 w-64 h-64 rounded-full bg-white/10 blur-3xl" />

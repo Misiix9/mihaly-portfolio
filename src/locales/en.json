@@ -3,7 +3,9 @@
     "home": "Home",
     "about": "About",
     "skills": "Skills",
-    "projects": "Projects",
+    "projects": "Work",
+    "services": "Services",
+    "process": "Process",
     "contact": "Contact"
   },
   "lang": { "en": "EN", "hu": "HU" },
@@ -37,10 +39,10 @@
       }
     },
     "title": "Mihály Győri — Portfolio",
-    "subtitle": "I craft premium web experiences where elegant design meets flawless engineering. Specializing in React applications that deliver exceptional user experiences and drive real business results. From concept to launch, every pixel serves a purpose.",
+    "subtitle": "I design and build websites and apps that load fast, perform well, and are easy to use — with clear communication from start to finish.",
     "value_proposition": "Building tomorrow's web experiences today",
-    "cta_primary": "Start Your Project",
-    "cta_secondary": "Explore My Work",
+    "cta_primary": "Start a Project",
+    "cta_secondary": "See Projects",
     "scroll_discover": "Scroll to discover",
     "availability": "Available for freelance projects",
     "response_time": "48-hour response guaranteed"
@@ -48,7 +50,7 @@
 
   "about": {
     "title": "About",
-    "body": "I'm Mihály Győri, a frontend developer from Hungary who transforms complex ideas into elegant digital experiences. With 3+ years of focused React development, I've mastered the art of balancing aesthetic sophistication with technical excellence. My approach combines meticulous attention to detail with performance-first thinking, creating interfaces that not only look exceptional but deliver measurable business results. Every project is an opportunity to push creative boundaries while maintaining the highest standards of code quality and user experience.",
+    "body": "I’m Mihály, a developer from Budapest. I build fast, clean interfaces and robust frontends. My focus: performance, clarity, and shipping on time.",
     "mission": "My mission is to bridge the gap between stunning visual design and rock-solid engineering, delivering web applications that users love and businesses depend on.",
     "strengths_title": "Core Expertise",
     "stack_title": "Technology Stack",
@@ -381,10 +383,10 @@
   },
 
   "contact": {
-    "title": "Let's Build Something Amazing",
-    "subtitle": "Ready to transform your vision into a stunning digital experience? Let's discuss your project.",
+    "title": "Let’s Build Something Fast, Clean, and Clear",
+    "subtitle": "Tell me briefly what you need and your timeline. I’ll reply within 24–48 hours.",
     "availability": "Currently accepting new projects",
-    "response_time": "48-hour response guarantee",
+    "response_time": "Reply within 24–48 hours",
     "services": {
       "title": "Services I Offer",
       "web_development": {
@@ -545,7 +547,8 @@
   },
 
   "footer": {
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "tagline": "Győri Mihály — Budapest • Available for freelance • Reply in 24–48h • Local time: {{time}} • GitHub • Instagram • Email"
   },
 
   "services": {
@@ -649,10 +652,10 @@
   },
 
   "cta": {
-    "title": "Ready to build something great?",
-    "subtitle": "Tell me about your idea — I’ll reply within 48 hours.",
-    "button": "Start your project",
-    "note": "Response time: within 48 hours"
+    "title": "Start a Project",
+    "subtitle": "Tell me briefly what you need. I’ll reply within 24–48 hours.",
+    "button": "Start a Project",
+    "note": "Response time: 24–48 hours"
   },
 
   "common": {

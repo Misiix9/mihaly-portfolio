@@ -83,8 +83,8 @@ export function setMeta({
 }
 
 export function setDefaultSiteMeta() {
-  const title = 'Mihaly Gyori — Portfolio'
-  const description = 'Hungarian website and desktop developer student. Minimal, monochrome, animation-rich portfolio.'
+  const title = 'Mihaly Gyori | Web Developer & React Specialist in Budapest'
+  const description = 'Professional web developer in Budapest specializing in React, TypeScript, and modern web applications. Fast, clean, and accessible websites for startups and businesses. Available for freelance projects.'
   setMeta({
     title,
     description,
@@ -93,9 +93,42 @@ export function setDefaultSiteMeta() {
     keywords: [
       'Mihaly Gyori',
       'Győri Mihály',
-      'web developer',
-      'portfolio',
-      'Hungary',
+      'web developer Budapest',
+      'React developer Hungary',
+      'TypeScript developer',
+      'freelance web developer',
+      'website development',
+      'web application development',
+      'frontend developer',
+      'JavaScript developer',
+      'portfolio website',
+      'Budapest developer',
+      'Hungarian web developer'
     ],
+  })
+}
+
+// Section-specific SEO helpers
+export function setAboutSectionMeta() {
+  setMeta({
+    title: 'About Mihaly Gyori | Web Developer Profile & Experience',
+    description: 'Learn about Mihaly Gyori, a passionate web developer from Budapest specializing in React, TypeScript, and modern web technologies. Student developer with professional project experience.',
+    keywords: ['about Mihaly Gyori', 'web developer background', 'React developer experience', 'Budapest developer profile']
+  })
+}
+
+export function setServicesSectionMeta() {
+  setMeta({
+    title: 'Web Development Services | Mihaly Gyori - React & TypeScript',
+    description: 'Professional web development services in Budapest. Website development, React applications, e-commerce, redesign, and maintenance. Clear pricing from €200-1500. Fast delivery.',
+    keywords: ['web development services', 'React development Budapest', 'website development Hungary', 'freelance web developer', 'web application development']
+  })
+}
+
+export function setContactSectionMeta() {
+  setMeta({
+    title: 'Contact Mihaly Gyori | Hire Web Developer in Budapest',
+    description: 'Get in touch with Mihaly Gyori for your web development project. Based in Budapest, available for freelance work. 24-48 hour response time. GitHub, Instagram, Email contact.',
+    keywords: ['contact web developer', 'hire React developer Budapest', 'freelance web developer Hungary', 'web development contact']
   })
 }

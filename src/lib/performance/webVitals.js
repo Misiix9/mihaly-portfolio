@@ -23,14 +23,15 @@ export const webVitals = {
 
   // First Contentful Paint (FCP) optimization
   optimizeFCP: () => {
-    // Remove render-blocking resources
-    const nonCriticalCSS = document.querySelectorAll('link[rel="stylesheet"]:not([data-critical])')
-    nonCriticalCSS.forEach(link => {
-      link.media = 'print'
-      link.onload = function() {
-        this.media = 'all'
-      }
-    })
+    // NOTE: Temporarily disabled CSS media-flip hack due to intermittent unstyled loads
+    // Cause: onload may not fire for cached stylesheets, leaving media='print' stuck
+    // const nonCriticalCSS = document.querySelectorAll('link[rel="stylesheet"]:not([data-critical])')
+    // nonCriticalCSS.forEach(link => {
+    //   link.media = 'print'
+    //   link.onload = function() {
+    //     this.media = 'all'
+    //   }
+    // })
 
     // Preload critical resources
     const criticalResources = [

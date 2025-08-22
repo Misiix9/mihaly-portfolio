@@ -16,6 +16,7 @@ export default function StickyNavigation() {
   const [scrollProgress, setScrollProgress] = useState(0)
   const [scrolled, setScrolled] = useState(false)
   const [navHidden, setNavHidden] = useState(false)
+  const [navHeight, setNavHeight] = useState(64)
   const navRef = useRef(null)
   const mobileMenuRef = useRef(null)
   const progressBarRef = useRef(null)
@@ -125,6 +126,15 @@ export default function StickyNavigation() {
             }
             lastScrollYRef.current = y
           }
+
+          // Update nav height so the fixed progress bar can sit right under it
+          if (navRef.current) {
+            const h = navRef.current.getBoundingClientRect().height
+            // Avoid re-renders if unchanged
+            if (h && Math.abs(h - navHeight) > 0.5) {
+              setNavHeight(h)
+            }
+          }
           ticking = false
         })
         ticking = true
@@ -135,7 +145,22 @@ export default function StickyNavigation() {
     handleScroll() // Initial call
 
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [navItems, isMenuOpen])
+  }, [navItems, isMenuOpen, navHeight])
+
+  // Keep navHeight in sync on resize (padding changes on scroll can alter height)
+  useEffect(() => {
+    const update = () => {
+      if (navRef.current) {
+        const h = navRef.current.getBoundingClientRect().height
+        if (h && Math.abs(h - navHeight) > 0.5) {
+          setNavHeight(h)
+        }
+      }
+    }
+    window.addEventListener('resize', update, { passive: true })
+    update()
+    return () => window.removeEventListener('resize', update)
+  }, [navHeight])
 
   // Mobile menu animations
   useEffect(() => {
@@ -270,18 +295,7 @@ export default function StickyNavigation() {
             : '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)'
         }}
       >
-        {/* Progress bar */}
-        <div className="absolute bottom-0 left-0 h-0.5 w-full bg-white/5">
-          <div 
-            ref={progressBarRef}
-            className="h-full origin-left"
-            style={{ 
-              transform: 'scaleX(0)',
-              background: 'linear-gradient(90deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.6) 100%)',
-              boxShadow: '0 0 8px rgba(255,255,255,0.3)'
-            }}
-          />
-        </div>
+        {/* Progress bar moved out of header to remain visible even when nav hides */}
 
         <div className="container mx-auto px-4 sm:px-6">
           <div
@@ -469,6 +483,28 @@ export default function StickyNavigation() {
           </nav>
         </div>
       </header>
+
+      {/* Fixed top progress bar: sits under navbar when visible; moves to top when navbar hides */}
+      {!reduced && (
+        <div
+          className="fixed left-0 right-0 z-40"
+          style={{
+            top: navHidden ? 0 : navHeight,
+          }}
+        >
+          <div className="h-0.5 w-full bg-white/5">
+            <div
+              ref={progressBarRef}
+              className="h-full origin-left"
+              style={{
+                transform: 'scaleX(0)',
+                background: 'linear-gradient(90deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.6) 100%)',
+                boxShadow: '0 0 8px rgba(255,255,255,0.3)'
+              }}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Mobile menu overlay */}
       {isMenuOpen && (

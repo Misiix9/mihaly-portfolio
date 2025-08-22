@@ -45,11 +45,14 @@ export function initSmoothScroll(options = {}) {
   initialized = true
 
   lenis = new Lenis({
-    duration: 1.0,
+    // Snappier response; reduce perceived lag
+    duration: 0.6,
     easing: (t) => 1 - Math.pow(1 - t, 3),
-    lerp: 0.1,
+    lerp: 0.08,
     smoothWheel: true,
     smoothTouch: false,
+    wheelMultiplier: 1.0,
+    touchMultiplier: 1.0,
     ...options,
   })
 

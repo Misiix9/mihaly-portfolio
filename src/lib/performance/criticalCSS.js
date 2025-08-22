@@ -31,7 +31,8 @@ export const criticalCSS = `
 
   html {
     font-size: 16px;
-    scroll-behavior: smooth;
+    /* With Lenis handling scrolling, native smooth scroll can introduce lag */
+    scroll-behavior: auto;
   }
 
   body {

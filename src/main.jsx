@@ -43,10 +43,10 @@ initPerformanceOptimizations()
 initWebVitalsOptimizations()
 
 // Initialize Lenis smooth scrolling
-initSmoothScroll()
+const lenis = initSmoothScroll()
 
 // Bridge Lenis with GSAP ScrollTrigger
-initGsapLenisBridge()
+initGsapLenisBridge(lenis)
 
 // Set up parallax with proper motion handling
 const reducedMotion = detectReducedMotion()

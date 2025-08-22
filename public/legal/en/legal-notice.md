@@ -1,9 +1,9 @@
 # Legal Notice (Impresszum)
 
 **Service Provider**
-- Name: Mihaly Gyori (Győri Mihály)
+- Name: Selora
 - Seat/Address: Budapest, Hungary
-- Email: hello@selora.dev
+- Email: hi@selora.dev
 - Website: https://selora.dev
 - VAT / Tax No.: — (provide if applicable)
 - Company / Registration ID: — (provide if applicable)
@@ -16,4 +16,4 @@ Portfolio and service presentation for web and software development.
 No warranty is given for completeness or accuracy. External links are the responsibility of their owners.
 
 **Copyright**
-© Current year Mihaly Gyori. All rights reserved. Content and assets may not be reused without permission unless otherwise stated.
+ Selora. All rights reserved. Content and assets may not be reused without permission unless otherwise stated.

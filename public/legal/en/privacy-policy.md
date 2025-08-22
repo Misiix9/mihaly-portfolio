@@ -1,6 +1,6 @@
 # Privacy Policy (GDPR)
 
-**Controller**: Mihaly Gyori, Budapest, Hungary, hello@selora.dev
+**Controller**: Selora, Budapest, Hungary, hi@selora.dev
 
 **Purpose & Lawful Bases**
 - Contact & Project Inquiries (consent / contract performance)
@@ -23,7 +23,7 @@
 - Analytics: per GA retention settings
 
 **Your Rights**
-Access, rectification, erasure, restriction, portability, objection, and complaint to NAIH. Contact: hello@selora.dev
+Access, rectification, erasure, restriction, portability, objection, and complaint to NAIH. Contact: hi@selora.dev
 
 **International Transfers**
 When using US services (e.g., Google), transfers rely on safeguards such as SCCs/EU-U.S. Data Privacy Framework.

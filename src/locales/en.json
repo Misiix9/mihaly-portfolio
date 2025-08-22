@@ -38,7 +38,7 @@
         "description": "Forward-thinking and cutting-edge solutions"
       }
     },
-    "title": "Mihály Győri — Portfolio",
+    "title": "Selora",
     "subtitle": "I design and build websites and apps that load fast, perform well, and are easy to use — with clear communication from start to finish.",
     "value_proposition": "Building tomorrow's web experiences today",
     "cta_primary": "Start a Project",
@@ -533,7 +533,7 @@
         {
           "name": "Sarah Johnson",
           "company": "Tech Startup",
-          "text": "Mihály delivered an exceptional website that exceeded our expectations. His attention to detail and technical expertise is outstanding.",
+          "text": "Selora delivered an exceptional website that exceeded our expectations. Their attention to detail and technical expertise is outstanding.",
           "rating": 5
         },
         {
@@ -548,7 +548,7 @@
 
   "footer": {
     "rights": "All rights reserved.",
-    "tagline": "Győri Mihály — Budapest • Available for freelance • Reply in 24–48h • Local time: {{time}} • GitHub • Instagram • Email"
+    "tagline": "Selora — Budapest • Available for freelance • Reply in 24–48h • Local time: {{time}}"
   },
 
   "services": {

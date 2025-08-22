@@ -34,7 +34,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'robots.txt'],
       manifest: {
-        name: 'Mihaly Gyori Portfolio',
+        name: 'Selora',
         short_name: 'Portfolio',
         theme_color: '#000000',
         background_color: '#000000',

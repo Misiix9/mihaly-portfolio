@@ -1,4 +1,4 @@
-# Mihaly Gyori — Portfolio
+# Selora — Portfolio
 
 Live: https://selora.dev
 
@@ -46,4 +46,4 @@ I’m adding current work and case studies. Agencies, startups, SMEs — feel fr
 - Integrations (analytics, forms, headless CMS)
 
 ## License
-Copyright © Mihaly Gyori. All rights reserved.
+Copyright © Selora. All rights reserved.

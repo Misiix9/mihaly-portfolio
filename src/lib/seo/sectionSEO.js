@@ -29,11 +29,11 @@ export function updateSEOForSection(sectionId, language = 'en') {
     case 'projects': {
       // Projects-specific SEO
       const projectsTitle = language === 'hu' 
-        ? 'Projektek | Mihaly Gyori - Web Fejlesztő Portfólió'
-        : 'Projects | Mihaly Gyori - Web Developer Portfolio'
+        ? 'Projektek | Selora'
+        : 'Projects | Selora'
       const projectsDesc = language === 'hu'
-        ? 'Tekintse meg Mihaly Gyori web fejlesztő projektjeit. React alkalmazások, weboldalak és modern web technológiák bemutatása.'
-        : 'View Mihaly Gyori\'s web development projects. Showcasing React applications, websites, and modern web technology implementations.'
+        ? 'Tekintse meg a Selora webfejlesztési projektjeit: React alkalmazások, weboldalak és modern web technológiák.'
+        : 'See Selora\'s web projects: React apps, websites, and modern web technologies.'
       document.title = projectsTitle
       const metaDesc = document.querySelector('meta[name="description"]')
       if (metaDesc) metaDesc.setAttribute('content', projectsDesc)
@@ -43,11 +43,11 @@ export function updateSEOForSection(sectionId, language = 'en') {
     case 'skills': {
       // Skills-specific SEO
       const skillsTitle = language === 'hu'
-        ? 'Készségek | Mihaly Gyori - React & TypeScript Fejlesztő'
-        : 'Skills | Mihaly Gyori - React & TypeScript Developer'
+        ? 'Készségek | Selora'
+        : 'Skills | Selora'
       const skillsDesc = language === 'hu'
-        ? 'Mihaly Gyori technikai készségei: React, TypeScript, JavaScript, GSAP, Tailwind CSS, Node.js, C#, Dart és modern web technológiák.'
-        : 'Mihaly Gyori\'s technical skills: React, TypeScript, JavaScript, GSAP, Tailwind CSS, Node.js, C#, Dart and modern web technologies.'
+        ? 'Selora technikai készségei: React, TypeScript, JavaScript, GSAP, Tailwind CSS, Node.js és modern web technológiák.'
+        : 'Selora\'s technical skills: React, TypeScript, JavaScript, GSAP, Tailwind CSS, Node.js, and modern web technologies.'
       document.title = skillsTitle
       const skillsMetaDesc = document.querySelector('meta[name="description"]')
       if (skillsMetaDesc) skillsMetaDesc.setAttribute('content', skillsDesc)
@@ -57,11 +57,11 @@ export function updateSEOForSection(sectionId, language = 'en') {
     case 'process': {
       // Process-specific SEO
       const processTitle = language === 'hu'
-        ? 'Munkafolyamat | Mihaly Gyori - Web Fejlesztési Folyamat'
-        : 'Process | Mihaly Gyori - Web Development Workflow'
+        ? 'Munkafolyamat | Selora'
+        : 'Process | Selora'
       const processDesc = language === 'hu'
-        ? 'Ismerje meg Mihaly Gyori átlátható web fejlesztési folyamatát: feltérképezés, tervezés, dizájn, fejlesztés, tesztelés és indítás.'
-        : 'Learn about Mihaly Gyori\'s transparent web development process: discovery, planning, design, development, testing, and launch.'
+        ? 'A Selora átlátható webfejlesztési folyamata: feltérképezés, tervezés, dizájn, fejlesztés, tesztelés és indítás.'
+        : 'Selora\'s transparent web development process: discovery, planning, design, development, testing, and launch.'
       document.title = processTitle
       const processMetaDesc = document.querySelector('meta[name="description"]')
       if (processMetaDesc) processMetaDesc.setAttribute('content', processDesc)
@@ -71,11 +71,11 @@ export function updateSEOForSection(sectionId, language = 'en') {
     case 'faq': {
       // FAQ-specific SEO
       const faqTitle = language === 'hu'
-        ? 'GYIK | Mihaly Gyori - Gyakori Kérdések'
-        : 'FAQ | Mihaly Gyori - Frequently Asked Questions'
+        ? 'GYIK | Selora'
+        : 'FAQ | Selora'
       const faqDesc = language === 'hu'
-        ? 'Gyakori kérdések Mihaly Gyori web fejlesztési szolgáltatásairól: árak, időkeretek, technológiák és munkafolyamat.'
-        : 'Frequently asked questions about Mihaly Gyori\'s web development services: pricing, timelines, technologies, and workflow.'
+        ? 'Gyakori kérdések a Selora webfejlesztési szolgáltatásairól: árak, időkeretek, technológiák és munkafolyamat.'
+        : 'Frequently asked questions about Selora\'s web development services: pricing, timelines, technologies, and workflow.'
       document.title = faqTitle
       const faqMetaDesc = document.querySelector('meta[name="description"]')
       if (faqMetaDesc) faqMetaDesc.setAttribute('content', faqDesc)

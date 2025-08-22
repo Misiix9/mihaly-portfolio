@@ -1,4 +1,4 @@
-# Mihaly Gyori — Portfolio (React + Vite)
+# Selora — Portfolio (React + Vite)
 
 Desktop‑first, animated personal portfolio built with React + Vite. Monochrome design (black/white) with rich motion: scroll reveals, parallax, micro‑interactions, particles/blobs, and optional 3D/Three.js.
 
@@ -137,4 +137,4 @@ vite.config.js
 - Keep animations cohesive and performant
 
 ## License
-Private project for Mihaly Gyori’s portfolio.
+Private project for Selora’s portfolio.

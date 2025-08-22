@@ -38,7 +38,7 @@
         "description": "Előremutató és élvonalbeli megoldások"
       }
     },
-    "title": "Győri Mihály — Portfólió",
+    "title": "Selora",
     "subtitle": "Gyors, tiszta, könnyen használható weboldalakat és alkalmazásokat készítek — végig egyenes, átlátható kommunikációval.",
     "value_proposition": "A holnap webes élményeit építem ma",
     "cta_primary": "Projekt Indítása",
@@ -454,7 +454,7 @@
 
   "footer": {
     "rights": "Minden jog fenntartva.",
-    "tagline": "Győri Mihály — Budapest • Szabadúszóként elérhető • Válasz 24–48 órán belül • Helyi idő: {{time}} • GitHub • Instagram • Email"
+    "tagline": "Selora — Budapest • Szabadúszóként elérhető • Válasz 24–48 órán belül • Helyi idő: {{time}}"
   },
 
   "common": {

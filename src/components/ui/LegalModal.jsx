@@ -49,35 +49,42 @@ export default function LegalModal({ isOpen, onClose, docKey }) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div
         ref={overlayRef}
-        className="absolute inset-0 bg-black/85 backdrop-blur-md"
+        className="absolute inset-0 bg-black/80 backdrop-blur-xl"
         onClick={onClose}
         aria-hidden
       />
-      <div
-        ref={contentRef}
-        className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl border border-white/20 bg-black/90 p-6 text-white/90 prose prose-invert prose-sm sm:prose-base"
-        onClick={(e) => e.stopPropagation()}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Legal content"
-      >
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 rounded-lg px-2 py-1 text-white/70 hover:text-white hover:bg-white/10"
-          aria-label="Close"
+      {/* Gradient border wrapper for a premium glass look */}
+      <div className="relative w-full max-w-4xl">
+        <div className="absolute -inset-0.5 rounded-3xl bg-gradient-to-br from-white/20 via-white/5 to-transparent blur opacity-60" aria-hidden />
+        <div
+          ref={contentRef}
+          className="relative max-h-[88vh] overflow-y-auto rounded-3xl border border-white/15 bg-black/70 p-6 sm:p-8 text-white/90 shadow-2xl backdrop-blur-xl prose prose-invert prose-sm sm:prose-base"
+          onClick={(e) => e.stopPropagation()}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Legal content"
         >
-          ✕
-        </button>
+          {/* Top bar accent */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-1 rounded-t-3xl bg-gradient-to-r from-white/30 via-white/10 to-white/30" aria-hidden />
 
-        {loading && <p>Loading…</p>}
-        {error && <p className="text-red-400">{error}</p>}
-        {!loading && !error && (
-          <article>
-            {/* Render markdown safely by converting simple line breaks */}
-            {/* For simplicity, we allow basic markdown via a minimal parser */}
-            <Markdown text={content} />
-          </article>
-        )}
+          <button
+            onClick={onClose}
+            className="absolute top-3 right-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-white/80 hover:text-white hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+
+          {loading && <p>Loading…</p>}
+          {error && <p className="text-red-400">{error}</p>}
+          {!loading && !error && (
+            <article className="max-w-none">
+              {/* Render markdown safely by converting simple line breaks */}
+              {/* For simplicity, we allow basic markdown via a minimal parser */}
+              <Markdown text={content} />
+            </article>
+          )}
+        </div>
       </div>
     </div>
   )

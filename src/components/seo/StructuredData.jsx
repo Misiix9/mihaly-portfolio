@@ -10,8 +10,8 @@ export default function StructuredData() {
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Mihály Győri",
-    "alternateName": "Misi Győri",
+    "name": "Selora",
+    "alternateName": "Selora",
     "url": baseUrl,
     "image": `${baseUrl}/og-image.svg`,
     "sameAs": [
@@ -19,7 +19,7 @@ export default function StructuredData() {
       "https://instagram.com/gyr.misi",
       "https://linkedin.com/in/mihaly-gyori"
     ],
-    "jobTitle": currentLang === 'hu' ? "Frontend Fejlesztő & Digitális Alkotó" : "Frontend Developer & Digital Craftsman",
+    "jobTitle": currentLang === 'hu' ? "Frontend Fejlesztő & Digitális Stúdió" : "Frontend Developer & Digital Studio",
     "worksFor": {
       "@type": "Organization",
       "name": "Freelance",
@@ -35,7 +35,7 @@ export default function StructuredData() {
       "Web Performance",
       "SEO Optimization"
     ],
-    "email": "mihalygyori05@gmail.com",
+    "email": "hi@selora.dev",
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "HU",
@@ -43,14 +43,14 @@ export default function StructuredData() {
     },
     "description": currentLang === 'hu' 
       ? "Kreatív frontend fejlesztő, aki modern technológiákkal építi a jövő webes élményeit."
-      : "Creative frontend developer crafting the future of web experiences with modern technologies."
+      : "Creative frontend studio crafting the future of web experiences with modern technologies."
   }
 
   // Organization Schema for Freelance Work
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Mihály Győri - Frontend Development",
+    "name": "Selora - Frontend Development",
     "alternateName": "MG Dev",
     "url": baseUrl,
     "logo": `${baseUrl}/og-image.svg`,
@@ -60,7 +60,7 @@ export default function StructuredData() {
       : "Professional frontend development services with modern technologies.",
     "founder": {
       "@type": "Person",
-      "name": "Mihály Győri"
+      "name": "Selora"
     },
     "foundingDate": "2023",
     "address": {
@@ -69,7 +69,7 @@ export default function StructuredData() {
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "email": "mihalygyori05@gmail.com",
+      "email": "hi@selora.dev",
       "contactType": "customer service",
       "availableLanguage": ["Hungarian", "English"]
     },
@@ -102,19 +102,19 @@ export default function StructuredData() {
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Mihály Győri - Frontend Developer Portfolio",
+    "name": "Selora - Frontend Developer Portfolio",
     "alternateName": "MG Dev Portfolio",
     "url": baseUrl,
     "description": currentLang === 'hu'
-      ? "Mihály Győri frontend fejlesztő portfóliója - Modern webes élmények és alkalmazások."
-      : "Mihály Győri frontend developer portfolio - Modern web experiences and applications.",
+      ? "Selora frontend fejlesztő portfólió - Modern webes élmények és alkalmazások."
+      : "Selora frontend developer portfolio - Modern web experiences and applications.",
     "author": {
       "@type": "Person",
-      "name": "Mihály Győri"
+      "name": "Selora"
     },
     "publisher": {
       "@type": "Organization", 
-      "name": "Mihály Győri - Frontend Development"
+      "name": "Selora - Frontend Development"
     },
     "potentialAction": {
       "@type": "SearchAction",

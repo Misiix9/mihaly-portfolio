@@ -11,6 +11,6 @@
 - Services are non‑returnable; issues are handled via the warranty/support provisions in the Terms of Service.
 
 ## How To Request
-- Email hello@selora.dev with your project reference and details.
+- Email hi@selora.dev with your project reference and details.
 
 _Last updated: 2025-08-22_

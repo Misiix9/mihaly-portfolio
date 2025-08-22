@@ -15,7 +15,7 @@ export function setMeta({
   description,
   url,
   type = 'website',
-  siteName = 'Mihaly Gyori — Portfolio',
+  siteName = 'Selora',
   image,
   locale = 'en',
   twitterCard = 'summary_large_image',
@@ -83,27 +83,22 @@ export function setMeta({
 }
 
 export function setDefaultSiteMeta() {
-  const title = 'Mihaly Gyori | Web Developer & React Specialist in Budapest'
-  const description = 'Professional web developer in Budapest specializing in React, TypeScript, and modern web applications. Fast, clean, and accessible websites for startups and businesses. Available for freelance projects.'
+  const title = 'Selora | Web Development'
+  const description = 'Professional web development: React, TypeScript, performance-focused, accessible, and clean. Fast delivery for startups and businesses.'
   setMeta({
     title,
     description,
     image: '/og-image.svg',
     twitterCard: 'summary_large_image',
     keywords: [
-      'Mihaly Gyori',
-      'Győri Mihály',
-      'web developer Budapest',
-      'React developer Hungary',
-      'TypeScript developer',
-      'freelance web developer',
-      'website development',
-      'web application development',
-      'frontend developer',
-      'JavaScript developer',
-      'portfolio website',
-      'Budapest developer',
-      'Hungarian web developer'
+      'Selora',
+      'web development',
+      'React',
+      'TypeScript',
+      'frontend',
+      'performance',
+      'accessibility',
+      'Budapest'
     ],
   })
 }
@@ -111,15 +106,15 @@ export function setDefaultSiteMeta() {
 // Section-specific SEO helpers
 export function setAboutSectionMeta() {
   setMeta({
-    title: 'About Mihaly Gyori | Web Developer Profile & Experience',
-    description: 'Learn about Mihaly Gyori, a passionate web developer from Budapest specializing in React, TypeScript, and modern web technologies. Student developer with professional project experience.',
-    keywords: ['about Mihaly Gyori', 'web developer background', 'React developer experience', 'Budapest developer profile']
+    title: 'About Selora | Web Development Profile',
+    description: 'About Selora: React and TypeScript-focused web development. Clean, fast, and accessible websites and apps.',
+    keywords: ['Selora', 'web development profile', 'React', 'TypeScript']
   })
 }
 
 export function setServicesSectionMeta() {
   setMeta({
-    title: 'Web Development Services | Mihaly Gyori - React & TypeScript',
+    title: 'Web Development Services | Selora',
     description: 'Professional web development services in Budapest. Website development, React applications, e-commerce, redesign, and maintenance. Clear pricing from €200-1500. Fast delivery.',
     keywords: ['web development services', 'React development Budapest', 'website development Hungary', 'freelance web developer', 'web application development']
   })
@@ -127,8 +122,8 @@ export function setServicesSectionMeta() {
 
 export function setContactSectionMeta() {
   setMeta({
-    title: 'Contact Mihaly Gyori | Hire Web Developer in Budapest',
-    description: 'Get in touch with Mihaly Gyori for your web development project. Based in Budapest, available for freelance work. 24-48 hour response time. GitHub, Instagram, Email contact.',
+    title: 'Contact Selora | Web Development in Budapest',
+    description: 'Get in touch with Selora for your web development project. Based in Budapest, available for freelance work. 24-48 hour response time. GitHub, Instagram, Email contact.',
     keywords: ['contact web developer', 'hire React developer Budapest', 'freelance web developer Hungary', 'web development contact']
   })
 }

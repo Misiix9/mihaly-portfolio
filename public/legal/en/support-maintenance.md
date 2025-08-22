@@ -16,6 +16,6 @@
 - New features, third‑party outages, content entry, and major redesigns are outside maintenance unless included in your plan.
 
 ## Contact
-- Support requests: hello@selora.dev
+- Support requests: hi@selora.dev
 
 _Last updated: 2025-08-22_

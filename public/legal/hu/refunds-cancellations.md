@@ -11,6 +11,6 @@
 - A szolgáltatás jellegéből adódóan nem „visszaváltható”; a problémákat a garancia/támogatás szabályai szerint kezeljük.
 
 ## Kérelem módja
-- E‑mail: hello@selora.dev (projekt azonosítóval és részletekkel)
+- E‑mail: hi@selora.dev (projekt azonosítóval és részletekkel)
 
 _Utolsó frissítés: 2025-08-22_

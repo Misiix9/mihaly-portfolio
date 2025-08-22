@@ -1,12 +1,10 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+// No i18n needed for aria here; brand is language-agnostic
 import LogoSrc from '../../assets/icons/Logo.svg';
 
 // Navbar Logo component that renders the provided SVG file
 export default function Logo({ className = '', size = 120, alt, ...props }) {
-  const { i18n } = useTranslation();
-  const isHu = i18n.language?.slice(0, 2) === 'hu';
-  const aria = alt || (isHu ? 'Győri Mihály — Logo' : 'Mihaly Gyori — Logo');
+  const aria = alt || 'Selora — Logo';
 
   return (
     <img

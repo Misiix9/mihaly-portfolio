@@ -17,11 +17,11 @@ export default function SEOHead({
   const seoContent = {
     en: {
       home: {
-        title: 'Mihály Győri - Frontend Developer & Digital Craftsman',
+        title: 'Selora - Frontend Developer & Digital Studio',
         description: 'Creative frontend developer crafting exceptional web experiences with React, Vue.js, and modern technologies. Available for freelance projects and collaborations.'
       },
       about: {
-        title: 'About Mihály Győri - Frontend Developer & Designer',
+        title: 'About Selora - Frontend Developer & Designer',
         description: 'Learn about my journey as a frontend developer, my passion for clean code, and my commitment to creating user-centered digital experiences.'
       },
       skills: {
@@ -33,17 +33,17 @@ export default function SEOHead({
         description: 'Discover my latest frontend development projects, including web applications, UI/UX designs, and innovative digital solutions.'
       },
       contact: {
-        title: 'Contact Mihály Győri - Hire a Frontend Developer',
+        title: 'Contact Selora - Hire a Frontend Developer',
         description: 'Ready to start your next project? Get in touch with me for frontend development, UI/UX design, and web application consulting.'
       }
     },
     hu: {
       home: {
-        title: 'Győri Mihály - Frontend Fejlesztő & Digitális Alkotó',
+        title: 'Selora - Frontend Fejlesztő & Digitális Stúdió',
         description: 'Kreatív frontend fejlesztő, aki kivételes webes élményeket alkot React, Vue.js és modern technológiákkal. Elérhető szabadúszó projektekhez.'
       },
       about: {
-        title: 'Rólam - Győri Mihály Frontend Fejlesztő & Tervező',
+        title: 'Rólam - Selora Frontend Fejlesztő & Tervező',
         description: 'Ismerje meg utamat frontend fejlesztőként, a tiszta kód iránti szenvedélyemet és elkötelezettségemet a felhasználó-központú digitális élmények iránt.'
       },
       skills: {
@@ -55,7 +55,7 @@ export default function SEOHead({
         description: 'Tekintse meg legújabb frontend fejlesztési projektjeimet, beleértve webalkalmazásokat, UI/UX tervezéseket és innovatív digitális megoldásokat.'
       },
       contact: {
-        title: 'Kapcsolat - Győri Mihály Frontend Fejlesztő Felvétele',
+        title: 'Kapcsolat - Selora Frontend Fejlesztő Felvétele',
         description: 'Készen áll a következő projektjére? Vegye fel velem a kapcsolatot frontend fejlesztés, UI/UX tervezés és webalkalmazás tanácsadás ügyében.'
       }
     }
@@ -105,10 +105,10 @@ export default function SEOHead({
     // Basic meta tags
     updateMeta('description', finalDescription)
     updateMeta('keywords', currentLang === 'hu' 
-      ? "frontend fejlesztő, webfejlesztő, React fejlesztő, Vue.js fejlesztő, UI/UX tervező, JavaScript, TypeScript, Győri Mihály, magyar fejlesztő"
-      : "frontend developer, web developer, React developer, Vue.js developer, UI/UX designer, JavaScript, TypeScript, Mihály Győri, Hungarian developer"
+      ? "frontend fejlesztő, webfejlesztő, React fejlesztő, Vue.js fejlesztő, UI/UX tervező, JavaScript, TypeScript, magyar fejlesztő"
+      : "frontend developer, web developer, React developer, Vue.js developer, UI/UX designer, JavaScript, TypeScript, Hungarian developer"
     )
-    updateMeta('author', 'Mihály Győri')
+    updateMeta('author', 'Selora')
     updateMeta('robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1')
     updateMeta('language', currentLang)
     updateMeta('geo.region', 'HU')
@@ -120,10 +120,10 @@ export default function SEOHead({
     updateMeta('og:description', finalDescription, true)
     updateMeta('og:image', fullImageUrl, true)
     updateMeta('og:image:alt', currentLang === 'hu' 
-      ? "Győri Mihály Frontend Fejlesztő Portfólió"
-      : "Mihály Győri Frontend Developer Portfolio", true)
+      ? "Selora Frontend Fejlesztő Portfólió"
+      : "Selora Frontend Developer Portfolio", true)
     updateMeta('og:url', canonicalUrl, true)
-    updateMeta('og:site_name', 'Mihály Győri Portfolio', true)
+    updateMeta('og:site_name', 'Selora', true)
     updateMeta('og:locale', currentLang === 'hu' ? 'hu_HU' : 'en_US', true)
 
     // Twitter Card tags
@@ -132,15 +132,15 @@ export default function SEOHead({
     updateMeta('twitter:description', finalDescription)
     updateMeta('twitter:image', fullImageUrl)
     updateMeta('twitter:image:alt', currentLang === 'hu' 
-      ? "Győri Mihály Frontend Fejlesztő Portfólió"
-      : "Mihály Győri Frontend Developer Portfolio")
+      ? "Selora Frontend Fejlesztő Portfólió"
+      : "Selora Frontend Developer Portfolio")
     updateMeta('twitter:creator', '@gyr_misi')
     updateMeta('twitter:site', '@gyr_misi')
 
     // Theme and application
     updateMeta('theme-color', '#000000')
     updateMeta('msapplication-TileColor', '#000000')
-    updateMeta('application-name', 'Mihály Győri Portfolio')
+    updateMeta('application-name', 'Selora')
 
     // Canonical and alternate URLs
     updateLink('canonical', canonicalUrl)

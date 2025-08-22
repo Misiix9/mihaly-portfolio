@@ -137,10 +137,10 @@ export function setBreadcrumbSchema(items) {
 export function initPortfolioSchema() {
   // Enhanced person schema
   setPersonSchema({
-    name: 'Mihaly Gyori',
-    alternateName: 'Győri Mihály',
+    name: 'Selora',
+    alternateName: undefined,
     jobTitle: 'Web Developer',
-    email: 'mihalygyori05@gmail.com',
+    email: 'hi@selora.dev',
     url: 'https://selora.dev',
     image: 'https://selora.dev/og-image.svg',
     sameAs: [
@@ -172,17 +172,17 @@ export function initPortfolioSchema() {
 
   // Website schema
   setWebsiteSchema({
-    name: 'Mihaly Gyori Portfolio',
+    name: 'Selora',
     url: 'https://selora.dev',
     description: 'Professional web developer portfolio showcasing React, TypeScript, and modern web development projects.',
-    author: 'Mihaly Gyori'
+    author: 'Selora'
   })
 
   // Professional service schema
   setProfessionalServiceSchema({
     name: 'Web Development Services',
     description: 'Professional web development services including React applications, websites, e-commerce, and maintenance.',
-    provider: 'Mihaly Gyori',
+    provider: 'Selora',
     serviceType: 'Web Development',
     offers: [
       {

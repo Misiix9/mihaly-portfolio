@@ -1,6 +1,6 @@
 # Általános Szerződési Feltételek
 
-Jelen feltételek a Győri Mihály ("Szolgáltató") által nyújtott web- és szoftverfejlesztési szolgáltatásokra vonatkoznak.
+Jelen feltételek a Selora ("Szolgáltató") által nyújtott web- és szoftverfejlesztési szolgáltatásokra vonatkoznak.
 
 ## Terjedelem és teljesítések
 - Szolgáltatások: tervezés, fejlesztés, integráció, élesítés.

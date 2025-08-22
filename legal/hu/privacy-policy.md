@@ -1,6 +1,6 @@
 # Adatvédelmi Tájékoztató (GDPR)
 
-**Adatkezelő**: Győri Mihály, Budapest, Magyarország, hello@selora.dev
+**Adatkezelő**: Selora, Budapest, Magyarország, hi@selora.dev
 
 **Célok és jogalapok**
 - Kapcsolatfelvétel, ajánlatkérés (hozzájárulás / szerződés teljesítése)
@@ -23,7 +23,7 @@
 - Analitika: GA beállítások szerint
 
 **Érintetti jogok**
-Hozzáférés, helyesbítés, törlés, korlátozás, hordozhatóság, tiltakozás; panasz: NAIH. Kapcsolat: hello@selora.dev
+Hozzáférés, helyesbítés, törlés, korlátozás, hordozhatóság, tiltakozás; panasz: NAIH. Kapcsolat: hi@selora.dev
 
 **Nemzetközi adattovábbítás**
 USA szolgáltatók esetén (pl. Google) megfelelő garanciák (SCC, EU–US Data Privacy Framework).

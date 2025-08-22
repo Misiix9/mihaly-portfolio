@@ -1,6 +1,6 @@
 # Terms of Service
 
-These Terms govern website and software projects provided by Mihaly Gyori ("Provider").
+These Terms govern website and software projects provided by Selora ("Provider").
 
 ## Scope & Deliverables
 - Services: design, development, integration, deployment.

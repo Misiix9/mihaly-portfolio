@@ -16,6 +16,6 @@
 - Új funkciók, harmadik fél szolgáltatáskiesései, tartalomfeltöltés, nagyobb újratervezés – nem része, kivéve ha a csomag tartalmazza.
 
 ## Kapcsolat
-- Támogatás: hello@selora.dev
+- Támogatás: hi@selora.dev
 
 _Utolsó frissítés: 2025-08-22_

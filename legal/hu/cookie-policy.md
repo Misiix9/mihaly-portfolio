@@ -17,6 +17,6 @@ Az oldal sütiket és hasonló technológiákat használ.
 - A tárolási idők szolgáltatónként eltérnek; lásd a Google GA dokumentációját.
 
 **Kapcsolat**
-Kérdés esetén: hello@selora.dev
+Kérdés esetén: hi@selora.dev
 
 _Utolsó frissítés: 2025-08-22_

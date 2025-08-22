@@ -17,6 +17,6 @@ This site uses cookies and similar technologies.
 - Storage durations depend on the provider; see Google’s documentation for GA.
 
 **Contact**
-Questions: hello@selora.dev
+Questions: hi@selora.dev
 
 _Last updated: 2025-08-22_

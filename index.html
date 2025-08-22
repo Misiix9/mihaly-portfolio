@@ -56,18 +56,16 @@
     <link rel="alternate" hreflang="x-default" href="https://selora.dev/" />
     
     <!-- Font preloading for optimal performance -->
-    <link rel="preload" href="/fonts/lexend-400.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="/fonts/lexend-500.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="/fonts/lexend-600.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/lexend-400.ttf" as="font" crossorigin>
+    <link rel="preload" href="/fonts/lexend-500.ttf" as="font" crossorigin>
+    <link rel="preload" href="/fonts/lexend-600.ttf" as="font" crossorigin>
     
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://www.google-analytics.com">
     
     <!-- Security Headers -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <!-- NOTE: Security headers (X-Content-Type-Options, X-Frame-Options, X-XSS-Protection) must be set by the server via HTTP response headers. -->
     
     <!-- Performance Hints -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">

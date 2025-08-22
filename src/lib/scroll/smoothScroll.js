@@ -10,7 +10,9 @@ function raf(time) {
 }
 
 function onAnchorClick(e) {
-  const target = e.target.closest('a[href^="#"]')
+  const t = e.target
+  if (!(t instanceof Element)) return
+  const target = t.closest('a[href^="#"]')
   if (!target) return
   const href = target.getAttribute('href')
   if (!href || href === '#' || href.length < 2) return

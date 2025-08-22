@@ -149,9 +149,7 @@ export function initDynamicSEO() {
 // Performance optimization: preload critical images
 export function preloadCriticalImages() {
   const criticalImages = [
-    '/og-image.svg',
-    '/Icon_Only.svg',
-    // Add any hero section images here
+    // Add runtime-visible hero/above-the-fold images here if needed, e.g. '/images/hero.webp'
   ]
 
   criticalImages.forEach(src => {

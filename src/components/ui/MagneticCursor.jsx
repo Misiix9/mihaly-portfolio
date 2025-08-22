@@ -36,7 +36,9 @@ const MagneticCursor = () => {
 
     // Magnetic effect for interactive elements
     const handleMouseEnter = (e) => {
-      const target = e.target.closest('[data-magnetic]');
+      const t = e.target;
+      if (!(t instanceof Element)) return;
+      const target = t.closest('[data-magnetic]');
       if (!target) return;
 
       setCursorText(target.dataset.cursorText || '');
@@ -70,7 +72,9 @@ const MagneticCursor = () => {
     };
 
     const handleMouseLeave = (e) => {
-      const target = e.target.closest('[data-magnetic]');
+      const t = e.target;
+      if (!(t instanceof Element)) return;
+      const target = t.closest('[data-magnetic]');
       if (!target) return;
 
       setCursorText('');

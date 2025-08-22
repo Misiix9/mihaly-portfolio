@@ -1,76 +1,49 @@
-# React + Vite
+# Mihaly Gyori — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live: https://selora.dev
 
-Currently, two official plugins are available:
+Fast, clean, bilingual (EN/HU) portfolio showcasing my work as a web and desktop developer student from Budapest. Built with React and modern tooling, rich in motion and interactivity while staying performant and accessible.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Value
+- **Clarity & Communication** — simple copy, fast replies (24–48h)
+- **Speed & Performance** — optimized loading, caching, Core Web Vitals
+- **Clean Implementation** — accessible, SEO‑ready, i18n, analytics
+- **Typical Timeline** — 2–4 weeks per project
 
-## Expanding the ESLint configuration
+## Highlights
+- **Animations & Interactions** — GSAP micro‑interactions, parallax, magnetic cursor, smooth scrolling
+- **Visuals** — optional 3D/Three.js sections and subtle effects
+- **Bilingual** — English/Hungarian with language switch and detection
+- **Accessibility** — sensible semantics, keyboard focus, reduced‑motion handling
+- **SEO** — dynamic meta, Open Graph/Twitter, JSON‑LD schema
+- **Analytics** — Google Analytics 4 (page/vitals reporting)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech
+- React + Vite
+- GSAP, Lenis (scroll), optional Three.js
+- Tailwind/CSS for styling
+- i18n (EN/HU), SEO utilities
+- Tooling: ESLint, Prettier
 
-## Deployment (GitHub Pages — manual)
+## Performance
+- Preload critical resources; cache‑busted assets with long‑lived caching
+- Critical CSS injection for fast first paint
+- Core Web Vitals optimizations (CLS/LCP/FCP)
 
-This project is configured for a GitHub Pages project site under:
+## Contact
+- GitHub: https://github.com/Misiix9
+- Instagram: https://instagram.com/misiix9
+- Email: hi@selora.dev
+- Location: Budapest (site displays current local time)
 
-- https://Misiix9.github.io/mihaly-portfolio/
+## Projects
+I’m adding current work and case studies. Agencies, startups, SMEs — feel free to reach out.
 
-Vite base is already set in `vite.config.js`:
+## Services
+- Websites & Landing Pages
+- React Frontends & UI Components
+- Performance, Accessibility, SEO
+- Integrations (analytics, forms, headless CMS)
 
-```js
-// vite.config.js
-export default defineConfig({
-  base: '/mihaly-portfolio/',
-})
-```
-
-We also include an SPA fallback at `public/404.html` so deep links work when hosted on Pages.
-
-### Steps
-
-1) Install deps and build
-
-```bash
-npm install
-npm run build
-```
-
-2) Publish `dist/` to a `gh-pages` branch (option A: git subtree)
-
-```bash
-git add -f dist
-git commit -m "build: publish dist"
-git subtree push --prefix dist origin gh-pages
-```
-
-If `git subtree` isn’t available or you prefer a clean branch (option B):
-
-```bash
-git checkout --orphan gh-pages
-git reset --hard
-git commit --allow-empty -m "Initialize gh-pages"
-git checkout main
-npm run build
-git checkout gh-pages
-cp -R dist/* .
-git add .
-git commit -m "Deploy"
-git push -u origin gh-pages
-git checkout main
-```
-
-3) GitHub Pages settings
-
-- Repository → Settings → Pages
-- Source: Deploy from a branch
-- Branch: `gh-pages` • Folder: `/ (root)` → Save
-
-Within a minute or two, your site should be live at:
-
-- https://Misiix9.github.io/mihaly-portfolio/
-
-### Custom domain (later)
-
-When you have a custom domain, add it in the Pages settings and create a `CNAME` DNS record pointing to GitHub Pages. Then you can remove or adjust the `base` in `vite.config.js` to `'/'` and update internal URLs if needed.
+## License
+Copyright © Mihaly Gyori. All rights reserved.

@@ -38,6 +38,7 @@ const MagneticCursor = () => {
     const handleMouseEnter = (e) => {
       const t = e.target;
       if (!(t instanceof Element)) return;
+      if (!t.closest) return;
       const target = t.closest('[data-magnetic]');
       if (!target) return;
 

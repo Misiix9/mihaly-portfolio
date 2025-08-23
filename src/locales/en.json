@@ -287,7 +287,7 @@
           "Advanced Lighthouse optimizations achieving 95+ scores",
           "TypeScript integration for type safety and developer experience"
         ],
-        "image": "/src/assets/img/Footify.png",
+        "image": "/screenshots/footify-hero.png",
         "gallery": [
           "/src/assets/img/Footify.png",
           "/src/assets/img/footify-1.svg",
@@ -344,7 +344,7 @@
           "Comprehensive SEO implementation with JSON-LD",
           "Web Vitals optimization achieving excellent scores"
         ],
-        "image": "/screenshots/portfolio-hero.jpg",
+        "image": "",
         "gallery": [
           "/screenshots/portfolio-desktop.jpg",
           "/screenshots/portfolio-mobile.jpg",

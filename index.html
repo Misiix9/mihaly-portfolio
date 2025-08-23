@@ -21,8 +21,16 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <!-- Favicon and Icons -->
-    <link rel="icon" type="image/svg+xml" href="/Icon_Only.svg" />
-    <link rel="apple-touch-icon" href="/Icon_Only.svg">
+    <!-- Primary favicon for most browsers -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <!-- PNG fallbacks/specific sizes -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <!-- Apple touch icon (iOS does not support SVG here) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <!-- SVG icon as an additional fallback (supported in many browsers) -->
+    <link rel="icon" type="image/svg+xml" href="/Icon_Only.svg">
+    <!-- Safari pinned tab -->
     <link rel="mask-icon" href="/Icon_Only.svg" color="#000000">
     
     <!-- Theme and Color -->

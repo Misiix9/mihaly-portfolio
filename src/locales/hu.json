@@ -267,7 +267,7 @@
           "Gördülékeny animációk implementálása"
         ],
         "solution": "React és Vite segítségével építve az optimális teljesítményért, élő futball API-k integrálásával, és reszponzív dizájn minták implementálásával Tailwind CSS-sel.",
-        "image": "/src/assets/img/Footify.png",
+        "image": "/screenshots/footify-hero.png",
         "gallery": [
           "/src/assets/img/Footify.png",
           "/src/assets/img/footify-1.svg",

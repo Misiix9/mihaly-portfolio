@@ -4,15 +4,41 @@
 User-agent: *
 Allow: /
 
-# Important pages
-Allow: /index.html
-Allow: /hu/
-Allow: /en/
+# Disallow sensitive development files and directories
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /.vscode/
+Disallow: /.env*
+Disallow: /package*.json
+Disallow: /vite.config.js
+Disallow: /tailwind.config.js
+Disallow: /postcss.config.js
+Disallow: /eslint.config.js
+Disallow: /.browserslistrc
+Disallow: /.gitignore
+Disallow: /README*.md
+Disallow: /audit-performance.sh
+Disallow: /ENV.md
+Disallow: /env.template
+Disallow: /IMPROVEMENTS.md
 
-# Assets and resources
-Allow: /assets/
-Allow: /fonts/
-Allow: /images/
+# Disallow temporary and backup files
+Disallow: /*~
+Disallow: /*.tmp
+Disallow: /*.bak
+Disallow: /*.backup
+Disallow: /*.old
+
+# Disallow query parameter variations that don't add value
+Disallow: /*?*utm_*
+Disallow: /*?*sessionid*
+Disallow: /*?*sid*
+
+# Allow important assets and pages
+Allow: /legal/
+Allow: /screenshots/
 Allow: /*.css
 Allow: /*.js
 Allow: /*.svg
@@ -20,22 +46,42 @@ Allow: /*.png
 Allow: /*.jpg
 Allow: /*.jpeg
 Allow: /*.webp
+Allow: /*.ico
+Allow: /*.woff*
+Allow: /*.ttf
+Allow: /*.eot
 
-# Disallow development and config files
-Disallow: /node_modules/
-Disallow: /src/
-Disallow: /.git/
-Disallow: /.vscode/
-Disallow: /package*.json
-Disallow: /vite.config.js
-Disallow: /tailwind.config.js
-Disallow: /postcss.config.js
-Disallow: /eslint.config.js
+# Specific bot configurations
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Block problematic bots (optional - uncomment if needed)
+# User-agent: AhrefsBot
+# Disallow: /
+# User-agent: MJ12bot
+# Disallow: /
+# User-agent: DotBot
+# Disallow: /
 
 # Sitemap location
 Sitemap: https://selora.dev/sitemap.xml
 
-# Crawl delay (optional, good for server performance)
-Crawl-delay: 1
+# Host specification (helps with canonical domain)
+Host: https://selora.dev
 
-# Note: Caching must be configured via HTTP response headers, not robots.txt directives
+# Crawl delay for general bots (1 second is reasonable)
+Crawl-delay: 1

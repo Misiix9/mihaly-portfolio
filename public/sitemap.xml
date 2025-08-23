@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <!-- Homepage - Default English -->
   <url>
     <loc>https://selora.dev/</loc>
     <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/hu/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://selora.dev/" />
-    <lastmod>2025-08-21</lastmod>
+    <lastmod>2025-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <!-- Associated images/icons -->
+    <image:image>
+      <image:loc>https://selora.dev/og-image.svg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://selora.dev/Icon_Only.svg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://selora.dev/Short_Logo.svg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://selora.dev/favicon.svg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://selora.dev/screenshots/footify-hero.png</image:loc>
+    </image:image>
   </url>
 
   <!-- Homepage - Hungarian -->
@@ -18,9 +35,25 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/" />
     <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/hu/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://selora.dev/" />
-    <lastmod>2025-08-21</lastmod>
+    <lastmod>2025-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <!-- Associated images/icons -->
+    <image:image>
+      <image:loc>https://selora.dev/og-image.svg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://selora.dev/Icon_Only.svg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://selora.dev/Short_Logo.svg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://selora.dev/favicon.svg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://selora.dev/screenshots/footify-hero.png</image:loc>
+    </image:image>
   </url>
 
   <!-- Legal Pages - English/Hungarian (with hreflang alternates) -->
@@ -28,7 +61,7 @@
     <loc>https://selora.dev/legal/en/legal-notice.md</loc>
     <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/legal-notice.md" />
     <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/legal-notice.md" />
-    <lastmod>2025-08-22</lastmod>
+    <lastmod>2025-08-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -36,7 +69,7 @@
     <loc>https://selora.dev/legal/hu/legal-notice.md</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/legal-notice.md" />
     <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/legal-notice.md" />
-    <lastmod>2025-08-22</lastmod>
+    <lastmod>2025-08-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -45,7 +78,7 @@
     <loc>https://selora.dev/legal/en/privacy-policy.md</loc>
     <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/privacy-policy.md" />
     <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/privacy-policy.md" />
-    <lastmod>2025-08-22</lastmod>
+    <lastmod>2025-08-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -53,7 +86,7 @@
     <loc>https://selora.dev/legal/hu/privacy-policy.md</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/privacy-policy.md" />
     <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/privacy-policy.md" />
-    <lastmod>2025-08-22</lastmod>
+    <lastmod>2025-08-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -62,7 +95,7 @@
     <loc>https://selora.dev/legal/en/terms-of-service.md</loc>
     <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/terms-of-service.md" />
     <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/terms-of-service.md" />
-    <lastmod>2025-08-22</lastmod>
+    <lastmod>2025-08-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -70,7 +103,7 @@
     <loc>https://selora.dev/legal/hu/terms-of-service.md</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/terms-of-service.md" />
     <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/terms-of-service.md" />
-    <lastmod>2025-08-22</lastmod>
+    <lastmod>2025-08-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -79,7 +112,7 @@
     <loc>https://selora.dev/legal/en/cookie-policy.md</loc>
     <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/cookie-policy.md" />
     <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/cookie-policy.md" />
-    <lastmod>2025-08-22</lastmod>
+    <lastmod>2025-08-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -87,7 +120,7 @@
     <loc>https://selora.dev/legal/hu/cookie-policy.md</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/cookie-policy.md" />
     <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/cookie-policy.md" />
-    <lastmod>2025-08-22</lastmod>
+    <lastmod>2025-08-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -96,7 +129,7 @@
     <loc>https://selora.dev/legal/en/refunds-cancellations.md</loc>
     <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/refunds-cancellations.md" />
     <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/refunds-cancellations.md" />
-    <lastmod>2025-08-22</lastmod>
+    <lastmod>2025-08-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -104,7 +137,7 @@
     <loc>https://selora.dev/legal/hu/refunds-cancellations.md</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/refunds-cancellations.md" />
     <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/refunds-cancellations.md" />
-    <lastmod>2025-08-22</lastmod>
+    <lastmod>2025-08-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -113,7 +146,7 @@
     <loc>https://selora.dev/legal/en/support-maintenance.md</loc>
     <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/support-maintenance.md" />
     <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/support-maintenance.md" />
-    <lastmod>2025-08-22</lastmod>
+    <lastmod>2025-08-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -121,7 +154,7 @@
     <loc>https://selora.dev/legal/hu/support-maintenance.md</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/legal/en/support-maintenance.md" />
     <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/legal/hu/support-maintenance.md" />
-    <lastmod>2025-08-22</lastmod>
+    <lastmod>2025-08-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -130,7 +163,7 @@
     <loc>https://selora.dev/#about</loc>
     <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/hu/#about" />
     <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/#about" />
-    <lastmod>2025-08-21</lastmod>
+    <lastmod>2025-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -140,7 +173,7 @@
     <loc>https://selora.dev/hu/#about</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://selora.dev/#about" />
     <xhtml:link rel="alternate" hreflang="hu" href="https://selora.dev/hu/#about" />
-    <lastmod>2025-08-21</lastmod>
+    <lastmod>2025-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -323,5 +356,36 @@
     <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <!-- Static assets (icons/images) as separate URLs -->
+  <url>
+    <loc>https://selora.dev/og-image.svg</loc>
+    <lastmod>2025-08-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://selora.dev/Icon_Only.svg</loc>
+    <lastmod>2025-08-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://selora.dev/Short_Logo.svg</loc>
+    <lastmod>2025-08-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://selora.dev/favicon.svg</loc>
+    <lastmod>2025-08-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://selora.dev/screenshots/footify-hero.png</loc>
+    <lastmod>2025-08-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
   </url>
 </urlset>

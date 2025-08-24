@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     
     <!-- Primary Meta Tags -->
-    <title>Mihaly Gyori | Web Developer & React Specialist in Budapest</title>
-    <meta name="title" content="Mihaly Gyori | Web Developer & React Specialist in Budapest">
+    <title>Selora | Web Development</title>
+    <meta name="title" content="Selora | Web Development">
     <meta name="description" content="Professional web developer in Budapest specializing in React, TypeScript, and modern web applications. Fast, clean, and accessible websites for startups and businesses. Available for freelance projects.">
-    <meta name="keywords" content="Mihaly Gyori, Győri Mihály, web developer Budapest, React developer Hungary, TypeScript developer, freelance web developer, website development, web application development, frontend developer, JavaScript developer, portfolio website, Budapest developer, Hungarian web developer">
-    <meta name="author" content="Mihaly Gyori">
+    <meta name="keywords" content="Selora, web development, React, TypeScript, Budapest, frontend developer, websites, web applications, performance, accessibility">
+    <meta name="author" content="Selora">
     <meta name="robots" content="index, follow">
     <meta name="language" content="English">
     <meta name="revisit-after" content="7 days">
@@ -21,8 +21,16 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <!-- Favicon and Icons -->
-    <link rel="icon" type="image/svg+xml" href="/Icon_Only.svg" />
-    <link rel="apple-touch-icon" href="/Icon_Only.svg">
+    <!-- Primary favicon for most browsers -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <!-- PNG fallbacks/specific sizes -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <!-- Apple touch icon (iOS does not support SVG here) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <!-- SVG icon as an additional fallback (supported in many browsers) -->
+    <link rel="icon" type="image/svg+xml" href="/Icon_Only.svg">
+    <!-- Safari pinned tab -->
     <link rel="mask-icon" href="/Icon_Only.svg" color="#000000">
     
     <!-- Theme and Color -->
@@ -35,17 +43,17 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://selora.dev/">
-    <meta property="og:title" content="Mihaly Gyori | Web Developer & React Specialist in Budapest">
+    <meta property="og:title" content="Selora | Web Development">
     <meta property="og:description" content="Professional web developer in Budapest specializing in React, TypeScript, and modern web applications. Fast, clean, and accessible websites for startups and businesses.">
     <meta property="og:image" content="https://selora.dev/og-image.svg">
-    <meta property="og:site_name" content="Mihaly Gyori Portfolio">
+    <meta property="og:site_name" content="Selora">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="hu_HU">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://selora.dev/">
-    <meta property="twitter:title" content="Mihaly Gyori | Web Developer & React Specialist in Budapest">
+    <meta property="twitter:title" content="Selora | Web Development">
     <meta property="twitter:description" content="Professional web developer in Budapest specializing in React, TypeScript, and modern web applications. Fast, clean, and accessible websites for startups and businesses.">
     <meta property="twitter:image" content="https://selora.dev/og-image.svg">
     
@@ -57,10 +65,13 @@
     <link rel="alternate" hreflang="hu" href="https://selora.dev/hu/" />
     <link rel="alternate" hreflang="x-default" href="https://selora.dev/" />
     
-    <!-- Google Fonts: Lexend -->
+    <!-- Google Fonts: Lexend (preload-as-style to avoid render-blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap">
+    </noscript>
     
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://www.google-analytics.com">
@@ -71,11 +82,11 @@
     <!-- Performance Hints -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//www.google-analytics.com">
-    <!-- Vite entry for development/build -->
-    <script type="module" crossorigin src="/assets/index-BcBk6YLu.js"></script>
+    <!-- Vite entry for development/build -->
+    <script type="module" crossorigin src="/assets/index-Cq-YKagh.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/three-e1LAwHc6.js">
     <link rel="modulepreload" crossorigin href="/assets/gsap-BBuo2-IK.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-BwzkMswn.css">
+    <link rel="stylesheet" crossorigin href="/assets/index-EeJuxn9Z.css">
     <script type="module">import.meta.url;import("_").catch(()=>1);(async function*(){})().next();window.__vite_is_modern_browser=true</script>
     <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
   <link rel="manifest" href="/manifest.webmanifest"></head>
@@ -84,6 +95,6 @@
     
     <script nomodule>!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",(function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()}),!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();</script>
     <script nomodule crossorigin id="vite-legacy-polyfill" src="/assets/polyfills-legacy-BGaHDbzy.js"></script>
-    <script nomodule crossorigin id="vite-legacy-entry" data-src="/assets/index-legacy-DcUrOgoS.js">System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))</script>
+    <script nomodule crossorigin id="vite-legacy-entry" data-src="/assets/index-legacy-Czb-RrSE.js">System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))</script>
   </body>
 </html>

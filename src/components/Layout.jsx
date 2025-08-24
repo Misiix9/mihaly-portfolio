@@ -43,12 +43,11 @@ export default function Layout() {
       {/* Section Progress Indicator */}
       <SectionProgressIndicator />
       
-      <main id="main" className="overflow-x-hidden pt-20">
+      <main id="main" className="overflow-x-hidden">
         <section id="hero">
           <Hero />
         </section>
-        <div className="section-divider container mx-auto px-4 sm:px-6" />
-        <section id="about">
+        <section id="about" style={{ marginTop: '0' }}>
           <About />
         </section>
         <div className="section-divider container mx-auto px-4 sm:px-6" />

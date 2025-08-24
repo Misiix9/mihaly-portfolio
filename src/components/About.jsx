@@ -11,7 +11,32 @@ export default function About() {
   const reveal = useScrollReveal()
 
   return (
-    <section className="relative py-20 md:py-32" id="about" data-section="about">
+    <section 
+      className="relative py-20 md:py-32 bg-black" 
+      id="about" 
+      data-section="about"
+      style={{
+        position: 'relative',
+        zIndex: 10,
+        backgroundColor: '#000000',
+        minHeight: '100vh'
+      }}
+    >
+      {/* Full Black Background - ensures it covers everything */}
+      <div
+        className="absolute inset-0 bg-black"
+        style={{
+          position: 'absolute',
+          top: '-100px', // Extend upward to cover header
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: '#000000',
+          zIndex: -1
+        }}
+        aria-hidden
+      />
+      
       {/* Enhanced Dynamic Background Layer */}
       <div
         className="absolute inset-0 -z-20 pointer-events-none"

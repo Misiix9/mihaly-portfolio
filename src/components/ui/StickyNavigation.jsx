@@ -110,17 +110,27 @@ export default function StickyNavigation() {
           const y = window.scrollY || window.pageYOffset || 0
           setScrolled(y > 60)
 
-          // Auto-hide logic: hide when scrolling down beyond threshold, reveal on scroll up
+          // Navbar visibility: Stay visible in hero section, hide only when scrolling into About section
           const lastY = lastScrollYRef.current
           const delta = Math.abs(y - lastY)
           const threshold = 8
-          if (delta > threshold) {
+          
+          // Get hero and about section elements
+          const heroSection = document.getElementById('hero')
+          const aboutSection = document.getElementById('about')
+          
+          if (delta > threshold && heroSection && aboutSection) {
             const scrollingDown = y > lastY
-            // Do not hide near top; do not hide if mobile menu is open
+            const heroHeight = heroSection.offsetHeight
+            const aboutStart = aboutSection.offsetTop
+            
+            // Only hide navbar when user has scrolled past the hero section into the about section
             if (!isMenuOpen) {
-              if (scrollingDown && y > 140) {
+              if (scrollingDown && y >= aboutStart - 50) {
+                // Hide navbar when entering About section
                 setNavHidden(true)
-              } else {
+              } else if (!scrollingDown || y < aboutStart - 50) {
+                // Show navbar when scrolling up or still in hero section
                 setNavHidden(false)
               }
             }

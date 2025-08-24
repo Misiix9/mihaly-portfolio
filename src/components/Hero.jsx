@@ -1,307 +1,791 @@
+import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import React, { useRef, useEffect, useState } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import useScrollReveal from '../lib/anim/useScrollReveal'
+import useReducedMotion from '../lib/anim/useReducedMotion'
 import Button from './ui/Button'
 
-
-
-
-
-import useReducedMotion from '../lib/anim/useReducedMotion'
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger)
 
 export default function Hero() {
   const { t } = useTranslation()
   const reveal = useScrollReveal()
   const reduced = useReducedMotion(false)
+  
+  // Optimized refs
+  const heroRef = useRef(null)
   const titleRef = useRef(null)
   const subtitleRef = useRef(null)
   const ctaRef = useRef(null)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const particlesRef = useRef(null)
+  const logoParticlesRef = useRef(null)
+  const floatingElementsRef = useRef([])
+  const skillBadgesRef = useRef([])
+  const metricsRef = useRef(null)
+  
+  // Performance-optimized states
+  const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 })
+  const [scrollProgress, setScrollProgress] = useState(0)
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [animationsEnabled, setAnimationsEnabled] = useState(true)
 
-  // Track mouse position for interactive effects
+  // Enhanced particle system with more particles
+  const createEnhancedParticleSystem = useCallback(() => {
+    if (!particlesRef.current || reduced) return
+
+    const particles = []
+    const particleCount = window.innerWidth < 768 ? 80 : 150 // Increased particle count
+
+    // Clear existing particles
+    particlesRef.current.innerHTML = ''
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div')
+      particle.className = 'particle absolute pointer-events-none will-change-transform'
+      
+      const size = Math.random() * 6 + 2
+      const depth = Math.random() * 100 + 50
+      
+      particle.style.cssText = `
+        width: ${size}px;
+        height: ${size}px;
+        background: ${i % 4 === 0 ? '#ffffff' : i % 4 === 1 ? '#f3f4f6' : i % 4 === 2 ? '#d1d5db' : '#9ca3af'};
+        border-radius: 50%;
+        left: ${Math.random() * 100}%;
+        top: ${Math.random() * 100}%;
+        opacity: ${Math.random() * 0.8 + 0.3};
+        transform: translateZ(${depth}px) scale(${Math.random() * 1.5 + 0.5});
+        box-shadow: 0 0 ${size * 2}px rgba(255,255,255,0.4), 0 0 ${size * 4}px rgba(255,255,255,0.2);
+      `
+      
+      particlesRef.current.appendChild(particle)
+      particles.push(particle)
+      
+      // Snappy animations
+      gsap.set(particle, { 
+        willChange: 'transform',
+        backfaceVisibility: 'hidden'
+      })
+      
+      gsap.to(particle, {
+        x: `+=${(Math.random() - 0.5) * 300}`,
+        y: `+=${(Math.random() - 0.5) * 300}`,
+        rotation: Math.random() * 720,
+        scale: Math.random() * 2 + 0.5,
+        duration: Math.random() * 8 + 6, // Faster animations
+        repeat: -1,
+        yoyo: true,
+        ease: "power2.inOut", // Snappier easing
+        delay: i * 0.05
+      })
+    }
+    
+    return particles
+  }, [reduced])
+
+  // Logo particle formation animation
+  const createLogoParticleFormation = useCallback(() => {
+    if (!logoParticlesRef.current || reduced) return
+
+    const logoParticles = []
+    const particleCount = 40
+    
+    // Clear existing
+    logoParticlesRef.current.innerHTML = ''
+
+    // Create logo outline with particles
+    const logoPath = [
+      // S shape approximation with particles
+      {x: 0, y: 0}, {x: 20, y: 0}, {x: 40, y: 0},
+      {x: 0, y: 20}, {x: 20, y: 20}, {x: 40, y: 20},
+      {x: 20, y: 40}, {x: 40, y: 40}, {x: 60, y: 40}
+    ]
+
+    logoPath.forEach((point, i) => {
+      const particle = document.createElement('div')
+      particle.className = 'logo-particle absolute will-change-transform'
+      particle.style.cssText = `
+        width: 4px;
+        height: 4px;
+        background: #ffffff;
+        border-radius: 50%;
+        opacity: 0;
+        box-shadow: 0 0 10px rgba(255,255,255,0.8);
+      `
+      
+      logoParticlesRef.current.appendChild(particle)
+      logoParticles.push(particle)
+      
+      // Animate particles forming logo
+      gsap.fromTo(particle, 
+        {
+          x: Math.random() * 400 - 200,
+          y: Math.random() * 400 - 200,
+          opacity: 0,
+          scale: 0
+        },
+        {
+          x: point.x,
+          y: point.y,
+          opacity: 1,
+          scale: 1,
+          duration: 2,
+          delay: i * 0.1 + 3, // After main animations
+          ease: "power3.out"
+        }
+      )
+    })
+    
+    return logoParticles
+  }, [reduced])
+
+  // Asymmetrical floating elements
+  const createAsymmetricalElements = useCallback(() => {
+    if (!heroRef.current || reduced) return
+
+    const geometryContainer = document.createElement('div')
+    geometryContainer.className = 'floating-geometry absolute inset-0 pointer-events-none'
+    geometryContainer.style.cssText = 'perspective: 1500px; transform-style: preserve-3d;'
+    
+    const elements = [
+      // Large accent shapes
+      { type: 'ring', size: 120, x: '85%', y: '20%', rotation: 45 },
+      { type: 'triangle', size: 80, x: '15%', y: '70%', rotation: 30 },
+      { type: 'hexagon', size: 60, x: '90%', y: '80%', rotation: 60 },
+      { type: 'line', size: 200, x: '5%', y: '30%', rotation: 75 },
+      { type: 'dot', size: 20, x: '80%', y: '60%', rotation: 0 },
+      { type: 'square', size: 40, x: '10%', y: '15%', rotation: 45 }
+    ]
+    
+    elements.forEach((elem, i) => {
+      const shape = document.createElement('div')
+      shape.className = `floating-shape floating-${elem.type} will-change-transform`
+      
+      let shapeStyle = `
+        position: absolute;
+        left: ${elem.x};
+        top: ${elem.y};
+        width: ${elem.size}px;
+        height: ${elem.size}px;
+        border: 2px solid rgba(255,255,255,0.15);
+        transform: translateZ(${Math.random() * 150 + 50}px) rotate(${elem.rotation}deg);
+        backdrop-filter: blur(10px);
+        box-shadow: 
+          0 0 30px rgba(255,255,255,0.1),
+          inset 0 0 20px rgba(255,255,255,0.05);
+      `
+      
+      // Different shapes
+      if (elem.type === 'ring') {
+        shapeStyle += 'border-radius: 50%; background: transparent;'
+      } else if (elem.type === 'triangle') {
+        shapeStyle += 'clip-path: polygon(50% 0%, 0% 100%, 100% 100%); background: rgba(255,255,255,0.02);'
+      } else if (elem.type === 'hexagon') {
+        shapeStyle += 'clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); background: rgba(255,255,255,0.02);'
+      } else if (elem.type === 'line') {
+        shapeStyle += 'height: 2px; border-radius: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);'
+      } else if (elem.type === 'dot') {
+        shapeStyle += 'border-radius: 50%; background: rgba(255,255,255,0.1);'
+      } else {
+        shapeStyle += 'border-radius: 8px; background: rgba(255,255,255,0.02);'
+      }
+      
+      shape.style.cssText = shapeStyle
+      geometryContainer.appendChild(shape)
+      floatingElementsRef.current.push(shape)
+      
+      // Dynamic animations
+      gsap.to(shape, {
+        rotationX: `+=${Math.random() * 360 + 180}`,
+        rotationY: `+=${Math.random() * 360 + 180}`,
+        rotationZ: `+=${Math.random() * 180 + 90}`,
+        y: `+=${(Math.random() - 0.5) * 100}`,
+        x: `+=${(Math.random() - 0.5) * 50}`,
+        duration: Math.random() * 20 + 15,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: i * 0.5
+      })
+    })
+    
+    heroRef.current.appendChild(geometryContainer)
+  }, [reduced])
+
+  // Enhanced scroll effects with no jumping - simplified approach
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth) * 100,
-        y: (e.clientY / window.innerHeight) * 100
+    if (reduced) return
+
+    let ticking = false
+    
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY
+          const heroHeight = window.innerHeight
+          const progress = Math.min(scrollY / heroHeight, 1)
+          
+          setScrollProgress(progress)
+          
+          // Smooth parallax effects without pinning
+          if (particlesRef.current) {
+            particlesRef.current.style.transform = `translate3d(0, ${progress * -50}px, 0) rotateZ(${progress * 5}deg)`
+          }
+          
+          // Subtle title movement
+          if (titleRef.current) {
+            titleRef.current.style.transform = `translate3d(0, ${progress * -30}px, 0) scale(${1 - progress * 0.1})`
+          }
+          
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [reduced])
+
+  // Throttled mouse tracking with enhanced parallax
+  const throttledMouseMove = useMemo(() => {
+    let ticking = false
+    
+    return (e) => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const x = (e.clientX / window.innerWidth) * 100
+          const y = (e.clientY / window.innerHeight) * 100
+          setMousePosition({ x, y })
+
+          if (!reduced && heroRef.current && animationsEnabled) {
+            // Enhanced parallax with more dramatic movement
+            floatingElementsRef.current.forEach((element, i) => {
+              if (element) {
+                const depth = (i + 1) * 0.1
+                const moveX = (x - 50) * depth
+                const moveY = (y - 50) * depth
+                
+                gsap.to(element, {
+                  x: moveX,
+                  y: moveY,
+                  rotationY: moveX * 0.2,
+                  rotationX: -moveY * 0.2,
+                  duration: 0.6,
+                  ease: "power2.out"
+                })
+              }
+            })
+
+            // Skill badges parallax
+            skillBadgesRef.current.forEach((badge, i) => {
+              if (badge) {
+                const depth = 0.05 + i * 0.02
+                gsap.to(badge, {
+                  x: (x - 50) * depth,
+                  y: (y - 50) * depth,
+                  duration: 0.4,
+                  ease: "power2.out"
+                })
+              }
+            })
+          }
+          
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+  }, [reduced, animationsEnabled])
+
+  // Event listeners
+  useEffect(() => {
+    if (!reduced && animationsEnabled) {
+      window.addEventListener('mousemove', throttledMouseMove, { passive: true })
+      
+      return () => {
+        window.removeEventListener('mousemove', throttledMouseMove)
+      }
+    }
+  }, [reduced, animationsEnabled, throttledMouseMove])
+
+  // Master animation timeline with text reveals
+  useEffect(() => {
+    if (!isLoaded || reduced) return
+
+    const tl = gsap.timeline()
+    
+    // Title letters with wave reveal
+    const letters = titleRef.current?.querySelectorAll('.letter')
+    if (letters) {
+      letters.forEach((letter, i) => {
+        gsap.set(letter, { 
+          rotationX: -90, 
+          y: -150, 
+          z: -300,
+          opacity: 0,
+          scale: 0.3,
+          transformOrigin: "50% 50% -100px",
+          willChange: 'transform'
+        })
+        
+        tl.to(letter, {
+          rotationX: 0,
+          y: 0,
+          z: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 1.2,
+          ease: "elastic.out(1, 0.5)",
+          transformOrigin: "50% 50% 0px"
+        }, i * 0.1)
+        
+        // No additional animations - just keep letters static after entrance
       })
     }
 
-    if (!reduced) {
-      window.addEventListener('mousemove', handleMouseMove)
-      return () => window.removeEventListener('mousemove', handleMouseMove)
+    // Subtitle reveal
+    const subtitleElements = subtitleRef.current?.children
+    if (subtitleElements) {
+      Array.from(subtitleElements).forEach((element, i) => {
+        gsap.set(element, { 
+          rotationX: 45, 
+          y: 100, 
+          opacity: 0,
+          willChange: 'transform'
+        })
+        
+        tl.to(element, {
+          rotationX: 0,
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "back.out(1.5)"
+        }, 1 + i * 0.2)
+      })
     }
-  }, [reduced])
 
-  // Optimize scroll performance
+    // Initialize enhanced systems
+    createEnhancedParticleSystem()
+    createAsymmetricalElements()
+    createLogoParticleFormation()
+    
+  }, [isLoaded, reduced, createEnhancedParticleSystem, createAsymmetricalElements, createLogoParticleFormation])
+
+  // Initialize with delay
   useEffect(() => {
-    document.documentElement.style.backgroundColor = '#000000'
-    document.body.style.backgroundColor = '#000000'
-    document.body.style.margin = '0'
-    document.body.style.padding = '0'
-    
-    const style = document.createElement('style')
-    style.textContent = `
-      html, body {
-        background-color: #000000;
-        margin: 0;
-        padding: 0;
-      }
-      #root, #app, .app {
-        background-color: #000000;
-      }
-      .hero-glow {
-        filter: blur(40px);
-        opacity: 0.6;
-      }
-      .hero-floating-element {
-        animation: float 6s ease-in-out infinite;
-      }
-      .hero-floating-element:nth-child(2) {
-        animation-delay: -2s;
-      }
-      .hero-floating-element:nth-child(3) {
-        animation-delay: -4s;
-      }
-      @keyframes float {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-20px) rotate(2deg); }
-      }
-      .hero-shine {
-        background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-        animation: shine 3s infinite;
-      }
-      @keyframes shine {
-        0% { transform: translateX(-100%) skewX(-15deg); }
-        100% { transform: translateX(200%) skewX(-15deg); }
-      }
-      .text-glow {
-        text-shadow: 0 0 20px rgba(255,255,255,0.5), 0 0 40px rgba(255,255,255,0.3);
-      }
-      .availability-pulse {
-        animation: pulse 2s infinite;
-      }
-      @keyframes pulse {
-        0%, 100% { opacity: 0.6; transform: scale(1); }
-        50% { opacity: 1; transform: scale(1.05); }
-      }
-    `
-    document.head.appendChild(style)
-    
-    return () => {
-      if (document.head.contains(style)) {
-        document.head.removeChild(style)
-      }
-    }
+    const timer = setTimeout(() => setIsLoaded(true), 150)
+    return () => clearTimeout(timer)
   }, [])
 
+  // Simple Shadow Hover - just strengthen the white shadow
+  const handleSimpleShadowHover = useCallback((e) => {
+    if (reduced || !animationsEnabled) return
+    
+    const element = e.currentTarget
+    
+    // Kill any existing animations to prevent conflicts
+    gsap.killTweensOf(element)
+    
+    gsap.to(element, {
+      textShadow: `
+        0 0 20px rgba(255,255,255,0.6),
+        0 0 40px rgba(255,255,255,0.3)
+      `,
+      filter: 'contrast(1.05) brightness(1.02)',
+      duration: 0.3,
+      ease: "power2.out"
+    })
+    
+  }, [reduced, animationsEnabled])
+
+  const handleSimpleShadowLeave = useCallback((e) => {
+    if (reduced || !animationsEnabled) return
+    
+    const element = e.currentTarget
+    
+    // Kill any existing animations to prevent conflicts
+    gsap.killTweensOf(element)
+    
+    gsap.to(element, {
+      textShadow: '0 0 20px rgba(255,255,255,0.4)',
+      filter: 'none',
+      duration: 2.0,
+      ease: "power2.out"
+    })
+    
+  }, [reduced, animationsEnabled])
+
+  // Standard hover for other elements
+  const handleStandardHover = useCallback((e, intensity = 1) => {
+    if (reduced || !animationsEnabled) return
+    
+    const element = e.currentTarget
+    gsap.killTweensOf(element)
+    
+    gsap.to(element, {
+      scale: 1 + (0.05 * intensity),
+      y: -5 * intensity,
+      duration: 0.3,
+      ease: "power2.out"
+    })
+  }, [reduced, animationsEnabled])
+
+  const handleStandardLeave = useCallback((e) => {
+    if (reduced || !animationsEnabled) return
+    
+    const element = e.currentTarget
+    gsap.killTweensOf(element)
+    
+    gsap.to(element, {
+      scale: 1,
+      y: 0,
+      duration: 0.5,
+      ease: "power2.out"
+    })
+  }, [reduced, animationsEnabled])
+
+  // Technologies and metrics data
+  const technologies = ['React', 'TypeScript', 'Node.js', 'Three.js', 'GSAP', 'WebGL', 'Next.js', 'GraphQL']
+  const metrics = [
+    { label: 'Years Experience', value: '5+' },
+    { label: 'Projects Completed', value: '50+' },
+    { label: 'Technologies Mastered', value: '20+' }
+  ]
+
   return (
-    <>
-      <section
-        className="relative overflow-hidden min-h-screen bg-black"
+    <section 
+      ref={heroRef}
+      className="relative h-screen overflow-hidden bg-black"
+      style={{
+        perspective: '2000px',
+        transformStyle: 'preserve-3d',
+        isolation: 'isolate'
+      }}
+    >
+      {/* Enhanced dramatic background */}
+      <div 
+        className="absolute inset-0"
         style={{
-          minHeight: '100vh',
-          padding: '0',
-          margin: '0',
-          backgroundColor: '#000000'
+          background: `
+            radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, 
+              rgba(255,255,255,0.12) 0%, 
+              rgba(255,255,255,0.06) 25%,
+              transparent 50%),
+            radial-gradient(ellipse at 20% 80%, rgba(255,255,255,0.08) 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%),
+            #000000
+          `,
+          willChange: 'auto'
         }}
-        data-lcp-critical
-        data-section="hero"
-      >
-        {/* Enhanced animated background */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `
-              radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-              linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #000000 100%)
-            `,
-            willChange: 'auto'
-          }}
-          aria-hidden
-        />
+      />
 
-        {/* Main content */}
-        <div className="container mx-auto px-6 sm:px-8 lg:px-12 flex items-center min-h-screen relative z-10">
-          <div className="max-w-6xl w-full grid lg:grid-cols-2 gap-12 lg:gap-16 items-center relative">
+      {/* Enhanced particle system */}
+      <div 
+        ref={particlesRef}
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          perspective: '1500px',
+          transformStyle: 'preserve-3d',
+          opacity: Math.max(0.4, 1 - scrollProgress * 0.3)
+        }}
+      />
+
+      {/* Logo particle formation */}
+      <div 
+        ref={logoParticlesRef}
+        className="absolute top-1/4 right-20 pointer-events-none"
+        style={{
+          width: '100px',
+          height: '100px',
+          perspective: '1000px',
+          transformStyle: 'preserve-3d'
+        }}
+      />
+
+      {/* Asymmetrical main content */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="w-full h-full relative">
+          
+          {/* Main brand - offset left and rotated */}
+          <div 
+            className="absolute left-[15%] top-[30%] transform -rotate-2"
+            style={{ perspective: '1500px' }}
+          >
+            <h1 
+              ref={titleRef}
+              className="text-7xl sm:text-8xl lg:text-9xl xl:text-[12rem] font-black leading-none relative"
+                             style={{
+                 fontFamily: 'Lexend, sans-serif',
+                 transformStyle: 'preserve-3d',
+                 textShadow: '0 0 20px rgba(255,255,255,0.4)',
+                 color: '#ffffff',
+                 filter: 'none'
+               }}
+              onMouseEnter={handleSimpleShadowHover}
+              onMouseLeave={handleSimpleShadowLeave}
+            >
+              {'SELORA'.split('').map((letter, i) => (
+                <span 
+                  key={i}
+                  className="letter-container inline-block relative"
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    perspective: '1000px'
+                  }}
+                >
+                  <span 
+                    className="letter inline-block cursor-pointer relative"
+                    style={{
+                      transformStyle: 'preserve-3d',
+                      backfaceVisibility: 'hidden',
+                      willChange: 'transform',
+                      transform: 'translate3d(0, 0, 0)', // Initial hardware acceleration
+                      transformOrigin: '50% 50% 0px',
+                      fontFamily: '"Lexend", sans-serif', // Ensure Lexend is always maintained
+                      fontDisplay: 'swap'
+                    }}
+                  >
+                    {letter}
+                  </span>
+                </span>
+              ))}
+            </h1>
+          </div>
+
+          {/* Subtitle - positioned asymmetrically */}
+          <div 
+            ref={subtitleRef} 
+            className="absolute right-[10%] top-[25%] transform rotate-1 max-w-sm"
+          >
+            <h2 
+              className="text-xl font-light mb-4"
+              style={{
+                color: '#e5e7eb',
+                textShadow: '0 5px 15px rgba(0,0,0,0.8), 0 0 30px rgba(255,255,255,0.1)',
+                transformStyle: 'preserve-3d',
+                lineHeight: '1.4'
+              }}
+              onMouseEnter={(e) => handleStandardHover(e, 1)}
+              onMouseLeave={handleStandardLeave}
+            >
+              Digital Architect &<br />Experience Craftsman
+            </h2>
             
-            {/* Left side - Text content */}
-            <div className="text-left flex flex-col justify-center relative z-10">
-            {/* Enhanced title with better typography */}
-<div className="relative text-left" ref={titleRef}>
-              <h1 
-                ref={reveal} 
-                className="hero-title text-left text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight leading-[0.9] bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent hover:scale-[1.02] transition-all duration-500 cursor-default relative z-10 mb-2" 
-                data-lang-text="hero.name"
+            <p 
+              className="text-sm leading-relaxed"
+              style={{
+                color: '#9ca3af',
+                textShadow: '0 3px 8px rgba(0,0,0,0.9)',
+                transformStyle: 'preserve-3d'
+              }}
+            >
+              Transforming ambitious visions into stunning digital realities
+            </p>
+          </div>
+
+          {/* Technology badges - scattered asymmetrically */}
+          <div className="absolute inset-0 pointer-events-none">
+            {technologies.map((tech, i) => (
+              <div
+                key={tech}
+                ref={el => skillBadgesRef.current[i] = el}
+                className="absolute pointer-events-auto cursor-pointer will-change-transform"
                 style={{
-                  fontFamily: 'Lexend, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                  letterSpacing: '-0.02em'
+                  left: `${[85, 20, 75, 25, 80, 15, 70, 30][i]}%`,
+                  top: `${[60, 80, 75, 65, 85, 70, 55, 90][i]}%`,
+                  transform: `rotate(${Math.random() * 20 - 10}deg)`,
+                  transformStyle: 'preserve-3d'
                 }}
+                onMouseEnter={(e) => handleStandardHover(e, 1.5)}
+                onMouseLeave={handleStandardLeave}
               >
-                Selora
-              </h1>
-              {/* Subtle glow effect behind title */}
-              {!reduced && (
-                <div className="absolute inset-0 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white hero-glow opacity-10 -z-10">
-                  Selora
+                <div 
+                  className="px-4 py-2 rounded-full text-xs font-medium border transition-all duration-300"
+                  style={{
+                    background: 'rgba(255,255,255,0.05)',
+                    borderColor: 'rgba(255,255,255,0.2)',
+                    color: '#ffffff',
+                    backdropFilter: 'blur(20px)',
+                    boxShadow: `
+                      0 8px 32px rgba(255,255,255,0.1),
+                      inset 0 1px 0 rgba(255,255,255,0.2),
+                      0 0 20px rgba(255,255,255,0.05)
+                    `,
+                    textShadow: '0 2px 4px rgba(0,0,0,0.5)'
+                  }}
+                >
+                  {tech}
                 </div>
-              )}
-            </div>
-            
-            {/* Enhanced subtitle with better responsive typography */}
-            <div ref={subtitleRef} className="space-y-6 text-left">
-              <div className="text-xl sm:text-2xl lg:text-3xl text-gray-100 font-light leading-relaxed text-left">
-                <span className="hero-subtitle block text-left">
-                  Crafting Digital Excellence Through
-                </span>
-                <span className="text-white font-semibold hero-role block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent text-left">
-                  Code, Design & Innovation
-                </span>
               </div>
-              
-              {/* Enhanced value proposition */}
-              <div 
-                ref={reveal} 
-                className="text-left text-sm sm:text-base text-blue-300 font-medium tracking-widest uppercase hover:text-blue-200 transition-colors duration-300 hero-subtitle relative overflow-hidden" 
-              >
-                Building Tomorrow's Web Experiences Today
-                {!reduced && <div className="absolute inset-0 hero-shine" />}
-              </div>
-              
-              {/* Enhanced main description */}
-              <div className="space-y-4 max-w-lg text-left">
-                <p 
-                  ref={reveal} 
-                  className="text-left text-gray-300 text-lg sm:text-xl leading-relaxed hover:text-white transition-colors duration-300 hero-subtitle font-light" 
-                  style={{ lineHeight: '1.8' }}
-                >
-                  I design and build websites and applications that load fast, perform exceptionally, and deliver seamless user experiences.
-                </p>
-                <p 
-                  ref={reveal} 
-                  className="text-left text-gray-400 text-base leading-relaxed font-light" 
-                  style={{ lineHeight: '1.7' }}
-                >
-                  From concept to deployment, I combine technical expertise with creative vision to bring your digital ideas to life.
-                </p>
-              </div>
+            ))}
+          </div>
 
-              {/* Response time guarantee */}
-              <div className="flex items-center gap-2 text-gray-500 text-sm text-left">
-                <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span data-lang-text="hero.response_time">{t('hero.response_time')}</span>
-              </div>
-            </div>
-            
-            {/* Enhanced CTA buttons with better spacing */}
-            <div ref={ctaRef} className="mt-8 flex flex-col sm:flex-row items-start gap-4">
-              <Button 
-                variant="primary" 
-                size="md" 
-                as="a" 
-                href="#contact" 
-                className="hero-cta rounded-xl px-8 py-3 font-semibold hover:scale-105 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-2xl relative overflow-hidden group w-full sm:w-auto"
-                data-magnetic="0.3"
-                data-cursor-text="Start Project"
-                data-cursor-scale="1.5"
+          {/* Metrics display - bottom left asymmetric */}
+          <div 
+            ref={metricsRef}
+            className="absolute bottom-[15%] left-[8%] space-y-3"
+          >
+            {metrics.map((metric, i) => (
+              <div
+                key={metric.label}
+                className="flex items-center space-x-4 will-change-transform"
+                style={{
+                  transform: `rotate(${i * 2 - 2}deg)`,
+                  transformStyle: 'preserve-3d'
+                }}
+                onMouseEnter={(e) => handleStandardHover(e, 0.8)}
+                onMouseLeave={handleStandardLeave}
               >
-                <span className="button-text relative z-10" data-lang-text="hero.cta_primary">{t('hero.cta_primary')}</span>
-                <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div 
+                  className="text-3xl font-black"
+                  style={{
+                    color: '#ffffff',
+                    textShadow: '0 0 20px rgba(255,255,255,0.6), 0 5px 15px rgba(0,0,0,0.8)'
+                  }}
+                >
+                  {metric.value}
+                </div>
+                <div 
+                  className="text-sm font-light"
+                  style={{
+                    color: '#9ca3af',
+                    textShadow: '0 2px 6px rgba(0,0,0,0.8)'
+                  }}
+                >
+                  {metric.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Enhanced glassy liquid buttons - asymmetrically positioned */}
+          <div 
+            ref={ctaRef} 
+            className="absolute bottom-[25%] right-[15%] space-y-4"
+          >
+            <Button 
+              variant="primary" 
+              size="lg" 
+              as="a" 
+              href="#contact" 
+              className="group relative overflow-hidden text-black px-8 py-4 rounded-3xl font-bold text-lg transition-all duration-500 will-change-transform block transform -rotate-1"
+              style={{
+                background: `
+                  linear-gradient(135deg, 
+                    rgba(255,255,255,0.9) 0%, 
+                    rgba(255,255,255,0.7) 50%, 
+                    rgba(255,255,255,0.8) 100%)
+                `,
+                boxShadow: `
+                  0 20px 60px rgba(255,255,255,0.2),
+                  0 0 80px rgba(255,255,255,0.1),
+                  inset 0 2px 0 rgba(255,255,255,0.4),
+                  inset 0 -2px 0 rgba(0,0,0,0.1)
+                `,
+                transformStyle: 'preserve-3d',
+                backfaceVisibility: 'hidden',
+                backdropFilter: 'blur(20px)',
+                border: '1px solid rgba(255,255,255,0.3)'
+              }}
+              onMouseEnter={(e) => handleStandardHover(e, 2)}
+              onMouseLeave={handleStandardLeave}
+            >
+              <span className="relative z-10 flex items-center gap-3">
+                Craft Magic
+                <svg className="w-5 h-5 group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </Button>
-              
-              <Button 
-                variant="secondary" 
-                size="md" 
-                as="a" 
-                href="#projects" 
-                className="hero-cta rounded-xl px-8 py-3 font-medium hover:scale-105 hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto"
-                data-magnetic="0.25"
-                data-cursor-text="View Work"
-                data-cursor-scale="1.3"
-              >
-                <span className="button-text" data-lang-text="hero.cta_secondary">{t('hero.cta_secondary')}</span>
-              </Button>
-            </div>
+              </span>
+              {/* Liquid effect overlay */}
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{
+                  background: 'linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.4), rgba(255,255,255,0.2))',
+                  filter: 'blur(2px)'
+                }}
+              />
+            </Button>
+            
+            <Button 
+              variant="ghost" 
+              size="lg" 
+              as="a" 
+              href="#projects" 
+              className="px-8 py-4 rounded-3xl font-bold text-lg text-white transition-all duration-500 will-change-transform block transform rotate-1"
+              style={{
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                textShadow: '0 0 20px rgba(255,255,255,0.3)',
+                boxShadow: `
+                  inset 0 1px 0 rgba(255,255,255,0.1), 
+                  0 10px 40px rgba(0,0,0,0.4),
+                  0 0 40px rgba(255,255,255,0.05)
+                `,
+                backdropFilter: 'blur(30px)',
+                transformStyle: 'preserve-3d',
+                backfaceVisibility: 'hidden'
+              }}
+              onMouseEnter={(e) => handleStandardHover(e, 1.5)}
+              onMouseLeave={handleStandardLeave}
+            >
+              <span className="relative z-10">Explore Creations</span>
+              {/* Glass reflection effect */}
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{
+                  background: 'linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%)',
+                  transform: 'translateX(-100%)',
+                  animation: 'glassReflection 2s infinite'
+                }}
+              />
+            </Button>
+          </div>
 
-            {/* Enhanced social links */}
-            <nav className="mt-8 flex items-center gap-6 text-gray-500" aria-label="Social Links">
-              <a
-                href="https://github.com/Misiix9"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="group flex items-center gap-1.5 text-sm hover:text-gray-300 transition-colors duration-300"
-                aria-label={t('common.social.github')}
-                data-magnetic="0.15"
-                data-cursor-text={t('common.social.github')}
+          {/* Enhanced availability badge - floating asymmetrically */}
+          <div 
+            className="absolute top-[15%] left-[60%] transform -rotate-3"
+            style={{
+              transformStyle: 'preserve-3d'
+            }}
+          >
+            <div 
+              className="inline-flex items-center gap-3 px-6 py-3 rounded-full backdrop-blur-md transition-all duration-300 will-change-transform"
+              style={{
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.15)',
+                boxShadow: `
+                  0 0 40px rgba(255,255,255,0.1), 
+                  inset 0 1px 0 rgba(255,255,255,0.1),
+                  0 10px 30px rgba(0,0,0,0.3)
+                `,
+                transformStyle: 'preserve-3d',
+                backfaceVisibility: 'hidden'
+              }}
+              onMouseEnter={(e) => handleStandardHover(e, 1)}
+              onMouseLeave={handleStandardLeave}
+            >
+              <div 
+                className="w-3 h-3 bg-white rounded-full animate-pulse" 
+                style={{
+                  boxShadow: '0 0 20px rgba(255,255,255,0.8)'
+                }} 
+              />
+              <span 
+                className="text-white font-medium text-sm"
+                style={{
+                  textShadow: '0 2px 4px rgba(0,0,0,0.8)'
+                }}
               >
-                <svg className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                <span className="hidden sm:inline">{t('common.social.github')}</span>
-              </a>
-              <a
-                href="https://instagram.com/gyr.misi"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="group flex items-center gap-1.5 text-sm hover:text-gray-300 transition-colors duration-300"
-                data-magnetic="0.15"
-                data-cursor-text={t('common.social.instagram')}
-                aria-label={t('common.social.instagram')}
-              >
-                <svg className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-                <span className="hidden sm:inline">{t('common.social.instagram')}</span>
-              </a>
-              <a
-                href="mailto:mihalygyori05@gmail.com"
-                className="group flex items-center gap-1.5 text-sm hover:text-gray-300 transition-colors duration-300"
-                aria-label={t('common.social.email')}
-              >
-                <svg className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                <span className="hidden sm:inline">{t('common.social.email')}</span>
-              </a>
-            </nav>
-
-            {/* Availability status - relocated to bottom */}
-            <div className="mt-6 flex items-center justify-start text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-green-500/5 border border-green-500/10 rounded-full text-green-400 text-xs font-medium backdrop-blur-sm">
-                <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-                <span data-lang-text="hero.availability">{t('hero.availability')}</span>
-              </div>
-            </div>
-            </div>
-
-            {/* Right side - Clean space for flowing animation */}
-            <div className="hidden lg:block relative">
-              <div className="relative w-full h-[500px] lg:h-[600px]">
-                {/* Clean space - animation fills this area */}
-              </div>
+                Available for epic projects
+              </span>
             </div>
           </div>
         </div>
-
-
-
-        {/* Enhanced scroll indicator */}
-        <div className="pointer-events-none absolute left-1/2 bottom-8 -translate-x-1/2 text-white/60 flex flex-col items-center gap-3" aria-hidden>
-          <div className="text-sm tracking-widest uppercase font-medium" data-lang-text="hero.scroll_discover">
-            {t('hero.scroll_discover')}
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <svg className="h-6 w-6 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M6 9l6 6 6-6" />
-            </svg>
-            <div className="w-px h-8 bg-gradient-to-b from-white/60 to-transparent" />
-          </div>
-        </div>
-      </section>
-    </>
+      </div>
+    </section>
   )
 }

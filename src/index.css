@@ -179,6 +179,54 @@ button:focus-visible {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.2) 100%);
 }
 
+/* Enhanced brand visualization animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes brandPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes particleOrbit {
+  0% {
+    transform: rotate(0deg) translateX(50px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(50px) rotate(-360deg);
+  }
+}
+
+@keyframes brandGlow {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(255,255,255,0.5), 0 0 40px rgba(59, 130, 246, 0.3);
+  }
+}
+
+/* Enhanced glassmorphism for brand container */
+.brand-container {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 /* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -189,7 +237,8 @@ button:focus-visible {
   
   .particle-animation,
   .mesh-animation,
-  .float-animation {
+  .float-animation,
+  .brand-animation {
     animation: none !important;
   }
 }

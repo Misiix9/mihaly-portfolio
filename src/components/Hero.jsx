@@ -2,8 +2,11 @@ import { useTranslation } from 'react-i18next'
 import React, { useRef, useEffect, useState } from 'react'
 import useScrollReveal from '../lib/anim/useScrollReveal'
 import Button from './ui/Button'
-import TypewriterText from './ui/TypewriterText'
-import RoleAnimations from './ui/RoleAnimations'
+
+
+
+
+
 import useReducedMotion from '../lib/anim/useReducedMotion'
 
 export default function Hero() {
@@ -119,74 +122,72 @@ export default function Hero() {
         />
 
         {/* Main content */}
-        <div className="container mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-center min-h-screen relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12 flex items-center min-h-screen relative z-10">
+          <div className="max-w-6xl w-full grid lg:grid-cols-2 gap-12 lg:gap-16 items-center relative">
+            
+            {/* Left side - Text content */}
+            <div className="text-left flex flex-col justify-center relative z-10">
             {/* Enhanced title with better typography */}
-            <div className="relative inline-block" ref={titleRef}>
+<div className="relative text-left" ref={titleRef}>
               <h1 
                 ref={reveal} 
-                className="hero-title text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight leading-[0.9] bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent hover:scale-[1.02] transition-all duration-500 cursor-default relative z-10 mb-2" 
+                className="hero-title text-left text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight leading-[0.9] bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent hover:scale-[1.02] transition-all duration-500 cursor-default relative z-10 mb-2" 
                 data-lang-text="hero.name"
                 style={{
                   fontFamily: 'Lexend, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                   letterSpacing: '-0.02em'
                 }}
               >
-                {t('hero.name')}
+                Selora
               </h1>
               {/* Subtle glow effect behind title */}
               {!reduced && (
                 <div className="absolute inset-0 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white hero-glow opacity-10 -z-10">
-                  {t('hero.name')}
+                  Selora
                 </div>
               )}
             </div>
             
             {/* Enhanced subtitle with better responsive typography */}
-            <div ref={subtitleRef} className="space-y-4">
-              <div className="text-lg sm:text-xl lg:text-2xl text-gray-100 font-medium flex items-baseline justify-center flex-wrap gap-1">
-                <span className="hero-subtitle" data-lang-text="hero.im">{t('hero.im')}</span>
-                {!reduced ? (
-                  <TypewriterText
-                    texts={[
-                      t('hero.roles.developer'),
-                      t('hero.roles.designer'),
-                      t('hero.roles.problem_solver'),
-                      t('hero.roles.innovator')
-                    ]}
-                    speed={80}
-                    delay={2000}
-                    loop={true}
-                    className="text-white font-semibold hero-role"
-                    data-lang-animation="typewriter"
-                  />
-                ) : (
-                  <span className="text-white font-semibold hero-role" data-lang-text="hero.role">{t('hero.role')}</span>
-                )}
+            <div ref={subtitleRef} className="space-y-6 text-left">
+              <div className="text-xl sm:text-2xl lg:text-3xl text-gray-100 font-light leading-relaxed text-left">
+                <span className="hero-subtitle block text-left">
+                  Crafting Digital Excellence Through
+                </span>
+                <span className="text-white font-semibold hero-role block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent text-left">
+                  Code, Design & Innovation
+                </span>
               </div>
               
-              {/* Value proposition with enhanced styling */}
+              {/* Enhanced value proposition */}
               <div 
                 ref={reveal} 
-                className="text-base sm:text-lg text-blue-300 font-medium tracking-wide uppercase hover:text-blue-200 transition-colors duration-300 hero-subtitle relative overflow-hidden" 
-                data-lang-text="hero.value_proposition"
+                className="text-left text-sm sm:text-base text-blue-300 font-medium tracking-widest uppercase hover:text-blue-200 transition-colors duration-300 hero-subtitle relative overflow-hidden" 
               >
-                {t('hero.value_proposition')}
+                Building Tomorrow's Web Experiences Today
                 {!reduced && <div className="absolute inset-0 hero-shine" />}
               </div>
               
-              {/* Main description with improved typography */}
-              <p 
-                ref={reveal} 
-                className="text-gray-300 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed hover:text-white transition-colors duration-300 hero-subtitle" 
-                data-lang-text="hero.subtitle"
-                style={{ lineHeight: '1.7' }}
-              >
-                {t('hero.subtitle')}
-              </p>
+              {/* Enhanced main description */}
+              <div className="space-y-4 max-w-lg text-left">
+                <p 
+                  ref={reveal} 
+                  className="text-left text-gray-300 text-lg sm:text-xl leading-relaxed hover:text-white transition-colors duration-300 hero-subtitle font-light" 
+                  style={{ lineHeight: '1.8' }}
+                >
+                  I design and build websites and applications that load fast, perform exceptionally, and deliver seamless user experiences.
+                </p>
+                <p 
+                  ref={reveal} 
+                  className="text-left text-gray-400 text-base leading-relaxed font-light" 
+                  style={{ lineHeight: '1.7' }}
+                >
+                  From concept to deployment, I combine technical expertise with creative vision to bring your digital ideas to life.
+                </p>
+              </div>
 
               {/* Response time guarantee */}
-              <div className="inline-flex items-center gap-2 text-gray-500 text-sm">
+              <div className="flex items-center gap-2 text-gray-500 text-sm text-left">
                 <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -195,7 +196,7 @@ export default function Hero() {
             </div>
             
             {/* Enhanced CTA buttons with better spacing */}
-            <div ref={ctaRef} className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div ref={ctaRef} className="mt-8 flex flex-col sm:flex-row items-start gap-4">
               <Button 
                 variant="primary" 
                 size="md" 
@@ -227,7 +228,7 @@ export default function Hero() {
             </div>
 
             {/* Enhanced social links */}
-            <nav className="mt-8 flex items-center justify-center gap-6 text-gray-500" aria-label="Social Links">
+            <nav className="mt-8 flex items-center gap-6 text-gray-500" aria-label="Social Links">
               <a
                 href="https://github.com/Misiix9"
                 target="_blank"
@@ -269,21 +270,24 @@ export default function Hero() {
             </nav>
 
             {/* Availability status - relocated to bottom */}
-            <div className="mt-6 flex items-center justify-center">
+            <div className="mt-6 flex items-center justify-start text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-green-500/5 border border-green-500/10 rounded-full text-green-400 text-xs font-medium backdrop-blur-sm">
                 <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
                 <span data-lang-text="hero.availability">{t('hero.availability')}</span>
               </div>
             </div>
+            </div>
+
+            {/* Right side - Clean space for flowing animation */}
+            <div className="hidden lg:block relative">
+              <div className="relative w-full h-[500px] lg:h-[600px]">
+                {/* Clean space - animation fills this area */}
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Keep the RoleAnimations on the right side */}
-        {!reduced && (
-          <div className="hidden lg:block">
-            <RoleAnimations />
-          </div>
-        )}
+
 
         {/* Enhanced scroll indicator */}
         <div className="pointer-events-none absolute left-1/2 bottom-8 -translate-x-1/2 text-white/60 flex flex-col items-center gap-3" aria-hidden>

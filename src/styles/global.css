@@ -24,6 +24,10 @@ body {
   position: relative; /* Ensure sticky positioning context works */
 }
 
+#hero{
+  padding-top: 0 !important;
+}
+
 /* Design tokens (expanded monochrome + spacing + radii) */
 :root {
   /* Expanded Monochrome Color System (15 shades) */

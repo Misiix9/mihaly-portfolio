@@ -47,7 +47,7 @@ export default function Layout() {
         <section id="hero">
           <Hero />
         </section>
-        <section id="about" style={{ marginTop: '0' }}>
+        <section id="about" style={{ marginTop: '100vh' }}>
           <About />
         </section>
         <div className="section-divider container mx-auto px-4 sm:px-6" />

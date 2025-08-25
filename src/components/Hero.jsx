@@ -229,6 +229,14 @@ export default function Hero() {
           
           setScrollProgress(progress)
           
+          // Fade out Hero section as About section approaches
+          if (heroRef.current) {
+            const opacity = Math.max(0, 1 - progress)
+            heroRef.current.style.opacity = opacity
+            // Optionally add pointer-events none when fully faded
+            heroRef.current.style.pointerEvents = opacity < 0.1 ? 'none' : 'auto'
+          }
+          
           // Smooth parallax effects without pinning
           if (particlesRef.current) {
             particlesRef.current.style.transform = `translate3d(0, ${progress * -50}px, 0) rotateZ(${progress * 5}deg)`
@@ -463,7 +471,13 @@ export default function Hero() {
       style={{
         perspective: '2000px',
         transformStyle: 'preserve-3d',
-        isolation: 'isolate'
+        isolation: 'isolate',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1,
+        transition: 'opacity 0.1s ease-out'
       }}
     >
       {/* Enhanced dramatic background */}

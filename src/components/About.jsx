@@ -12,14 +12,15 @@ export default function About() {
 
   return (
     <section 
-      className="relative py-20 md:py-32 bg-black" 
+      className="relative pt-8 md:pt-12 pb-20 md:pb-32 bg-black" 
       id="about" 
       data-section="about"
       style={{
         position: 'relative',
         zIndex: 10,
         backgroundColor: '#000000',
-        minHeight: '100vh'
+        minHeight: '100vh',
+        transform: 'translateZ(0)' // Create stacking context
       }}
     >
       {/* Full Black Background - ensures it covers everything */}

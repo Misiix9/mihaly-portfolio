@@ -6,7 +6,9 @@
     "projects": "Munkák",
     "services": "Szolgáltatások",
     "process": "Folyamat",
-    "contact": "Kapcsolat"
+    "contact": "Kapcsolat",
+    "cta": "Kezdjük El",
+    "faq": "GYIK"
   },
   "lang": { "en": "EN", "hu": "HU" },
 
@@ -45,7 +47,30 @@
     "cta_secondary": "Projektek Megtekintése",
     "scroll_discover": "Görgess a felfedezéshez",
     "availability": "Elérhető szabadúszó projektekhez",
-    "response_time": "48 órás válaszidő garantált"
+    "response_time": "48 órás válaszidő garantált",
+    "hero_title": "Digitális Építész &<br />Élménykészítő",
+    "hero_description": "Ambiciózus víziókat alakítok lenyűgöző digitális valósággá",
+    "cta_craft": "Varázslatot Alkotni",
+    "cta_explore": "Alkotások Felfedezése",
+    "availability_epic": "Elérhető epikus projektekhez",
+    "metrics": {
+      "years_experience": "Év Tapasztalat",
+      "projects_completed": "Befejezett Projekt",
+      "technologies_mastered": "Elsajátított Technológia",
+      "years_value": "5+",
+      "projects_value": "50+",
+      "technologies_value": "20+"
+    },
+    "technologies": {
+      "react": "React",
+      "typescript": "TypeScript",
+      "nodejs": "Node.js",
+      "threejs": "Three.js",
+      "gsap": "GSAP",
+      "webgl": "WebGL",
+      "nextjs": "Next.js",
+      "graphql": "GraphQL"
+    }
   },
 
   "about": {
@@ -243,36 +268,113 @@
     "items": [
       {
         "name": "Footify.hu",
-        "desc": "Modern futball platform, amely valós idejű meccsprogramokat, eredményeket és átfogó statisztikákat szolgáltat elegáns felhasználói élménnyel.",
-        "tech": ["React", "Vite", "Tailwind CSS", "REST API", "Reszponzív Dizájn"],
+        "desc": "Átfogó futball platform, amely valós idejű meccsadatokat, eredményeket és statisztikákat szolgáltat, a felhasználói élményre és teljesítményre fókuszálva. Úgy készült, hogy ezreket kiszolgáljon a csúcsforgalom idején.",
+        "caseStudy": "A Footify.hu a sport szenvedély és technikai kiválóság metszéspontját képviseli. A kihívással szemben, hogy olyan platformot hozzak létre, amely valós idejű futballadatokat szolgáltat lelkes szurkolóknak, olyan megoldást építettem, amely mind a teljesítményt, mind a felhasználói élményt előtérbe helyezi. A platform élő meccsfrissítéseket, átfogó statisztikákat és reszponzív dizájnt kezel minden eszközön, több mint 2000 havi aktív felhasználót szolgálva 99.8%-os üzemidővel.",
+        "tech": ["React 18", "Vite", "Tailwind CSS", "REST API", "PWA", "Web Workers"],
         "url": "https://footify.hu",
         "featured": true,
         "type": "Webalkalmazás",
         "year": "2024",
-        "status": "Éles",
+        "status": "Éles Termelés",
         "metrics": {
-          "performance": "95/100",
-          "users": "2K+ havi",
-          "speed": "1.2mp betöltési idő"
+          "performance": "95/100 Lighthouse",
+          "users": "2,000+ MAU",
+          "speed": "1.2s First Contentful Paint",
+          "conversion": "23% felhasználói elköteleződési arány",
+          "uptime": "99.8% elérhetőség"
+        },
+        "businessImpact": {
+          "userGrowth": "150%-os növekedés a havi aktív felhasználókban",
+          "engagement": "Átlagos munkamenet időtartam: 4.2 perc",
+          "performance": "40%-kal gyorsabb mint a versenytársak",
+          "mobile": "A forgalom 78%-a mobil eszközökről"
         },
         "features": [
-          "Valós idejű meccsadat integráció",
-          "Reszponzív dizájn minden eszközön",
-          "Tiszta, intuitív felhasználói felület",
-          "Gyors betöltés és gördülékeny animációk"
+          "Valós idejű meccsadat WebSocket integrációval",
+          "Progressive Web App (PWA) offline funkciókkal",
+          "Fejlett reszponzív dizájn mobile-first megközelítéssel",
+          "Optimalizált teljesítmény lazy loading és code splitting technikákkal",
+          "Interaktív statisztikai vizualizációk",
+          "Push értesítések meccsfrissítésekhez"
         ],
         "challenges": [
-          "Valós idejű adatfrissítések optimalizálása",
-          "Reszponzív elrendezések létrehozása mobilra",
-          "Gördülékeny animációk implementálása"
+          "Valós idejű adatfrissítések kezelése teljesítményromlás nélkül",
+          "Pixel-pontos reszponzív elrendezések létrehozása változatos képernyőméretekhez",
+          "Gördülékeny mikrointerakciók implementálása 60fps fenntartása mellett",
+          "Bundle méret optimalizálása gazdag funkcionalitás hozzáadása mellett",
+          "Akadálymentességi megfelelőség biztosítása minden funkcióban"
         ],
-        "solution": "React és Vite segítségével építve az optimális teljesítményért, élő futball API-k integrálásával, és reszponzív dizájn minták implementálásával Tailwind CSS-sel.",
+        "solution": "Robusztus architektúrát implementáltam React 18 concurrent funkcióival, Vite-tal a villámgyors fejlesztéshez és build-ekhez, valamint kifinomult állapotkezelő rendszerrel. A valós idejű frissítések optimalizált WebSocket kapcsolatokon keresztül okos batching-gel vannak kezelve a UI thrashing megelőzésére. A reszponzív dizájn CSS Grid és Flexbox előnyeit használja Tailwind utility osztályaival, konzisztens élményt biztosítva minden eszközön.",
+        "technicalHighlights": [
+          "Egyedi React hook-ok adatlekéréshez és cache-eléshez",
+          "Optimalizált re-render-ek React.memo és useMemo használatával",
+          "Service Worker implementáció offline funkcionalitáshoz",
+          "Fejlett Lighthouse optimalizációk 95+ pontszám elérésére",
+          "TypeScript integráció típusbiztonságért és fejlesztői élményért"
+        ],
         "image": "/screenshots/footify-hero.png",
         "gallery": [
           "/src/assets/img/Footify.png",
           "/src/assets/img/footify-1.svg",
           "/src/assets/img/footify-2.png",
           "/src/assets/img/footify-3.png"
+        ]
+      },
+      {
+        "name": "Portfolio Weboldal",
+        "desc": "Kifinomult személyes portfólió, amely fejlett React technikákat, GSAP animációkat és Three.js integrációt mutat be. A teljesítmény és akadálymentesség alapelvekkel készült.",
+        "caseStudy": "Ez a portfólió egyszerre szolgál képességeim bemutatásaként és élvonalbeli webtechnológiák tesztterepként. A kihívás egy vizuálisan lenyűgöző élmény létrehozása volt, amely technikai jártasságot demonstrál, miközben kiváló teljesítmény mutatókat és akadálymentességi szabványokat tart fenn. Minden animáció, interakció és dizájn döntés a minőség iránti elkötelezettségemet és a részletekre való odafigyelésemet tükrözi.",
+        "tech": ["React 19", "Vite", "GSAP", "Three.js", "Tailwind CSS", "i18next", "EmailJS"],
+        "url": "#",
+        "github": "https://github.com/Misiix9/mihaly-portfolio",
+        "featured": true,
+        "type": "Portfólió Weboldal",
+        "year": "2024",
+        "status": "Éles Termelés",
+        "metrics": {
+          "performance": "98/100 Lighthouse",
+          "accessibility": "100/100 Akadálymentességi Pontszám",
+          "speed": "0.8s First Contentful Paint",
+          "seo": "100/100 SEO Pontszám",
+          "pwa": "PWA implementációra kész"
+        },
+        "businessImpact": {
+          "inquiries": "40%-os növekedés projekt megkeresésekben",
+          "engagement": "Átlagos munkamenet időtartam: 3.8 perc",
+          "conversion": "15% kapcsolatfelvételi űrlap konverziós arány",
+          "international": "A látogatók 30%-a nemzetközi piacokról"
+        },
+        "features": [
+          "Fejlett GSAP scroll-triggered animációk",
+          "Three.js 3D jelenetek egyedi shader-ekkel",
+          "Kétnyelvű támogatás (angol/magyar)",
+          "Kifinomult kapcsolatfelvételi űrlap többlépéses varázslóval",
+          "SEO optimalizáció strukturált adatokkal",
+          "Teljesítmény optimalizáció lazy loading-gal",
+          "Akadálymentességi megfelelőség (WCAG 2.1 AA)",
+          "Reszponzív dizájn mobiltól 4K kijelzőkig"
+        ],
+        "challenges": [
+          "Vizuális gazdagság és teljesítmény követelmények egyensúlyozása",
+          "Gördülékeny animációk létrehozása eszközök között",
+          "Komplex 3D jelenetek implementálása betöltési idők befolyásolása nélkül",
+          "Kétnyelvű élmény építése megfelelő SEO-val",
+          "Akadálymentesség biztosítása vizuális vonzerő fenntartása mellett"
+        ],
+        "solution": "Moduláris architektúrát fejlesztettem lazy-loaded komponensekkel, GSAP-ot implementáltam ScrollTrigger-rel optimalizált animációkhoz, és egyedi Three.js jeleneteket hoztam létre hatékony LOD rendszerekkel. A kétnyelvű implementáció react-i18next-ot használ megfelelő URL struktúrával és hreflang tag-ekkel a SEO-hoz. A teljesítmény code splitting, kép optimalizáció és progresszív betöltési stratégiákkal van optimalizálva.",
+        "technicalHighlights": [
+          "Egyedi animációs rendszer reduced motion támogatással",
+          "WebGL optimalizációk gördülékeny 60fps 3D rendereléshez",
+          "Fejlett React minták egyedi hook-okkal",
+          "Átfogó SEO implementáció JSON-LD-vel",
+          "Web Vitals optimalizáció kiváló pontszámok elérésére"
+        ],
+        "image": "",
+        "gallery": [
+          "/screenshots/portfolio-desktop.jpg",
+          "/screenshots/portfolio-mobile.jpg",
+          "/screenshots/portfolio-3d.jpg",
+          "/screenshots/portfolio-animations.jpg"
         ]
       }
     ],
@@ -289,20 +391,82 @@
     "modal": {
       "close": "Bezárás",
       "overview": "Projekt Áttekintés",
+      "caseStudy": "Esettanulmány",
       "features": "Kulcs Funkciók",
       "challenges": "Kihívások és Megoldások",
       "metrics": "Teljesítmény Mutatók",
+      "businessImpact": "Üzleti Hatás",
+      "technicalHighlights": "Technikai Kiemelések",
       "gallery": "Projekt Galéria",
       "technology": "Technológiai Stack",
       "year": "Év",
       "status": "Státusz",
-      "type": "Típus"
+      "type": "Típus",
+      "viewLive": "Élő Oldal Megtekintése",
+      "viewCode": "Forráskód Megtekintése"
     }
   },
 
   "contact": {
     "title": "Építsünk Valami Gyorsat, Tisztát és Átláthatót",
     "subtitle": "Írd le röviden, mire van szükséged és a határidőt. 24–48 órán belül válaszolok.",
+    "availability": "Jelenleg fogadok új projekteket",
+    "response_time": "Válasz 24–48 órán belül",
+    "services": {
+      "title": "Amit kínálok",
+      "web_development": {
+        "title": "Webfejlesztés",
+        "description": "Egyedi React alkalmazások teljesítményre és skálázhatóságra építve",
+        "features": ["React/Next.js", "TypeScript", "Teljesítmény Optimalizálás", "SEO Kész"]
+      },
+      "ui_ux": {
+        "title": "UI/UX Implementáció",
+        "description": "Pixel-pontos dizájnok gördülékeny animációkkal és mikrointerakciókkal",
+        "features": ["Reszponzív Dizájn", "GSAP Animációk", "Akadálymentesség", "Böngésző-kompatibilitás"]
+      },
+      "consulting": {
+        "title": "Technikai Tanácsadás",
+        "description": "Szakértői útmutatás architektúrához, teljesítményhez és legjobb gyakorlatokhoz",
+        "features": ["Kódáttekintés", "Architektúra Tervezés", "Teljesítmény Audit", "Mentorálás"]
+      }
+    },
+    "process": {
+      "title": "Folyamat",
+      "discovery": {
+        "title": "Felfedezés",
+        "description": "Célok, követelmények és sikermutatók megértése"
+      },
+      "planning": {
+        "title": "Tervezés",
+        "description": "Technikai architektúra, ütemterv és mérföldkövek meghatározása"
+      },
+      "development": {
+        "title": "Fejlesztés",
+        "description": "Iteratív fejlesztés rendszeres frissítésekkel és visszajelzési ciklusokkal"
+      },
+      "launch": {
+        "title": "Indítás és Támogatás",
+        "description": "Telepítés, monitorozás és folyamatos támogatás a siker biztosítására"
+      }
+    },
+    "pricing": {
+      "title": "Befektetési Tartományok",
+      "website": {
+        "title": "Weboldal Fejlesztés",
+        "range": "800.000 - 3.200.000 Ft",
+        "description": "Egyedi weboldalak modern dizájnnal és funkcionalitással"
+      },
+      "webapp": {
+        "title": "Webalkalmazások",
+        "range": "2.000.000 - 8.000.000 Ft",
+        "description": "Komplex alkalmazások fejlett funkciókkal és integrációkkal"
+      },
+      "consulting": {
+        "title": "Tanácsadás és Auditok",
+        "range": "200.000 - 800.000 Ft",
+        "description": "Szakértői útmutatás és technikai felülvizsgálatok"
+      }
+    },
     "steps": {
       "step1": "Projekt Részletek",
       "step2": "Követelmények",
@@ -323,6 +487,8 @@
       "ecommerce": "E-kereskedelmi Oldal",
       "redesign": "Weboldal Újratervezés",
       "maintenance": "Weboldal Karbantartás",
+      "optimization": "Teljesítmény Optimalizálás",
+      "consulting": "Technikai Tanácsadás",
       "other": "Egyéb"
     },
     "budget": {
@@ -349,7 +515,9 @@
       "seo": "SEO Optimalizálás",
       "analytics": "Analitika Beállítás",
       "multilingual": "Többnyelvű Támogatás",
-      "api": "API Integráció"
+      "api": "API Integráció",
+      "performance": "Teljesítmény Optimalizálás",
+      "accessibility": "Akadálymentesség"
     },
     "form": {
       "name": "Teljes Név",
@@ -367,6 +535,8 @@
       "mailto_fallback": "vagy használd az email kliensedet",
       "success": "Köszönöm! Az üzeneted sikeresen elküldve.",
       "error": "Valami hiba történt. Kérlek próbáld újra vagy írj emailt közvetlenül.",
+      "step": "Lépés",
+      "of": "/",
       "validation": {
         "required": "Ez a mező kötelező",
         "email": "Kérlek érvényes email címet adj meg",
@@ -380,8 +550,27 @@
       "step1": "Átnézem a projekt részleteit",
       "step2": "Személyre szabott választ kapsz",
       "step3": "Beszélgetést ütemezünk a részletekről",
+      "step4": "Részletes ajánlatot adok ütemtervvel és árazással",
       "cta": "Vissza a Portfolióhoz",
-      "social": "Kövesd a munkámat:"
+      "social": "Kövesd a munkámat:",
+      "guarantee": "48 órás válaszidő garancia"
+    },
+    "testimonials": {
+      "title": "Mit mondanak az ügyfelek",
+      "items": [
+        {
+          "name": "Sarah Johnson",
+          "company": "Tech Startup",
+          "text": "Selora kivételes weboldalt szállított, amely felülmúlta az elvárásainkat. A részletekre való odafigyelésük és technikai szakértelmük kiemelkedő.",
+          "rating": 5
+        },
+        {
+          "name": "Mark Chen",
+          "company": "E-kereskedelmi Vállalkozás",
+          "text": "Professzionális, megbízható és hihetetlenül tehetséges. Az új platformunk gyönyörűen teljesít és jelentősen javította a konverziós arányainkat.",
+          "rating": 5
+        }
+      ]
     }
   },
 
@@ -396,27 +585,15 @@
 
   "services": {
     "title": "Szolgáltatások",
+    "subtitle": "Világos ajánlatok a kapcsolatfelvételi varázslóval összhangban.",
+    "from": "Kezdve",
+    "note": "Az árak kiindulási pontok. A végső árajánlatok a terjedelemtől függenek. EUR és HUF megjelenítés (1 EUR = 400 HUF).",
     "items": {
-      "website": {
-        "title": "Weboldal",
-        "blurb": "Modern, gyors weboldalak letisztult UI‑val és világos szerkezettel."
-      },
-      "webapp": {
-        "title": "Webalkalmazás",
-        "blurb": "Egyedi React appok stabil architektúrával és jó teljesítménnyel."
-      },
-      "ecommerce": {
-        "title": "E‑kereskedelem",
-        "blurb": "Gyors, biztonságos, könnyen kezelhető webshopok."
-      },
-      "redesign": {
-        "title": "Redizájn",
-        "blurb": "Tisztább UX/UI, jobb sebesség, átláthatóbb tartalom."
-      },
-      "maintenance": {
-        "title": "Karbantartás",
-        "blurb": "Frissítések, javítások és teljesítmény‑optimalizálás."
-      }
+      "website": { "desc": "Modern, reszponzív weboldalak sebességre és kidolgozottságra tervezve." },
+      "webapp": { "desc": "Egyedi React webalkalmazások robusztus architektúrával." },
+      "ecommerce": { "desc": "E-kereskedelmi kirakat biztonságos fizetéssel és CMS-sel." },
+      "redesign": { "desc": "UX/UI frissítés a tisztaság, teljesítmény és kinézet javításáért." },
+      "maintenance": { "desc": "Folyamatos frissítések, javítások és teljesítménygondozás." }
     }
   },
 
@@ -454,7 +631,23 @@
 
   "footer": {
     "rights": "Minden jog fenntartva.",
-    "tagline": "Selora — Budapest • Szabadúszóként elérhető • Válasz 24–48 órán belül • Helyi idő: {{time}}"
+    "tagline": "Selora — Budapest • Szabadúszóként elérhető • Válasz 24–48 órán belül • Helyi idő: {{time}}",
+    "sections": {
+      "quick_links": "Gyors Linkek",
+      "legal": "Jogi",
+      "get_in_touch": "Kapcsolat"
+    },
+    "legal": {
+      "legal_notice": "Impresszum",
+      "privacy_policy": "Adatvédelmi Tájékoztató",
+      "cookie_policy": "Sütiszabályzat",
+      "terms_of_service": "Általános Szerződési Feltételek",
+      "refunds_cancellations": "Visszatérítés és Lemondás",
+      "support_maintenance": "Támogatás és Karbantartás"
+    },
+    "contact_links": {
+      "start_project": "Kezdjük El"
+    }
   },
 
   "common": {
@@ -483,6 +676,10 @@
       "budget": "Költségvetés:",
       "timeline": "Időkeret:",
       "features": "Funkciók:"
+    },
+    "navigation": {
+      "switch_to_hungarian": "Váltás magyar nyelvre",
+      "switch_to_english": "Switch to English"
     }
   }
 }

@@ -87,25 +87,16 @@ export default function LanguageSwitch() {
     <button
       ref={buttonRef}
       type="button"
-      aria-label={lang === 'en' ? 'Switch language to Hungarian' : 'Váltás angol nyelvre'}
+      aria-label={lang === 'en' ? t('common.navigation.switch_to_hungarian') : t('common.navigation.switch_to_english')}
       onClick={toggle}
       disabled={isAnimating}
       className="relative inline-flex items-center border border-white/20 hover:border-white/40 rounded-[var(--radius-md)] px-2 py-1 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50 disabled:opacity-70"
       data-magnetic="0.15"
       data-cursor-text="Lang"
     >
-      <span className="relative h-5 w-10 overflow-hidden">
-        <span
-          className="absolute inset-0 grid place-items-center transition-transform duration-300"
-          style={{ transform: lang === 'en' ? 'translateY(0%)' : 'translateY(-100%)' }}
-        >
-          <span className="text-xs tabular-nums tracking-wide">{labels.en}</span>
-        </span>
-        <span
-          className="absolute inset-0 grid place-items-center transition-transform duration-300"
-          style={{ transform: lang === 'en' ? 'translateY(100%)' : 'translateY(0%)' }}
-        >
-          <span className="text-xs tabular-nums tracking-wide">{labels.hu}</span>
+      <span className="relative h-5 w-10 overflow-hidden flex items-center justify-center">
+        <span className="text-xs tabular-nums tracking-wide transition-all duration-300">
+          {lang === 'en' ? labels.en : labels.hu}
         </span>
       </span>
       

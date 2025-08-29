@@ -18,8 +18,6 @@ export default function Footer() {
     setLegalOpen(true)
   }
 
-  const lang = typeof navigator !== 'undefined' && navigator.language?.startsWith('hu') ? 'hu' : 'en'
-  const label = (en, hu) => (lang === 'hu' ? hu : en)
   return (
     <footer className="relative py-12 md:py-16 border-t border-white/10 overflow-hidden">
       {/* Gradient top hairline */}
@@ -111,37 +109,37 @@ export default function Footer() {
         <div className="grid gap-8 sm:gap-10 md:grid-cols-2 lg:grid-cols-3">
           {/* Quick Links column (uses existing anchors) */}
           <div>
-            <h3 className="mb-3 text-xs uppercase tracking-wider text-white/50">{label('Quick Links', 'Gyors Linkek')}</h3>
+            <h3 className="mb-3 text-xs uppercase tracking-wider text-white/50">{t('footer.sections.quick_links')}</h3>
             <ul className="flex flex-col gap-2">
               <li><a href="#about" className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-white/85 hover:text-white hover:bg-white/5 transition-colors">{t('nav.about')}</a></li>
               <li><a href="#skills" className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-white/85 hover:text-white hover:bg-white/5 transition-colors">{t('nav.skills')}</a></li>
               <li><a href="#projects" className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-white/85 hover:text-white hover:bg-white/5 transition-colors">{t('nav.projects')}</a></li>
-              <li><a href="#services" className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-white/85 hover:text-white hover:bg-white/5 transition-colors">{t('nav.services', t('services.title'))}</a></li>
-              <li><a href="#process" className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-white/85 hover:text-white hover:bg-white/5 transition-colors">{t('nav.process', t('process.title'))}</a></li>
-              <li><a href="#faq" className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-white/85 hover:text-white hover:bg-white/5 transition-colors">{t('nav.faq', t('faq.title'))}</a></li>
+              <li><a href="#services" className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-white/85 hover:text-white hover:bg-white/5 transition-colors">{t('nav.services')}</a></li>
+              <li><a href="#process" className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-white/85 hover:text-white hover:bg-white/5 transition-colors">{t('nav.process')}</a></li>
+              <li><a href="#faq" className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-white/85 hover:text-white hover:bg-white/5 transition-colors">{t('nav.faq')}</a></li>
               <li><a href="#contact" className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-white/85 hover:text-white hover:bg-white/5 transition-colors">{t('nav.contact')}</a></li>
             </ul>
           </div>
 
           {/* Legal column */}
           <div>
-            <h3 className="mb-3 text-xs uppercase tracking-wider text-white/50">{label('Legal', 'Jogi')}</h3>
+            <h3 className="mb-3 text-xs uppercase tracking-wider text-white/50">{t('footer.sections.legal')}</h3>
             <ul className="flex flex-col gap-2 text-white/85">
-              <li><a href="#" onClick={(e) => { e.preventDefault(); openLegal('legal-notice') }} className="hover:text-white hover:underline underline-offset-4">{label('Legal Notice', 'Impresszum')}</a></li>
-              <li><a href="#" onClick={(e) => { e.preventDefault(); openLegal('privacy-policy') }} className="hover:text-white hover:underline underline-offset-4">{label('Privacy Policy', 'Adatvédelmi Tájékoztató')}</a></li>
-              <li><a href="#" onClick={(e) => { e.preventDefault(); openLegal('cookie-policy') }} className="hover:text-white hover:underline underline-offset-4">{label('Cookie Policy', 'Sütiszabályzat')}</a></li>
-              <li><a href="#" onClick={(e) => { e.preventDefault(); openLegal('terms-of-service') }} className="hover:text-white hover:underline underline-offset-4">{label('Terms of Service', 'Általános Szerződési Feltételek')}</a></li>
-              <li><a href="#" onClick={(e) => { e.preventDefault(); openLegal('refunds-cancellations') }} className="hover:text-white hover:underline underline-offset-4">{label('Refunds & Cancellations', 'Visszatérítés és Lemondás')}</a></li>
-              <li><a href="#" onClick={(e) => { e.preventDefault(); openLegal('support-maintenance') }} className="hover:text-white hover:underline underline-offset-4">{label('Support & Maintenance', 'Támogatás és Karbantartás')}</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); openLegal('legal-notice') }} className="hover:text-white hover:underline underline-offset-4">{t('footer.legal.legal_notice')}</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); openLegal('privacy-policy') }} className="hover:text-white hover:underline underline-offset-4">{t('footer.legal.privacy_policy')}</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); openLegal('cookie-policy') }} className="hover:text-white hover:underline underline-offset-4">{t('footer.legal.cookie_policy')}</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); openLegal('terms-of-service') }} className="hover:text-white hover:underline underline-offset-4">{t('footer.legal.terms_of_service')}</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); openLegal('refunds-cancellations') }} className="hover:text-white hover:underline underline-offset-4">{t('footer.legal.refunds_cancellations')}</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); openLegal('support-maintenance') }} className="hover:text-white hover:underline underline-offset-4">{t('footer.legal.support_maintenance')}</a></li>
             </ul>
           </div>
 
           {/* Contact column */}
           <div className="hidden lg:block">
-            <h3 className="mb-3 text-xs uppercase tracking-wider text-white/50">{label('Get In Touch', 'Kapcsolat')}</h3>
+            <h3 className="mb-3 text-xs uppercase tracking-wider text-white/50">{t('footer.sections.get_in_touch')}</h3>
             <ul className="flex flex-col gap-2 text-white/85">
               <li><a href="#contact" className="hover:text-white hover:underline underline-offset-4">{t('nav.contact')}</a></li>
-              <li><a href="#cta" className="hover:text-white hover:underline underline-offset-4">{label('Start a Project', 'Kezdjük El')}</a></li>
+              <li><a href="#cta" className="hover:text-white hover:underline underline-offset-4">{t('footer.contact_links.start_project')}</a></li>
             </ul>
           </div>
         </div>

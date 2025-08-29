@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import useScrollReveal from '../lib/anim/useScrollReveal'
 import useReducedMotion from '../lib/anim/useReducedMotion'
 import Button from './ui/Button'
 
@@ -11,7 +10,6 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function Hero() {
   const { t } = useTranslation()
-  const reveal = useScrollReveal()
   const reduced = useReducedMotion(false)
   
   // Optimized refs
@@ -29,7 +27,7 @@ export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 })
   const [scrollProgress, setScrollProgress] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
-  const [animationsEnabled, setAnimationsEnabled] = useState(true)
+  const [animationsEnabled] = useState(true)
 
   // Enhanced particle system with more particles
   const createEnhancedParticleSystem = useCallback(() => {
@@ -90,7 +88,6 @@ export default function Hero() {
     if (!logoParticlesRef.current || reduced) return
 
     const logoParticles = []
-    const particleCount = 40
     
     // Clear existing
     logoParticlesRef.current.innerHTML = ''
@@ -457,11 +454,11 @@ export default function Hero() {
   }, [reduced, animationsEnabled])
 
   // Technologies and metrics data
-  const technologies = ['React', 'TypeScript', 'Node.js', 'Three.js', 'GSAP', 'WebGL', 'Next.js', 'GraphQL']
+  const technologies = ['react', 'typescript', 'nodejs', 'threejs', 'gsap', 'webgl', 'nextjs', 'graphql']
   const metrics = [
-    { label: 'Years Experience', value: '5+' },
-    { label: 'Projects Completed', value: '50+' },
-    { label: 'Technologies Mastered', value: '20+' }
+    { label: t('hero.metrics.years_experience'), value: t('hero.metrics.years_value') },
+    { label: t('hero.metrics.projects_completed'), value: t('hero.metrics.projects_value') },
+    { label: t('hero.metrics.technologies_mastered'), value: t('hero.metrics.technologies_value') }
   ]
 
   return (
@@ -585,9 +582,8 @@ export default function Hero() {
               }}
               onMouseEnter={(e) => handleStandardHover(e, 1)}
               onMouseLeave={handleStandardLeave}
-            >
-              Digital Architect &<br />Experience Craftsman
-            </h2>
+              dangerouslySetInnerHTML={{ __html: t('hero.hero_title') }}
+            />
             
             <p 
               className="text-sm leading-relaxed"
@@ -597,7 +593,7 @@ export default function Hero() {
                 transformStyle: 'preserve-3d'
               }}
             >
-              Transforming ambitious visions into stunning digital realities
+              {t('hero.hero_description')}
             </p>
           </div>
 
@@ -632,7 +628,7 @@ export default function Hero() {
                     textShadow: '0 2px 4px rgba(0,0,0,0.5)'
                   }}
                 >
-                  {tech}
+                  {t(`hero.technologies.${tech}`)}
                 </div>
               </div>
             ))}
@@ -709,7 +705,7 @@ export default function Hero() {
               onMouseLeave={handleStandardLeave}
             >
               <span className="relative z-10 flex items-center gap-3">
-                Craft Magic
+                {t('hero.cta_craft')}
                 <svg className="w-5 h-5 group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -746,7 +742,7 @@ export default function Hero() {
               onMouseEnter={(e) => handleStandardHover(e, 1.5)}
               onMouseLeave={handleStandardLeave}
             >
-              <span className="relative z-10">Explore Creations</span>
+              <span className="relative z-10">{t('hero.cta_explore')}</span>
               {/* Glass reflection effect */}
               <div 
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -794,7 +790,7 @@ export default function Hero() {
                   textShadow: '0 2px 4px rgba(0,0,0,0.8)'
                 }}
               >
-                Available for epic projects
+                {t('hero.availability_epic')}
               </span>
             </div>
           </div>

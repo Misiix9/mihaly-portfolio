@@ -24,15 +24,15 @@ export default function StickyNavigation() {
   const reduced = useReducedMotion()
 
   const navItems = useMemo(() => [
-    { key: 'home', href: '#hero', label: t('nav.home', 'Home') },
-    { key: 'about', href: '#about', label: t('nav.about', 'About') },
-    { key: 'skills', href: '#skills', label: t('nav.skills', 'Skills') },
-    { key: 'projects', href: '#projects', label: t('nav.projects', 'Projects') },
-    { key: 'services', href: '#services', label: t('nav.services', t('services.title', 'Services')) },
-    { key: 'process', href: '#process', label: t('nav.process', t('process.title', 'Process')) },
-    { key: 'faq', href: '#faq', label: t('nav.faq', t('faq.title', 'FAQ')) },
-    { key: 'cta', href: '#cta', label: t('nav.cta', 'Get Started') },
-    { key: 'contact', href: '#contact', label: t('nav.contact', 'Contact') }
+    { key: 'home', href: '#hero', label: t('nav.home') },
+    { key: 'about', href: '#about', label: t('nav.about') },
+    { key: 'skills', href: '#skills', label: t('nav.skills') },
+    { key: 'projects', href: '#projects', label: t('nav.projects') },
+    { key: 'services', href: '#services', label: t('nav.services') },
+    { key: 'process', href: '#process', label: t('nav.process') },
+    { key: 'faq', href: '#faq', label: t('nav.faq') },
+    { key: 'cta', href: '#cta', label: t('nav.cta') },
+    { key: 'contact', href: '#contact', label: t('nav.contact') }
   ], [t])
 
   // Smooth scroll to section
@@ -121,7 +121,6 @@ export default function StickyNavigation() {
           
           if (delta > threshold && heroSection && aboutSection) {
             const scrollingDown = y > lastY
-            const heroHeight = heroSection.offsetHeight
             const aboutStart = aboutSection.offsetTop
             
             // Only hide navbar when user has scrolled past the hero section into the about section
@@ -388,7 +387,7 @@ export default function StickyNavigation() {
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="md:hidden p-2 text-white/70 hover:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white/40 rounded"
-                aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+                aria-label={isMenuOpen ? t('common.close_menu') : t('common.open_menu')}
                 aria-expanded={isMenuOpen}
               >
                 <div className="w-6 h-6 flex flex-col justify-center space-y-1">

@@ -103,11 +103,11 @@ export default function SectionProgressIndicator() {
             </div>
 
             {/* Section name tooltip */}
-            <div className="absolute right-6 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none group-hover:translate-x-1">
-              <div className="bg-black/90 backdrop-blur-md text-white text-xs px-3 py-2 rounded-lg border border-white/20 shadow-lg whitespace-nowrap">
+            <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-full opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none group-hover:-translate-x-[calc(100%+8px)]">
+              <div className="bg-black/90 backdrop-blur-md text-white text-xs px-3 py-2 rounded-lg border border-white/20 shadow-lg whitespace-nowrap relative min-w-max">
                 {section.name}
-                <div className="absolute left-full top-1/2 transform -translate-y-1/2">
-                  <div className="w-0 h-0 border-t-[4px] border-b-[4px] border-l-[6px] border-transparent border-l-black/90" />
+                <div className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-full">
+                  <div className="w-0 h-0 border-t-[4px] border-b-[4px] border-r-[6px] border-transparent border-r-black/90" />
                 </div>
               </div>
             </div>

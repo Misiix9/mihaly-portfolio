@@ -6,7 +6,9 @@
     "projects": "Work",
     "services": "Services",
     "process": "Process",
-    "contact": "Contact"
+    "contact": "Contact",
+    "cta": "Get Started",
+    "faq": "FAQ"
   },
   "lang": { "en": "EN", "hu": "HU" },
 
@@ -45,7 +47,30 @@
     "cta_secondary": "See Projects",
     "scroll_discover": "Scroll to discover",
     "availability": "Available for freelance projects",
-    "response_time": "48-hour response guaranteed"
+    "response_time": "48-hour response guaranteed",
+    "hero_title": "Digital Architect &<br />Experience Craftsman",
+    "hero_description": "Transforming ambitious visions into stunning digital realities",
+    "cta_craft": "Craft Magic",
+    "cta_explore": "Explore Creations",
+    "availability_epic": "Available for epic projects",
+    "metrics": {
+      "years_experience": "Years Experience",
+      "projects_completed": "Projects Completed",
+      "technologies_mastered": "Technologies Mastered",
+      "years_value": "5+",
+      "projects_value": "50+",
+      "technologies_value": "20+"
+    },
+    "technologies": {
+      "react": "React",
+      "typescript": "TypeScript",
+      "nodejs": "Node.js",
+      "threejs": "Three.js",
+      "gsap": "GSAP",
+      "webgl": "WebGL",
+      "nextjs": "Next.js",
+      "graphql": "GraphQL"
+    }
   },
 
   "about": {
@@ -461,6 +486,7 @@
       "webapp": "Web Application",
       "ecommerce": "E-commerce Platform",
       "redesign": "Website Redesign",
+      "maintenance": "Website Maintenance",
       "optimization": "Performance Optimization",
       "consulting": "Technical Consulting",
       "other": "Other"
@@ -509,6 +535,8 @@
       "mailto_fallback": "or email me directly",
       "success": "Thank you! Your message has been sent successfully.",
       "error": "Something went wrong. Please try again or email me directly.",
+      "step": "Step",
+      "of": "of",
       "validation": {
         "required": "This field is required",
         "email": "Please enter a valid email address",
@@ -548,7 +576,23 @@
 
   "footer": {
     "rights": "All rights reserved.",
-    "tagline": "Selora — Budapest • Available for freelance • Reply in 24–48h • Local time: {{time}}"
+    "tagline": "Selora — Budapest • Available for freelance • Reply in 24–48h • Local time: {{time}}",
+    "sections": {
+      "quick_links": "Quick Links",
+      "legal": "Legal",
+      "get_in_touch": "Get In Touch"
+    },
+    "legal": {
+      "legal_notice": "Legal Notice",
+      "privacy_policy": "Privacy Policy",
+      "cookie_policy": "Cookie Policy",
+      "terms_of_service": "Terms of Service",
+      "refunds_cancellations": "Refunds & Cancellations",
+      "support_maintenance": "Support & Maintenance"
+    },
+    "contact_links": {
+      "start_project": "Start a Project"
+    }
   },
 
   "services": {
@@ -684,6 +728,10 @@
       "budget": "Budget:",
       "timeline": "Timeline:",
       "features": "Features:"
+    },
+    "navigation": {
+      "switch_to_hungarian": "Switch language to Hungarian",
+      "switch_to_english": "Switch language to English"
     }
   }
 }

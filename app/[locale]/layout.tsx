@@ -104,18 +104,29 @@ export const metadata: Metadata = {
 
 import NeuralCursor from "@/components/ui/NeuralCursor";
 
+export function generateStaticParams() {
+  return [
+    {locale: 'en'},
+    {locale: 'hu'}
+  ];
+}
+
 export default async function RootLayout({
   children,
-}: Readonly<{
+  params
+}: {
   children: React.ReactNode;
-}>) {
-  const locale = await getLocale();
+  params: Promise<{locale: string}>;
+}) {
+  const {locale} = await params;
   const messages = await getMessages();
 
   // Structured Data (JSON-LD) for Google Rich Results
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
+     // ... rest of jsonLd
+
     "name": "Mihály Győri",
     "alternateName": "Selora",
     "url": "https://selora.dev",

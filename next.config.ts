@@ -1,8 +1,8 @@
 import createNextIntlPlugin from 'next-intl/plugin';
- 
-const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
- 
 import type { NextConfig } from 'next';
+
+// Use the default path that next-intl expects
+const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
     output: 'export',
@@ -12,5 +12,5 @@ const nextConfig: NextConfig = {
     // Optional: Add basePath if deploying to a subdirectory
     // basePath: '/mihaly-portfolio', 
 };
- 
+
 export default withNextIntl(nextConfig);

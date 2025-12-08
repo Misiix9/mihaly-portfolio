@@ -2,6 +2,26 @@ import { useTranslation } from 'react-i18next'
 import useScrollReveal from '../lib/anim/useScrollReveal'
 import Parallax from './ui/Parallax'
 import MorphingBlob from './ui/MorphingBlob'
+import { BentoGrid, BentoItem } from './ui/BentoGrid'
+// Simple SVGs to replace external icons for now
+const IconBox = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-4 w-4 text-neutral-500"
+  >
+    <path
+      d="M3 7.8C3 6.11984 3 5.27976 3.32698 4.63803C3.6146 4.07354 4.07354 3.6146 4.63803 3.32698C5.27976 3 6.11984 3 7.8 3H16.2C17.8802 3 18.7202 3 19.362 3.32698C19.9265 3.6146 20.3854 4.07354 20.673 4.63803C21 5.27976 21 6.11984 21 7.8V16.2C21 17.8802 21 18.7202 20.673 19.362C20.3854 19.9265 19.9265 20.3854 19.362 20.673C18.7202 21 17.8802 21 16.2 21H7.8C6.11984 21 5.27976 21 4.63803 20.673C4.07354 20.3854 3.6146 19.9265 3.32698 19.362C3 18.7202 3 17.8802 3 16.2V7.8Z"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 export default function About() {
   const { t } = useTranslation()
@@ -11,34 +31,20 @@ export default function About() {
   const reveal = useScrollReveal()
 
   return (
-    <section 
-      className="relative pt-8 md:pt-12 pb-20 md:pb-32 bg-black" 
-      id="about" 
+    <section
+      className="relative pt-8 md:pt-12 pb-20 md:pb-32 bg-black"
+      id="about"
       data-section="about"
       style={{
         position: 'relative',
         zIndex: 10,
         backgroundColor: '#000000',
         minHeight: '100vh',
-        transform: 'translateZ(0)' // Create stacking context
+        transform: 'translateZ(0)'
       }}
     >
-      {/* Full Black Background - ensures it covers everything */}
-      <div
-        className="absolute inset-0 bg-black"
-        style={{
-          position: 'absolute',
-          top: '-100px', // Extend upward to cover header
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: '#000000',
-          zIndex: -1
-        }}
-        aria-hidden
-      />
-      
-      {/* Enhanced Dynamic Background Layer */}
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-black -z-10" />
       <div
         className="absolute inset-0 -z-20 pointer-events-none"
         style={{
@@ -51,147 +57,88 @@ export default function About() {
         }}
         aria-hidden
       />
-      
-      {/* Enhanced Floating Elements */}
-      <div
-        className="absolute top-20 right-20 w-40 h-40 rounded-full -z-19 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.03) 0%, transparent 70%)',
-          animation: 'globalFloat 25s ease-in-out infinite 1s'
-        }}
-        aria-hidden
-      />
-      <div
-        className="absolute bottom-32 left-16 w-32 h-32 rounded-full -z-19 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.025) 0%, transparent 70%)',
-          animation: 'globalPulse 18s ease-in-out infinite 3s'
-        }}
-        aria-hidden
-      />
-      
-      {/* Enhanced background accents */}
-      <Parallax
-        className="pointer-events-none absolute -z-10 -top-12 left-8 h-[500px] w-[500px]"
-        aria-hidden
-        speedY={0.06}
-        maxShift={80}
-      >
-        <MorphingBlob className="h-full w-full" opacity={0.06} />
-      </Parallax>
-      <Parallax
-        className="pointer-events-none absolute -z-10 top-16 -right-12 h-48 w-48 rounded-full bg-gradient-to-r from-blue-500/5 to-purple-500/5 blur-3xl"
-        aria-hidden
-        speedY={0.1}
-        maxShift={90}
-        style={{ animation: 'globalPulse 16s ease-in-out infinite 2s' }}
-      />
-      
-      <div className="container mx-auto px-6 sm:px-8 lg:px-12">
-        {/* Enhanced Title Section */}
-        <div className="text-center mb-16" ref={reveal}>
+
+      <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10" ref={reveal}>
+        {/* Title */}
+        <div className="text-center mb-16">
           <h2 className="about-title text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent mb-4">
             {t('about.title')}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          {/* Main Content */}
-          <div ref={reveal} className="lg:col-span-7 space-y-8">
-            {/* About Content */}
-            <div className="relative">
-              <p className="about-content text-lg leading-relaxed text-white/85 max-w-3xl">
+        {/* Bento Grid Layout */}
+        <BentoGrid>
+          {/* Main Bio - Large Item */}
+          <BentoItem
+            title={t('about.mission_title', 'My Mission')}
+            description={t('about.mission')}
+            header={<div className="flex h-full min-h-[6rem] w-full rounded-xl bg-gradient-to-br from-neutral-200 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800 animate-pulse" />}
+            icon={<IconBox />}
+            cols={2}
+            rows={1}
+            className="md:col-span-2"
+          >
+            <div className="p-4">
+              <p className="text-neutral-300 text-sm leading-relaxed mb-4">
                 {t('about.body')}
               </p>
-              <div className="absolute -left-4 top-0 w-1 h-16 bg-gradient-to-b from-blue-500 to-transparent rounded-full" />
-            </div>
-
-            {/* Mission Statement */}
-            <div className="relative p-6 rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm">
-              <div className="absolute top-4 left-4 w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
-              <p className="text-white/90 italic leading-relaxed pl-4">
+              <div className="p-4 rounded-xl bg-white/5 border border-white/10 italic text-white/80">
                 "{t('about.mission')}"
-              </p>
+              </div>
             </div>
+          </BentoItem>
 
-            {/* Core Strengths */}
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-white/90 flex items-center gap-3">
-                <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
-                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
+          {/* Experience - Tall Item */}
+          <BentoItem
+            title={t('about.experience_title')}
+            description={t('about.experience_desc', 'My professional journey')}
+            header={<div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800" />}
+            icon={<IconBox />}
+            cols={1}
+            rows={2}
+          >
+            <div className="flex flex-col gap-3 p-4">
+              {Array.isArray(experience) && experience.slice(0, 4).map((exp, i) => (
+                <div key={i} className="text-xs text-neutral-400 border-b border-white/10 pb-2 last:border-0">
+                  {exp}
                 </div>
-                {t('about.strengths_title')}
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {Array.isArray(strengths) && strengths.map((strength, i) => (
-                  <div key={i} className="group flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-all duration-300">
-                    <div className="mt-1.5 w-2 h-2 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 group-hover:scale-125 transition-transform duration-300" />
-                    <span className="text-white/80 leading-relaxed">{strength}</span>
-                  </div>
-                ))}
-              </div>
+              ))}
             </div>
-          </div>
+          </BentoItem>
 
-          {/* Sidebar */}
-          <div ref={reveal} className="lg:col-span-5 space-y-8">
-            {/* Technology Stack */}
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-white/90 flex items-center gap-3">
-                <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center">
-                  <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                  </svg>
-                </div>
-                {t('about.stack_title')}
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {Array.isArray(stack) && stack.map((tech, i) => (
-                  <span
-                    key={i}
-                    className="group relative px-4 py-2 rounded-xl border border-white/15 bg-gradient-to-br from-white/8 to-white/[0.02] text-white/85 hover:text-white hover:border-white/25 hover:bg-white/10 transition-all duration-300 cursor-default backdrop-blur-sm"
-                  >
-                    <span className="relative z-10">{tech}</span>
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/10 group-hover:to-purple-500/10 transition-all duration-300" />
-                  </span>
-                ))}
-              </div>
+          {/* Stack - Small Item */}
+          <BentoItem
+            title={t('about.stack_title')}
+            description="My Tech Arsenal"
+            header={<div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800" />}
+            icon={<IconBox />}
+            cols={1}
+          >
+            <div className="flex flex-wrap gap-2 p-2">
+              {Array.isArray(stack) && stack.slice(0, 6).map((tech, i) => (
+                <span key={i} className="text-[10px] px-2 py-1 bg-white/10 rounded-md text-white/70">
+                  {tech}
+                </span>
+              ))}
             </div>
+          </BentoItem>
 
-            {/* Professional Experience */}
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-white/90 flex items-center gap-3">
-                <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
-                  <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                {t('about.experience_title')}
-              </h3>
-              <div className="space-y-3">
-                {Array.isArray(experience) && experience.map((exp, i) => (
-                  <div key={i} className="group flex items-start gap-3 p-4 rounded-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.01] hover:border-white/20 hover:bg-white/8 transition-all duration-300 backdrop-blur-sm">
-                    <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-gradient-to-r from-orange-400 to-red-400 group-hover:scale-150 transition-transform duration-300" />
-                    <span className="text-white/80 leading-relaxed text-sm">{exp}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Stats or Call to Action */}
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-white/10 backdrop-blur-sm">
-              <div className="text-center space-y-3">
-                <div className="text-2xl font-bold text-white">3+</div>
-                <div className="text-white/70 text-sm uppercase tracking-wider">Years of Experience</div>
-                <div className="w-12 h-px bg-gradient-to-r from-blue-400 to-purple-400 mx-auto" />
-                <div className="text-white/60 text-xs">Crafting digital experiences</div>
-              </div>
-            </div>
-          </div>
-        </div>
+          {/* Strengths - Small Item */}
+          <BentoItem
+            title={t('about.strengths_title')}
+            description="Core Competencies"
+            header={<div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800" />}
+            icon={<IconBox />}
+            cols={1}
+          >
+            <ul className="list-disc list-inside text-xs text-neutral-400 p-2 space-y-1">
+              {Array.isArray(strengths) && strengths.slice(0, 3).map((s, i) => (
+                <li key={i}>{s}</li>
+              ))}
+            </ul>
+          </BentoItem>
+        </BentoGrid>
       </div>
     </section>
   )

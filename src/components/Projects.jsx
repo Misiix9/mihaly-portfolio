@@ -5,8 +5,8 @@ import { createAdvancedGsapParallax, createScrollReveal } from '../lib/anim/para
 import useReducedMotion from '../lib/anim/useReducedMotion'
 import Parallax from './ui/Parallax'
 import LottiePlayer from './ui/LottiePlayer'
-import ProjectCard from './ui/ProjectCard'
 import ProjectModal from './ui/ProjectModal'
+import HorizontalProjectScroll from './ui/HorizontalProjectScroll'
 
 export default function Projects() {
   const { t } = useTranslation()
@@ -15,7 +15,6 @@ export default function Projects() {
   const reduced = useReducedMotion()
   const projectsRef = useRef(null)
   const titleRef = useRef(null)
-  const cardsRef = useRef(null)
   const [selectedProject, setSelectedProject] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -50,22 +49,6 @@ export default function Projects() {
       ease: 'power3.out',
     })
 
-    // Staggered project cards reveal
-    const cards = cardsRef.current?.children
-    if (cards) {
-      Array.from(cards).forEach((card, index) => {
-        createScrollReveal(card, {
-          y: 100,
-          opacity: 0,
-          scale: 0.9,
-          rotation: index % 2 === 0 ? -1 : 1,
-          delay: index * 0.15,
-          duration: 1.2,
-          ease: 'power3.out',
-        })
-      })
-    }
-
     return () => {
       sectionParallax?.()
       titleReveal?.()
@@ -73,7 +56,7 @@ export default function Projects() {
   }, [reduced])
 
   return (
-    <section ref={projectsRef} className="relative py-20 md:py-28" id="projects" data-section="projects">
+    <section ref={projectsRef} className="relative py-20 md:py-28 overflow-hidden" id="projects" data-section="projects">
       {/* Enhanced Dynamic Background Layer for Projects Section */}
       <div
         className="absolute inset-0 -z-20 pointer-events-none overflow-hidden"
@@ -88,7 +71,7 @@ export default function Projects() {
         }}
         aria-hidden
       />
-      
+
       {/* Animated mesh gradient overlay */}
       <div
         className="absolute inset-0 -z-19 pointer-events-none opacity-40"
@@ -102,7 +85,7 @@ export default function Projects() {
         }}
         aria-hidden
       />
-      
+
       {/* Enhanced Floating Dynamic Elements */}
       <div
         className="absolute top-24 right-32 w-36 h-36 rounded-full -z-19 pointer-events-none"
@@ -122,7 +105,7 @@ export default function Projects() {
         }}
         aria-hidden
       />
-      
+
       {/* Additional floating particles */}
       <div
         className="absolute top-1/3 left-1/4 w-2 h-2 rounded-full -z-18 pointer-events-none bg-white/20"
@@ -148,7 +131,7 @@ export default function Projects() {
         }}
         aria-hidden
       />
-      
+
       {/* Background accents (RAF mode) with enhanced animation */}
       <Parallax
         className="pointer-events-none absolute -z-10 -top-6 left-10 h-28 w-28 rounded-full bg-white/4 blur-2xl"
@@ -173,8 +156,8 @@ export default function Projects() {
           autoplay
         />
       </div>
-      <div className="container mx-auto px-4 sm:px-6">
-        <div className="relative" ref={titleRef}>
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="relative mb-8" ref={titleRef}>
           <h2 ref={reveal} className="text-2xl sm:text-3xl font-bold text-white hover:scale-105 transition-all duration-300 cursor-default relative">
             {t('projects.title')}
             {/* Enhanced text glow effect */}
@@ -183,7 +166,7 @@ export default function Projects() {
             </div>
           </h2>
           <p className="mt-3 text-hierarchy-secondary text-lg hover:text-white/90 transition-colors duration-500">{t('projects.subtitle')}</p>
-          
+
           {/* Enhanced decorative elements */}
           <div className="absolute -bottom-2 left-0 h-0.5 w-28 bg-gradient-to-r from-white/60 via-white/40 to-transparent rounded-full" />
           <div className="absolute -bottom-2 left-0 h-px w-32 bg-gradient-to-r from-white/30 via-white/20 to-transparent rounded-full animate-pulse" />
@@ -200,16 +183,13 @@ export default function Projects() {
             aria-hidden
           />
         </div>
+      </div>
 
-        <div ref={cardsRef} className="mt-16 px-6 py-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {Array.isArray(items) && items.map((project, idx) => (
-            <ProjectCard
-              key={idx}
-              project={project}
-              onOpenModal={handleOpenModal}
-            />
-          ))}
-        </div>
+      {/* Horizontal Scroll Implementation */}
+      <div className="relative z-10 w-full mt-8">
+        {Array.isArray(items) && (
+          <HorizontalProjectScroll items={items} onOpenModal={handleOpenModal} />
+        )}
       </div>
 
       {/* Project Modal */}

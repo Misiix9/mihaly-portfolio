@@ -7,6 +7,7 @@ import Parallax from './ui/Parallax'
 import SkillsFilter from './ui/SkillsFilter'
 import SkillsCategory from './ui/SkillsCategory'
 import MorphingBlob from './ui/MorphingBlob'
+import SpotlightCard from './ui/SpotlightCard'
 
 export default function Skills() {
   const { t } = useTranslation()
@@ -19,8 +20,8 @@ export default function Skills() {
   const [activeFilter, setActiveFilter] = useState('all')
 
   // Filter categories based on active filter
-  const filteredCategories = activeFilter === 'all' 
-    ? categories 
+  const filteredCategories = activeFilter === 'all'
+    ? categories
     : categories.filter(cat => cat.id === activeFilter)
 
   const handleFilterChange = (filterId) => {
@@ -30,12 +31,12 @@ export default function Skills() {
   // Calculate statistics from skills data
   const skillsStats = useMemo(() => {
     if (!Array.isArray(categories)) return { total: 0, avgLevel: 0, totalYears: 0 }
-    
+
     const allSkills = categories.flatMap(cat => cat.items || [])
     const totalSkills = allSkills.length
     const avgLevel = totalSkills > 0 ? Math.round(allSkills.reduce((sum, skill) => sum + (skill.level || 0), 0) / totalSkills) : 0
     const totalYears = allSkills.reduce((sum, skill) => sum + (skill.yearsExperience || 0), 0)
-    
+
     return { total: totalSkills, avgLevel, totalYears }
   }, [categories])
 
@@ -81,7 +82,7 @@ export default function Skills() {
         }}
         aria-hidden
       />
-      
+
       {/* Floating Dynamic Elements */}
       <div
         className="absolute top-32 left-16 w-28 h-28 rounded-full -z-19 pointer-events-none"
@@ -99,7 +100,7 @@ export default function Skills() {
         }}
         aria-hidden
       />
-      
+
       {/* Background accents with enhanced animation */}
       <Parallax
         className="pointer-events-none absolute -z-10 top-6 right-8 h-28 w-28 rounded-full bg-white/4 blur-2xl"
@@ -135,8 +136,7 @@ export default function Skills() {
         {/* Enhanced Statistics Display */}
         <div ref={statsRef} className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {/* Total Skills Card */}
-          <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md border border-white/10 p-6 hover:border-white/20 transition-all duration-500 hover:scale-105">
-            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <SpotlightCard className="rounded-2xl bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md border border-white/10 p-6 transition-all duration-500 hover:scale-105">
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-3">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-white/20 to-white/10 flex items-center justify-center">
@@ -149,11 +149,10 @@ export default function Skills() {
               <div className="text-3xl font-bold text-white mb-1">{skillsStats.total}</div>
               <div className="text-sm text-white/70">{t('skills.stats.totalSkills', 'Total Skills')}</div>
             </div>
-          </div>
+          </SpotlightCard>
 
           {/* Average Level Card */}
-          <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md border border-white/10 p-6 hover:border-white/20 transition-all duration-500 hover:scale-105">
-            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <SpotlightCard className="rounded-2xl bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md border border-white/10 p-6 transition-all duration-500 hover:scale-105">
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-3">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-white/20 to-white/10 flex items-center justify-center">
@@ -166,11 +165,10 @@ export default function Skills() {
               <div className="text-3xl font-bold text-white mb-1">{skillsStats.avgLevel}/10</div>
               <div className="text-sm text-white/70">{t('skills.stats.avgLevel', 'Average Level')}</div>
             </div>
-          </div>
+          </SpotlightCard>
 
           {/* Total Experience Card */}
-          <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md border border-white/10 p-6 hover:border-white/20 transition-all duration-500 hover:scale-105">
-            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <SpotlightCard className="rounded-2xl bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md border border-white/10 p-6 transition-all duration-500 hover:scale-105">
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-3">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-white/20 to-white/10 flex items-center justify-center">
@@ -183,7 +181,7 @@ export default function Skills() {
               <div className="text-3xl font-bold text-white mb-1">{skillsStats.totalYears}+</div>
               <div className="text-sm text-white/70">{t('skills.stats.totalYears', 'Years Experience')}</div>
             </div>
-          </div>
+          </SpotlightCard>
         </div>
 
         {/* Skills Filter */}

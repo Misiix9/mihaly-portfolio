@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import useReducedMotion from '../lib/anim/useReducedMotion'
 import Button from './ui/Button'
+import TextReveal from './ui/TextReveal'
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger)
@@ -11,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger)
 export default function Hero() {
   const { t } = useTranslation()
   const reduced = useReducedMotion(false)
-  
+
   // Optimized refs
   const heroRef = useRef(null)
   const titleRef = useRef(null)
@@ -22,7 +23,7 @@ export default function Hero() {
   const floatingElementsRef = useRef([])
   const skillBadgesRef = useRef([])
   const metricsRef = useRef(null)
-  
+
   // Performance-optimized states
   const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 })
   const [scrollProgress, setScrollProgress] = useState(0)
@@ -42,10 +43,10 @@ export default function Hero() {
     for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement('div')
       particle.className = 'particle absolute pointer-events-none will-change-transform'
-      
+
       const size = Math.random() * 6 + 2
       const depth = Math.random() * 100 + 50
-      
+
       particle.style.cssText = `
         width: ${size}px;
         height: ${size}px;
@@ -57,16 +58,16 @@ export default function Hero() {
         transform: translateZ(${depth}px) scale(${Math.random() * 1.5 + 0.5});
         box-shadow: 0 0 ${size * 2}px rgba(255,255,255,0.4), 0 0 ${size * 4}px rgba(255,255,255,0.2);
       `
-      
+
       particlesRef.current.appendChild(particle)
       particles.push(particle)
-      
+
       // Snappy animations
-      gsap.set(particle, { 
+      gsap.set(particle, {
         willChange: 'transform',
         backfaceVisibility: 'hidden'
       })
-      
+
       gsap.to(particle, {
         x: `+=${(Math.random() - 0.5) * 300}`,
         y: `+=${(Math.random() - 0.5) * 300}`,
@@ -79,7 +80,7 @@ export default function Hero() {
         delay: i * 0.05
       })
     }
-    
+
     return particles
   }, [reduced])
 
@@ -88,16 +89,16 @@ export default function Hero() {
     if (!logoParticlesRef.current || reduced) return
 
     const logoParticles = []
-    
+
     // Clear existing
     logoParticlesRef.current.innerHTML = ''
 
     // Create logo outline with particles
     const logoPath = [
       // S shape approximation with particles
-      {x: 0, y: 0}, {x: 20, y: 0}, {x: 40, y: 0},
-      {x: 0, y: 20}, {x: 20, y: 20}, {x: 40, y: 20},
-      {x: 20, y: 40}, {x: 40, y: 40}, {x: 60, y: 40}
+      { x: 0, y: 0 }, { x: 20, y: 0 }, { x: 40, y: 0 },
+      { x: 0, y: 20 }, { x: 20, y: 20 }, { x: 40, y: 20 },
+      { x: 20, y: 40 }, { x: 40, y: 40 }, { x: 60, y: 40 }
     ]
 
     logoPath.forEach((point, i) => {
@@ -111,12 +112,12 @@ export default function Hero() {
         opacity: 0;
         box-shadow: 0 0 10px rgba(255,255,255,0.8);
       `
-      
+
       logoParticlesRef.current.appendChild(particle)
       logoParticles.push(particle)
-      
+
       // Animate particles forming logo
-      gsap.fromTo(particle, 
+      gsap.fromTo(particle,
         {
           x: Math.random() * 400 - 200,
           y: Math.random() * 400 - 200,
@@ -134,7 +135,7 @@ export default function Hero() {
         }
       )
     })
-    
+
     return logoParticles
   }, [reduced])
 
@@ -145,7 +146,7 @@ export default function Hero() {
     const geometryContainer = document.createElement('div')
     geometryContainer.className = 'floating-geometry absolute inset-0 pointer-events-none'
     geometryContainer.style.cssText = 'perspective: 1500px; transform-style: preserve-3d;'
-    
+
     const elements = [
       // Large accent shapes
       { type: 'ring', size: 120, x: '85%', y: '20%', rotation: 45 },
@@ -155,11 +156,11 @@ export default function Hero() {
       { type: 'dot', size: 20, x: '80%', y: '60%', rotation: 0 },
       { type: 'square', size: 40, x: '10%', y: '15%', rotation: 45 }
     ]
-    
+
     elements.forEach((elem, i) => {
       const shape = document.createElement('div')
       shape.className = `floating-shape floating-${elem.type} will-change-transform`
-      
+
       let shapeStyle = `
         position: absolute;
         left: ${elem.x};
@@ -173,7 +174,7 @@ export default function Hero() {
           0 0 30px rgba(255,255,255,0.1),
           inset 0 0 20px rgba(255,255,255,0.05);
       `
-      
+
       // Different shapes
       if (elem.type === 'ring') {
         shapeStyle += 'border-radius: 50%; background: transparent;'
@@ -188,11 +189,11 @@ export default function Hero() {
       } else {
         shapeStyle += 'border-radius: 8px; background: rgba(255,255,255,0.02);'
       }
-      
+
       shape.style.cssText = shapeStyle
       geometryContainer.appendChild(shape)
       floatingElementsRef.current.push(shape)
-      
+
       // Dynamic animations
       gsap.to(shape, {
         rotationX: `+=${Math.random() * 360 + 180}`,
@@ -207,7 +208,7 @@ export default function Hero() {
         delay: i * 0.5
       })
     })
-    
+
     heroRef.current.appendChild(geometryContainer)
   }, [reduced])
 
@@ -216,16 +217,16 @@ export default function Hero() {
     if (reduced) return
 
     let ticking = false
-    
+
     const handleScroll = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
           const scrollY = window.scrollY
           const heroHeight = window.innerHeight
           const progress = Math.min(scrollY / heroHeight, 1)
-          
+
           setScrollProgress(progress)
-          
+
           // Fade out Hero section as About section approaches
           if (heroRef.current) {
             const opacity = Math.max(0, 1 - progress)
@@ -233,17 +234,17 @@ export default function Hero() {
             // Optionally add pointer-events none when fully faded
             heroRef.current.style.pointerEvents = opacity < 0.1 ? 'none' : 'auto'
           }
-          
+
           // Smooth parallax effects without pinning
           if (particlesRef.current) {
             particlesRef.current.style.transform = `translate3d(0, ${progress * -50}px, 0) rotateZ(${progress * 5}deg)`
           }
-          
+
           // Subtle title movement
           if (titleRef.current) {
             titleRef.current.style.transform = `translate3d(0, ${progress * -30}px, 0) scale(${1 - progress * 0.1})`
           }
-          
+
           ticking = false
         })
         ticking = true
@@ -251,14 +252,14 @@ export default function Hero() {
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
-    
+
     return () => window.removeEventListener('scroll', handleScroll)
   }, [reduced])
 
   // Throttled mouse tracking with enhanced parallax
   const throttledMouseMove = useMemo(() => {
     let ticking = false
-    
+
     return (e) => {
       if (!ticking) {
         requestAnimationFrame(() => {
@@ -273,7 +274,7 @@ export default function Hero() {
                 const depth = (i + 1) * 0.1
                 const moveX = (x - 50) * depth
                 const moveY = (y - 50) * depth
-                
+
                 gsap.to(element, {
                   x: moveX,
                   y: moveY,
@@ -298,7 +299,7 @@ export default function Hero() {
               }
             })
           }
-          
+
           ticking = false
         })
         ticking = true
@@ -310,7 +311,7 @@ export default function Hero() {
   useEffect(() => {
     if (!reduced && animationsEnabled) {
       window.addEventListener('mousemove', throttledMouseMove, { passive: true })
-      
+
       return () => {
         window.removeEventListener('mousemove', throttledMouseMove)
       }
@@ -322,21 +323,21 @@ export default function Hero() {
     if (!isLoaded || reduced) return
 
     const tl = gsap.timeline()
-    
+
     // Title letters with wave reveal
     const letters = titleRef.current?.querySelectorAll('.letter')
     if (letters) {
       letters.forEach((letter, i) => {
-        gsap.set(letter, { 
-          rotationX: -90, 
-          y: -150, 
+        gsap.set(letter, {
+          rotationX: -90,
+          y: -150,
           z: -300,
           opacity: 0,
           scale: 0.3,
           transformOrigin: "50% 50% -100px",
           willChange: 'transform'
         })
-        
+
         tl.to(letter, {
           rotationX: 0,
           y: 0,
@@ -347,29 +348,8 @@ export default function Hero() {
           ease: "elastic.out(1, 0.5)",
           transformOrigin: "50% 50% 0px"
         }, i * 0.1)
-        
-        // No additional animations - just keep letters static after entrance
-      })
-    }
 
-    // Subtitle reveal
-    const subtitleElements = subtitleRef.current?.children
-    if (subtitleElements) {
-      Array.from(subtitleElements).forEach((element, i) => {
-        gsap.set(element, { 
-          rotationX: 45, 
-          y: 100, 
-          opacity: 0,
-          willChange: 'transform'
-        })
-        
-        tl.to(element, {
-          rotationX: 0,
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "back.out(1.5)"
-        }, 1 + i * 0.2)
+        // No additional animations - just keep letters static after entrance
       })
     }
 
@@ -377,7 +357,7 @@ export default function Hero() {
     createEnhancedParticleSystem()
     createAsymmetricalElements()
     createLogoParticleFormation()
-    
+
   }, [isLoaded, reduced, createEnhancedParticleSystem, createAsymmetricalElements, createLogoParticleFormation])
 
   // Initialize with delay
@@ -389,12 +369,12 @@ export default function Hero() {
   // Simple Shadow Hover - just strengthen the white shadow
   const handleSimpleShadowHover = useCallback((e) => {
     if (reduced || !animationsEnabled) return
-    
+
     const element = e.currentTarget
-    
+
     // Kill any existing animations to prevent conflicts
     gsap.killTweensOf(element)
-    
+
     gsap.to(element, {
       textShadow: `
         0 0 20px rgba(255,255,255,0.6),
@@ -404,33 +384,33 @@ export default function Hero() {
       duration: 0.3,
       ease: "power2.out"
     })
-    
+
   }, [reduced, animationsEnabled])
 
   const handleSimpleShadowLeave = useCallback((e) => {
     if (reduced || !animationsEnabled) return
-    
+
     const element = e.currentTarget
-    
+
     // Kill any existing animations to prevent conflicts
     gsap.killTweensOf(element)
-    
+
     gsap.to(element, {
       textShadow: '0 0 20px rgba(255,255,255,0.4)',
       filter: 'none',
       duration: 2.0,
       ease: "power2.out"
     })
-    
+
   }, [reduced, animationsEnabled])
 
   // Standard hover for other elements
   const handleStandardHover = useCallback((e, intensity = 1) => {
     if (reduced || !animationsEnabled) return
-    
+
     const element = e.currentTarget
     gsap.killTweensOf(element)
-    
+
     gsap.to(element, {
       scale: 1 + (0.05 * intensity),
       y: -5 * intensity,
@@ -441,10 +421,10 @@ export default function Hero() {
 
   const handleStandardLeave = useCallback((e) => {
     if (reduced || !animationsEnabled) return
-    
+
     const element = e.currentTarget
     gsap.killTweensOf(element)
-    
+
     gsap.to(element, {
       scale: 1,
       y: 0,
@@ -462,7 +442,7 @@ export default function Hero() {
   ]
 
   return (
-    <section 
+    <section
       ref={heroRef}
       className="relative h-screen overflow-hidden bg-black"
       style={{
@@ -478,7 +458,7 @@ export default function Hero() {
       }}
     >
       {/* Enhanced dramatic background */}
-      <div 
+      <div
         className="absolute inset-0"
         style={{
           background: `
@@ -495,7 +475,7 @@ export default function Hero() {
       />
 
       {/* Enhanced particle system */}
-      <div 
+      <div
         ref={particlesRef}
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -506,7 +486,7 @@ export default function Hero() {
       />
 
       {/* Logo particle formation */}
-      <div 
+      <div
         ref={logoParticlesRef}
         className="absolute top-1/4 right-20 pointer-events-none"
         style={{
@@ -520,27 +500,27 @@ export default function Hero() {
       {/* Asymmetrical main content */}
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="w-full h-full relative">
-          
+
           {/* Main brand - offset left and rotated */}
-          <div 
+          <div
             className="absolute left-[15%] top-[30%] transform -rotate-2"
             style={{ perspective: '1500px' }}
           >
-            <h1 
+            <h1
               ref={titleRef}
               className="text-7xl sm:text-8xl lg:text-9xl xl:text-[12rem] font-black leading-none relative"
-                             style={{
-                 fontFamily: 'Lexend, sans-serif',
-                 transformStyle: 'preserve-3d',
-                 textShadow: '0 0 20px rgba(255,255,255,0.4)',
-                 color: '#ffffff',
-                 filter: 'none'
-               }}
+              style={{
+                fontFamily: 'Lexend, sans-serif',
+                transformStyle: 'preserve-3d',
+                textShadow: '0 0 20px rgba(255,255,255,0.4)',
+                color: '#ffffff',
+                filter: 'none'
+              }}
               onMouseEnter={handleSimpleShadowHover}
               onMouseLeave={handleSimpleShadowLeave}
             >
               {'SELORA'.split('').map((letter, i) => (
-                <span 
+                <span
                   key={i}
                   className="letter-container inline-block relative"
                   style={{
@@ -548,7 +528,7 @@ export default function Hero() {
                     perspective: '1000px'
                   }}
                 >
-                  <span 
+                  <span
                     className="letter inline-block cursor-pointer relative"
                     style={{
                       transformStyle: 'preserve-3d',
@@ -568,11 +548,11 @@ export default function Hero() {
           </div>
 
           {/* Subtitle - positioned asymmetrically */}
-          <div 
-            ref={subtitleRef} 
+          <div
+            ref={subtitleRef}
             className="absolute right-[10%] top-[25%] transform rotate-1 max-w-sm"
           >
-            <h2 
+            <h2
               className="text-xl font-light mb-4"
               style={{
                 color: '#e5e7eb',
@@ -582,10 +562,11 @@ export default function Hero() {
               }}
               onMouseEnter={(e) => handleStandardHover(e, 1)}
               onMouseLeave={handleStandardLeave}
-              dangerouslySetInnerHTML={{ __html: t('hero.hero_title') }}
-            />
-            
-            <p 
+            >
+              <TextReveal>{t('hero.hero_title')}</TextReveal>
+            </h2>
+
+            <div
               className="text-sm leading-relaxed"
               style={{
                 color: '#9ca3af',
@@ -593,8 +574,8 @@ export default function Hero() {
                 transformStyle: 'preserve-3d'
               }}
             >
-              {t('hero.hero_description')}
-            </p>
+              <TextReveal delay={0.5} stagger={0.01}>{t('hero.hero_description')}</TextReveal>
+            </div>
           </div>
 
           {/* Technology badges - scattered asymmetrically */}
@@ -613,7 +594,7 @@ export default function Hero() {
                 onMouseEnter={(e) => handleStandardHover(e, 1.5)}
                 onMouseLeave={handleStandardLeave}
               >
-                <div 
+                <div
                   className="px-4 py-2 rounded-full text-xs font-medium border transition-all duration-300"
                   style={{
                     background: 'rgba(255,255,255,0.05)',
@@ -635,7 +616,7 @@ export default function Hero() {
           </div>
 
           {/* Metrics display - bottom left asymmetric */}
-          <div 
+          <div
             ref={metricsRef}
             className="absolute bottom-[15%] left-[8%] space-y-3"
           >
@@ -650,7 +631,7 @@ export default function Hero() {
                 onMouseEnter={(e) => handleStandardHover(e, 0.8)}
                 onMouseLeave={handleStandardLeave}
               >
-                <div 
+                <div
                   className="text-3xl font-black"
                   style={{
                     color: '#ffffff',
@@ -659,7 +640,7 @@ export default function Hero() {
                 >
                   {metric.value}
                 </div>
-                <div 
+                <div
                   className="text-sm font-light"
                   style={{
                     color: '#9ca3af',
@@ -673,15 +654,15 @@ export default function Hero() {
           </div>
 
           {/* Enhanced glassy liquid buttons - asymmetrically positioned */}
-          <div 
-            ref={ctaRef} 
+          <div
+            ref={ctaRef}
             className="absolute bottom-[25%] right-[15%] space-y-4"
           >
-            <Button 
-              variant="primary" 
-              size="lg" 
-              as="a" 
-              href="#contact" 
+            <Button
+              variant="primary"
+              size="lg"
+              as="a"
+              href="#contact"
               className="group relative overflow-hidden text-black px-8 py-4 rounded-3xl font-bold text-lg transition-all duration-500 will-change-transform block transform -rotate-1"
               style={{
                 background: `
@@ -711,7 +692,7 @@ export default function Hero() {
                 </svg>
               </span>
               {/* Liquid effect overlay */}
-              <div 
+              <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 style={{
                   background: 'linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.4), rgba(255,255,255,0.2))',
@@ -719,12 +700,12 @@ export default function Hero() {
                 }}
               />
             </Button>
-            
-            <Button 
-              variant="ghost" 
-              size="lg" 
-              as="a" 
-              href="#projects" 
+
+            <Button
+              variant="ghost"
+              size="lg"
+              as="a"
+              href="#projects"
               className="px-8 py-4 rounded-3xl font-bold text-lg text-white transition-all duration-500 will-change-transform block transform rotate-1"
               style={{
                 background: 'rgba(255,255,255,0.03)',
@@ -744,7 +725,7 @@ export default function Hero() {
             >
               <span className="relative z-10">{t('hero.cta_explore')}</span>
               {/* Glass reflection effect */}
-              <div 
+              <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 style={{
                   background: 'linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%)',
@@ -756,13 +737,13 @@ export default function Hero() {
           </div>
 
           {/* Enhanced availability badge - floating asymmetrically */}
-          <div 
+          <div
             className="absolute top-[15%] left-[60%] transform -rotate-3"
             style={{
               transformStyle: 'preserve-3d'
             }}
           >
-            <div 
+            <div
               className="inline-flex items-center gap-3 px-6 py-3 rounded-full backdrop-blur-md transition-all duration-300 will-change-transform"
               style={{
                 background: 'rgba(255,255,255,0.03)',
@@ -778,13 +759,13 @@ export default function Hero() {
               onMouseEnter={(e) => handleStandardHover(e, 1)}
               onMouseLeave={handleStandardLeave}
             >
-              <div 
-                className="w-3 h-3 bg-white rounded-full animate-pulse" 
+              <div
+                className="w-3 h-3 bg-white rounded-full animate-pulse"
                 style={{
                   boxShadow: '0 0 20px rgba(255,255,255,0.8)'
-                }} 
+                }}
               />
-              <span 
+              <span
                 className="text-white font-medium text-sm"
                 style={{
                   textShadow: '0 2px 4px rgba(0,0,0,0.8)'

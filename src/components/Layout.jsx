@@ -15,19 +15,20 @@ import Services from './sections/Services'
 import ProcessTimeline from './sections/ProcessTimeline'
 import FAQ from './sections/FAQ'
 import CTABanner from './sections/CTABanner'
+import InfiniteMarquee from './ui/InfiniteMarquee'
 
 export default function Layout() {
   const { t } = useTranslation()
-  
+
   return (
     <div className="relative overflow-x-hidden">
       {/* SEO and Structured Data */}
       <SEOHead section="home" />
       <StructuredData />
-      
+
       {/* Global Never-Static Background System - TEMPORARILY DISABLED */}
       {/* <GlobalDynamicBackground /> */}
-      
+
       {/* Skip to content for keyboard users */}
       <a
         href="#main"
@@ -36,13 +37,13 @@ export default function Layout() {
         {t('common.skip_to_content')}
       </a>
       <Transitions />
-      
+
       {/* Enhanced Sticky Navigation */}
       <StickyNavigation />
-      
+
       {/* Section Progress Indicator */}
       <SectionProgressIndicator />
-      
+
       <main id="main" className="overflow-x-hidden">
         <section id="hero">
           <Hero />
@@ -50,7 +51,14 @@ export default function Layout() {
         <section id="about" style={{ marginTop: '100vh' }}>
           <About />
         </section>
-        <div className="section-divider container mx-auto px-4 sm:px-6" />
+
+        <div className="py-12 md:py-20 overflow-hidden">
+          <InfiniteMarquee
+            items={['CREATIVE', 'DEVELOPER', 'DESIGNER', 'INNOVATOR', 'ENGINEER']}
+            speed={40}
+          />
+        </div>
+
         <section id="skills">
           <Skills />
         </section>

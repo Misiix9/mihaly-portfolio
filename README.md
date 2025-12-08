@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Selora.dev
 
-## Getting Started
+**"Digital experiences that bridge the gap between clean code and artistic design."**
 
-First, run the development server:
+![Selora Portfolio Preview](https://selora.dev/og-image.jpg)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Overview
+This is the official portfolio of **Mihály Győri (Selora)**, an award-winning Creative Developer & Frontend Engineer based in Budapest. It serves not just as a showcase of work, but as a testament to what is possible on the modern web—blending high-performance engineering with immersive, cinematic visuals.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Live Site: [https://selora.dev](https://selora.dev)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
+### 🔮 Immersive 3D Experience
+-   **Identity Prism**: A fully interactive, refractive glass prism built with **React Three Fiber** that represents the multifaceted nature of development and design.
+-   **Global Reach**: A real-time, interactive 3D globe visualization using **Cobe**, showcasing remote capabilities and global connections.
+-   **3D Avatar**: A lightweight, rigged GLTF head model that tracks user interaction.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### ⚡ Advanced Physics & Interaction
+-   **Neural Cursor**: A custom cursor system with magnetic pull, proximity detection, and neural connection lines that snap to interactive elements.
+-   **Magnetic Gallery**: A project showcase featuring physics-based tilt, parallax depth, and velocity-based distortion effects.
+-   **Liquid Navigation**: Page transitions that warp and distort space, creating a seamless flow between sections.
 
-## Learn More
+### 🎨 Aesthetic & Design
+-   **Deep Red Theme**: A carefully curated dark mode aesthetic with vibrant, "Cyberpunk/Noir" red accents.
+-   **Text Decay**: Scroll-triggered text fragmentation effects that deconstruct key headlines.
+-   **Audio Feedback**: Subtle, ambient sound design and interactive click effects managed by a global sound provider.
 
-To learn more about Next.js, take a look at the following resources:
+## Technology Stack
+Built on the bleeding edge of the React ecosystem.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   **Framework**: Next.js 14 (App Router)
+-   **Language**: TypeScript
+-   **Styling**: Tailwind CSS
+-   **Animation**: Framer Motion, GSAP
+-   **3D / WebGL**: Three.js, React Three Fiber, Drei, Cobe
+-   **Internationalization**: next-intl (English/Hungarian)
+-   **Global State**: Zustand
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Philosophy
+This project rejects the "cookie-cutter" portfolio template. Every interaction is intentional. Every animation serves to guide the eye. It is designed to be **fast**, **accessible**, and **unforgettable**.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Designed & Developed by Mihály Győri.*

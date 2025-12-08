@@ -29,6 +29,7 @@
     "use-sound": "^5.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.57.0",
     "@swc/helpers": "^0.5.17",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",

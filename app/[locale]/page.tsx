@@ -9,6 +9,13 @@ import GlobalReach from '@/components/sections/GlobalReach';
 import MagneticGallery from '@/components/sections/MagneticGallery';
 import Contact from '@/components/sections/Contact';
 
+export function generateStaticParams() {
+  return [
+    {locale: 'en'},
+    {locale: 'hu'}
+  ];
+}
+
 export default async function Home({
   params
 }: {

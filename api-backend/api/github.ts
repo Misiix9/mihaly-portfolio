@@ -1,18 +1,24 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-interface GitHubEvent {
-  type: string;
-  created_at: string;
-  payload: {
-    commits?: Array<{ message: string }>;
-    size?: number;
-  };
+interface ContributionDay {
+  contributionCount: number;
+  date: string;
 }
 
-interface ActivityDay {
-  date: string;
-  level: number; // 0-3
-  commits: number;
+interface GraphQLResponse {
+  data?: {
+    user?: {
+      contributionsCollection?: {
+        contributionCalendar?: {
+          totalContributions: number;
+          weeks: Array<{
+            contributionDays: ContributionDay[];
+          }>;
+        };
+      };
+    };
+  };
+  errors?: Array<{ message: string }>;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -26,9 +32,100 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const username = process.env.GITHUB_USERNAME || 'Misiix9';
+  const githubToken = process.env.GITHUB_TOKEN;
+
+  // If no token, fall back to events API approach
+  if (!githubToken) {
+    return await fetchFromEventsAPI(username, res);
+  }
 
   try {
-    // Fetch recent events from GitHub API
+    // Use GraphQL API to get contribution data (requires token)
+    const query = `
+      query($username: String!) {
+        user(login: $username) {
+          contributionsCollection {
+            contributionCalendar {
+              totalContributions
+              weeks {
+                contributionDays {
+                  contributionCount
+                  date
+                }
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const response = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${githubToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query,
+        variables: { username },
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`GitHub GraphQL API returned ${response.status}`);
+    }
+
+    const data: GraphQLResponse = await response.json();
+
+    if (data.errors) {
+      throw new Error(data.errors[0]?.message || 'GraphQL error');
+    }
+
+    const calendar = data.data?.user?.contributionsCollection?.contributionCalendar;
+    
+    if (!calendar) {
+      throw new Error('No contribution data found');
+    }
+
+    // Get last 7 days of contributions
+    const allDays: ContributionDay[] = [];
+    calendar.weeks.forEach(week => {
+      week.contributionDays.forEach(day => {
+        allDays.push(day);
+      });
+    });
+
+    // Get last 7 days
+    const last7Days = allDays.slice(-7);
+    
+    // Calculate total commits for last 7 days
+    const totalCommits = last7Days.reduce((sum, day) => sum + day.contributionCount, 0);
+    
+    // Calculate activity levels (0-3)
+    const maxContributions = Math.max(...last7Days.map(d => d.contributionCount), 1);
+    const levels = last7Days.map(day => {
+      if (day.contributionCount === 0) return 0;
+      if (day.contributionCount <= maxContributions / 3) return 1;
+      if (day.contributionCount <= (maxContributions * 2) / 3) return 2;
+      return 3;
+    });
+
+    return res.status(200).json({
+      username,
+      totalCommits,
+      levels,
+      lastUpdated: new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error('GitHub GraphQL API error:', error);
+    // Fall back to events API
+    return await fetchFromEventsAPI(username, res);
+  }
+}
+
+// Fallback to Events API (for when no token is available)
+async function fetchFromEventsAPI(username: string, res: VercelResponse) {
+  try {
     const response = await fetch(
       `https://api.github.com/users/${username}/events?per_page=100`,
       {
@@ -43,10 +140,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       throw new Error(`GitHub API returned ${response.status}`);
     }
 
+    interface GitHubEvent {
+      type: string;
+      created_at: string;
+      payload: {
+        commits?: Array<{ message: string }>;
+        size?: number;
+      };
+    }
+
     const events: GitHubEvent[] = await response.json();
 
     // Get dates for last 7 days
-    const last7Days: ActivityDay[] = [];
+    const last7Days: Array<{ date: string; level: number; commits: number }> = [];
     for (let i = 6; i >= 0; i--) {
       const date = new Date();
       date.setDate(date.getDate() - i);
@@ -57,14 +163,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Count commits per day
     let totalCommits = 0;
     events.forEach((event) => {
-      if (event.type === 'PushEvent') {
-        const eventDate = event.created_at.split('T')[0];
-        const dayIndex = last7Days.findIndex((d) => d.date === eventDate);
-        if (dayIndex !== -1) {
-          const commitCount = event.payload.commits?.length || event.payload.size || 1;
-          last7Days[dayIndex].commits += commitCount;
-          totalCommits += commitCount;
-        }
+      const eventDate = event.created_at.split('T')[0];
+      const dayIndex = last7Days.findIndex((d) => d.date === eventDate);
+      
+      if (dayIndex !== -1 && event.type === 'PushEvent') {
+        const commitCount = event.payload.commits?.length || event.payload.size || 1;
+        last7Days[dayIndex].commits += commitCount;
+        totalCommits += commitCount;
       }
     });
 
@@ -89,7 +194,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       lastUpdated: new Date().toISOString(),
     });
   } catch (error) {
-    console.error('GitHub API error:', error);
+    console.error('GitHub Events API error:', error);
     return res.status(500).json({
       error: 'Failed to fetch GitHub data',
       fallback: {

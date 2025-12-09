@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { MapPin, Database, Layout, Server, Code, Palette, Terminal, Clock, ChevronLeft, ChevronRight, Music, Calendar, Github } from 'lucide-react';
 import { useGitHubActivity } from '@/hooks/useGitHubActivity';
 import { useSpotifyPlayback } from '@/hooks/useSpotifyPlayback';
-import { useCalendarEvents } from '@/hooks/useCalendarEvents';
+import { useNextAvailability } from '@/hooks/useNextAvailability';
 
 export default function About() {
   const t = useTranslations('Home');
@@ -53,7 +53,7 @@ export default function About() {
   // Live data hooks
   const githubData = useGitHubActivity();
   const spotifyData = useSpotifyPlayback();
-  const calendarData = useCalendarEvents();
+  const availabilityData = useNextAvailability();
 
   // Extended Tech Stack Data
   const techStack = [
@@ -286,9 +286,17 @@ export default function About() {
                 )}
 
                 {activeInfoCard === 1 && (
-                  /* Spotify - Compact */
+                  /* Spotify - Compact with Album Art */
                   <div className="flex items-center gap-2 w-full">
-                    <Music className={`w-4 h-4 shrink-0 ${spotifyData.isPlaying ? 'text-green-500' : 'text-gray-400'}`} />
+                    {spotifyData.albumArt ? (
+                      <img 
+                        src={spotifyData.albumArt} 
+                        alt="Album art" 
+                        className="w-7 h-7 rounded shrink-0 object-cover"
+                      />
+                    ) : (
+                      <Music className={`w-4 h-4 shrink-0 ${spotifyData.isPlaying ? 'text-green-500' : 'text-gray-400'}`} />
+                    )}
                     <div className="flex-1 min-w-0">
                       <p className="text-white text-xs font-medium truncate">
                         {spotifyData.isLoading ? 'Loading...' : (spotifyData.track || 'Not playing')}
@@ -305,12 +313,12 @@ export default function About() {
                 )}
 
                 {activeInfoCard === 2 && (
-                  /* Calendar - Compact */
+                  /* Availability - Compact */
                   <div className="flex items-center gap-2 w-full">
                     <Calendar className="w-4 h-4 text-accent shrink-0" />
-                    <span className="text-xs text-gray-400">Next:</span>
+                    <span className="text-xs text-gray-400">Next available:</span>
                     <span className="text-xs text-white font-medium truncate">
-                      {calendarData.isLoading ? 'Loading...' : (calendarData.time || 'No events')}
+                      {availabilityData.isLoading ? 'Loading...' : availabilityData.nextAvailable}
                     </span>
                   </div>
                 )}

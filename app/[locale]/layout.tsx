@@ -18,6 +18,7 @@ const lexend = Lexend({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://selora.dev'),
   title: {
     default: "Selora | Creative Web Developer & Frontend Engineer | Next.js & Three.js",
     template: "%s | Selora",

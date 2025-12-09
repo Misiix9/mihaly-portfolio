@@ -87,7 +87,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       throw new Error('No contribution data found');
     }
 
-    // Get last 7 days of contributions
+    // Get last 28 days of contributions
     const allDays: ContributionDay[] = [];
     calendar.weeks.forEach(week => {
       week.contributionDays.forEach(day => {
@@ -95,15 +95,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     });
 
-    // Get last 7 days
-    const last7Days = allDays.slice(-7);
+    // Get last 28 days
+    const last28Days = allDays.slice(-28);
     
-    // Calculate total commits for last 7 days
-    const totalCommits = last7Days.reduce((sum, day) => sum + day.contributionCount, 0);
+    // Calculate total commits for last 28 days
+    const totalCommits = last28Days.reduce((sum, day) => sum + day.contributionCount, 0);
     
     // Calculate activity levels (0-3)
-    const maxContributions = Math.max(...last7Days.map(d => d.contributionCount), 1);
-    const levels = last7Days.map(day => {
+    const maxContributions = Math.max(...last28Days.map(d => d.contributionCount), 1);
+    const levels = last28Days.map(day => {
       if (day.contributionCount === 0) return 0;
       if (day.contributionCount <= maxContributions / 3) return 1;
       if (day.contributionCount <= (maxContributions * 2) / 3) return 2;
@@ -151,31 +151,31 @@ async function fetchFromEventsAPI(username: string, res: VercelResponse) {
 
     const events: GitHubEvent[] = await response.json();
 
-    // Get dates for last 7 days
-    const last7Days: Array<{ date: string; level: number; commits: number }> = [];
-    for (let i = 6; i >= 0; i--) {
+    // Get dates for last 28 days
+    const last28Days: Array<{ date: string; level: number; commits: number }> = [];
+    for (let i = 27; i >= 0; i--) {
       const date = new Date();
       date.setDate(date.getDate() - i);
       const dateStr = date.toISOString().split('T')[0];
-      last7Days.push({ date: dateStr, level: 0, commits: 0 });
+      last28Days.push({ date: dateStr, level: 0, commits: 0 });
     }
 
     // Count commits per day
     let totalCommits = 0;
     events.forEach((event) => {
       const eventDate = event.created_at.split('T')[0];
-      const dayIndex = last7Days.findIndex((d) => d.date === eventDate);
+      const dayIndex = last28Days.findIndex((d) => d.date === eventDate);
       
       if (dayIndex !== -1 && event.type === 'PushEvent') {
         const commitCount = event.payload.commits?.length || event.payload.size || 1;
-        last7Days[dayIndex].commits += commitCount;
+        last28Days[dayIndex].commits += commitCount;
         totalCommits += commitCount;
       }
     });
 
     // Calculate activity levels (0-3)
-    const maxCommits = Math.max(...last7Days.map((d) => d.commits), 1);
-    last7Days.forEach((day) => {
+    const maxCommits = Math.max(...last28Days.map((d) => d.commits), 1);
+    last28Days.forEach((day) => {
       if (day.commits === 0) {
         day.level = 0;
       } else if (day.commits <= maxCommits / 3) {
@@ -190,7 +190,7 @@ async function fetchFromEventsAPI(username: string, res: VercelResponse) {
     return res.status(200).json({
       username,
       totalCommits,
-      levels: last7Days.map((d) => d.level),
+      levels: last28Days.map((d) => d.level),
       lastUpdated: new Date().toISOString(),
     });
   } catch (error) {
@@ -200,7 +200,7 @@ async function fetchFromEventsAPI(username: string, res: VercelResponse) {
       fallback: {
         username,
         totalCommits: 0,
-        levels: [0, 0, 0, 0, 0, 0, 0],
+        levels: Array(28).fill(0),
       },
     });
   }

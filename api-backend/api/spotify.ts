@@ -7,6 +7,8 @@ interface SpotifyTrack {
     name: string;
     images: Array<{ url: string }>;
   };
+  duration_ms: number;
+  uri: string;
   external_urls: {
     spotify: string;
   };
@@ -14,6 +16,7 @@ interface SpotifyTrack {
 
 interface SpotifyCurrentlyPlaying {
   is_playing: boolean;
+  progress_ms: number;
   item: SpotifyTrack;
 }
 
@@ -87,6 +90,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           album: data.item.album.name,
           albumArt: data.item.album.images[0]?.url,
           url: data.item.external_urls.spotify,
+          uri: data.item.uri,
+          progressMs: data.progress_ms,
+          durationMs: data.item.duration_ms,
           lastUpdated: new Date().toISOString(),
         });
       }
@@ -113,6 +119,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           album: track.album.name,
           albumArt: track.album.images[0]?.url,
           url: track.external_urls.spotify,
+          uri: track.uri,
+          progressMs: 0,
+          durationMs: track.duration_ms,
           playedAt: data.items[0].played_at,
           lastUpdated: new Date().toISOString(),
         });

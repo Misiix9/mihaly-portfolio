@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 interface GitHubActivity {
   totalCommits: number;
-  levels: number[]; // Array of 7 numbers (0-3) representing activity levels for last 7 days
+  levels: number[]; // Array of 28 numbers (0-3) representing activity levels for last 28 days (4 weeks)
   lastUpdated: string;
   isLoading: boolean;
   error: string | null;
@@ -13,7 +13,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 export function useGitHubActivity() {
   const [data, setData] = useState<GitHubActivity>({
     totalCommits: 0,
-    levels: [0, 0, 0, 0, 0, 0, 0],
+    levels: Array(28).fill(0),
     lastUpdated: '',
     isLoading: true,
     error: null,
@@ -24,8 +24,8 @@ export function useGitHubActivity() {
       // If no API URL is set, use fallback data
       if (!API_URL) {
         setData({
-          totalCommits: 12,
-          levels: [2, 3, 1, 3, 2, 3, 1],
+          totalCommits: 56,
+          levels: [2, 3, 1, 3, 2, 3, 1, 2, 3, 1, 3, 2, 3, 1, 2, 3, 1, 3, 2, 3, 1, 2, 3, 1, 3, 2, 3, 1],
           lastUpdated: new Date().toISOString(),
           isLoading: false,
           error: null,
@@ -49,8 +49,8 @@ export function useGitHubActivity() {
         console.error('GitHub fetch error:', err);
         // Use fallback data on error
         setData({
-          totalCommits: 12,
-          levels: [2, 3, 1, 3, 2, 3, 1],
+          totalCommits: 56,
+          levels: [2, 3, 1, 3, 2, 3, 1, 2, 3, 1, 3, 2, 3, 1, 2, 3, 1, 3, 2, 3, 1, 2, 3, 1, 3, 2, 3, 1],
           lastUpdated: new Date().toISOString(),
           isLoading: false,
           error: 'Using cached data',

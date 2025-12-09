@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { MapPin, Database, Layout, Server, Code, Palette, Terminal, Clock, ChevronLeft, ChevronRight, Music, Calendar, Github } from 'lucide-react';
+import { MapPin, Database, Layout, Server, Code, Palette, Terminal, Clock, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, Music, Calendar, Github, ExternalLink } from 'lucide-react';
 import { useGitHubActivity } from '@/hooks/useGitHubActivity';
 import { useSpotifyPlayback } from '@/hooks/useSpotifyPlayback';
 import { useNextAvailability } from '@/hooks/useNextAvailability';
@@ -50,6 +50,9 @@ export default function About() {
   // Switchable card state (0 = GitHub, 1 = Spotify, 2 = Calendar)
   const [activeInfoCard, setActiveInfoCard] = useState(0);
 
+  // Expanded state for About section
+  const [isExpanded, setIsExpanded] = useState(false);
+
   // Live data hooks
   const githubData = useGitHubActivity();
   const spotifyData = useSpotifyPlayback();
@@ -84,7 +87,9 @@ export default function About() {
              initial={{ opacity: 0, scale: 0.95 }}
              whileInView={{ opacity: 1, scale: 1 }}
              viewport={{ once: true }}
-             className="md:col-span-1 relative rounded-3xl overflow-hidden min-h-[380px] md:min-h-[380px] group border border-white/5"
+             onMouseEnter={() => setIsExpanded(true)}
+             onMouseLeave={() => setIsExpanded(false)}
+             className="md:col-span-1 relative rounded-3xl overflow-hidden min-h-[380px] md:min-h-[340px] group border border-white/5 order-1 cursor-pointer"
           >
               <Image 
                  src="/images/image.jpg"
@@ -110,7 +115,7 @@ export default function About() {
              initial={{ opacity: 0, y: 20 }}
              whileInView={{ opacity: 1, y: 0 }}
              viewport={{ once: true }}
-             className="md:col-span-2 bg-[#111] border border-white/5 p-4 rounded-3xl flex flex-col gap-4 group hover:border-white/10 transition-colors h-fit"
+             className="md:col-span-2 bg-[#111] border border-white/5 p-4 rounded-3xl flex flex-col gap-4 group hover:border-white/10 transition-colors h-fit order-2"
             >
               <div>
                    <div className="flex justify-between items-start mb-2">
@@ -125,9 +130,36 @@ export default function About() {
                    </p>
                    {/* Personal Interests */}
                    <p className="text-gray-500 text-xs mt-3 pt-3 border-t border-white/5">
-                       🎮 Strategy &amp; FPS &nbsp;|&nbsp; 📚 Business &amp; Fantasy &nbsp;|&nbsp; � Hardstyle • Techno • Hip-Hop &nbsp;|&nbsp; ☕ Coffee addict &nbsp;|&nbsp; 🦉 Night owl &nbsp;|&nbsp; 🐧 BTW, I use Arch <br /><br /><br />
-                       Outside of work, you&apos;ll find me deep in strategy games plotting my next move, or in the middle of an intense FPS session. I balance screen time with reading—business books to sharpen my entrepreneurial edge, and fantasy novels to fuel my imagination. My playlist is a wild mix: hardstyle and techno for those late-night coding sprints, hip-hop to keep the energy up, and lo-fi when I need to zone in. I also maintain Arch Linux scripts on GitHub, because yes, I use Arch.
+                       🎮 Strategy &amp; FPS &nbsp;|&nbsp; 📚 Business &amp; Fantasy &nbsp;|&nbsp; 🎵 Hardstyle • Techno • Hip-Hop &nbsp;|&nbsp; ☕ Coffee addict &nbsp;|&nbsp; 🦉 Night owl &nbsp;|&nbsp; 🐧 BTW, I use Arch
                    </p>
+                   
+                   {/* More Toggle Button - Mobile Only */}
+                   <button 
+                     onClick={() => setIsExpanded(!isExpanded)}
+                     className="md:hidden flex items-center gap-1 text-accent text-xs hover:text-accent/80 transition-colors mt-2 group/more"
+                   >
+                     <span>{isExpanded ? 'Less' : 'More'}</span>
+                     {isExpanded ? (
+                       <ChevronUp className="w-3 h-3 group-hover/more:-translate-y-0.5 transition-transform" />
+                     ) : (
+                       <ChevronDown className="w-3 h-3 group-hover/more:translate-y-0.5 transition-transform" />
+                     )}
+                   </button>
+                   
+                   {/* Extended Text - Only visible when expanded */}
+                   <AnimatePresence>
+                     {isExpanded && (
+                       <motion.p 
+                         initial={{ opacity: 0, height: 0 }}
+                         animate={{ opacity: 1, height: 'auto' }}
+                         exit={{ opacity: 0, height: 0 }}
+                         transition={{ duration: 0.3, ease: 'easeInOut' }}
+                         className="text-gray-500 text-xs mt-2 overflow-hidden"
+                       >
+                         Outside of work, you&apos;ll find me deep in strategy games plotting my next move, or in the middle of an intense FPS session. I balance screen time with reading—business books to sharpen my entrepreneurial edge, and fantasy novels to fuel my imagination. My playlist is a wild mix: hardstyle and techno for those late-night coding sprints, hip-hop to keep the energy up, and lo-fi when I need to zone in. I also maintain Arch Linux scripts on GitHub, because yes, I use Arch.
+                       </motion.p>
+                     )}
+                   </AnimatePresence>
               </div>
 
               {/* Stats Row */}
@@ -135,7 +167,7 @@ export default function About() {
                   <div className="bg-white/5 rounded-xl p-3 text-center hover:bg-white/10 transition-colors group/stat relative cursor-pointer">
                       <h4 className="text-2xl font-bold text-white">5+</h4>
                       <p className="text-[10px] uppercase tracking-wider text-gray-500">Years Exp</p>
-                      <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[9px] text-accent whitespace-nowrap opacity-0 group-hover/stat:opacity-100 transition-opacity duration-300">(Since Studying)</span>
+                      <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-[9px] text-accent whitespace-nowrap opacity-0 group-hover/stat:opacity-100 transition-opacity duration-300">(Since Studying)</span>
                   </div>
                   <div className="bg-white/5 rounded-xl p-3 text-center hover:bg-white/10 transition-colors">
                       <a href="https://github.com/Misiix9" target="_blank" rel="noreferrer">
@@ -155,7 +187,7 @@ export default function About() {
              initial={{ opacity: 0, y: 20 }}
              whileInView={{ opacity: 1, y: 0 }}
              viewport={{ once: true }}
-             className="grid-tech md:col-span-2 bg-[#111] border border-white/5 p-6 rounded-3xl flex flex-col gap-4 group hover:border-white/10 transition-colors"
+             className={`grid-tech md:col-span-2 bg-[#111] border border-white/5 p-6 rounded-3xl flex flex-col gap-4 group hover:border-white/10 transition-colors ${isExpanded ? 'order-3' : 'order-4'}`}
           >
               <div className="flex items-center justify-between">
                   <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Tech Arsenal</h4>
@@ -179,13 +211,15 @@ export default function About() {
               </div>
           </motion.div>
 
-          {/* 4. Location & Connect (1 Col) */}
-           <motion.div 
-             initial={{ opacity: 0, x: 20 }}
-             whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true }}
-             className="md:col-span-1 bg-[#111] border border-white/5 p-4 rounded-3xl flex flex-col gap-3 group hover:border-white/10 transition-colors h-fit"
-           >
+          {/* 4. Location & Info Card Wrapper (1 Col) - stays together */}
+          <div className={`md:col-span-1 flex flex-col gap-3 ${isExpanded ? 'order-4' : 'order-3'}`}>
+            {/* Location Card */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-[#111] border border-white/5 p-4 rounded-3xl flex flex-col gap-3 group hover:border-white/10 transition-colors"
+            >
                {/* Location Header with Pulsing Dot */}
                
                <div className="flex items-start justify-between">
@@ -217,113 +251,153 @@ export default function About() {
                         <span>Relocation</span>
                         <span className="text-white">Available</span>
                     </div>
-                    {/* Timezone Converter */}
-                    <div className="flex items-center justify-between text-xs text-gray-400">
-                        <span>Your time ({visitorTimezone})</span>
-                        <span className="text-white font-mono">{visitorTime || '--:--'}</span>
-                    </div>
                     {/* Response Time */}
                     <div className="flex items-center justify-between text-xs text-gray-400">
                         <span>Avg. reply</span>
                         <span className="text-green-400">{'< 24h'}</span>
                     </div>
-               </div>
-               
-           </motion.div>
-           {/* 5. Switchable Info Card */}
-          <motion.div 
-             initial={{ opacity: 1, y: -45, x: 660}}
-             whileInView={{ opacity: 1, y: -66, x: 660}}
-             viewport={{ once: true }}
-             className="hidden md:flex md:col-span-1 bg-[#111] border border-white/5 px-4 py-2 rounded-2xl items-center gap-5 group/card hover:border-white/10 transition-colors h-[50px] relative overflow-hidden"
-          >
-              {/* Navigation Arrows - appear on hover */}
-              <button 
-                onClick={() => setActiveInfoCard((prev) => (prev === 0 ? 2 : prev - 1))}
-                className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-white/10 text-white opacity-0 group-hover/card:opacity-100 transition-opacity hover:bg-white/20 z-10"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button 
-                onClick={() => setActiveInfoCard((prev) => (prev === 2 ? 0 : prev + 1))}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-white/10 text-white opacity-0 group-hover/card:opacity-100 transition-opacity hover:bg-white/20 z-10"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-
-              {/* Card Header */}
-              <div className="flex items-center gap-2 shrink-0">
-                <div className="flex gap-1">
-                  {[0, 1, 2].map((i) => (
-                    <div key={i} className={`w-1 h-1 rounded-full transition-colors ${activeInfoCard === i ? 'bg-accent' : 'bg-white/20'}`} />
-                  ))}
                 </div>
-              </div>
+               
+            </motion.div>
 
-              {/* Content based on active card */}
-              <div className="flex-1 flex items-center overflow-hidden">
-                {activeInfoCard === 0 && (
-                  /* GitHub Activity - Compact */
-                  <div className="flex items-center gap-2 w-full">
-                    <Github className="w-4 h-4 text-gray-400 shrink-0" />
-                    <div className="flex gap-0.5 flex-1">
-                      {(githubData.levels.length >= 7 ? githubData.levels : [2, 3, 1, 3, 2, 3, 1]).map((level, i) => (
-                        <div 
-                          key={i} 
-                          className={`w-2 h-2 rounded-sm ${
-                            level === 3 ? 'bg-green-500' 
-                            : level === 2 ? 'bg-green-500/50' 
-                            : level === 1 ? 'bg-green-500/20'
-                            : 'bg-white/10'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <span className="text-[10px] text-gray-500 shrink-0">
-                      {githubData.isLoading ? '...' : `${githubData.totalCommits} commits`}
-                    </span>
-                  </div>
-                )}
+            {/* Switchable Info Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="hidden md:flex md:flex-col bg-[#111] border border-white/5 px-4 py-2 rounded-2xl group/card hover:border-white/10 transition-colors h-[87px] relative overflow-hidden"
+            >
+               {/* Navigation Arrows - appear on hover */}
+               <button 
+                 onClick={() => setActiveInfoCard((prev) => (prev === 0 ? 2 : prev - 1))}
+                 className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-white/10 text-white opacity-0 group-hover/card:opacity-100 transition-opacity hover:bg-white/20 z-10"
+               >
+                 <ChevronLeft className="w-4 h-4" />
+               </button>
+               <button 
+                 onClick={() => setActiveInfoCard((prev) => (prev === 2 ? 0 : prev + 1))}
+                 className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-white/10 text-white opacity-0 group-hover/card:opacity-100 transition-opacity hover:bg-white/20 z-10"
+               >
+                 <ChevronRight className="w-4 h-4" />
+               </button>
 
-                {activeInfoCard === 1 && (
-                  /* Spotify - Compact with Album Art */
-                  <div className="flex items-center gap-2 w-full">
-                    {spotifyData.albumArt ? (
-                      <img 
-                        src={spotifyData.albumArt} 
-                        alt="Album art" 
-                        className="w-7 h-7 rounded shrink-0 object-cover"
-                      />
-                    ) : (
-                      <Music className={`w-4 h-4 shrink-0 ${spotifyData.isPlaying ? 'text-green-500' : 'text-gray-400'}`} />
-                    )}
-                    <div className="flex-1 min-w-0">
-                      <p className="text-white text-xs font-medium truncate">
-                        {spotifyData.isLoading ? 'Loading...' : (spotifyData.track || 'Not playing')}
-                      </p>
-                    </div>
-                    {spotifyData.isPlaying && (
-                      <div className="flex gap-0.5 shrink-0">
-                        {[8, 12, 6, 10].map((h, i) => (
-                          <div key={i} className="w-0.5 bg-green-500 rounded-full animate-pulse" style={{ height: `${h}px`, animationDelay: `${i * 0.15}s` }} />
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
+               {/* Content based on active card */}
+               <div className="flex-1 flex items-center overflow-hidden">
+                 {activeInfoCard === 0 && (
+                   /* GitHub Activity - 4 weeks grid */
+                   <div className="flex items-center gap-3 w-full">
+                     <Github className="w-5 h-5 text-gray-400 shrink-0" />
+                     <div className="flex-1">
+                       <div className="grid grid-cols-7 gap-0.5">
+                         {(githubData.levels.length >= 28 ? githubData.levels : Array(28).fill(0)).map((level, i) => (
+                           <div 
+                             key={i} 
+                             className={`w-2 h-2 rounded-sm ${
+                               level === 3 ? 'bg-green-500' 
+                               : level === 2 ? 'bg-green-500/50' 
+                               : level === 1 ? 'bg-green-500/20'
+                               : 'bg-white/10'
+                             }`}
+                             title={`Day ${i + 1}`}
+                           />
+                         ))}
+                       </div>
+                     </div>
+                     <div className="text-right shrink-0">
+                       <span className="text-xs text-white font-medium">
+                         {githubData.isLoading ? '...' : githubData.totalCommits}
+                       </span>
+                       <span className="text-[10px] text-gray-500 block">commits</span>
+                     </div>
+                   </div>
+                 )}
 
-                {activeInfoCard === 2 && (
-                  /* Availability - Compact */
-                  <div className="flex items-center gap-2 w-full">
-                    <Calendar className="w-4 h-4 text-accent shrink-0" />
-                    <span className="text-xs text-gray-400">Next available:</span>
-                    <span className="text-xs text-white font-medium truncate">
-                      {availabilityData.isLoading ? 'Loading...' : availabilityData.nextAvailable}
-                    </span>
-                  </div>
-                )}
-              </div>
-          </motion.div>
+                 {activeInfoCard === 1 && (
+                   /* Spotify - With artist, progress bar, and open button */
+                   <div className="flex items-center gap-2 w-full">
+                     {spotifyData.albumArt ? (
+                       <img 
+                         src={spotifyData.albumArt} 
+                         alt="Album art" 
+                         className="w-10 h-10 rounded shrink-0 object-cover"
+                       />
+                     ) : (
+                       <div className="w-10 h-10 rounded bg-white/10 flex items-center justify-center shrink-0">
+                         <Music className={`w-5 h-5 ${spotifyData.isPlaying ? 'text-green-500' : 'text-gray-400'}`} />
+                       </div>
+                     )}
+                     <div className="flex-1 min-w-0">
+                       {spotifyData.url ? (
+                         <a 
+                           href={spotifyData.url}
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           className="flex items-center gap-1 group/title"
+                         >
+                           <p className="text-white text-xs font-medium truncate group-hover/title:text-white/80 group-hover/title:underline transition-colors">
+                             {spotifyData.isLoading ? 'Loading...' : (spotifyData.track || 'Not playing')}
+                           </p>
+                           <ExternalLink className="w-3 h-3 text-white shrink-0 group-hover/title:text-white/80 transition-colors" />
+                         </a>
+                       ) : (
+                         <p className="text-white text-xs font-medium truncate">
+                           {spotifyData.isLoading ? 'Loading...' : (spotifyData.track || 'Not playing')}
+                         </p>
+                       )}
+                       {spotifyData.artist && (
+                         <p className="text-gray-500 text-[10px] truncate">{spotifyData.artist}</p>
+                       )}
+                       {spotifyData.progressMs !== null && spotifyData.durationMs && (
+                         <div className="flex items-center gap-1 mt-1">
+                           <span className="text-[9px] text-gray-500 w-6 text-right">
+                             {Math.floor(spotifyData.progressMs / 60000)}:{String(Math.floor((spotifyData.progressMs % 60000) / 1000)).padStart(2, '0')}
+                           </span>
+                           <div className="flex-1 h-1 bg-white/10 rounded-full overflow-hidden">
+                             <div 
+                               className="h-full bg-green-500 rounded-full transition-all duration-100 ease-linear"
+                               style={{ width: `${(spotifyData.progressMs / spotifyData.durationMs) * 100}%` }}
+                             />
+                           </div>
+                           <span className="text-[9px] text-gray-500 w-6">
+                             {Math.floor(spotifyData.durationMs / 60000)}:{String(Math.floor((spotifyData.durationMs % 60000) / 1000)).padStart(2, '0')}
+                           </span>
+                         </div>
+                       )}
+                     </div>
+                   </div>
+                 )}
+
+                 {activeInfoCard === 2 && (
+                   /* Availability - Enhanced */
+                   <div className="flex items-center gap-3 w-full">
+                     <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center shrink-0">
+                       <Calendar className="w-5 h-5 text-accent" />
+                     </div>
+                     <div className="flex-1">
+                       <p className="text-[10px] text-gray-500 uppercase tracking-wide">Next available</p>
+                       <p className="text-white text-sm font-medium">
+                         {availabilityData.isLoading ? 'Loading...' : availabilityData.nextAvailable}
+                       </p>
+                     </div>
+                     <div className="px-2 py-1 rounded-full bg-green-500/20 shrink-0">
+                       <span className="text-[10px] text-green-400 font-medium">Open</span>
+                     </div>
+                   </div>
+                 )}
+               </div>
+
+               {/* Navigation Dots - Centered at bottom */}
+               <div className="flex justify-center gap-1.5 mt-1">
+                 {[0, 1, 2].map((i) => (
+                   <button 
+                     key={i} 
+                     onClick={() => setActiveInfoCard(i)}
+                     className={`w-1.5 h-1.5 rounded-full transition-colors ${activeInfoCard === i ? 'bg-accent' : 'bg-white/20 hover:bg-white/40'}`}
+                   />
+                 ))}
+               </div>
+            </motion.div>
+          </div>
        </div>
     </section>
   );

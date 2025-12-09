@@ -43,7 +43,9 @@ export default function Hero() {
         <div className="w-24 h-1 bg-accent rounded-full mb-4" />
         <h2 className="text-xl md:text-3xl font-light text-gray-300 tracking-widest uppercase font-lexend">
           MIHÁLY GYŐRI
+          <h3 className="text-sm font-medium text-gray-400">Full Stack Engineer</h3>
         </h2>
+        
         <div className="flex flex-col gap-1">
                         <div className="flex items-center gap-2">
                             <div className="relative">

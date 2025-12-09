@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowDown, Download, Copy, Check, Github } from 'lucide-react';
+import { ArrowDown, Download, Copy, Check, Github, Linkedin, Instagram } from 'lucide-react';
 import { useRef, useState } from 'react';
 import Avatar3D from '@/components/ui/Avatar3D';
 
@@ -83,6 +83,12 @@ export default function Hero() {
              <div className="flex items-center gap-6 text-gray-400">
                  <a href="https://github.com/Misiix9" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
                      <Github size={24} />
+                 </a>
+                 <a href="https://www.linkedin.com/in/gy%C5%91ri-mih%C3%A1ly-7161102bb/" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
+                     <Linkedin size={24} />
+                 </a>
+                 <a href="https://instagram.com/gyr.misi" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
+                     <Instagram size={24} />
                  </a>
              </div>
         </motion.div>

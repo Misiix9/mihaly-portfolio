@@ -1,12 +1,51 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { ArrowUpRight, Github, Linkedin, Mail, MapPin, Download, Languages, Database, Layout, Server, Cpu, Code, Palette, Terminal, Globe } from 'lucide-react';
+import { MapPin, Database, Layout, Server, Code, Palette, Terminal, Clock, ChevronLeft, ChevronRight, Music, Calendar, Github } from 'lucide-react';
 
 export default function About() {
   const t = useTranslations('Home');
+
+  // Live time state
+  const [budapestTime, setBudapestTime] = useState('');
+  const [visitorTime, setVisitorTime] = useState('');
+  const [visitorTimezone, setVisitorTimezone] = useState('');
+
+  useEffect(() => {
+    const updateTimes = () => {
+      // Budapest time (Europe/Budapest timezone)
+      const budapest = new Date().toLocaleTimeString('en-US', {
+        timeZone: 'Europe/Budapest',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      });
+      setBudapestTime(budapest);
+
+      // Visitor's local time
+      const visitor = new Date().toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      });
+      setVisitorTime(visitor);
+
+      // Get visitor's timezone abbreviation
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      setVisitorTimezone(tz.split('/').pop()?.replace('_', ' ') || 'Local');
+    };
+
+    updateTimes();
+    const interval = setInterval(updateTimes, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Switchable card state (0 = GitHub, 1 = Spotify, 2 = Calendar)
+  const [activeInfoCard, setActiveInfoCard] = useState(0);
 
   // Extended Tech Stack Data
   const techStack = [
@@ -37,13 +76,13 @@ export default function About() {
              initial={{ opacity: 0, scale: 0.95 }}
              whileInView={{ opacity: 1, scale: 1 }}
              viewport={{ once: true }}
-             className="md:col-span-1 relative rounded-3xl overflow-hidden min-h-[300px] md:min-h-0 group border border-white/5"
+             className="md:col-span-1 relative rounded-3xl overflow-hidden min-h-[380px] md:min-h-[380px] group border border-white/5"
           >
               <Image 
                  src="/images/image.jpg"
                  alt="Profile"
                  fill
-                 className="object-cover transition-transform duration-700 group-hover:scale-105"
+                 className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                  sizes="(max-width: 768px) 100vw, 33vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90" />
@@ -55,17 +94,6 @@ export default function About() {
                           Available for work
                       </span>
                   </div>
-                  <div className="flex gap-3">
-                      <a href="#" className="p-2.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full hover:bg-white hover:text-black transition-all">
-                          <Linkedin className="w-4 h-4" />
-                      </a>
-                       <a href="https://github.com/Misiix9" target="_blank" className="p-2.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full hover:bg-white hover:text-black transition-all">
-                          <Github className="w-4 h-4" />
-                      </a>
-                       <a href="mailto:hi@selora.dev" className="p-2.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full hover:bg-white hover:text-black transition-all">
-                          <Mail className="w-4 h-4" />
-                      </a>
-                  </div>
               </div>
           </motion.div>
 
@@ -74,11 +102,11 @@ export default function About() {
              initial={{ opacity: 0, y: 20 }}
              whileInView={{ opacity: 1, y: 0 }}
              viewport={{ once: true }}
-             className="md:col-span-2 bg-[#111] border border-white/5 p-6 rounded-3xl flex flex-col justify-between gap-6 group hover:border-white/10 transition-colors"
+             className="md:col-span-2 bg-[#111] border border-white/5 p-4 rounded-3xl flex flex-col gap-4 group hover:border-white/10 transition-colors h-fit"
             >
               <div>
                    <div className="flex justify-between items-start mb-2">
-                       <p className="text-gray-400 text-sm font-mono tracking-wide">About Me</p>
+                       <p className="text-sm font-bold text-gray-400 uppercase tracking-wider">About Me</p>
                        <span className="text-xs text-gray-600 font-mono">EST. 2023</span>
                    </div>
                    <h3 className="text-3xl font-bold text-white leading-tight mb-3">
@@ -87,17 +115,25 @@ export default function About() {
                    <p className="text-gray-400 text-sm leading-relaxed text-balance">
                        I'm Mihály, a Full Stack Engineer who bridges the gap between design and engineering. I don't just write code; I craft digital experiences that are fast, accessible, and visually stunning. My focus is on React ecosystems and high-performance animations.
                    </p>
+                   {/* Personal Interests */}
+                   <p className="text-gray-500 text-xs mt-3 pt-3 border-t border-white/5">
+                       🎮 Strategy &amp; FPS &nbsp;|&nbsp; 📚 Business &amp; Fantasy &nbsp;|&nbsp; � Hardstyle • Techno • Hip-Hop &nbsp;|&nbsp; ☕ Coffee addict &nbsp;|&nbsp; 🦉 Night owl &nbsp;|&nbsp; 🐧 BTW, I use Arch <br /><br /><br />
+                       Outside of work, you&apos;ll find me deep in strategy games plotting my next move, or in the middle of an intense FPS session. I balance screen time with reading—business books to sharpen my entrepreneurial edge, and fantasy novels to fuel my imagination. My playlist is a wild mix: hardstyle and techno for those late-night coding sprints, hip-hop to keep the energy up, and lo-fi when I need to zone in. I also maintain Arch Linux scripts on GitHub, because yes, I use Arch.
+                   </p>
               </div>
 
               {/* Stats Row */}
               <div className="grid grid-cols-3 gap-4 pt-4 border-t border-white/5">
-                  <div className="bg-white/5 rounded-xl p-3 text-center hover:bg-white/10 transition-colors">
-                      <h4 className="text-2xl font-bold text-white">2+</h4>
+                  <div className="bg-white/5 rounded-xl p-3 text-center hover:bg-white/10 transition-colors group/stat relative cursor-pointer">
+                      <h4 className="text-2xl font-bold text-white">5+</h4>
                       <p className="text-[10px] uppercase tracking-wider text-gray-500">Years Exp</p>
+                      <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[9px] text-accent whitespace-nowrap opacity-0 group-hover/stat:opacity-100 transition-opacity duration-300">(Since Studying)</span>
                   </div>
                   <div className="bg-white/5 rounded-xl p-3 text-center hover:bg-white/10 transition-colors">
-                      <h4 className="text-2xl font-bold text-white">15+</h4>
-                      <p className="text-[10px] uppercase tracking-wider text-gray-500">Projects</p>
+                      <a href="https://github.com/Misiix9" target="_blank" rel="noreferrer">
+                          <h4 className="text-2xl font-bold text-white">10+</h4>
+                          <p className="text-[10px] uppercase tracking-wider text-gray-500">Projects</p>
+                      </a>
                   </div>
                    <div className="bg-white/5 rounded-xl p-3 text-center hover:bg-white/10 transition-colors">
                       <h4 className="text-2xl font-bold text-white">100%</h4>
@@ -106,56 +142,12 @@ export default function About() {
               </div>
           </motion.div>
 
-          {/* 3. Location & Connect (1 Col) - Moved UP */}
-           <motion.div 
-             initial={{ opacity: 0, x: 20 }}
-             whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true }}
-             className="md:col-span-1 bg-[#111] border border-white/5 p-6 rounded-3xl flex flex-col justify-between gap-4 group hover:border-white/10 transition-colors"
-           >
-               <div className="flex items-start justify-between">
-                   <div className="flex flex-col gap-1">
-                        <div className="flex items-center gap-2">
-                            <MapPin className="w-4 h-4 text-accent" />
-                            <h4 className="text-white font-bold text-sm">Budapest</h4>
-                        </div>
-                        <p className="text-gray-500 text-xs pl-6">Based in Hungary</p>
-                   </div>
-                   <div className="p-2 rounded-lg bg-white/5 text-xs text-gray-400 font-mono">
-                        GMT+2
-                   </div>
-               </div>
-
-                <div className="h-px w-full bg-white/5" />
-                
-               <div className="space-y-3">
-                    <div className="flex items-center justify-between text-xs text-gray-400">
-                        <span>Language</span>
-                        <span className="text-white">EN / HU</span>
-                    </div>
-                    <div className="flex items-center justify-between text-xs text-gray-400">
-                        <span>Relocation</span>
-                        <span className="text-white">Available</span>
-                    </div>
-               </div>
-
-               <div className="mt-auto pt-4">
-                   <a 
-                     href="/cv.pdf" 
-                     className="flex items-center justify-center gap-2 w-full py-3 bg-white text-black rounded-xl text-sm font-bold hover:bg-accent hover:text-white transition-colors"
-                   >
-                       <Download className="w-4 h-4" />
-                       Download CV
-                   </a>
-               </div>
-           </motion.div>
-
-          {/* 4. Extended Tech Stack (2 Cols) */}
+                     {/* 3. Extended Tech Stack (2 Cols) */}
           <motion.div 
              initial={{ opacity: 0, y: 20 }}
              whileInView={{ opacity: 1, y: 0 }}
              viewport={{ once: true }}
-             className="md:col-span-2 bg-[#111] border border-white/5 p-6 rounded-3xl flex flex-col gap-4 group hover:border-white/10 transition-colors"
+             className="grid-tech md:col-span-2 bg-[#111] border border-white/5 p-6 rounded-3xl flex flex-col gap-4 group hover:border-white/10 transition-colors"
           >
               <div className="flex items-center justify-between">
                   <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Tech Arsenal</h4>
@@ -179,6 +171,134 @@ export default function About() {
               </div>
           </motion.div>
 
+          {/* 4. Location & Connect (1 Col) */}
+           <motion.div 
+             initial={{ opacity: 0, x: 20 }}
+             whileInView={{ opacity: 1, x: 0 }}
+             viewport={{ once: true }}
+             className="md:col-span-1 bg-[#111] border border-white/5 p-4 rounded-3xl flex flex-col gap-3 group hover:border-white/10 transition-colors h-fit"
+           >
+               {/* Location Header with Pulsing Dot */}
+               
+               <div className="flex items-start justify-between">
+                   <div className="flex flex-col gap-1">
+                        <div className="flex items-center gap-2">
+                            <div className="relative">
+                                <MapPin className="w-4 h-4 text-accent" />
+                                <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                            </div>
+                            <h4 className="text-white font-bold text-sm">Budapest</h4>
+                        </div>
+                        <p className="text-gray-500 text-xs pl-6">Based in Hungary 🇭🇺</p>
+                   </div>
+                   {/* Live Local Time */}
+                   <div className="p-2 rounded-lg bg-white/5 text-xs text-white font-mono flex items-center gap-1.5">
+                        <Clock className="w-3 h-3 text-accent" />
+                        {budapestTime || '--:--'}
+                   </div>
+               </div>
+
+                <div className="h-px w-full bg-white/5" />
+                
+               <div className="space-y-2">
+                    <div className="flex items-center justify-between text-xs text-gray-400">
+                        <span>Language</span>
+                        <span className="text-white">HU / EN / ES</span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs text-gray-400">
+                        <span>Relocation</span>
+                        <span className="text-white">Available</span>
+                    </div>
+                    {/* Timezone Converter */}
+                    <div className="flex items-center justify-between text-xs text-gray-400">
+                        <span>Your time ({visitorTimezone})</span>
+                        <span className="text-white font-mono">{visitorTime || '--:--'}</span>
+                    </div>
+                    {/* Response Time */}
+                    <div className="flex items-center justify-between text-xs text-gray-400">
+                        <span>Avg. reply</span>
+                        <span className="text-green-400">{'< 24h'}</span>
+                    </div>
+               </div>
+               
+           </motion.div>
+           {/* 5. Switchable Info Card */}
+          <motion.div 
+             initial={{ opacity: 1, y: -45, x: 660}}
+             whileInView={{ opacity: 1, y: -66, x: 660}}
+             viewport={{ once: true }}
+             className="hidden md:flex md:col-span-1 bg-[#111] border border-white/5 px-4 py-2 rounded-2xl items-center gap-5 group/card hover:border-white/10 transition-colors h-[50px] relative overflow-hidden"
+          >
+              {/* Navigation Arrows - appear on hover */}
+              <button 
+                onClick={() => setActiveInfoCard((prev) => (prev === 0 ? 2 : prev - 1))}
+                className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-white/10 text-white opacity-0 group-hover/card:opacity-100 transition-opacity hover:bg-white/20 z-10"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button 
+                onClick={() => setActiveInfoCard((prev) => (prev === 2 ? 0 : prev + 1))}
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-white/10 text-white opacity-0 group-hover/card:opacity-100 transition-opacity hover:bg-white/20 z-10"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+
+              {/* Card Header */}
+              <div className="flex items-center gap-2 shrink-0">
+                <div className="flex gap-1">
+                  {[0, 1, 2].map((i) => (
+                    <div key={i} className={`w-1 h-1 rounded-full transition-colors ${activeInfoCard === i ? 'bg-accent' : 'bg-white/20'}`} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Content based on active card */}
+              <div className="flex-1 flex items-center overflow-hidden">
+                {activeInfoCard === 0 && (
+                  /* GitHub Activity - Compact */
+                  <div className="flex items-center gap-2 w-full">
+                    <Github className="w-4 h-4 text-gray-400 shrink-0" />
+                    <div className="flex gap-0.5 flex-1">
+                      {[2, 3, 1, 3, 2, 3, 1, 2, 3, 2, 1, 3, 2].map((level, i) => (
+                        <div 
+                          key={i} 
+                          className={`w-2 h-2 rounded-sm ${
+                            level === 3 ? 'bg-green-500' 
+                            : level === 2 ? 'bg-green-500/50' 
+                            : 'bg-green-500/20'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-[10px] text-gray-500 shrink-0">12 commits</span>
+                  </div>
+                )}
+
+                {activeInfoCard === 1 && (
+                  /* Spotify - Compact */
+                  <div className="flex items-center gap-2 w-full">
+                    <Music className="w-4 h-4 text-green-500 shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-white text-xs font-medium truncate">Blinding Lights</p>
+                    </div>
+                    <div className="flex gap-0.5 shrink-0">
+                      {[8, 12, 6, 10].map((h, i) => (
+                        <div key={i} className="w-0.5 bg-green-500 rounded-full animate-pulse" style={{ height: `${h}px`, animationDelay: `${i * 0.15}s` }} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {activeInfoCard === 2 && (
+                  /* Calendar - Compact */
+                  <div className="flex items-center gap-2 w-full">
+                    <Calendar className="w-4 h-4 text-accent shrink-0" />
+                    <span className="text-xs text-gray-400">Next:</span>
+                    <span className="text-xs text-white font-medium">Tomorrow 10:00 AM</span>
+                  </div>
+                )}
+              </div>
+          </motion.div>
        </div>
     </section>
   );

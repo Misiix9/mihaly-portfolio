@@ -8,44 +8,36 @@ import DecayText from '@/components/ui/DecayText';
 
 const projects = [
   {
-    title: "Project Alpha",
+    title: "Footify Landing Page",
     category: "Full Stack",
-    image: "/images/placeholders/project_thumb_alpha.png",
-    description: "A centralized digital nomad platform.",
+    image: "/images/footifyLandingPage.png",
+    description: "A landing page for our football statistics app.",
     year: "2024",
-    link: "#"
+    link: "https://footify.hu"
   },
   {
-    title: "Beta Systems",
-    category: "Analytics",
+    title: "Footify App",
+    category: "Full Stack",
     image: "/images/placeholders/project_thumb_beta.png",
-    description: "Enterprise data visualization dashboard.",
-    year: "2023",
-    link: "#"
+    description: "A mobile- and web app for football statistics.",
+    year: "2024",
+    link: "https://github.com/gaspardani87/Footify"
   },
   {
-    title: "Gamma API",
-    category: "Backend",
-    image: "/images/placeholders/project_thumb_gamma.png",
-    description: "High-performance microservices architecture.",
-    year: "2023",
-    link: "#"
-  },
-  {
-    title: "BME University",
+    title: "ELTE University",
     category: "Study",
-    image: "/images/placeholders/study_thumb_bme.png",
-    description: "BSc in Computer Science (Specialization: Software)",
-    year: "2023-Now",
-    link: "#"
+    image: "/images/elteLogo.png",
+    description: "BSc in Computer Science, Specializing in Software Engineering",
+    year: "2025-Now",
+    link: "https://elte.hu"
   },
     {
-    title: "High School",
+    title: "Petőfi Sándor Technical School, Aszod",
     category: "Study",
     image: "/images/placeholders/study_thumb_bme.png",
-    description: "Focus on Mathematics and Informatics.",
-    year: "2019-2023",
-    link: "#"
+    description: "Specialize in Software Development and Testing",
+    year: "2020-2025",
+    link: "https://vac-petofi.www.intezmeny.edir.hu/"
   }
 ];
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowDown, Download, Copy, Check, Github, Linkedin, Instagram } from 'lucide-react';
+import { ArrowDown, Download, Copy, Check, Github, Linkedin, Instagram, MapPin } from 'lucide-react';
 import { useRef, useState } from 'react';
 import Avatar3D from '@/components/ui/Avatar3D';
 
@@ -44,6 +44,14 @@ export default function Hero() {
         <h2 className="text-xl md:text-3xl font-light text-gray-300 tracking-widest uppercase font-lexend">
           MIHÁLY GYŐRI
         </h2>
+        <div className="flex flex-col gap-1">
+                        <div className="flex items-center gap-2">
+                            <div className="relative">
+                                <MapPin className="w-4 h-4 text-accent" />
+                            </div>
+                            <h4 className="text-white font-bold text-sm">Budapest, Hungary 🇭🇺</h4>
+                        </div>
+                   </div>
 
         {/* Recruiter Pack */}
         <motion.div
@@ -52,14 +60,7 @@ export default function Hero() {
            transition={{ delay: 1.2, duration: 0.8 }}
            className="mt-8 flex flex-col items-center gap-6"
         >
-             {/* Status Badge */}
-             <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-                 <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                 </span>
-                 <span className="text-sm font-medium text-gray-300">Available for Work</span>
-             </div>
+             
 
              {/* Actions */}
              <div className="flex flex-wrap items-center justify-center gap-4">
@@ -78,6 +79,7 @@ export default function Hero() {
                      {isCopied ? "Copied!" : "Copy Email"}
                  </button>
              </div>
+                    
 
              {/* Socials (Mini) */}
              <div className="flex items-center gap-6 text-gray-400">

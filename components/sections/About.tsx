@@ -6,6 +6,9 @@ import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { MapPin, Database, Layout, Server, Code, Palette, Terminal, Clock, ChevronLeft, ChevronRight, Music, Calendar, Github } from 'lucide-react';
+import { useGitHubActivity } from '@/hooks/useGitHubActivity';
+import { useSpotifyPlayback } from '@/hooks/useSpotifyPlayback';
+import { useCalendarEvents } from '@/hooks/useCalendarEvents';
 
 export default function About() {
   const t = useTranslations('Home');
@@ -46,6 +49,11 @@ export default function About() {
 
   // Switchable card state (0 = GitHub, 1 = Spotify, 2 = Calendar)
   const [activeInfoCard, setActiveInfoCard] = useState(0);
+
+  // Live data hooks
+  const githubData = useGitHubActivity();
+  const spotifyData = useSpotifyPlayback();
+  const calendarData = useCalendarEvents();
 
   // Extended Tech Stack Data
   const techStack = [
@@ -259,33 +267,40 @@ export default function About() {
                   <div className="flex items-center gap-2 w-full">
                     <Github className="w-4 h-4 text-gray-400 shrink-0" />
                     <div className="flex gap-0.5 flex-1">
-                      {[2, 3, 1, 3, 2, 3, 1, 2, 3, 2, 1, 3, 2].map((level, i) => (
+                      {(githubData.levels.length >= 7 ? githubData.levels : [2, 3, 1, 3, 2, 3, 1]).map((level, i) => (
                         <div 
                           key={i} 
                           className={`w-2 h-2 rounded-sm ${
                             level === 3 ? 'bg-green-500' 
                             : level === 2 ? 'bg-green-500/50' 
-                            : 'bg-green-500/20'
+                            : level === 1 ? 'bg-green-500/20'
+                            : 'bg-white/10'
                           }`}
                         />
                       ))}
                     </div>
-                    <span className="text-[10px] text-gray-500 shrink-0">12 commits</span>
+                    <span className="text-[10px] text-gray-500 shrink-0">
+                      {githubData.isLoading ? '...' : `${githubData.totalCommits} commits`}
+                    </span>
                   </div>
                 )}
 
                 {activeInfoCard === 1 && (
                   /* Spotify - Compact */
                   <div className="flex items-center gap-2 w-full">
-                    <Music className="w-4 h-4 text-green-500 shrink-0" />
+                    <Music className={`w-4 h-4 shrink-0 ${spotifyData.isPlaying ? 'text-green-500' : 'text-gray-400'}`} />
                     <div className="flex-1 min-w-0">
-                      <p className="text-white text-xs font-medium truncate">Blinding Lights</p>
+                      <p className="text-white text-xs font-medium truncate">
+                        {spotifyData.isLoading ? 'Loading...' : (spotifyData.track || 'Not playing')}
+                      </p>
                     </div>
-                    <div className="flex gap-0.5 shrink-0">
-                      {[8, 12, 6, 10].map((h, i) => (
-                        <div key={i} className="w-0.5 bg-green-500 rounded-full animate-pulse" style={{ height: `${h}px`, animationDelay: `${i * 0.15}s` }} />
-                      ))}
-                    </div>
+                    {spotifyData.isPlaying && (
+                      <div className="flex gap-0.5 shrink-0">
+                        {[8, 12, 6, 10].map((h, i) => (
+                          <div key={i} className="w-0.5 bg-green-500 rounded-full animate-pulse" style={{ height: `${h}px`, animationDelay: `${i * 0.15}s` }} />
+                        ))}
+                      </div>
+                    )}
                   </div>
                 )}
 
@@ -294,7 +309,9 @@ export default function About() {
                   <div className="flex items-center gap-2 w-full">
                     <Calendar className="w-4 h-4 text-accent shrink-0" />
                     <span className="text-xs text-gray-400">Next:</span>
-                    <span className="text-xs text-white font-medium">Tomorrow 10:00 AM</span>
+                    <span className="text-xs text-white font-medium truncate">
+                      {calendarData.isLoading ? 'Loading...' : (calendarData.time || 'No events')}
+                    </span>
                   </div>
                 )}
               </div>

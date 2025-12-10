@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { motion, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function NeuralCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -10,40 +10,33 @@ export default function NeuralCursor() {
   
   // Store nearby targets for lines
   const [targets, setTargets] = useState<{x: number, y: number, key: string}[]>([]);
-  
-  // Spring physics for the main cursor to feel "heavy"
-  const springConfig = { damping: 25, stiffness: 400 };
-  const cursorX = useSpring(0, springConfig);
-  const cursorY = useSpring(0, springConfig);
 
-    // Cache specific target locations to avoid layout thrashing
-    const targetsRef = useRef<{x: number, y: number, key: string}[]>([]); 
+  // Cache specific target locations to avoid layout thrashing
+  const targetsRef = useRef<{x: number, y: number, key: string}[]>([]); 
 
-    useEffect(() => {
-        const scanElements = () => {
-            const els = document.querySelectorAll('a, button, .magnetic-target');
-            const newTargets: {x: number, y: number, key: string}[] = [];
-            
-            els.forEach((el, index) => {
-                const rect = el.getBoundingClientRect();
-                newTargets.push({
-                    x: rect.left + rect.width / 2,
-                    y: rect.top + rect.height / 2,
-                    key: `target-${index}`
-                });
-            });
-            targetsRef.current = newTargets;
-        };
+  useEffect(() => {
+    const scanElements = () => {
+      const els = document.querySelectorAll('a, button, .magnetic-target');
+      const newTargets: {x: number, y: number, key: string}[] = [];
+      
+      els.forEach((el, index) => {
+        const rect = el.getBoundingClientRect();
+        newTargets.push({
+          x: rect.left + rect.width / 2,
+          y: rect.top + rect.height / 2,
+          key: `target-${index}`
+        });
+      });
+      targetsRef.current = newTargets;
+    };
 
-        // Scan initially and on resize/scroll (throttled ideally, but interval ok for now if lightweight)
-        scanElements();
-        const interval = setInterval(scanElements, 2000); 
+    // Scan initially and on resize/scroll
+    scanElements();
+    const interval = setInterval(scanElements, 2000); 
 
-        const updatePosition = (e: MouseEvent) => {
-            const { clientX, clientY } = e;
-            setPosition({ x: clientX, y: clientY });
-            cursorX.set(clientX);
-            cursorY.set(clientY);
+    const updatePosition = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      setPosition({ x: clientX, y: clientY });
             
             const target = e.target as HTMLElement;
             // Quick check for pointer - using computed style is still heavy, maybe simplify?
@@ -79,7 +72,7 @@ export default function NeuralCursor() {
       window.removeEventListener('resize', scanElements);
       clearInterval(interval);
     };
-  }, [cursorX, cursorY]);
+  }, []);
 
   return (
     <>
@@ -103,7 +96,7 @@ export default function NeuralCursor() {
       {/* Main Dot */}
       <motion.div
         className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"
-        style={{ x: cursorX, y: cursorY, translateX: '-50%', translateY: '-50%' }}
+        style={{ x: position.x, y: position.y, translateX: '-50%', translateY: '-50%' }}
         animate={{
           scale: isClicking ? 0.8 : 1
         }}
@@ -112,7 +105,7 @@ export default function NeuralCursor() {
       {/* Glowing Surround */}
       <motion.div
         className="fixed top-0 left-0 rounded-full border border-white/30 pointer-events-none z-[9998]"
-        style={{ x: cursorX, y: cursorY, translateX: '-50%', translateY: '-50%' }}
+        style={{ x: position.x, y: position.y, translateX: '-50%', translateY: '-50%' }}
         animate={{
           width: isPointer ? 60 : 40,
           height: isPointer ? 60 : 40,
